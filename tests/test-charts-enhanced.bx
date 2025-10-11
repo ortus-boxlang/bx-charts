@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BoxLang Charts Test - Enhanced Features</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .chart-section { margin: 30px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .chart-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #333; }
+        .chart-container { display: inline-block; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>BoxLang Charts - Enhanced Features Test</h1>
+
+    <div class="chart-section">
+        <div class="chart-title">1. Pie Chart with Axis Titles and Custom Colors</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="JVM Memory Usage" backgroundcolor="#ffffff" 
+                     chartheight="300" chartwidth="400" showlegend="true"
+                     xaxistitle="Memory Type" yaxistitle="Memory (KB)">
+                <bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000" serieslabel="JVM Memory Distribution">
+                    <bx:chartdata item="Free Memory (KB)" value="512">
+                    <bx:chartdata item="Used Memory (KB)" value="256">
+                    <bx:chartdata item="Unallocated Memory (KB)" value="128">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">2. Bar Chart with Grid Lines and Series Placement</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="#ffffff"
+                     chartwidth="500" chartheight="350" showlegend="true" 
+                     xaxistitle="Metrics" yaxistitle="Count"
+                     seriesplacement="cluster" showxgridlines="false" showygridlines="true">
+                <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00" serieslabel="Cache Statistics">
+                    <bx:chartdata item="Hits" value="150">
+                    <bx:chartdata item="Misses" value="25">
+                    <bx:chartdata item="Garbage Collections" value="10">
+                    <bx:chartdata item="Evictions" value="5">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">3. Area Chart (Time Series)</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="#ffffff"
+                     chartwidth="600" chartheight="300" 
+                     xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+                     showxgridlines="true" showygridlines="true">
+                <bx:chartseries type="area" colorlist="36A2EB" serieslabel="Memory Over Time">
+                    <bx:chartdata item="9:00 AM" value="512">
+                    <bx:chartdata item="10:00 AM" value="678">
+                    <bx:chartdata item="11:00 AM" value="543">
+                    <bx:chartdata item="12:00 PM" value="721">
+                    <bx:chartdata item="1:00 PM" value="634">
+                    <bx:chartdata item="2:00 PM" value="587">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">4. Horizontal Bar Chart</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Resource Utilization" backgroundcolor="#ffffff"
+                     chartwidth="450" chartheight="300" 
+                     xaxistitle="Usage Percentage" yaxistitle="Resources">
+                <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Current Usage">
+                    <bx:chartdata item="CPU" value="75">
+                    <bx:chartdata item="Memory" value="60">
+                    <bx:chartdata item="Disk I/O" value="45">
+                    <bx:chartdata item="Network" value="30">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">5. Scatter Plot</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Performance Correlation" backgroundcolor="#ffffff"
+                     chartwidth="500" chartheight="400" 
+                     xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
+                     showxgridlines="true" showygridlines="true">
+                <bx:chartseries type="scatter" colorlist="9966FF" serieslabel="Performance Data">
+                    <bx:chartdata item="Point 1" value="120">
+                    <bx:chartdata item="Point 2" value="85">
+                    <bx:chartdata item="Point 3" value="200">
+                    <bx:chartdata item="Point 4" value="150">
+                    <bx:chartdata item="Point 5" value="95">
+                    <bx:chartdata item="Point 6" value="175">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">6. Stacked Bar Chart</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="#ffffff"
+                     chartwidth="500" chartheight="350" 
+                     xaxistitle="Servers" yaxistitle="Resource Usage (%)"
+                     seriesplacement="stacked" showygridlines="true">
+                <bx:chartseries type="bar" colorlist="FF9F40,4BC0C0,FF6384" serieslabel="Resource Distribution">
+                    <bx:chartdata item="Server A" value="30">
+                    <bx:chartdata item="Server B" value="45">
+                    <bx:chartdata item="Server C" value="25">
+                    <bx:chartdata item="Server D" value="60">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-title">7. Doughnut Chart with Enhanced Styling</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="#ffffff"
+                     chartheight="350" chartwidth="350" showlegend="true">
+                <bx:chartseries type="doughnut" 
+                               colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF" 
+                               serieslabel="Browser Market Share">
+                    <bx:chartdata item="Chrome" value="65">
+                    <bx:chartdata item="Firefox" value="18">
+                    <bx:chartdata item="Safari" value="12">
+                    <bx:chartdata item="Edge" value="4">
+                    <bx:chartdata item="Others" value="1">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <hr style="margin: 40px 0;">
+    
+    <h2>Enhanced Features Demonstrated:</h2>
+    <ul>
+        <li><strong>Axis Titles:</strong> All charts now support <code>xaxistitle</code> and <code>yaxistitle</code> attributes</li>
+        <li><strong>Series Labels:</strong> Each series can have a custom label with <code>serieslabel</code> attribute</li>
+        <li><strong>Additional Chart Types:</strong> Added support for <code>area</code>, <code>horizontalbar</code>, and <code>scatter</code> charts</li>
+        <li><strong>Series Placement:</strong> Bar charts support <code>seriesplacement="stacked"</code> and <code>seriesplacement="cluster"</code></li>
+        <li><strong>Grid Lines:</strong> Control grid line visibility with <code>showxgridlines</code> and <code>showygridlines</code> attributes</li>
+        <li><strong>Enhanced Color Handling:</strong> Improved support for hex colors with proper <code>##</code> prefix handling</li>
+        <li><strong>Better Chart.js Integration:</strong> Fixed canvas context and Chart.js configuration for all chart types</li>
+    </ul>
+
+</body>
+</html>

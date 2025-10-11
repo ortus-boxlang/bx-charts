@@ -59,13 +59,13 @@ class{
 		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" ];
 		var chartType = lcase( trim( attributes.type ) );
 		if ( !arrayContains( validTypes, chartType ) ) {
-			throw new RuntimeException( "Invalid chart type '#chartType#'. Valid types are: #arrayToList( validTypes )#" );
+			throw new RuntimeException( "Invalid chart type '##chartType##'. Valid types are: ##arrayToList( validTypes )##" );
 		}
 
 		// Initialize this series data structure
 		executionState.type = chartType;
 		executionState.colorlist = attributes.colorlist ?: "";
-		executionState.serieslabel = attributes.serieslabel ?: "";
+		executionState.serieslabel = attributes.serieslabel ?: chartType;
 		executionState.chartData = [];
 
 		// Process the body to collect chartdata components
@@ -89,7 +89,7 @@ class{
 		arrayAppend( parentState.chartSeries, seriesData );
 
 		// Log the series for debugging
-		variables.log.debug( "Added chart series: type=#chartType#, label=#executionState.serieslabel#, dataPoints=#arrayLen( executionState.chartData )#" );
+		variables.log.debug( "Added chart series: type=##chartType##, label=##executionState.serieslabel##, dataPoints=##arrayLen( executionState.chartData )##" );
 
 		return null; // Default return
 	}

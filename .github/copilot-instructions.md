@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-This is a **BoxLang module** that provides charting capabilities using Chart.js. Key architectural elements:
+This is a **BoxLang module** that provides comprehensive charting capabilities using Chart.js. Key architectural elements:
 
 - **Module System**: BoxLang modules follow a specific structure with `ModuleConfig.bx` as the entry point
 - **Components**: Chart-related components (Chart, ChartData, ChartSeries) that can be used in both script and template syntax
@@ -40,6 +40,27 @@ class{
     └── <bx:chartdata> (individual data points)
 ```
 
+## Enhanced Chart Features
+
+### Supported Chart Types
+- **Basic**: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`
+- **Enhanced**: `area`, `horizontalbar`, `scatter`
+
+### Chart Attributes (`<bx:chart>`)
+- **Dimensions**: `chartwidth`, `chartheight` (default: 400x300)
+- **Styling**: `title`, `backgroundcolor`, `showlegend`, `show3d`
+- **Axis Configuration**: `xaxistitle`, `yaxistitle`
+- **Grid Lines**: `showxgridlines`, `showygridlines`
+- **Series Layout**: `seriesplacement` (default, cluster, stacked)
+
+### Series Attributes (`<bx:chartseries>`)
+- **Type**: `type` (required) - chart type from supported list
+- **Styling**: `colorlist` (comma-separated colors), `serieslabel`
+- **Data Source**: Contains `<bx:chartdata>` components
+
+### Data Attributes (`<bx:chartdata>`)
+- **Required**: `item` (label), `value` (numeric value)
+
 ## Chart-Specific Patterns
 
 ### Parent-Child Component Communication
@@ -66,8 +87,9 @@ var chartConfig = {
 
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
-- **Test**: Uses TestBox framework with specs in `tests/specs/`
+- **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
 - **Dependencies**: Chart.js library managed manually in `/lib/`
+- **Documentation**: [BoxLang MCP Server Docs](https://boxlang.ortusbooks.com/~gitbook/mcp)
 
 ### Component Development Lifecycle
 1. Components auto-register via annotations during module load
@@ -89,9 +111,61 @@ var chartConfig = {
 - Render HTML canvas elements with inline JavaScript initialization
 
 ### Chart.js Integration
-- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`
-- Color support: hex colors with `##` prefix (BoxLang escaping)
+- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`, `area`, `horizontalbar`, `scatter`
+- Color support: hex colors with `##` prefix (BoxLang escapes `#` for interpolation, so `##` becomes literal `#`)
+- Advanced features: stacked/clustered series, grid line control, axis titles
 - Responsive by default, custom dimensions via `chartwidth`/`chartheight`
+
+### Color Handling Patterns
+```boxlang
+// BoxLang uses # for interpolation (#variable#), so to use a literal #, escape it with ##
+if ( left( color, 2 ) == "##" ) {
+    color = "#" & right( color, len(color) - 2 );
+}
+// Named colors supported: red, blue, green, etc.
+// Hex colors: #FF6384, ff6384, ##ff6384 (## becomes literal #)
+```
+
+### Chart Type Mappings
+- `area` → Chart.js `line` with `fill: true`
+- `horizontalbar` → Chart.js `bar` with `indexAxis: "y"`
+- `scatter` → Chart.js `scatter` with `showLine: false`
+- `stacked` → Chart.js bar with `scales.x.stacked: true, scales.y.stacked: true`
+
+## Usage Examples
+
+### Basic Pie Chart
+```boxlang
+<bx:chart title="Sales Data" chartwidth="400" chartheight="300">
+    <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Q4 Sales">
+        <bx:chartdata item="Product A" value="150">
+        <bx:chartdata item="Product B" value="200">
+        <bx:chartdata item="Product C" value="100">
+    </bx:chartseries>
+</bx:chart>
+```
+
+### Stacked Bar Chart with Axis Titles
+```boxlang
+<bx:chart title="Resource Usage" xaxistitle="Servers" yaxistitle="Usage %"
+          seriesplacement="stacked" showygridlines="true">
+    <bx:chartseries type="bar" serieslabel="Current Usage">
+        <bx:chartdata item="Server 1" value="30">
+        <bx:chartdata item="Server 2" value="45">
+    </bx:chartseries>
+</bx:chart>
+```
+
+### Area Chart with Grid Lines
+```boxlang
+<bx:chart title="Trend Analysis" xaxistitle="Time" yaxistitle="Value"
+          showxgridlines="true" showygridlines="true">
+    <bx:chartseries type="area" colorlist="36A2EB" serieslabel="Performance">
+        <bx:chartdata item="Jan" value="100">
+        <bx:chartdata item="Feb" value="150">
+    </bx:chartseries>
+</bx:chart>
+```
 
 ## Key Files to Reference
 

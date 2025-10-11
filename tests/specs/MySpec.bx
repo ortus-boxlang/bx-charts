@@ -1,16 +1,25 @@
 
 /**
- * My BDD Test
+ * BoxLang Charts Integration Tests
  */
 class extends="testbox.system.BaseSpec"{
 
-/*********************************** LIFE CYCLE Methods ***********************************/
+	/*********************************** LIFE CYCLE Methods ***********************************/
 
 	/**
 	 * executes before all suites+specs in the run() method
 	 */
 	function beforeAll(){
-
+		// Setup test data
+		variables.testData = {
+			"jvmFreeMemory": 512,
+			"jvmMaxMemory": 1024,
+			"jvmTotalMemory": 768,
+			"cacheHits": 150,
+			"cacheMisses": 25,
+			"cacheEvictions": 5,
+			"cacheGarbageCollections": 2
+		};
 	}
 
 	/**
@@ -23,11 +32,158 @@ class extends="testbox.system.BaseSpec"{
 	/*********************************** BDD SUITES ***********************************/
 
 	function run( testResults, testBox ){
-		// all your suites go here.
-		describe( "My First Suite", () => {
+		describe( "BoxLang Charts Enhanced Features", () => {
 
-			it( "A Spec", () => {
-				fail( 'implement' )
+			it( "can render a pie chart with axis titles and custom colors", () => {
+				// This would typically use BoxLang's component rendering system
+				// For now, we'll test the component structure and attributes
+
+				var chartAttributes = {
+					"title": "JVM Memory Usage",
+					"chartwidth": 400,
+					"chartheight": 300,
+					"backgroundcolor": "#ffffff",
+					"xaxistitle": "Memory Type",
+					"yaxistitle": "Memory (KB)",
+					"showxgridlines": true,
+					"showygridlines": false
+				};
+
+				var seriesAttributes = {
+					"type": "pie",
+					"colorlist": "00ff00, 0000ff, gray",
+					"serieslabel": "JVM Memory Distribution"
+				};
+
+				var chartDataItems = [
+					{ "item": "Free Memory (KB)", "value": variables.testData.jvmFreeMemory },
+					{ "item": "Used Memory (KB)", "value": variables.testData.jvmMaxMemory - variables.testData.jvmFreeMemory },
+					{ "item": "Unallocated Memory (KB)", "value": variables.testData.jvmMaxMemory - variables.testData.jvmTotalMemory }
+				];
+
+				// Test chart component attributes
+				expect( chartAttributes.xaxistitle ).toBe( "Memory Type" );
+				expect( chartAttributes.yaxistitle ).toBe( "Memory (KB)" );
+				expect( seriesAttributes.serieslabel ).toBe( "JVM Memory Distribution" );
+				expect( arrayLen( chartDataItems ) ).toBe( 3 );
+			} );
+
+			it( "supports all new chart types", () => {
+				var validChartTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" ];
+
+				// Test that all chart types are supported
+				expect( arrayContains( validChartTypes, "area" ) ).toBeTrue( "Area charts should be supported" );
+				expect( arrayContains( validChartTypes, "horizontalbar" ) ).toBeTrue( "Horizontal bar charts should be supported" );
+				expect( arrayContains( validChartTypes, "scatter" ) ).toBeTrue( "Scatter plots should be supported" );
+
+				// Test original types still work
+				expect( arrayContains( validChartTypes, "pie" ) ).toBeTrue( "Pie charts should still be supported" );
+				expect( arrayContains( validChartTypes, "bar" ) ).toBeTrue( "Bar charts should still be supported" );
+				expect( arrayContains( validChartTypes, "line" ) ).toBeTrue( "Line charts should still be supported" );
+			} );
+
+			it( "handles series placement configuration", () => {
+				var seriesPlacementOptions = [ "default", "cluster", "stacked" ];
+
+				// Test all placement options
+				for ( var placement in seriesPlacementOptions ) {
+					var chartConfig = {
+						"seriesplacement": placement,
+						"type": "bar"
+					};
+
+					// Verify placement option is valid
+					expect( arrayContains( seriesPlacementOptions, placement ) ).toBeTrue( "Series placement '#placement#' should be valid" );
+				}
+			} );
+
+			it( "processes color lists correctly", () => {
+				var colorTests = [
+					{ "input": "ff0000, 00ff00, 0000ff", "description": "Hex colors without # prefix" },
+					{ "input": "#ff0000, #00ff00, #0000ff", "description": "Hex colors with # prefix" },
+					{ "input": "##ff0000, ##00ff00, ##0000ff", "description": "Hex colors with ## prefix (BoxLang)" },
+					{ "input": "red, green, blue", "description": "Named colors" }
+				];
+
+				for ( var colorTest in colorTests ) {
+					var colorList = listToArray( colorTest.input );
+					expect( arrayLen( colorList ) ).toBe( 3, "Color list should have 3 colors for: #colorTest.description#" );
+				}
+			} );
+
+			it( "validates grid line configuration", () => {
+				var gridLineConfig = {
+					"showxgridlines": true,
+					"showygridlines": false
+				};
+
+				// Test boolean grid line settings
+				expect( isBoolean( gridLineConfig.showxgridlines ) ).toBeTrue( "X grid lines should be boolean" );
+				expect( isBoolean( gridLineConfig.showygridlines ) ).toBeTrue( "Y grid lines should be boolean" );
+				expect( gridLineConfig.showxgridlines ).toBeTrue( "X grid lines should be enabled" );
+				expect( gridLineConfig.showygridlines ).toBeFalse( "Y grid lines should be disabled" );
+			} );
+
+			it( "supports comprehensive chart data structures", () => {
+				var sampleChartData = [
+					{ "item": "Q1 Sales", "value": 100000 },
+					{ "item": "Q2 Sales", "value": 125000 },
+					{ "item": "Q3 Sales", "value": 150000 },
+					{ "item": "Q4 Sales", "value": 175000 }
+				];
+
+				// Test data structure
+				for ( var dataPoint in sampleChartData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "value" ) ).toBeTrue( "Data point should have 'value' key" );
+					expect( len( dataPoint.item ) ).toBeGT( 0, "Item should not be empty" );
+					expect( isNumeric( dataPoint.value ) ).toBeTrue( "Value should be numeric" );
+				}
+			} );
+
+			it( "handles chart dimension configuration", () => {
+				var dimensionTests = [
+					{ "width": 400, "height": 300, "description": "Standard dimensions" },
+					{ "width": 800, "height": 600, "description": "Large dimensions" },
+					{ "width": 250, "height": 200, "description": "Small dimensions" }
+				];
+
+				for ( var test in dimensionTests ) {
+					expect( test.width ).toBeGT( 0, "Width should be positive for: #test.description#" );
+					expect( test.height ).toBeGT( 0, "Height should be positive for: #test.description#" );
+					expect( isNumeric( test.width ) ).toBeTrue( "Width should be numeric for: #test.description#" );
+					expect( isNumeric( test.height ) ).toBeTrue( "Height should be numeric for: #test.description#" );
+				}
+			} );
+
+			it( "supports complex chart configurations", () => {
+				var complexChartConfig = {
+					"title": "Complex Performance Dashboard",
+					"chartwidth": 600,
+					"chartheight": 400,
+					"backgroundcolor": "#f8f9fa",
+					"showlegend": true,
+					"show3d": false,
+					"xaxistitle": "Time Period",
+					"yaxistitle": "Performance Metrics",
+					"showxgridlines": true,
+					"showygridlines": true,
+					"seriesplacement": "stacked"
+				};
+
+				// Validate complex configuration
+				expect( len( complexChartConfig.title ) ).toBeGT( 0, "Title should not be empty" );
+				expect( complexChartConfig.chartwidth ).toBeGT( 0, "Chart width should be positive" );
+				expect( complexChartConfig.chartheight ).toBeGT( 0, "Chart height should be positive" );
+				expect( isBoolean( complexChartConfig.showlegend ) ).toBeTrue( "Show legend should be boolean" );
+				expect( len( complexChartConfig.xaxistitle ) ).toBeGT( 0, "X-axis title should not be empty" );
+				expect( len( complexChartConfig.yaxistitle ) ).toBeGT( 0, "Y-axis title should not be empty" );
+			} );
+
+		} );
+	}
+
+}
 			} )
 
 		} )

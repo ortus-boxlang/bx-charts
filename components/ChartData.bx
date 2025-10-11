@@ -70,7 +70,7 @@ class{
 		arrayAppend( parentState.chartData, dataPoint );
 
 		// Log the data point for debugging
-		variables.log.debug( "Added chart data point: #dataPoint.item# = #dataPoint.value#" );
+		variables.log.debug( "Added chart data point: ##dataPoint.item## = ##dataPoint.value##" );
 
 		return null; // Default return
 	}

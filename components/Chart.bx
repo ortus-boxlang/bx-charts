@@ -54,7 +54,7 @@ class{
 		var chartWidth = attributes.chartwidth ?: 400;
 		var chartHeight = attributes.chartheight ?: 300;
 		var title = attributes.title ?: "";
-		var backgroundColor = attributes.backgroundcolor ?: "#ffffff";
+		var backgroundColor = attributes.backgroundcolor ?: "##ffffff";
 		var showLegend = isBoolean( attributes.showlegend ) ? attributes.showlegend : true;
 		var show3d = isBoolean( attributes.show3d ) ? attributes.show3d : false;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
@@ -181,19 +181,21 @@ class{
 			var colorList = [];
 			if ( structKeyExists( series, "colorlist" ) && len( series.colorlist ) ) {
 				colorList = listToArray( series.colorlist );
-				// Ensure colors start with #
+				// Normalize hex colors (handle BoxLang #### prefix)
 				for ( var i = 1; i <= arrayLen( colorList ); i++ ) {
 					var color = trim( colorList[i] );
-					if ( !color.startsWith( "##" ) && !color.startsWith( "#" ) ) {
-						color = "##" & color;
+					// Handle BoxLang #### prefix for hex colors
+					if ( left( color, 2 ) == "####" ) {
+						colorList[i] = "##" & right( color, len(color) - 2 );
+					} else if ( left( color, 1 ) != "##" && !listFindNoCase( "red,blue,green,yellow,orange,purple,pink,brown,gray,black,white", color ) ) {
+						colorList[i] = "##" & color;
 					}
-					colorList[i] = color;
 				}
 			}
 
 			// Default colors if none provided
 			if ( arrayLen( colorList ) == 0 ) {
-				colorList = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
+				colorList = [ "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40" ];
 			}
 
 			for ( var dataItem in series.chartData ) {
@@ -222,12 +224,12 @@ class{
 			} else if ( series.type == "area" ) {
 				config.type = "line";
 				dataset.fill = true;
-				dataset.borderColor = colors[1] ?: "##FF6384";
-				dataset.backgroundColor = colors[1] ?: "##FF6384";
+				dataset.borderColor = colors[1] ?: "#FF6384";
+				dataset.backgroundColor = colors[1] ?: "#FF6384";
 			} else if ( series.type == "scatter" ) {
 				config.type = "scatter";
-				dataset.borderColor = colors;
-				dataset.backgroundColor = colors;
+				dataset.showLine = false;
+				dataset.pointBackgroundColor = colors;
 			}
 
 			// Handle series placement for bar charts
