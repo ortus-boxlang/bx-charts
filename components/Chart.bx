@@ -59,6 +59,17 @@ class{
 		var show3d = isBoolean( attributes.show3d ) ? attributes.show3d : false;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
 
+		// Axis titles
+		var xAxisTitle = attributes.xaxistitle ?: "";
+		var yAxisTitle = attributes.yaxistitle ?: "";
+
+		// Grid lines
+		var showXGridlines = isBoolean( attributes.showxgridlines ) ? attributes.showxgridlines : false;
+		var showYGridlines = isBoolean( attributes.showygridlines ) ? attributes.showygridlines : true;
+
+		// Series placement
+		var seriesPlacement = attributes.seriesplacement ?: "default";
+
 		// Process the body to collect chart series data
 		var buffer = newBuffer();
 		var bodyResult = processBody( context, body, buffer );
@@ -77,7 +88,12 @@ class{
 			title,
 			backgroundColor,
 			showLegend,
-			show3d
+			show3d,
+			xAxisTitle,
+			yAxisTitle,
+			showXGridlines,
+			showYGridlines,
+			seriesPlacement
 		);
 
 		// Render the chart HTML and JavaScript
@@ -103,7 +119,7 @@ class{
 	/**
 	 * Builds Chart.js configuration from collected series data
 	 */
-	private function buildChartConfig( required array chartSeries, title, backgroundColor, showLegend, show3d ) {
+	private function buildChartConfig( required array chartSeries, title, backgroundColor, showLegend, show3d, xAxisTitle, yAxisTitle, showXGridlines, showYGridlines, seriesPlacement ) {
 		var config = {
 			"type": "pie", // Default to pie, will be overridden by series
 			"data": {
@@ -120,6 +136,28 @@ class{
 					"legend": {
 						"display": showLegend
 					}
+				},
+				"scales": {
+					"x": {
+						"display": true,
+						"title": {
+							"display": len( xAxisTitle ) > 0,
+							"text": xAxisTitle
+						},
+						"grid": {
+							"display": showXGridlines
+						}
+					},
+					"y": {
+						"display": true,
+						"title": {
+							"display": len( yAxisTitle ) > 0,
+							"text": yAxisTitle
+						},
+						"grid": {
+							"display": showYGridlines
+						}
+					}
 				}
 			}
 		};
@@ -129,7 +167,7 @@ class{
 			config.type = series.type; // Use the series type
 
 			var dataset = {
-				"label": series.type,
+				"label": series.serieslabel ?: series.type,
 				"data": [],
 				"backgroundColor": []
 			};
@@ -172,10 +210,33 @@ class{
 			dataset.backgroundColor = colors;
 
 			// Chart type specific settings
-			if ( series.type == "bar" ) {
-				config.type = "bar";
+			if ( series.type == "bar" || series.type == "horizontalbar" ) {
+				if ( series.type == "horizontalbar" ) {
+					config.type = "bar";
+					config.options.indexAxis = "y"; // Make horizontal
+				} else {
+					config.type = "bar";
+				}
 				dataset.borderColor = colors;
 				dataset.borderWidth = 1;
+			} else if ( series.type == "area" ) {
+				config.type = "line";
+				dataset.fill = true;
+				dataset.borderColor = colors[1] ?: "##FF6384";
+				dataset.backgroundColor = colors[1] ?: "##FF6384";
+			} else if ( series.type == "scatter" ) {
+				config.type = "scatter";
+				dataset.borderColor = colors;
+				dataset.backgroundColor = colors;
+			}
+
+			// Handle series placement for bar charts
+			if ( config.type == "bar" && seriesPlacement != "default" ) {
+				if ( seriesPlacement == "stacked" ) {
+					config.options.scales.x.stacked = true;
+					config.options.scales.y.stacked = true;
+				}
+				// Note: "cluster" is the default behavior for Chart.js
 			}
 
 			arrayAppend( config.data.datasets, dataset );
