@@ -210,9 +210,9 @@ class{
 		if ( len( color ) == 0 ) {
 			return "";
 		}
-		
+
 		var cleanColor = trim( color );
-		
+
 		// Handle BoxLang #### prefix for hex colors
 		if ( left( cleanColor, 2 ) == "####" ) {
 			return "##" & right( cleanColor, len( cleanColor ) - 2 );
@@ -231,16 +231,16 @@ class{
 	/**
 	 * Builds Chart.js configuration from collected series data
 	 */
-	private function buildChartConfig( 
-		required array chartSeries, 
-		title, 
-		backgroundColor, 
-		showLegend, 
-		show3d, 
-		xAxisTitle, 
-		yAxisTitle, 
-		showXGridlines, 
-		showYGridlines, 
+	private function buildChartConfig(
+		required array chartSeries,
+		title,
+		backgroundColor,
+		showLegend,
+		show3d,
+		xAxisTitle,
+		yAxisTitle,
+		showXGridlines,
+		showYGridlines,
 		seriesPlacement,
 		fontBold,
 		fontItalic,
@@ -410,7 +410,7 @@ class{
 
 		// Process each chart series
 		var processedSeries = chartSeries;
-		
+
 		// Sort series data if requested
 		if ( sortXAxis ) {
 			for ( var series in processedSeries ) {
@@ -525,29 +525,29 @@ class{
 		// Handle special JavaScript functions that can't be JSON serialized
 		var clickUrl = "";
 		var labelFormat = "";
-		
+
 		if ( structKeyExists( config.options, "clickUrl" ) ) {
 			clickUrl = config.options.clickUrl;
 			structDelete( config.options, "clickUrl" );
 		}
-		
-		if ( structKeyExists( config.options, "scales" ) 
-			&& structKeyExists( config.options.scales, "y" ) 
+
+		if ( structKeyExists( config.options, "scales" )
+			&& structKeyExists( config.options.scales, "y" )
 			&& structKeyExists( config.options.scales.y, "labelFormat" ) ) {
 			labelFormat = config.options.scales.y.labelFormat;
 			structDelete( config.options.scales.y, "labelFormat" );
 		}
 
 		var jsExtras = "";
-		
+
 		// Add click event handler if URL is specified
 		if ( len( clickUrl ) > 0 ) {
-			jsExtras &= "config.options.onClick = function(event, elements) { if(elements.length > 0) { window.open('" & clickUrl & "', '_blank'); } };" & chr(10);
+			jsExtras &= "config.options.onClick = function(event, elements) { if(elements.length > 0) { window.open('" & clickUrl & "', '_blank'); } };" & char(10);
 		}
-		
+
 		// Add label formatting if specified
 		if ( len( labelFormat ) > 0 ) {
-			jsExtras &= "config.options.scales.y.ticks.callback = function(value, index, values) { return '" & labelFormat & "'.replace('{value}', value); };" & chr(10);
+			jsExtras &= "config.options.scales.y.ticks.callback = function(value, index, values) { return '" & labelFormat & "'.replace('{value}', value); };" & char(10);
 		}
 
 		var html = '<div style="width: #chartWidth#px; height: #chartHeight#px;">
@@ -557,9 +557,9 @@ class{
 			(function() {
 				var ctx = document.getElementById("#chartId#").getContext("2d");
 				var config = #JSONSerialize( config )#;
-				
+
 				#jsExtras#
-				
+
 				new Chart(ctx, config);
 			})();
 		</script>';
