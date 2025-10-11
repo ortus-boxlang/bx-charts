@@ -109,7 +109,7 @@ class{
 			context.putAttachment( "chartJSLoaded", true );
 
 			// Include Chart.js from our lib folder via Asset.bx
-			var scriptTag = '<script src="/bxmodules/bxcharts/Asset.bx?target=chart.min.js"></script>';
+			var scriptTag = '<script src="/bxmodules/bxcharts/public/Asset.bx?target=chart.min.js"></script>';
 
 			// Call the htmlHead BIF to add the script tag
 			htmlHead( scriptTag );

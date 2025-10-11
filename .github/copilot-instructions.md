@@ -15,7 +15,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 - `ModuleConfig.bx` - Module descriptor with lifecycle methods (`configure()`, `onLoad()`, `onUnload()`)
 - `box.json` - ForgeBox package descriptor with BoxLang-specific metadata
 - `Build.bx` - BoxLang build script for packaging (not Gradle/Maven)
-- `Asset.bx` - Static asset proxy for serving files from `/lib/` via `/bxmodules/bxcharts/Asset.bx?target=filename`
+- `Asset.bx` - Static asset proxy for serving files from `/lib/` via `/bxmodules/bxcharts/public/Asset.bx?target=filename`
 
 ### Component Architecture (`components/`)
 All components follow this pattern:

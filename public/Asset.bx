@@ -1,12 +1,12 @@
 class{
 
 	static {
-		libPath = getDirectoryFromPath( getCurrentTemplatePath() ) & "lib/"
+		publicPath = getDirectoryFromPath( getCurrentTemplatePath() );
 	}
 
 	/**
 	 * Deliver a static asset from the lib folder
-	 * Usage: /bxmodules/bxcharts/Asset.bx?target=path/to/asset.js
+	 * Usage: /bxmodules/bxcharts/public/Asset.bx?target=path/to/asset.js
 	 */
 	remote function deliver(){
 		param name="url.target" default="";
@@ -18,7 +18,7 @@ class{
 		}
 
 		// Check if the target exists in the lib folder
-		var filePath = libPath & url.target;
+		var filePath = publicPath & url.target;
 		if( NOT fileExists( filePath ) ){
 			bx:header statusCode="404";
 			return;
