@@ -41,6 +41,8 @@ jobs:
 
       - name: Setup BoxLang
         uses: ortus-boxlang/setup-boxlang@1.1.0
+        with:
+          version: snapshot
 
       - name: Test Module
         run: |
