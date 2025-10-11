@@ -6,7 +6,6 @@ on:
   # If you push to main this will trigger a stable release
   push:
     branches:
-      - master
       - main
 
   # Reusable workflow : Usually called by a `snapshot` workflow
@@ -65,7 +64,7 @@ jobs:
 
           # Snapshot builds are always on the development branch
           echo "Github Ref is $GITHUB_REF"
-          echo "BRANCH=master" >> $GITHUB_ENV
+          echo "BRANCH=main" >> $GITHUB_ENV
           if [ $GITHUB_REF == 'refs/heads/development' ]
           then
             echo "BRANCH=development" >> $GITHUB_ENV
@@ -173,6 +172,11 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: development
+
+      - name: Setup CommandBox
+        uses: Ortus-Solutions/setup-commandbox@v2.0.1
+        with:
+          forgeboxAPIKey: ${{ secrets.FORGEBOX_API_TOKEN }}
 
       - name: Download build artifacts
         uses: actions/download-artifact@v5
