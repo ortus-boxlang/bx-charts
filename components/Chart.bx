@@ -55,8 +55,8 @@ class{
 		var chartHeight = attributes.chartheight ?: 300;
 		var title = attributes.title ?: "";
 		var backgroundColor = attributes.backgroundcolor ?: "##ffffff";
-		var showLegend = isBoolean( attributes.showlegend ) ? attributes.showlegend : true;
-		var show3d = isBoolean( attributes.show3d ) ? attributes.show3d : false;
+		var showLegend = attributes.showlegend ?: true;
+		var show3d = attributes.show3d ?: false;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
 
 		// Axis titles
@@ -64,8 +64,8 @@ class{
 		var yAxisTitle = attributes.yaxistitle ?: "";
 
 		// Grid lines
-		var showXGridlines = isBoolean( attributes.showxgridlines ) ? attributes.showxgridlines : false;
-		var showYGridlines = isBoolean( attributes.showygridlines ) ? attributes.showygridlines : true;
+		var showXGridlines = attributes.showxgridlines ?: false;
+		var showYGridlines = attributes.showygridlines ?: true;
 
 		// Series placement
 		var seriesPlacement = attributes.seriesplacement ?: "default";
@@ -109,7 +109,7 @@ class{
 			context.putAttachment( "chartJSLoaded", true );
 
 			// Include Chart.js from our lib folder via Asset.bx
-			var scriptTag = '<script src="/bxmodules/bxcharts/public/Asset.bx?target=chart.min.js"></script>';
+			var scriptTag = '<script src="/bxmodules/bxcharts/public/Asset.bx?method=deliver&target=chart.min.js"></script>';
 
 			// Call the htmlHead BIF to add the script tag
 			htmlHead( scriptTag );
@@ -257,7 +257,7 @@ class{
 		<script>
 			(function() {
 				var ctx = document.getElementById("#chartId#").getContext("2d");
-				new Chart(ctx, #serializeJSON( config )#);
+				new Chart(ctx, #JSONSerialize( config )#);
 			})();
 		</script>';
 

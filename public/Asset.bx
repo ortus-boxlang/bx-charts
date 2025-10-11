@@ -18,7 +18,7 @@ class{
 		}
 
 		// Check if the target exists in the lib folder
-		var filePath = publicPath & url.target;
+		var filePath = static.publicPath & url.target;
 		if( NOT fileExists( filePath ) ){
 			bx:header statusCode="404";
 			return;
@@ -74,7 +74,7 @@ class{
 		// Set caching headers for 1 week
 		bx:header name="Cache-Control" value="public, max-age=604800";
 		bx:header name="Pragma" value="";
-		bx:header name="Expires" value="#dateAdd( now(), "s", 604800 )#";
+		bx:header name="Expires" value="#dateAdd( "s", 604800, now() )#";
 		// Output the file
 		bx:content file="#filePath#" type="#contentType#" reset="true";
 		return;
