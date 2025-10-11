@@ -57,8 +57,6 @@ class{
 	 * @attribute.title - string, optional -  Title of the chart.
 	 * @attribute.xAxisTitle - string, optional -  text; X-axis title
 	 * @attribute.yAxisTitle - string, optional -  text; Y-axis title
-	 *
-	 * Newly implemented attributes
 	 * @attribute.dataBackgroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
 	 * @attribute.fontBold - boolean, optional -  Yes: displays grid control text in bold.
 	 * @attribute.fontItalic - boolean, optional -  Yes: displays grid control text in italics.
