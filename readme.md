@@ -1,4 +1,4 @@
-# ⚡︎ BoxLang Charts
+# ⚡︎ BoxLang Charts Module
 
 ```
 |:------------------------------------------------------:|
@@ -7,79 +7,160 @@
 |:------------------------------------------------------:|
 ```
 
-<blockquote>
-	Copyright Since 2023 by Ortus Solutions, Corp
-	<br>
-	<a href="https://www.boxlang.io">www.boxlang.io</a> |
-	<a href="https://www.ortussolutions.com">www.ortussolutions.com</a>
-</blockquote>
+This module provides chart generation capabilities to the [BoxLang](https://boxlang.io) language
 
-<p>&nbsp;</p>
+## Components
 
-A charting module for BoxLang
+This module contributes the following Components to the language:
 
-----
+* `chart` - renders charts to the browser using the Chart.js library
+  * The following attributes are available to the `mail` component
+    * `backgroundColor` - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
+    * `chartHeight` - number, optional -  Chart height; integer number of pixels
+    * `chartWidth` - number, optional -  Chart width; integer number of pixels
+    * `font` - string, optional -  Font of data in column..
+    * `show3D` - boolean, optional -  Display chart with three-dimensional appearance.
+    * `showLegend` - boolean, optional -  yes: if chart contains more than one data series, display legend
+    * `showXGridlines` - boolean, optional -  yes: display X-axis gridlines
+    * `source` - string, optional -  variable name of the source path
+    * `showYGridlines` - boolean, optional -  yes: display Y-axis gridlines.
+    * `title` - string, optional -  Title of the chart.
+    * `xAxisTitle` - string, optional -  text; X-axis title
+    * `yAxisTitle` - string, optional -  text; Y-axis title
+    * `dataBackgroundColor` - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
+    * `fontBold` - boolean, optional -  Yes: displays grid control text in bold.
+    * `fontItalic` - boolean, optional -  Yes: displays grid control text in italics.
+    * `fontSize` - number, optional -  Size of text in column. Default: 12.
+    * `foregroundColor` - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Default: ##333333.
+    * `labelFormat` - string, optional -  Format for Y-axis labels. Use {value} placeholder for the actual value.
+    * `categoryLabelPositions` - string, optional -  Label position relative to axis: standard, up_45, up_90, down_45, down_90 or horizontal (standard) and vertical (down_90). Default is horizontal.
+    * `markerSize` - number, optional -  Size of data point marker in pixels. Integer. Default: 4.
+    * `scaleFrom` - number, optional -  Y-axis minimum value; integer.
+    * `scaleTo` - number, optional -  Y-axis max value; integer.
+    * `showBorder` - boolean, optional -  Whether to display a border around the chart.
+    * `showMarkers` - boolean, optional -  Applies to chartseries type attribute values line, curve and scatter. yes: display markers at data points. Default: true.
+    * `showXLabel` - boolean, optional -  yes: shows the x-axis labels. Default: true.
+    * `showTooltip` - boolean, optional -  show the tooltip or not. Default: true.
+    * `sortXAxis` - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale.
+    * `url` - string, optional -  URL to open if the user clicks item in a data series.
+* `chartSeries` - used within the `chart` component. defines the style in which chart data displays: bar, line, pie, etc.
+  * this component supports the following attributes:
+    * `item` - string, required - The name of the data point.
+    * `value` - string, required -The value of the data point.
+    * `color` - string, optional  - The color of the data point. Accepts hexadecimal values - e.g., #FF0000`) or named colors.
+    * `markerStyle` - string, optional - Specifies the style of the marker for the data point. Possible values: `circle`, `square`, `diamond`, `triangle`, `plus`, `star`, `cross`.
+    * `url` - string, optional - The URL to open when the data point is clicked.
+    * `tooltip` - string, optional - The text to display as a tooltip for the data point.
+    * `seriesLabel` - string, optional - The label for the series to which the data point belongs.
+    * `seriesColor` - string, optional - The color of the series to which the data point belongs.
+* `chartData` - used within the `chartSeries` component. defines chart data points for the cfchartseries component.
+  * this component supports the following attributes:
+    * `item` - string, required - data point name
+   	* `value` - string, required - data point value
 
-This template can be used to create Ortus based BoxLang Modules written in BoxLang. To use, just click the `Use this Template` button in the github repository: https://github.com/ortus-boxlang/boxlang-module-template-bx and run the setup task from where you cloned it.
+## Examples
 
-```bash
-boxlang SetupTemplate.bx
+### Pie Chart with Axis Titles and Custom Colors
+
+```
+<bx:chart format="png" show3d="false" title="Memory Usage Distribution"
+			backgroundcolor="##ffffff" chartheight="275" chartwidth="275"
+			showlegend="true">
+	<bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000, ffff00"
+					serieslabel="Memory Usage">
+		<bx:chartdata item="Free Memory" value="512">
+		<bx:chartdata item="Used Memory" value="256">
+		<bx:chartdata item="Reserved Memory" value="128">
+		<bx:chartdata item="Cache Memory" value="64">
+	</bx:chartseries>
+</bx:chart>
 ```
 
-The `SetupTemplate` task will ask you for your module name, id and description and configure the template for you! Enjoy!
+### Bar Chart with Axis Titles and Grid Lines
 
-## Directory Structure
-
-Here is a brief overview of the directory structure:
-
-- `.github/workflows` - These are the github actions to test and build the module via CI
-- `.vscode` - VScode additions
-- `bifs` - Where you can code Built in Functions for BoxLang
-- `components` - Where you can code BoxLang components
-- `interceptors` - Where you can code BoxLang interceptors
-- `lib` - Place any Jar's or classes for your module that will be class loaded for you
-- `.cfformat.json` - A format config using the Ortus Standards
-- `.editorconfig` - Smooth consistency between editors
-- `.gitattributes` - Git attributes
-- `.gitignore` - Basic ignores. Modify as needed.
-- `.markdownlint.json` - A linting file for markdown docs
-- `box.json` - The box.json for your module used to publish to ForgeBox
-- `changelog.md` - A nice changelog tracking file
-- `CONTRIBUTING.md` - A contribution guideline
-- `ModuleConfig.bx` - Your module's configuration file
-- `readme.md` - Your module's readme. Modify as needed.
-
-## Local Building
-
-The `Build.bx` is used to package your module so it can be distributed to FORGEBOX or to a friend.  It will create a zip file in the `build` directory with the name of your module and the version number.  The zip file will contain all the files needed to run your module, including the `box.json` file, the `ModuleConfig.bx` file, and any other files you have in your module.
-
-If you want to build the module, you can use `boxlang Build.bx` to build the module.  Here are the options you can pass to the script:
-
-| Option      | Required | Default Value | Description                                  |
-|-------------|----------|---------------|----------------------------------------------|
-| `version`   | No       | `1.0.0`       | The version of the module.                   |
-| `branch`    | No       | `development` | The branch being built.                      |
-| `buildId`   | No       | UUID (generated) | A unique identifier for the build.         |
-
-```bash
-boxlang Build.bx --version=1.1.0
+```
+<bx:chart format="png" show3d="false" backgroundcolor="##ffffff"
+			chartwidth="400" chartheight="300" showlegend="true"
+			title="Performance Metrics"
+			xaxistitle="Metrics" yaxistitle="Count"
+			showxgridlines="true" showygridlines="true">
+	<bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00"
+					serieslabel="Performance Data">
+		<bx:chartdata item="Hits" value="150">
+		<bx:chartdata item="Misses" value="25">
+		<bx:chartdata item="Garbage Collections" value="10">
+		<bx:chartdata item="Evictions" value="5">
+	</bx:chartseries>
+</bx:chart>
 ```
 
-## Version Management
+### Horizontal Bar Chart
 
-This module uses [SemVer](https://semver.org/) for versioning.  The version is stored in the `box.json` file and is used to publish to FORGEBOX and the GithubActions will atuomatically bump it for you.  The version is also used to tag the repo for releases.
+```
+<bx:chart format="png" title="Department Budgets"
+			chartwidth="450" chartheight="300"
+			xaxistitle="Budget (thousands)" yaxistitle="Departments"
+			showxgridlines="false" showygridlines="true">
+	<bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+					serieslabel="Budget Allocation">
+		<bx:chartdata item="IT" value="850">
+		<bx:chartdata item="Marketing" value="620">
+		<bx:chartdata item="Sales" value="950">
+		<bx:chartdata item="HR" value="340">
+	</bx:chartseries>
+</bx:chart>
+```
 
-## Github Actions Automation
+### Area Chart Example
 
-This repo has all kinds of automation for PRs, snapshots, tests and releases.  Use them as you see fit.
-If you will be doing FORGEBOX publishing, then you will need to set up a FORGEBOX API key in the secrets of your repository.
+```
+<bx:chart format="png" title="Website Traffic Over Time"
+			chartwidth="500" chartheight="300"
+			xaxistitle="Time Period" yaxistitle="Visitors"
+			showxgridlines="true" showygridlines="true">
+	<bx:chartseries type="area" colorlist="36A2EB"
+					serieslabel="Daily Visitors">
+		<bx:chartdata item="Monday" value="1200">
+		<bx:chartdata item="Tuesday" value="1350">
+		<bx:chartdata item="Wednesday" value="1100">
+		<bx:chartdata item="Thursday" value="1450">
+		<bx:chartdata item="Friday" value="1800">
+		<bx:chartdata item="Saturday" value="2100">
+		<bx:chartdata item="Sunday" value="1900">
+	</bx:chartseries>
+</bx:chart>
+```
 
-- `FORGEBOX_API_TOKEN` - This is your FORGEBOX API key. You can get it from your FORGEBOX account settings.  This is used to publish to FORGEBOX.
+### Stacked Bar Chart
+
+```
+<bx:chart format="png" title="Quarterly Sales by Region"
+			chartwidth="500" chartheight="350"
+			xaxistitle="Quarters" yaxistitle="Sales (thousands)"
+			showxgridlines="false" showygridlines="true"
+			seriesplacement="stacked">
+	<bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56"
+					serieslabel="North Region">
+		<bx:chartdata item="Q1" value="120">
+		<bx:chartdata item="Q2" value="135">
+		<bx:chartdata item="Q3" value="145">
+		<bx:chartdata item="Q4" value="160">
+	</bx:chartseries>
+</bx:chart>
+```
+
 
 ## Ortus Sponsors
 
-BoxLang is a professional open-source project and it is completely funded by the [community](https://patreon.com/ortussolutions) and [Ortus Solutions, Corp](https://www.ortussolutions.com). Ortus Patreons get many benefits like a cfcasts account, a FORGEBOX Pro account and so much more. If you are interested in becoming a sponsor, please visit our patronage page: [https://patreon.com/ortussolutions](https://patreon.com/ortussolutions)
+[BoxLang](https://boxlang.io) is a professional open-source project and it is completely funded by the [community](https://patreon.com/ortussolutions) and [Ortus Solutions, Corp](https://www.ortussolutions.com). Ortus Patreons get many benefits like a cfcasts account, a FORGEBOX Pro account and so much more. If you are interested in becoming a sponsor, please visit our patronage page: [https://patreon.com/ortussolutions](https://patreon.com/ortussolutions)
 
 ### THE DAILY BREAD
 
 > "I am the way, and the truth, and the life; no one comes to the Father, but by me (JESUS)" Jn 14:1-12
+
+<blockquote>
+	Copyright Since 2025 by Ortus Solutions, Corp
+	<br>
+	<a href="https://www.boxlang.io">www.boxlang.io</a> |
+	<a href="https://www.ortussolutions.com">www.ortussolutions.com</a>
+</blockquote>
