@@ -68,7 +68,6 @@ jobs:
           if [ $GITHUB_REF == 'refs/heads/development' ]
           then
             echo "BRANCH=development" >> $GITHUB_ENV
-            echo "MODULE_VERSION=${MODULE_VERSION}-snapshot" >> $GITHUB_ENV
           fi
 
       - name: Update changelog [unreleased] with latest version
