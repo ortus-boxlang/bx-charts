@@ -56,31 +56,33 @@ class{
 	 * @attribute.showYGridlines - boolean, optional -  yes: display Y-axis gridlines.
 	 * @attribute.title - string, optional -  Title of the chart.
 	 * @attribute.xAxisTitle - string, optional -  text; X-axis title
+	 * @attribute.yAxisTitle - string, optional -  text; Y-axis title
 	 *
-	 * Unimplemented attributes
-	 * @attribute.dataBackgroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Not currently implemented
-	 * @attribute.fontBold - boolean, optional -  Yes: displays grid control text in bold. Not currently implemented
-	 * @attribute.fontItalic - boolean, optional -  Yes: displays grid control text in italics. Not currently implemented
-	 * @attribute.fontSize - number, optional -  Size of text in column. Not currently implemented
-	 * @attribute.foregroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Not currently implemented
-	 * @attribute.format - string, optional -  File format in which to save graph.  Not currently implemented
-	 * @attribute.labelFormat, string, optional	, Format for Y-axis labels. Not currently implemented
-	 * @attribute.categoryLabelPositions - string, optional -  Label position relative to axis: standard, up_45, up_90, down_45, down_90 or horizontal (standard) and vertical (down_90). Default is horizontal. . Not currently implemented
-	 * @attribute.markerSize - number, optional -  Size of data point marker in pixels. Integer. . Not currently implemented
-	 * @attribute.name - string, optional -  Page variable name. String. Generates the graph as binary data and assigns it to the specified variable. Suppresses chart display. You can use the name value in the cffile tag to write the chart to a file. Not currently implemented
-	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not currently implemented
-	 * @attribute.scaleFrom - number, optional -  Y-axis minimum value; integer. Not currently implemented
-	 * @attribute.scaleTo - number, optional -  Y-axis max value; integer. Not currently implemented
-	 * @attribute.showBorder - any, optional -  Whether to display a border around the chart. Not currently implemented
-	 * @attribute.showMarkers - boolean, optional -  Applies to chartseries type attribute values line, curve and scatter. yes: display markers at data points. Not currently implemented
-	 * @attribute.showXLabel - boolean, optional -  yes: shows the x-axis labels. Not currently implemented
-	 * @attribute.showTooltip - boolean, optional -  show the tooltip or not. Not currently implemented
-	 * @attribute.sortXAxis - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale. Not currently implemented
-	 * @attribute.url - string, optional -  URL to open if the user clicks item in a data series. Not currently implemented
-	 * @attribute.xOffset - number, optional -  Applies if show3D="yes". Number of units by which to display the chart as angled, horizontally. Not currently implemented
-	 * @attribute.yAxisTitle - string, optional -  text; X-axis title. Not currently implemented
-	 * @attribute.yOffset - number, optional -  Applies if show3D="yes". Number of units by which to display the chart as angled, horizontally. Not currently implemented
-	 * @attribute.base64 - boolean, optional -  Render chart inline using a base64 data url. Not currently implemented
+	 * Newly implemented attributes
+	 * @attribute.dataBackgroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
+	 * @attribute.fontBold - boolean, optional -  Yes: displays grid control text in bold.
+	 * @attribute.fontItalic - boolean, optional -  Yes: displays grid control text in italics.
+	 * @attribute.fontSize - number, optional -  Size of text in column. Default: 12.
+	 * @attribute.foregroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Default: ##333333.
+	 * @attribute.labelFormat - string, optional -  Format for Y-axis labels. Use {value} placeholder for the actual value.
+	 * @attribute.categoryLabelPositions - string, optional -  Label position relative to axis: standard, up_45, up_90, down_45, down_90 or horizontal (standard) and vertical (down_90). Default is horizontal.
+	 * @attribute.markerSize - number, optional -  Size of data point marker in pixels. Integer. Default: 4.
+	 * @attribute.scaleFrom - number, optional -  Y-axis minimum value; integer.
+	 * @attribute.scaleTo - number, optional -  Y-axis max value; integer.
+	 * @attribute.showBorder - boolean, optional -  Whether to display a border around the chart.
+	 * @attribute.showMarkers - boolean, optional -  Applies to chartseries type attribute values line, curve and scatter. yes: display markers at data points. Default: true.
+	 * @attribute.showXLabel - boolean, optional -  yes: shows the x-axis labels. Default: true.
+	 * @attribute.showTooltip - boolean, optional -  show the tooltip or not. Default: true.
+	 * @attribute.sortXAxis - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale.
+	 * @attribute.url - string, optional -  URL to open if the user clicks item in a data series.
+	 *
+	 * Unimplemented attributes (not feasible with Chart.js or not essential)
+	 * @attribute.format - string, optional -  File format in which to save graph. Not implemented (web charts only support canvas/HTML)
+	 * @attribute.name - string, optional -  Page variable name. Not implemented (not applicable to web charts)
+	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not implemented (limited Chart.js support)
+	 * @attribute.xOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
+	 * @attribute.yOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
+	 * @attribute.base64 - boolean, optional -  Render chart inline using a base64 data url. Not implemented (complex feature, not essential)
 	 *
 	 * @return A BodyResult instance or null for a default result return.
 	 */
@@ -109,6 +111,36 @@ class{
 		// Series placement
 		var seriesPlacement = attributes.seriesplacement ?: "default";
 
+		// Font attributes - newly implemented
+		var fontBold = attributes.fontbold ?: false;
+		var fontItalic = attributes.fontitalic ?: false;
+		var fontSize = attributes.fontsize ?: 12;
+
+		// Color attributes - newly implemented
+		var dataBackgroundColor = attributes.databackgroundcolor ?: "";
+		var foregroundColor = attributes.foregroundcolor ?: "##333333";
+
+		// Display control attributes - newly implemented
+		var showBorder = attributes.showborder ?: false;
+		var showMarkers = attributes.showmarkers ?: true;
+		var showXLabel = attributes.showxlabel ?: true;
+		var showTooltip = attributes.showtooltip ?: true;
+
+		// Axis formatting - newly implemented
+		var labelFormat = attributes.labelformat ?: "";
+		var categoryLabelPositions = attributes.categorylabelpositions ?: "horizontal";
+
+		// Scale control - newly implemented
+		var scaleFrom = attributes.scalefrom ?: "";
+		var scaleTo = attributes.scaleto ?: "";
+		var markerSize = attributes.markersize ?: 4;
+
+		// Data sorting - newly implemented
+		var sortXAxis = attributes.sortxaxis ?: false;
+
+		// Click URL - newly implemented
+		var url = attributes.url ?: "";
+
 		// Process the body to collect chart series data
 		var buffer = newBuffer();
 		var bodyResult = processBody( context, body, buffer );
@@ -132,7 +164,23 @@ class{
 			yAxisTitle,
 			showXGridlines,
 			showYGridlines,
-			seriesPlacement
+			seriesPlacement,
+			fontBold,
+			fontItalic,
+			fontSize,
+			dataBackgroundColor,
+			foregroundColor,
+			showBorder,
+			showMarkers,
+			showXLabel,
+			showTooltip,
+			labelFormat,
+			categoryLabelPositions,
+			scaleFrom,
+			scaleTo,
+			markerSize,
+			sortXAxis,
+			url
 		);
 
 		// Render the chart HTML and JavaScript
@@ -156,9 +204,77 @@ class{
 	}
 
 	/**
+	 * Normalizes color values to proper hex format for Chart.js
+	 */
+	private function normalizeColor( required color ) {
+		if ( len( color ) == 0 ) {
+			return "";
+		}
+
+		var cleanColor = trim( color );
+
+		// Handle BoxLang #### prefix for hex colors
+		if ( left( cleanColor, 2 ) == "####" ) {
+			return "##" & right( cleanColor, len( cleanColor ) - 2 );
+		} else if ( left( cleanColor, 2 ) == "##" ) {
+			return cleanColor;
+		} else if ( left( cleanColor, 1 ) == "##" ) {
+			return cleanColor;
+		} else if ( listFindNoCase( "red,blue,green,yellow,orange,purple,pink,brown,gray,grey,black,white,cyan,magenta", cleanColor ) ) {
+			return cleanColor;
+		} else {
+			// Assume it's a hex value without prefix
+			return "##" & cleanColor;
+		}
+	}
+
+	/**
 	 * Builds Chart.js configuration from collected series data
 	 */
-	private function buildChartConfig( required array chartSeries, title, backgroundColor, showLegend, show3d, xAxisTitle, yAxisTitle, showXGridlines, showYGridlines, seriesPlacement ) {
+	private function buildChartConfig(
+		required array chartSeries,
+		title,
+		backgroundColor,
+		showLegend,
+		show3d,
+		xAxisTitle,
+		yAxisTitle,
+		showXGridlines,
+		showYGridlines,
+		seriesPlacement,
+		fontBold,
+		fontItalic,
+		fontSize,
+		dataBackgroundColor,
+		foregroundColor,
+		showBorder,
+		showMarkers,
+		showXLabel,
+		showTooltip,
+		labelFormat,
+		categoryLabelPositions,
+		scaleFrom,
+		scaleTo,
+		markerSize,
+		sortXAxis,
+		url
+	) {
+		// Normalize colors
+		var normalizedForegroundColor = normalizeColor( foregroundColor );
+		var normalizedDataBackgroundColor = normalizeColor( dataBackgroundColor );
+
+		// Build font configuration
+		var fontStyle = "";
+		if ( fontBold && fontItalic ) {
+			fontStyle = "bold italic";
+		} else if ( fontBold ) {
+			fontStyle = "bold";
+		} else if ( fontItalic ) {
+			fontStyle = "italic";
+		} else {
+			fontStyle = "normal";
+		}
+
 		var config = {
 			"type": "pie", // Default to pie, will be overridden by series
 			"data": {
@@ -170,39 +286,143 @@ class{
 				"plugins": {
 					"title": {
 						"display": len( title ) > 0,
-						"text": title
+						"text": title,
+						"font": {
+							"size": fontSize,
+							"style": fontStyle
+						},
+						"color": normalizedForegroundColor
 					},
 					"legend": {
-						"display": showLegend
+						"display": showLegend,
+						"labels": {
+							"font": {
+								"size": fontSize,
+								"style": fontStyle
+							},
+							"color": normalizedForegroundColor
+						}
+					},
+					"tooltip": {
+						"enabled": showTooltip
 					}
 				},
 				"scales": {
 					"x": {
-						"display": true,
+						"display": showXLabel,
 						"title": {
 							"display": len( xAxisTitle ) > 0,
-							"text": xAxisTitle
+							"text": xAxisTitle,
+							"font": {
+								"size": fontSize,
+								"style": fontStyle
+							},
+							"color": normalizedForegroundColor
 						},
 						"grid": {
 							"display": showXGridlines
+						},
+						"ticks": {
+							"font": {
+								"size": fontSize,
+								"style": fontStyle
+							},
+							"color": normalizedForegroundColor
 						}
 					},
 					"y": {
 						"display": true,
 						"title": {
 							"display": len( yAxisTitle ) > 0,
-							"text": yAxisTitle
+							"text": yAxisTitle,
+							"font": {
+								"size": fontSize,
+								"style": fontStyle
+							},
+							"color": normalizedForegroundColor
 						},
 						"grid": {
 							"display": showYGridlines
+						},
+						"ticks": {
+							"font": {
+								"size": fontSize,
+								"style": fontStyle
+							},
+							"color": normalizedForegroundColor
 						}
 					}
 				}
 			}
 		};
 
+		// Add scale limits if specified
+		if ( len( scaleFrom ) > 0 ) {
+			config.options.scales.y.min = val( scaleFrom );
+		}
+		if ( len( scaleTo ) > 0 ) {
+			config.options.scales.y.max = val( scaleTo );
+		}
+
+		// Add label formatting if specified
+		if ( len( labelFormat ) > 0 ) {
+			// We'll handle this in the rendered JavaScript
+			config.options.scales.y.labelFormat = labelFormat;
+		}
+
+		// Add category label positioning
+		if ( categoryLabelPositions != "horizontal" ) {
+			var rotation = 0;
+			switch ( categoryLabelPositions ) {
+				case "up_45":
+					rotation = -45;
+					break;
+				case "up_90":
+					rotation = -90;
+					break;
+				case "down_45":
+					rotation = 45;
+					break;
+				case "down_90":
+					rotation = 90;
+					break;
+				case "vertical":
+					rotation = -90;
+					break;
+			}
+			config.options.scales.x.ticks.maxRotation = abs( rotation );
+			config.options.scales.x.ticks.minRotation = rotation;
+		}
+
+		// Add border configuration
+		if ( showBorder ) {
+			config.options.elements = config.options.elements ?: {};
+			config.options.elements.arc = config.options.elements.arc ?: {};
+			config.options.elements.arc.borderWidth = 2;
+			config.options.elements.arc.borderColor = normalizedForegroundColor;
+		}
+
+		// Add click event handling if URL is specified
+		if ( len( url ) > 0 ) {
+			// We'll handle this in the rendered JavaScript
+			config.options.clickUrl = url;
+		}
+
 		// Process each chart series
-		for ( var series in chartSeries ) {
+		var processedSeries = chartSeries;
+
+		// Sort series data if requested
+		if ( sortXAxis ) {
+			for ( var series in processedSeries ) {
+				if ( structKeyExists( series, "chartData" ) ) {
+					arraySort( series.chartData, function( a, b ) {
+						return compare( a.item, b.item );
+					} );
+				}
+			}
+		}
+
+		for ( var series in processedSeries ) {
 			config.type = series.type; // Use the series type
 
 			var dataset = {
@@ -265,10 +485,22 @@ class{
 				dataset.fill = true;
 				dataset.borderColor = colors[1] ?: "##FF6384";
 				dataset.backgroundColor = colors[1] ?: "##FF6384";
+				// Apply marker settings for area charts
+				dataset.pointRadius = showMarkers ? markerSize : 0;
+				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
+			} else if ( series.type == "line" ) {
+				dataset.borderColor = colors[1] ?: "##FF6384";
+				dataset.backgroundColor = normalizedDataBackgroundColor ?: "transparent";
+				dataset.fill = false;
+				// Apply marker settings for line charts
+				dataset.pointRadius = showMarkers ? markerSize : 0;
+				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
 			} else if ( series.type == "scatter" ) {
 				config.type = "scatter";
 				dataset.showLine = false;
 				dataset.pointBackgroundColor = colors;
+				dataset.pointRadius = markerSize;
+				dataset.pointHoverRadius = markerSize + 2;
 			}
 
 			// Handle series placement for bar charts
@@ -290,13 +522,45 @@ class{
 	 * Renders the chart HTML canvas and JavaScript initialization
 	 */
 	private function renderChart( required context, required chartId, chartWidth, chartHeight, config ) {
+		// Handle special JavaScript functions that can't be JSON serialized
+		var clickUrl = "";
+		var labelFormat = "";
+
+		if ( structKeyExists( config.options, "clickUrl" ) ) {
+			clickUrl = config.options.clickUrl;
+			structDelete( config.options, "clickUrl" );
+		}
+
+		if ( structKeyExists( config.options, "scales" )
+			&& structKeyExists( config.options.scales, "y" )
+			&& structKeyExists( config.options.scales.y, "labelFormat" ) ) {
+			labelFormat = config.options.scales.y.labelFormat;
+			structDelete( config.options.scales.y, "labelFormat" );
+		}
+
+		var jsExtras = "";
+
+		// Add click event handler if URL is specified
+		if ( len( clickUrl ) > 0 ) {
+			jsExtras &= "config.options.onClick = function(event, elements) { if(elements.length > 0) { window.open('" & clickUrl & "', '_blank'); } };" & char(10);
+		}
+
+		// Add label formatting if specified
+		if ( len( labelFormat ) > 0 ) {
+			jsExtras &= "config.options.scales.y.ticks.callback = function(value, index, values) { return '" & labelFormat & "'.replace('{value}', value); };" & char(10);
+		}
+
 		var html = '<div style="width: #chartWidth#px; height: #chartHeight#px;">
 			<canvas id="#chartId#" width="#chartWidth#" height="#chartHeight#"></canvas>
 		</div>
 		<script>
 			(function() {
 				var ctx = document.getElementById("#chartId#").getContext("2d");
-				new Chart(ctx, #JSONSerialize( config )#);
+				var config = #JSONSerialize( config )#;
+
+				#jsExtras#
+
+				new Chart(ctx, config);
 			})();
 		</script>';
 
