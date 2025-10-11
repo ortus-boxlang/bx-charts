@@ -75,6 +75,7 @@ class{
 			destination : destination,
 			format : "zip",
 			source : static.buildDir,
+			includeBaseFolder : false,
 			overwrite : true,
 			recurse : true
 		)
