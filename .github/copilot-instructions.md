@@ -30,7 +30,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 - `ModuleConfig.bx` - Module descriptor with lifecycle methods (`configure()`, `onLoad()`, `onUnload()`)
 - `box.json` - ForgeBox package descriptor with BoxLang-specific metadata
 - `Build.bx` - BoxLang build script for packaging (not Gradle/Maven)
-- `Asset.bx` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/Asset.bx?target=filename`
+- `Asset.bx` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/Asset.bx?method=deliver&target=filename`
 
 ### Component Architecture (`components/`)
 All components follow this pattern:
@@ -85,7 +85,7 @@ class{
 
 ### Asset Management
 - Chart.js library stored in `/public/chart.min.js`
-- Served via `Asset.bx?target=chart.min.js`
+- Served via `Asset.bx?method=deliver&target=chart.min.js`
 - HTML head injection using `htmlHead()` BIF from BoxLang web support
 
 ### Chart Configuration Pattern
@@ -190,19 +190,6 @@ if ( left( color, 2 ) == "##" ) {
 - Check `bodyResult.isEarlyExit()` after processing child components
 - Validate required attributes early and throw descriptive errors
 
-### Error Handling Patterns
-```boxlang
-// Validate component nesting
-var parentState = context.findClosestComponent("chart");
-if (isNull(parentState)) {
-    throw new RuntimeException("chartseries must be nested within a chart component");
-}
-
-// Validate required attributes
-if (!structKeyExists(attributes, "type")) {
-    throw new RuntimeException("chartseries requires a 'type' attribute");
-}
-```
 
 ### Naming Conventions
 - Component files: PascalCase (e.g., `Chart.bx`, `ChartSeries.bx`)
@@ -262,6 +249,6 @@ if (!structKeyExists(attributes, "type")) {
 
 - **Add chart types**: Update `validTypes` array in ChartSeries.bx
 - **Add chart options**: Extend `buildChartConfig()` method in Chart.bx
-- **Add static assets**: Place in `/public/` and serve via `Asset.bx?target=filename`
+- **Add static assets**: Place in `/public/` and serve via `Asset.bx?method=deliver&target=filename`
 - **Test charts**: Use `test-charts-enhanced.bx` example file
 - **Debug data flow**: Check execution state in parent components
