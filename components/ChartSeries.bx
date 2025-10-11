@@ -1,0 +1,95 @@
+/**
+ * BoxLang ChartSeries Component - Defines a data series for charts
+ * <p>
+ * This component must be nested within a chart component.
+ * It defines the chart type and styling, and contains chartData components.
+ * <p>
+ * Usage:
+ * <pre>
+ * <bx:chartseries type="pie" colorlist="red,blue,green">
+ *   <bx:chartdata item="Item 1" value="100">
+ *   <bx:chartdata item="Item 2" value="200">
+ * </bx:chartseries>
+ * </pre>
+ */
+@BoxComponent( "chartseries" )
+@AllowsBody( true )
+@RequiresBody( true )
+class{
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * Injections
+	 * --------------------------------------------------------------------------
+	 */
+	property name="moduleRecord";
+	property name="boxRuntime";
+	property name="functionService";
+	property name="componentService";
+	property name="interceptorService";
+	property name="asyncService";
+	property name="schedulerService";
+	property name="datasourceService";
+	property name="cacheService";
+	property name="log";
+
+	/**
+	 * Defines a chart series with type and styling
+	 *
+	 * @param context The context of the execution (IBoxContext)
+	 * @param attributes The attributes of the component that were passed in
+	 * @param body The body of the component containing chartdata components
+	 * @param executionState The execution state of the component
+	 *
+	 * @return A BodyResult instance or null for a default result return.
+	 */
+	function invoke( required context, Struct attributes, any body, Struct executionState ){
+		// This component must be nested within a chart component
+		var parentState = context.findClosestComponent( "chart" );
+		if ( isNull( parentState ) ) {
+			throw new RuntimeException( "chartseries must be nested within a chart component" );
+		}
+
+		// Validate required attributes
+		if ( !structKeyExists( attributes, "type" ) || !len( trim( attributes.type ) ) ) {
+			throw new RuntimeException( "chartseries requires a 'type' attribute (pie, bar, line, etc.)" );
+		}
+
+		// Validate chart type
+		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea" ];
+		var chartType = lcase( trim( attributes.type ) );
+		if ( !arrayContains( validTypes, chartType ) ) {
+			throw new RuntimeException( "Invalid chart type '#chartType#'. Valid types are: #arrayToList( validTypes )#" );
+		}
+
+		// Initialize this series data structure
+		executionState.type = chartType;
+		executionState.colorlist = attributes.colorlist ?: "";
+		executionState.chartData = [];
+
+		// Process the body to collect chartdata components
+		var buffer = newBuffer();
+		var bodyResult = processBody( context, body, buffer );
+
+		// If there was a return statement inside our body, we early exit now
+		if ( bodyResult.isEarlyExit() ) {
+			return bodyResult;
+		}
+
+		// Create the series data structure
+		var seriesData = {
+			"type": chartType,
+			"colorlist": executionState.colorlist,
+			"chartData": executionState.chartData
+		};
+
+		// Add this series to the parent chart
+		arrayAppend( parentState.chartSeries, seriesData );
+
+		// Log the series for debugging
+		variables.log.debug( "Added chart series: type=#chartType#, dataPoints=#arrayLen( executionState.chartData )#" );
+
+		return null; // Default return
+	}
+
+}

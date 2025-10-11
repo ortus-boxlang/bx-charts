@@ -1,0 +1,204 @@
+/**
+ * BoxLang Chart Component - Renders charts using Chart.js
+ * <p>
+ * This component creates interactive charts using the Chart.js library.
+ * It processes chartSeries and chartData child components to build the chart configuration.
+ * <p>
+ * Basic Usage:
+ * <pre>
+ * <bx:chart title="My Chart" chartwidth="400" chartheight="300">
+ *   <bx:chartseries type="pie">
+ *     <bx:chartdata item="Item 1" value="100">
+ *     <bx:chartdata item="Item 2" value="200">
+ *   </bx:chartseries>
+ * </bx:chart>
+ * </pre>
+ */
+@BoxComponent( "chart" )
+@AllowsBody( true )
+@RequiresBody( true )
+class{
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * Injections
+	 * --------------------------------------------------------------------------
+	 */
+	property name="moduleRecord";
+	property name="boxRuntime";
+	property name="functionService";
+	property name="componentService";
+	property name="interceptorService";
+	property name="asyncService";
+	property name="schedulerService";
+	property name="datasourceService";
+	property name="cacheService";
+	property name="log";
+
+	/**
+	 * Renders a chart using Chart.js
+	 *
+	 * @param context The context of the execution (IBoxContext)
+	 * @param attributes The attributes of the component that were passed in
+	 * @param body The body of the component containing chartseries and chartdata
+	 * @param executionState The execution state of the component
+	 *
+	 * @return A BodyResult instance or null for a default result return.
+	 */
+	function invoke( required context, Struct attributes, any body, Struct executionState ){
+		// Initialize storage for chart series data
+		executionState.chartSeries = [];
+
+		// Set default attributes
+		var chartId = "chart_" & createUUID().replace("-", "", "all");
+		var chartWidth = attributes.chartwidth ?: 400;
+		var chartHeight = attributes.chartheight ?: 300;
+		var title = attributes.title ?: "";
+		var backgroundColor = attributes.backgroundcolor ?: "#ffffff";
+		var showLegend = isBoolean( attributes.showlegend ) ? attributes.showlegend : true;
+		var show3d = isBoolean( attributes.show3d ) ? attributes.show3d : false;
+		var format = attributes.format ?: "canvas"; // We'll always render as canvas
+
+		// Process the body to collect chart series data
+		var buffer = newBuffer();
+		var bodyResult = processBody( context, body, buffer );
+
+		// If there was a return statement inside our body, we early exit now
+		if ( bodyResult.isEarlyExit() ) {
+			return bodyResult;
+		}
+
+		// Ensure Chart.js is loaded
+		ensureChartJSLoaded( context );
+
+		// Build the chart configuration
+		var chartConfig = buildChartConfig(
+			executionState.chartSeries,
+			title,
+			backgroundColor,
+			showLegend,
+			show3d
+		);
+
+		// Render the chart HTML and JavaScript
+		renderChart( context, chartId, chartWidth, chartHeight, chartConfig );
+	}
+
+	/**
+	 * Ensures Chart.js library is loaded in the page head
+	 */
+	private function ensureChartJSLoaded( required context ) {
+		// Use the BoxLang web htmlHead() BIF to include Chart.js
+		if ( !context.hasAttachment( "chartJSLoaded" ) ) {
+			context.putAttachment( "chartJSLoaded", true );
+
+			// Include Chart.js from our lib folder via Asset.bx
+			var scriptTag = '<script src="/bxmodules/bxcharts/Asset.bx?target=chart.min.js"></script>';
+
+			// Call the htmlHead BIF to add the script tag
+			htmlHead( scriptTag );
+		}
+	}
+
+	/**
+	 * Builds Chart.js configuration from collected series data
+	 */
+	private function buildChartConfig( required array chartSeries, title, backgroundColor, showLegend, show3d ) {
+		var config = {
+			"type": "pie", // Default to pie, will be overridden by series
+			"data": {
+				"labels": [],
+				"datasets": []
+			},
+			"options": {
+				"responsive": true,
+				"plugins": {
+					"title": {
+						"display": len( title ) > 0,
+						"text": title
+					},
+					"legend": {
+						"display": showLegend
+					}
+				}
+			}
+		};
+
+		// Process each chart series
+		for ( var series in chartSeries ) {
+			config.type = series.type; // Use the series type
+
+			var dataset = {
+				"label": series.type,
+				"data": [],
+				"backgroundColor": []
+			};
+
+			// Process chart data items
+			var labels = [];
+			var values = [];
+			var colors = [];
+
+			// Parse color list if provided
+			var colorList = [];
+			if ( structKeyExists( series, "colorlist" ) && len( series.colorlist ) ) {
+				colorList = listToArray( series.colorlist );
+				// Ensure colors start with #
+				for ( var i = 1; i <= arrayLen( colorList ); i++ ) {
+					var color = trim( colorList[i] );
+					if ( !color.startsWith( "##" ) && !color.startsWith( "#" ) ) {
+						color = "##" & color;
+					}
+					colorList[i] = color;
+				}
+			}
+
+			// Default colors if none provided
+			if ( arrayLen( colorList ) == 0 ) {
+				colorList = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
+			}
+
+			for ( var dataItem in series.chartData ) {
+				arrayAppend( labels, dataItem.item );
+				arrayAppend( values, val( dataItem.value ) );
+
+				// Assign colors cyclically
+				var colorIndex = ( arrayLen( values ) - 1 ) % arrayLen( colorList ) + 1;
+				arrayAppend( colors, colorList[ colorIndex ] );
+			}
+
+			config.data.labels = labels;
+			dataset.data = values;
+			dataset.backgroundColor = colors;
+
+			// Chart type specific settings
+			if ( series.type == "bar" ) {
+				config.type = "bar";
+				dataset.borderColor = colors;
+				dataset.borderWidth = 1;
+			}
+
+			arrayAppend( config.data.datasets, dataset );
+		}
+
+		return config;
+	}
+
+	/**
+	 * Renders the chart HTML canvas and JavaScript initialization
+	 */
+	private function renderChart( required context, required chartId, chartWidth, chartHeight, config ) {
+		var html = '<div style="width: #chartWidth#px; height: #chartHeight#px;">
+			<canvas id="#chartId#" width="#chartWidth#" height="#chartHeight#"></canvas>
+		</div>
+		<script>
+			(function() {
+				var ctx = document.getElementById("#chartId#").getContext("2d");
+				new Chart(ctx, #serializeJSON( config )#);
+			})();
+		</script>';
+
+		context.writeToBuffer( html );
+	}
+
+}

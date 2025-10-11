@@ -1,0 +1,29 @@
+<!--- Test file for BoxLang Charts Module --->
+<html>
+<head>
+    <title>BoxLang Charts Test</title>
+</head>
+<body>
+    <h1>BoxLang Charts Test</h1>
+
+    <h2>Pie Chart Example</h2>
+    <bx:chart format="png" show3d="false" title="Memory Usage Pie Chart" backgroundcolor="##ffffff" chartheight="275" chartwidth="275">
+        <bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000">
+            <bx:chartdata item="Free Memory" value="512">
+            <bx:chartdata item="Used Memory" value="256">
+            <bx:chartdata item="Reserved Memory" value="128">
+        </bx:chartseries>
+    </bx:chart>
+
+    <h2>Bar Chart Example</h2>
+    <bx:chart format="png" show3d="false" backgroundcolor="##ffffff" chartwidth="275" chartheight="275" showlegend="true" title="Performance Report">
+        <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00">
+            <bx:chartdata item="Hits" value="150">
+            <bx:chartdata item="Misses" value="25">
+            <bx:chartdata item="Garbage Collections" value="10">
+            <bx:chartdata item="Evictions" value="5">
+        </bx:chartseries>
+    </bx:chart>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+/**
+ * BoxLang ChartData Component - Defines data points for chart series
+ * <p>
+ * This component must be nested within a chartSeries component.
+ * It defines individual data points with labels and values.
+ * <p>
+ * Usage:
+ * <pre>
+ * <bx:chartdata item="Label" value="100">
+ * </pre>
+ */
+@BoxComponent( "chartdata" )
+@AllowsBody( false )
+@RequiresBody( false )
+class{
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * Injections
+	 * --------------------------------------------------------------------------
+	 */
+	property name="moduleRecord";
+	property name="boxRuntime";
+	property name="functionService";
+	property name="componentService";
+	property name="interceptorService";
+	property name="asyncService";
+	property name="schedulerService";
+	property name="datasourceService";
+	property name="cacheService";
+	property name="log";
+
+	/**
+	 * Defines a data point for a chart series
+	 *
+	 * @param context The context of the execution (IBoxContext)
+	 * @param attributes The attributes of the component that were passed in
+	 * @param body The body of the component (not used)
+	 * @param executionState The execution state of the component
+	 *
+	 * @return A BodyResult instance or null for a default result return.
+	 */
+	function invoke( required context, Struct attributes, any body, Struct executionState ){
+		// This component must be nested within a chartSeries component
+		var parentState = context.findClosestComponent( "chartseries" );
+		if ( isNull( parentState ) ) {
+			throw new RuntimeException( "chartdata must be nested within a chartseries component" );
+		}
+
+		// Validate required attributes
+		if ( !structKeyExists( attributes, "item" ) || !len( trim( attributes.item ) ) ) {
+			throw new RuntimeException( "chartdata requires an 'item' attribute with the data label" );
+		}
+
+		if ( !structKeyExists( attributes, "value" ) ) {
+			throw new RuntimeException( "chartdata requires a 'value' attribute with the data value" );
+		}
+
+		// Add this data point to the parent series
+		var dataPoint = {
+			"item": trim( attributes.item ),
+			"value": attributes.value
+		};
+
+		// Initialize chartData array if it doesn't exist
+		if ( !structKeyExists( parentState, "chartData" ) ) {
+			parentState.chartData = [];
+		}
+
+		arrayAppend( parentState.chartData, dataPoint );
+
+		// Log the data point for debugging
+		variables.log.debug( "Added chart data point: #dataPoint.item# = #dataPoint.value#" );
+
+		return null; // Default return
+	}
+
+}
