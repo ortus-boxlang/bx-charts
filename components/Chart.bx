@@ -43,6 +43,45 @@ class{
 	 * @param body The body of the component containing chartseries and chartdata
 	 * @param executionState The execution state of the component
 	 *
+	 * Supported attributes
+	 *
+	 * @attribute.backgroundColor - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
+	 * @attribute.chartHeight - number, optional -  Chart height; integer number of pixels
+	 * @attribute.chartWidth - number, optional -  Chart width; integer number of pixels
+	 * @attribute.font - string, optional -  Font of data in column..
+	 * @attribute.show3D - boolean, optional -  Display chart with three-dimensional appearance.
+	 * @attribute.showLegend - boolean, optional -  yes: if chart contains more than one data series, display legend
+	 * @attribute.showXGridlines - boolean, optional -  yes: display X-axis gridlines
+	 * @attribute.source - string, optional -  variable name of the source path, if set the path to the source file is returned and no image tag is written to response stream.
+	 * @attribute.showYGridlines - boolean, optional -  yes: display Y-axis gridlines.
+	 * @attribute.title - string, optional -  Title of the chart.
+	 * @attribute.xAxisTitle - string, optional -  text; X-axis title
+	 *
+	 * Unimplemented attributes
+	 * @attribute.dataBackgroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Not currently implemented
+	 * @attribute.fontBold - boolean, optional -  Yes: displays grid control text in bold. Not currently implemented
+	 * @attribute.fontItalic - boolean, optional -  Yes: displays grid control text in italics. Not currently implemented
+	 * @attribute.fontSize - number, optional -  Size of text in column. Not currently implemented
+	 * @attribute.foregroundColor - string, optional -  color for control. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Not currently implemented
+	 * @attribute.format - string, optional -  File format in which to save graph.  Not currently implemented
+	 * @attribute.labelFormat, string, optional	, Format for Y-axis labels. Not currently implemented
+	 * @attribute.categoryLabelPositions - string, optional -  Label position relative to axis: standard, up_45, up_90, down_45, down_90 or horizontal (standard) and vertical (down_90). Default is horizontal. . Not currently implemented
+	 * @attribute.markerSize - number, optional -  Size of data point marker in pixels. Integer. . Not currently implemented
+	 * @attribute.name - string, optional -  Page variable name. String. Generates the graph as binary data and assigns it to the specified variable. Suppresses chart display. You can use the name value in the cffile tag to write the chart to a file. Not currently implemented
+	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not currently implemented
+	 * @attribute.scaleFrom - number, optional -  Y-axis minimum value; integer. Not currently implemented
+	 * @attribute.scaleTo - number, optional -  Y-axis max value; integer. Not currently implemented
+	 * @attribute.showBorder - any, optional -  Whether to display a border around the chart. Not currently implemented
+	 * @attribute.showMarkers - boolean, optional -  Applies to chartseries type attribute values line, curve and scatter. yes: display markers at data points. Not currently implemented
+	 * @attribute.showXLabel - boolean, optional -  yes: shows the x-axis labels. Not currently implemented
+	 * @attribute.showTooltip - boolean, optional -  show the tooltip or not. Not currently implemented
+	 * @attribute.sortXAxis - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale. Not currently implemented
+	 * @attribute.url - string, optional -  URL to open if the user clicks item in a data series. Not currently implemented
+	 * @attribute.xOffset - number, optional -  Applies if show3D="yes". Number of units by which to display the chart as angled, horizontally. Not currently implemented
+	 * @attribute.yAxisTitle - string, optional -  text; X-axis title. Not currently implemented
+	 * @attribute.yOffset - number, optional -  Applies if show3D="yes". Number of units by which to display the chart as angled, horizontally. Not currently implemented
+	 * @attribute.base64 - boolean, optional -  Render chart inline using a base64 data url. Not currently implemented
+	 *
 	 * @return A BodyResult instance or null for a default result return.
 	 */
 	function invoke( required context, Struct attributes, any body, Struct executionState ){
