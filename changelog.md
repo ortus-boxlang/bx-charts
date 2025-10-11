@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2025-10-11
 
+## [1.0.0] - 2025-10-11
+
 - First iteration of this module
 
 [unreleased]: https://github.com/ortus-boxlang/bx-charts/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/ortus-boxlang/bx-charts/compare/cf3a3cc93133ecebd5e239d57b8bf3b3f79ad40d...v1.0.0
+[1.0.0]: https://github.com/ortus-boxlang/bx-charts/compare/v1.0.0...v1.0.0
