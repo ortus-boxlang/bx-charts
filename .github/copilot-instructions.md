@@ -1,12 +1,27 @@
 # BoxLang Charts Module - Copilot Instructions
 
+## Project Overview
+
+**Purpose**: A comprehensive charting module for the BoxLang runtime that provides interactive Chart.js-based visualizations through BoxLang components. This module enables developers to create rich, responsive charts using familiar BoxLang template syntax.
+
+**Target Audience**: BoxLang developers who need to integrate data visualization capabilities into their web applications. Suitable for both beginners and advanced users with varying levels of charting experience.
+
+**Key Features**:
+- Support for 9+ chart types (pie, bar, line, doughnut, radar, area, scatter, etc.)
+- Nested component architecture for intuitive data organization
+- Responsive design with customizable dimensions and styling
+- Advanced features like stacked/clustered series, axis titles, grid lines
+- Static asset serving with security and content-type management
+
+**Runtime Requirements**: BoxLang 1.0.0+ with web support for `htmlHead()` BIF
+
 ## Architecture Overview
 
 This is a **BoxLang module** that provides comprehensive charting capabilities using Chart.js. Key architectural elements:
 
 - **Module System**: BoxLang modules follow a specific structure with `ModuleConfig.bx` as the entry point
 - **Components**: Chart-related components (Chart, ChartData, ChartSeries) that can be used in both script and template syntax
-- **Asset Serving**: Static assets (JS/CSS) served via `Asset.bx` proxy from `/lib/` directory
+- **Asset Serving**: Static assets (JS/CSS) served via `Asset.bx` proxy from `/public/` directory
 - **Module Mapping**: All modules are registered with prefix `bxModules.{mapping}` (this module uses `bxcharts`)
 
 ## File Structure & Patterns
@@ -15,7 +30,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 - `ModuleConfig.bx` - Module descriptor with lifecycle methods (`configure()`, `onLoad()`, `onUnload()`)
 - `box.json` - ForgeBox package descriptor with BoxLang-specific metadata
 - `Build.bx` - BoxLang build script for packaging (not Gradle/Maven)
-- `Asset.bx` - Static asset proxy for serving files from `/lib/` via `/bxmodules/bxcharts/public/Asset.bx?target=filename`
+- `Asset.bx` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/Asset.bx?target=filename`
 
 ### Component Architecture (`components/`)
 All components follow this pattern:
@@ -69,7 +84,7 @@ class{
 - Data flows: ChartData → ChartSeries → Chart → Rendered HTML/JS
 
 ### Asset Management
-- Chart.js library stored in `/lib/chart.min.js`
+- Chart.js library stored in `/public/chart.min.js`
 - Served via `Asset.bx?target=chart.min.js`
 - HTML head injection using `htmlHead()` BIF from BoxLang web support
 
@@ -88,7 +103,7 @@ var chartConfig = {
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
 - **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
-- **Dependencies**: Chart.js library managed manually in `/lib/`
+- **Dependencies**: Chart.js library managed manually in `/public/`
 - **Documentation**: [BoxLang MCP Server Docs](https://boxlang.ortusbooks.com/~gitbook/mcp)
 
 ### Component Development Lifecycle
@@ -96,6 +111,40 @@ var chartConfig = {
 2. Parent components initialize execution state for child data collection
 3. Child components find parent via `context.findClosestComponent("parentname")`
 4. Data aggregation happens during body processing
+
+## Essential Commands & Tooling
+
+### Build Commands
+```bash
+# Build module with default version (1.0.0)
+boxlang Build.bx
+
+# Build with specific version and build ID
+boxlang Build.bx --version=1.1.0 --buildId=123
+```
+
+### Testing Commands
+```bash
+# Run TestBox specs (requires BoxLang with TestBox)
+boxlang tests/specs/ChartSpec.bx
+
+# Manual testing with example charts
+boxlang tests/test-charts-enhanced.bx
+```
+
+### Code Formatting
+```bash
+# Format all BoxLang code using cfformat
+box run-script format
+
+# Watch for changes and auto-format
+box run-script format:watch
+```
+
+### Package Management
+- Uses ForgeBox for distribution (`box.json` configuration)
+- Dependencies managed via CommandBox (`commandbox-boxlang`, `testbox`, etc.)
+- Static assets (Chart.js) included directly in `/public/` directory
 
 ## BoxLang-Specific Conventions
 
@@ -131,6 +180,41 @@ if ( left( color, 2 ) == "##" ) {
 - `horizontalbar` → Chart.js `bar` with `indexAxis: "y"`
 - `scatter` → Chart.js `scatter` with `showLine: false`
 - `stacked` → Chart.js bar with `scales.x.stacked: true, scales.y.stacked: true`
+
+## Coding Standards & Best Practices
+
+### BoxLang Component Conventions
+- Use `@BoxComponent("name")` annotation to register components
+- Always implement `invoke(context, attributes, body, executionState)` method
+- Use `processBody(context, body, buffer)` pattern for nested content
+- Check `bodyResult.isEarlyExit()` after processing child components
+- Validate required attributes early and throw descriptive errors
+
+### Error Handling Patterns
+```boxlang
+// Validate component nesting
+var parentState = context.findClosestComponent("chart");
+if (isNull(parentState)) {
+    throw new RuntimeException("chartseries must be nested within a chart component");
+}
+
+// Validate required attributes
+if (!structKeyExists(attributes, "type")) {
+    throw new RuntimeException("chartseries requires a 'type' attribute");
+}
+```
+
+### Naming Conventions
+- Component files: PascalCase (e.g., `Chart.bx`, `ChartSeries.bx`)
+- Component names: lowercase (e.g., `chart`, `chartseries`, `chartdata`)
+- Attributes: camelCase (e.g., `chartWidth`, `showLegend`, `seriesLabel`)
+- Internal variables: camelCase with descriptive names
+
+### Code Formatting
+- Follow Ortus Standards (`.cfformat.json`)
+- Use tabs for indentation
+- Always use explicit scoping for variables
+- Include comprehensive docblocks with parameter descriptions
 
 ## Usage Examples
 
@@ -178,6 +262,6 @@ if ( left( color, 2 ) == "##" ) {
 
 - **Add chart types**: Update `validTypes` array in ChartSeries.bx
 - **Add chart options**: Extend `buildChartConfig()` method in Chart.bx
-- **Add static assets**: Place in `/lib/` and serve via `Asset.bx?target=filename`
-- **Test charts**: Use `test-charts.bx` example file
+- **Add static assets**: Place in `/public/` and serve via `Asset.bx?target=filename`
+- **Test charts**: Use `test-charts-enhanced.bx` example file
 - **Debug data flow**: Check execution state in parent components
