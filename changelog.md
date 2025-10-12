@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Extended `<bx:chartdata>` component with `x`, `y`, and `r` attributes for bubble charts
   - Comprehensive bubble chart example in test files
   - Documentation for bubble chart usage in readme.md
+- Chart selection guide in readme.md
+  - "Choosing the Right Chart Type" section with quick selection guide
+  - Visual examples table with images for all 10 chart types
+  - Decision tree for selecting appropriate chart type
+  - Common pitfalls and best practices guide
 - Responsive chart support with Chart.js features
   - `responsive` attribute (default: true) - Chart resizes to fit container width
   - `maintainAspectRatio` attribute (default: true) - Maintains width/height ratio during resize
