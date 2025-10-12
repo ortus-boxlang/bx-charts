@@ -190,6 +190,48 @@ BoxLang Charts support responsive sizing that adapts to container width and scre
 * Use `maintainAspectRatio="false"` when you need charts to fill specific container heights
 * Combine with CSS for maximum control over chart sizing in responsive layouts
 
+## Development
+
+### Updating Chart.js Library
+
+This module includes an automated way to update the Chart.js library used for rendering charts. The process uses npm to manage the Chart.js dependency and copy it to the public assets directory.
+
+**Prerequisites:**
+* Node.js and npm installed on your system
+
+**To update Chart.js to the latest version:**
+
+1. Update the Chart.js version in `package.json`:
+   ```json
+   "dependencies": {
+     "chart.js": "^4.5.0"  // Change to desired version
+   }
+   ```
+
+2. Run the update command:
+   ```bash
+   npm run update
+   ```
+
+   This command will:
+   - Install/update the Chart.js dependency from npm
+   - Copy the Chart.js library to `public/chart.min.js`
+   - Display the version and file size information
+
+**Alternative: Manual update steps**
+
+If you prefer to run the steps separately:
+
+```bash
+# Install dependencies
+npm install
+
+# Copy Chart.js to public directory
+npm run copy-assets
+```
+
+**Note:** The `public/chart.min.js` file is tracked in version control. After updating Chart.js, commit the changes to include the new version in the module distribution.
+
 
 ## Ortus Sponsors
 

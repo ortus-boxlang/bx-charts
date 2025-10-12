@@ -1,0 +1,19 @@
+{
+  "name": "bx-charts",
+  "version": "1.2.0",
+  "description": "A charting module for BoxLang using Chart.js",
+  "private": true,
+  "scripts": {
+    "update": "npm install && npm run copy-assets",
+    "copy-assets": "node scripts/copy-assets.js"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ortus-boxlang/bx-charts"
+  },
+  "license": "Apache-2.0"
+}
