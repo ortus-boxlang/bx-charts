@@ -478,7 +478,13 @@ class{
 
 			for ( var dataItem in series.chartData ) {
 				arrayAppend( labels, dataItem.item );
-				arrayAppend( values, val( dataItem.value ) );
+				
+				// For bubble and scatter charts, handle x, y, r coordinates
+				if ( series.type == "bubble" && structKeyExists( dataItem, "x" ) && structKeyExists( dataItem, "y" ) && structKeyExists( dataItem, "r" ) ) {
+					arrayAppend( values, { "x": val( dataItem.x ), "y": val( dataItem.y ), "r": val( dataItem.r ) } );
+				} else {
+					arrayAppend( values, val( dataItem.value ) );
+				}
 
 				// Assign colors cyclically
 				var colorIndex = ( arrayLen( values ) - 1 ) % arrayLen( colorList ) + 1;
@@ -520,6 +526,11 @@ class{
 				dataset.pointBackgroundColor = colors;
 				dataset.pointRadius = markerSize;
 				dataset.pointHoverRadius = markerSize + 2;
+			} else if ( series.type == "bubble" ) {
+				config.type = "bubble";
+				dataset.backgroundColor = colors;
+				dataset.borderColor = colors;
+				dataset.borderWidth = 2;
 			}
 
 			// Handle series placement for bar charts

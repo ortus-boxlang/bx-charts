@@ -30,7 +30,7 @@ This module provides powerful chart generation capabilities to the [BoxLang](htt
 
 ## ✨ Features
 
-- 🎨 **9 Chart Types**: pie, bar, line, doughnut, radar, polar area, area, horizontal bar, and scatter plots
+- 🎨 **10 Chart Types**: pie, bar, line, doughnut, radar, polar area, area, horizontal bar, scatter, and bubble charts
 - 📱 **Responsive Design**: Charts automatically adapt to container sizes and screen dimensions
 - 🎯 **Easy to Use**: Simple BoxLang component syntax with nested data structure
 - 🎭 **Highly Customizable**: Extensive styling options including colors, fonts, axes, and grid lines
@@ -72,7 +72,7 @@ That's it! 🎉 You now have a beautiful, interactive pie chart.
 
 ## 📊 Chart Types
 
-The module supports 9 different chart types, each optimized for specific data visualization needs:
+The module supports 10 different chart types, each optimized for specific data visualization needs:
 
 ### 🥧 Pie Chart (`type="pie"`)
 Perfect for showing proportions and percentages of a whole.
@@ -120,6 +120,12 @@ Bar chart with horizontal orientation.
 Shows relationship between two variables.
 - **Best for**: Correlation analysis, distribution patterns
 - **Data structure**: X-Y coordinate pairs
+
+### 🫧 Bubble Chart (`type="bubble"`)
+Shows three-dimensional data using x, y coordinates and bubble size.
+- **Best for**: Multi-dimensional data analysis, comparative metrics, portfolio analysis
+- **Data structure**: X-Y coordinate pairs with radius (r) for bubble size
+- **Usage**: Use `x`, `y`, and `r` attributes in `<bx:chartdata>` instead of just `value`
 
 ## 📚 Components Reference
 
@@ -217,12 +223,21 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `item` | string | ✅ Yes | Data point label/name |
-| `value` | number | ✅ Yes | Data point value |
+| `value` | number | ✅ Yes* | Data point value (*Required for all chart types except bubble) |
+| `x` | number | ⚠️ Bubble | X-coordinate (required for bubble charts) |
+| `y` | number | ⚠️ Bubble | Y-coordinate (required for bubble charts) |
+| `r` | number | ⚠️ Bubble | Bubble radius (required for bubble charts) |
 
-**Example:**
+**Standard Example:**
 ```boxlang
 <bx:chartdata item="Product A" value="150">
 <bx:chartdata item="Product B" value="200">
+```
+
+**Bubble Chart Example:**
+```boxlang
+<bx:chartdata item="Product A" x="20" y="30" r="15">
+<bx:chartdata item="Product B" x="40" y="10" r="10">
 ```
 
 ## 💡 Examples
@@ -419,6 +434,30 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 ```
 
 **💡 Use Case:** Shows relationships between two variables, useful for correlation analysis.
+
+#### 🫧 Bubble Chart for Multi-dimensional Analysis
+
+Bubble charts display three dimensions of data using x and y coordinates plus bubble size.
+
+```boxlang
+<bx:chart title="Product Portfolio Analysis"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Market Share (%)" yaxistitle="Revenue ($M)"
+          showxgridlines="true" showygridlines="true">
+    <bx:chartseries type="bubble" 
+                    colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                    serieslabel="Product Performance">
+        <bx:chartdata item="Product A" x="20" y="30" r="15">
+        <bx:chartdata item="Product B" x="40" y="10" r="10">
+        <bx:chartdata item="Product C" x="30" y="20" r="25">
+        <bx:chartdata item="Product D" x="15" y="35" r="8">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Perfect for displaying three-dimensional data where the third dimension (bubble size) represents metrics like customer satisfaction, investment size, or population.
+
+**Note:** For bubble charts, use `x`, `y`, and `r` attributes instead of `value` in `<bx:chartdata>` components.
 
 #### 📱 Responsive Chart
 

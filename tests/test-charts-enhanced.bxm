@@ -266,6 +266,26 @@
         </div>
     </div>
 
+    <div class="chart-section">
+        <div class="chart-title">16. Bubble Chart - Multi-dimensional Data Visualization</div>
+        <div class="chart-container">
+            <bx:chart format="canvas" title="Product Performance Analysis" backgroundcolor="##ffffff"
+                     chartheight="400" chartwidth="600" showlegend="true"
+                     xaxistitle="Market Share (%)" yaxistitle="Revenue ($M)"
+                     showxgridlines="true" showygridlines="true">
+                <bx:chartseries type="bubble" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" serieslabel="Product Metrics">
+                    <bx:chartdata item="Product A" x="20" y="30" r="15">
+                    <bx:chartdata item="Product B" x="40" y="10" r="10">
+                    <bx:chartdata item="Product C" x="30" y="20" r="25">
+                    <bx:chartdata item="Product D" x="15" y="35" r="8">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+        <div style="margin-top: 10px; color: ##666; font-size: 14px;">
+            Bubble charts show three dimensions: X-axis (Market Share), Y-axis (Revenue), and bubble size (Customer Satisfaction).
+        </div>
+    </div>
+
     <hr style="margin: 40px 0;">
 
     <h2>Enhanced Features Demonstrated:</h2>
@@ -286,6 +306,7 @@
         <li><strong>Data Sorting (NEW):</strong> Alphabetically sort x-axis labels with <code>sortxaxis</code> attribute</li>
         <li><strong>Interactive Charts (NEW):</strong> Add click navigation with <code>url</code> attribute</li>
         <li><strong>Label Formatting (NEW):</strong> Custom Y-axis label formatting with <code>labelformat</code> using {value} placeholder</li>
+        <li><strong>Bubble Charts (NEW):</strong> Added support for <code>bubble</code> chart type with x, y, r (radius) coordinates</li>
     </ul>
 
 </body>
