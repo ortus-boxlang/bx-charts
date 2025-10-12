@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Responsive chart support with Chart.js features
+  - `responsive` attribute (default: true) - Chart resizes to fit container width
+  - `maintainAspectRatio` attribute (default: true) - Maintains width/height ratio during resize
+  - `aspectRatio` attribute (default: 2) - Custom aspect ratio (width/height)
+- Container div now uses flexible sizing when responsive mode is enabled
+- Comprehensive test file with 7+ responsive chart examples
+- Documentation for responsive features in readme.md
+
+### Changed
+- Updated renderChart to support responsive and non-responsive modes
+- Chart container styling now adapts based on responsive settings
+
 ## [1.0.0] - 2025-10-11
 
 ## [1.0.0] - 2025-10-11
