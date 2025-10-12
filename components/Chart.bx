@@ -48,6 +48,10 @@ class{
 	 * @attribute.backgroundColor - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
 	 * @attribute.chartHeight - number, optional -  Chart height; integer number of pixels
 	 * @attribute.chartWidth - number, optional -  Chart width; integer number of pixels
+	 * @attribute.responsive - boolean, optional -  Enable responsive behavior. When true, chart resizes with container. Default: true
+	 * @attribute.maintainAspectRatio - boolean, optional -  Maintain aspect ratio during resize. Default: true
+	 * @attribute.aspectRatio - number, optional -  Aspect ratio (width/height) for chart. Default: 2 for most charts
+	 * @attribute.resizeDelay - number, optional -  Delay in milliseconds before resize update. Default: 0
 	 * @attribute.font - string, optional -  Font of data in column..
 	 * @attribute.show3D - boolean, optional -  Display chart with three-dimensional appearance.
 	 * @attribute.showLegend - boolean, optional -  yes: if chart contains more than one data series, display legend
@@ -97,6 +101,12 @@ class{
 		var showLegend = attributes.showlegend ?: true;
 		var show3d = attributes.show3d ?: false;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
+		
+		// Responsive attributes
+		var responsive = attributes.responsive ?: true;
+		var maintainAspectRatio = attributes.maintainaspectratio ?: true;
+		var aspectRatio = attributes.aspectratio ?: 2;
+		var resizeDelay = attributes.resizedelay ?: 0;
 
 		// Axis titles
 		var xAxisTitle = attributes.xaxistitle ?: "";
@@ -178,11 +188,15 @@ class{
 			scaleTo,
 			markerSize,
 			sortXAxis,
-			url
+			url,
+			responsive,
+			maintainAspectRatio,
+			aspectRatio,
+			resizeDelay
 		);
 
 		// Render the chart HTML and JavaScript
-		renderChart( context, chartId, chartWidth, chartHeight, chartConfig );
+		renderChart( context, chartId, chartWidth, chartHeight, chartConfig, responsive );
 	}
 
 	/**
@@ -255,7 +269,11 @@ class{
 		scaleTo,
 		markerSize,
 		sortXAxis,
-		url
+		url,
+		responsive,
+		maintainAspectRatio,
+		aspectRatio,
+		resizeDelay
 	) {
 		// Normalize colors
 		var normalizedForegroundColor = normalizeColor( foregroundColor );
@@ -280,7 +298,10 @@ class{
 				"datasets": []
 			},
 			"options": {
-				"responsive": true,
+				"responsive": responsive,
+				"maintainAspectRatio": maintainAspectRatio,
+				"aspectRatio": aspectRatio,
+				"resizeDelay": resizeDelay,
 				"plugins": {
 					"title": {
 						"display": len( title ) > 0,
@@ -519,7 +540,7 @@ class{
 	/**
 	 * Renders the chart HTML canvas and JavaScript initialization
 	 */
-	private function renderChart( required context, required chartId, chartWidth, chartHeight, config ) {
+	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive ) {
 		// Handle special JavaScript functions that can't be JSON serialized
 		var clickUrl = "";
 		var labelFormat = "";
@@ -548,8 +569,21 @@ class{
 			jsExtras &= "config.options.scales.y.ticks.callback = function(value, index, values) { return '" & labelFormat & "'.replace('{value}', value); };" & char(10);
 		}
 
-		var html = '<div style="width: #chartWidth#px; height: #chartHeight#px;">
-			<canvas id="#chartId#" width="#chartWidth#" height="#chartHeight#"></canvas>
+		// Build container div with appropriate styling
+		var containerStyle = "";
+		if ( responsive ) {
+			// For responsive charts, use relative sizing
+			containerStyle = "position: relative; width: 100%; max-width: #chartWidth#px;";
+			if ( !config.options.maintainAspectRatio ) {
+				containerStyle &= " height: #chartHeight#px;";
+			}
+		} else {
+			// For non-responsive charts, use fixed dimensions
+			containerStyle = "width: #chartWidth#px; height: #chartHeight#px;";
+		}
+
+		var html = '<div style="#containerStyle#">
+			<canvas id="#chartId#"></canvas>
 		</div>
 		<script>
 			(function() {
