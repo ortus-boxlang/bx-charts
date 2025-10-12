@@ -18,6 +18,9 @@ This module contributes the following Components to the language:
     * `backgroundColor` - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
     * `chartHeight` - number, optional -  Chart height; integer number of pixels
     * `chartWidth` - number, optional -  Chart width; integer number of pixels
+    * `responsive` - boolean, optional -  Enable responsive behavior. When true, chart resizes with container. Default: true
+    * `maintainAspectRatio` - boolean, optional -  Maintain aspect ratio during resize. Default: true
+    * `aspectRatio` - number, optional -  Aspect ratio (width/height) for chart. Default: 2 for most charts
     * `font` - string, optional -  Font of data in column..
     * `show3D` - boolean, optional -  Display chart with three-dimensional appearance.
     * `showLegend` - boolean, optional -  yes: if chart contains more than one data series, display legend
@@ -148,6 +151,42 @@ This module contributes the following Components to the language:
 	</bx:chartseries>
 </bx:chart>
 ```
+
+### Responsive Charts
+
+BoxLang Charts support responsive sizing that adapts to container width and screen sizes. This is ideal for responsive web applications and dashboards.
+
+```
+<bx:chart format="png" title="Responsive Dashboard Chart"
+			chartwidth="800" chartheight="400"
+			responsive="true"
+			maintainAspectRatio="true"
+			aspectRatio="2"
+			xaxistitle="Months" yaxistitle="Revenue">
+	<bx:chartseries type="bar" colorlist="36A2EB"
+					serieslabel="Monthly Revenue">
+		<bx:chartdata item="Jan" value="12000">
+		<bx:chartdata item="Feb" value="15000">
+		<bx:chartdata item="Mar" value="13500">
+		<bx:chartdata item="Apr" value="18000">
+	</bx:chartseries>
+</bx:chart>
+```
+
+**Responsive Attributes:**
+
+* `responsive` (default: true) - Chart resizes to fit container width
+* `maintainAspectRatio` (default: true) - Maintains width/height ratio during resize
+* `aspectRatio` (default: 2) - Custom aspect ratio (width/height). Examples:
+  * 2 = Wide format (2:1 ratio)
+  * 1 = Square format (1:1 ratio)
+  * 0.5 = Tall format (1:2 ratio)
+
+**Tips for Responsive Charts:**
+
+* Charts with `responsive="true"` will resize to fill their container width up to `chartWidth`
+* Use `maintainAspectRatio="false"` when you need charts to fill specific container heights
+* Combine with CSS for maximum control over chart sizing in responsive layouts
 
 
 ## Ortus Sponsors

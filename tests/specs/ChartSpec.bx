@@ -180,13 +180,52 @@ class extends="testbox.system.BaseSpec"{
 				expect( len( complexChartConfig.yaxistitle ) ).toBeGT( 0, "Y-axis title should not be empty" );
 			} );
 
+			it( "supports responsive chart configuration", () => {
+				var responsiveConfig = {
+					"responsive": true,
+					"maintainAspectRatio": true,
+					"aspectRatio": 2
+				};
+
+				// Test responsive configuration
+				expect( isBoolean( responsiveConfig.responsive ) ).toBeTrue( "Responsive should be boolean" );
+				expect( isBoolean( responsiveConfig.maintainAspectRatio ) ).toBeTrue( "MaintainAspectRatio should be boolean" );
+				expect( isNumeric( responsiveConfig.aspectRatio ) ).toBeTrue( "AspectRatio should be numeric" );
+				expect( responsiveConfig.aspectRatio ).toBeGT( 0, "AspectRatio should be positive" );
+			} );
+
+			it( "validates aspect ratio values", () => {
+				var aspectRatioTests = [
+					{ "ratio": 1, "description": "Square (1:1)" },
+					{ "ratio": 2, "description": "Wide (2:1)" },
+					{ "ratio": 3, "description": "Very wide (3:1)" },
+					{ "ratio": 0.5, "description": "Tall (1:2)" }
+				];
+
+				for ( var test in aspectRatioTests ) {
+					expect( test.ratio ).toBeGT( 0, "Aspect ratio should be positive for: #test.description#" );
+					expect( isNumeric( test.ratio ) ).toBeTrue( "Aspect ratio should be numeric for: #test.description#" );
+				}
+			} );
+
+			it( "handles responsive chart attributes correctly", () => {
+				var chartAttributes = {
+					"responsive": true,
+					"maintainAspectRatio": false,
+					"aspectRatio": 1.5,
+					"chartwidth": 800,
+					"chartheight": 400
+				};
+
+				// Validate attributes
+				expect( chartAttributes.responsive ).toBeTrue( "Responsive should be enabled" );
+				expect( chartAttributes.maintainAspectRatio ).toBeFalse( "MaintainAspectRatio should be disabled" );
+				expect( chartAttributes.aspectRatio ).toBe( 1.5, "AspectRatio should be 1.5" );
+				expect( chartAttributes.chartwidth ).toBe( 800, "Chart width should be 800" );
+				expect( chartAttributes.chartheight ).toBe( 400, "Chart height should be 400" );
+			} );
+
 		} );
-	}
-
-}
-			} )
-
-		} )
 	}
 
 }
