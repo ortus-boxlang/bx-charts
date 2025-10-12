@@ -15,5 +15,8 @@
     "type": "git",
     "url": "https://github.com/ortus-boxlang/bx-charts"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "comments": {
+    "updating": "To update Chart.js, change the version above and run 'npm run update'"
+  }
 }
