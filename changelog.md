@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `responsive` attribute (default: true) - Chart resizes to fit container width
   - `maintainAspectRatio` attribute (default: true) - Maintains width/height ratio during resize
   - `aspectRatio` attribute (default: 2) - Custom aspect ratio (width/height)
+  - `resizeDelay` attribute (default: 0) - Delay in milliseconds before resize update for performance
 - Container div now uses flexible sizing when responsive mode is enabled
 - Comprehensive test file with 7+ responsive chart examples
 - Documentation for responsive features in readme.md

@@ -21,6 +21,7 @@ This module contributes the following Components to the language:
     * `responsive` - boolean, optional -  Enable responsive behavior. When true, chart resizes with container. Default: true
     * `maintainAspectRatio` - boolean, optional -  Maintain aspect ratio during resize. Default: true
     * `aspectRatio` - number, optional -  Aspect ratio (width/height) for chart. Default: 2 for most charts
+    * `resizeDelay` - number, optional -  Delay in milliseconds before resize update. Default: 0
     * `font` - string, optional -  Font of data in column..
     * `show3D` - boolean, optional -  Display chart with three-dimensional appearance.
     * `showLegend` - boolean, optional -  yes: if chart contains more than one data series, display legend
@@ -181,6 +182,7 @@ BoxLang Charts support responsive sizing that adapts to container width and scre
   * 2 = Wide format (2:1 ratio)
   * 1 = Square format (1:1 ratio)
   * 0.5 = Tall format (1:2 ratio)
+* `resizeDelay` (default: 0) - Delay in milliseconds before resize update for performance optimization
 
 **Tips for Responsive Charts:**
 

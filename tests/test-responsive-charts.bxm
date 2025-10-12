@@ -197,6 +197,29 @@
     </div>
 
     <div class="chart-section">
+        <div class="chart-title">8. Responsive Chart with Resize Delay (Performance Optimization)</div>
+        <div class="chart-description">This chart uses resizeDelay to debounce resize events for better performance.</div>
+        <div class="feature-highlight">
+            <strong>Attributes:</strong> responsive="true", resizeDelay="100" (100ms debounce)
+        </div>
+        <div class="responsive-container">
+            <bx:chart title="Optimized Responsive Chart" 
+                     chartwidth="600" chartheight="300"
+                     responsive="true"
+                     maintainAspectRatio="true"
+                     resizeDelay="100">
+                <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" 
+                               serieslabel="Performance Data">
+                    <bx:chartdata item="Jan" value="120">
+                    <bx:chartdata item="Feb" value="150">
+                    <bx:chartdata item="Mar" value="135">
+                    <bx:chartdata item="Apr" value="180">
+                </bx:chartseries>
+            </bx:chart>
+        </div>
+    </div>
+
+    <div class="chart-section">
         <div class="chart-title">Implementation Notes</div>
         <div class="feature-highlight">
             <strong>Key Features:</strong>
@@ -204,6 +227,7 @@
                 <li><strong>responsive</strong> - When true, chart resizes to fit container (default: true)</li>
                 <li><strong>maintainAspectRatio</strong> - When true, maintains width/height ratio during resize (default: true)</li>
                 <li><strong>aspectRatio</strong> - Custom aspect ratio (width/height). Default is 2 (2:1 ratio)</li>
+                <li><strong>resizeDelay</strong> - Delay in milliseconds before resize update (default: 0). Useful for performance optimization</li>
                 <li><strong>chartwidth/chartheight</strong> - Used as max-width and initial dimensions</li>
             </ul>
         </div>
@@ -213,6 +237,7 @@
                 <li>Use responsive="true" for most charts to ensure they work on all screen sizes</li>
                 <li>Set appropriate aspectRatio values: 2 (wide), 1 (square), 0.5 (tall)</li>
                 <li>Use maintainAspectRatio="false" when you need charts to fill specific container heights</li>
+                <li>Add resizeDelay="100" or higher for better performance when charts frequently resize</li>
                 <li>Combine with CSS max-width for better control over maximum chart size</li>
             </ul>
         </div>
