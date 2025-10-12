@@ -56,7 +56,7 @@ class{
 		}
 
 		// Validate chart type
-		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" ];
+		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" ];
 		var chartType = lcase( trim( attributes.type ) );
 		if ( !arrayContains( validTypes, chartType ) ) {
 			throw new RuntimeException( "Invalid chart type '##chartType##'. Valid types are: ##arrayToList( validTypes )##" );

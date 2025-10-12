@@ -17,6 +17,7 @@ This module provides powerful chart generation capabilities to the [BoxLang](htt
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
 - [Chart Types](#-chart-types)
+- [Choosing the Right Chart Type](#-choosing-the-right-chart-type)
 - [Components Reference](#-components-reference)
 - [Examples](#-examples)
   - [Basic Examples](#basic-examples)
@@ -30,7 +31,7 @@ This module provides powerful chart generation capabilities to the [BoxLang](htt
 
 ## ✨ Features
 
-- 🎨 **9 Chart Types**: pie, bar, line, doughnut, radar, polar area, area, horizontal bar, and scatter plots
+- 🎨 **10 Chart Types**: pie, bar, line, doughnut, radar, polar area, area, horizontal bar, scatter, and bubble charts
 - 📱 **Responsive Design**: Charts automatically adapt to container sizes and screen dimensions
 - 🎯 **Easy to Use**: Simple BoxLang component syntax with nested data structure
 - 🎭 **Highly Customizable**: Extensive styling options including colors, fonts, axes, and grid lines
@@ -72,7 +73,7 @@ That's it! 🎉 You now have a beautiful, interactive pie chart.
 
 ## 📊 Chart Types
 
-The module supports 9 different chart types, each optimized for specific data visualization needs:
+The module supports 10 different chart types, each optimized for specific data visualization needs:
 
 ### 🥧 Pie Chart (`type="pie"`)
 Perfect for showing proportions and percentages of a whole.
@@ -120,6 +121,138 @@ Bar chart with horizontal orientation.
 Shows relationship between two variables.
 - **Best for**: Correlation analysis, distribution patterns
 - **Data structure**: X-Y coordinate pairs
+
+### 🫧 Bubble Chart (`type="bubble"`)
+Shows three-dimensional data using x, y coordinates and bubble size.
+- **Best for**: Multi-dimensional data analysis, comparative metrics, portfolio analysis
+- **Data structure**: X-Y coordinate pairs with radius (r) for bubble size
+- **Usage**: Use `x`, `y`, and `r` attributes in `<bx:chartdata>` instead of just `value`
+
+## 🎯 Choosing the Right Chart Type
+
+Selecting the appropriate chart type is crucial for effective data visualization. Use this guide to choose the best chart for your data:
+
+### 📊 Quick Selection Guide
+
+| **Your Goal** | **Recommended Chart Type** | **Why** |
+|--------------|---------------------------|---------|
+| Show parts of a whole | **Pie** or **Doughnut** | Best for displaying percentage distribution of 3-6 categories |
+| Compare values across categories | **Bar** or **Horizontal Bar** | Clear visual comparison of discrete values |
+| Show trends over time | **Line** or **Area** | Excellent for time series and continuous data |
+| Compare multiple variables | **Radar** | Perfect for multi-dimensional comparisons (e.g., product features) |
+| Show proportions with magnitude | **Polar Area** | Like pie chart but size indicates importance |
+| Display correlation | **Scatter** | Shows relationship between two variables |
+| Show 3D relationships | **Bubble** | Displays three metrics simultaneously (x, y, size) |
+| Compare with long labels | **Horizontal Bar** | Better readability for lengthy category names |
+| Emphasize volume/magnitude | **Area** | Highlights total quantity over time |
+
+### 🎨 Visual Examples
+
+<table>
+<tr>
+<td align="center" width="33%">
+<strong>🥧 Pie Chart</strong><br/>
+<img src="https://github.com/user-attachments/assets/1f39126f-eeb0-4333-8345-b130010e4b5b" width="280"/><br/>
+<em>Market share, budget allocation</em>
+</td>
+<td align="center" width="33%">
+<strong>📊 Bar Chart</strong><br/>
+<img src="https://github.com/user-attachments/assets/810328bd-0294-4ed1-bd1b-79f2e7eda566" width="280"/><br/>
+<em>Comparing quantities, rankings</em>
+</td>
+<td align="center" width="33%">
+<strong>📈 Line Chart</strong><br/>
+<img src="https://github.com/user-attachments/assets/ce8b6d2a-d08b-437f-8fc4-4025607c19ab" width="280"/><br/>
+<em>Trends over time, time series</em>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+<strong>🍩 Doughnut Chart</strong><br/>
+<img src="https://via.placeholder.com/280x200/FFCE56/333333?text=Doughnut+Chart" width="280"/><br/>
+<em>Modern proportions display</em>
+</td>
+<td align="center" width="33%">
+<strong>🕸️ Radar Chart</strong><br/>
+<img src="https://via.placeholder.com/280x200/4BC0C0/333333?text=Radar+Chart" width="280"/><br/>
+<em>Multi-variable comparison</em>
+</td>
+<td align="center" width="33%">
+<strong>🎯 Polar Area Chart</strong><br/>
+<img src="https://via.placeholder.com/280x200/9966FF/333333?text=Polar+Area" width="280"/><br/>
+<em>Proportions with magnitude</em>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+<strong>🏔️ Area Chart</strong><br/>
+<img src="https://via.placeholder.com/280x200/FF9F40/333333?text=Area+Chart" width="280"/><br/>
+<em>Volume over time</em>
+</td>
+<td align="center" width="33%">
+<strong>↔️ Horizontal Bar</strong><br/>
+<img src="https://via.placeholder.com/280x200/E74C3C/333333?text=Horizontal+Bar" width="280"/><br/>
+<em>Long labels, comparisons</em>
+</td>
+<td align="center" width="33%">
+<strong>🔵 Scatter Plot</strong><br/>
+<img src="https://via.placeholder.com/280x200/3498DB/333333?text=Scatter+Plot" width="280"/><br/>
+<em>Correlation analysis</em>
+</td>
+</tr>
+<tr>
+<td align="center" colspan="3">
+<strong>🫧 Bubble Chart</strong><br/>
+<img src="https://via.placeholder.com/280x200/9B59B6/333333?text=Bubble+Chart" width="280"/><br/>
+<em>Three-dimensional data (x, y, size)</em>
+</td>
+</tr>
+</table>
+
+### 💡 Decision Tree
+
+```
+What do you want to visualize?
+
+├─ Parts of a whole (percentages)?
+│  ├─ Simple distribution → Pie Chart 🥧
+│  └─ Modern look with center space → Doughnut Chart 🍩
+│
+├─ Comparing values?
+│  ├─ Short category names → Bar Chart 📊
+│  ├─ Long category names → Horizontal Bar Chart ↔️
+│  └─ Multiple variables per item → Radar Chart 🕸️
+│
+├─ Changes over time?
+│  ├─ Single or few metrics → Line Chart 📈
+│  └─ Emphasize volume/total → Area Chart 🏔️
+│
+├─ Relationships between variables?
+│  ├─ Two variables (x, y) → Scatter Plot 🔵
+│  └─ Three variables (x, y, size) → Bubble Chart 🫧
+│
+└─ Proportions with varying magnitude?
+   └─ Polar Area Chart 🎯
+```
+
+### ⚠️ Common Pitfalls to Avoid
+
+| **Don't Use** | **When** | **Use Instead** |
+|--------------|---------|-----------------|
+| Pie Chart | More than 6 categories | Bar Chart |
+| Line Chart | Comparing unrelated categories | Bar Chart |
+| 3D Effects | Accuracy is important | 2D charts (all types) |
+| Radar Chart | Categories aren't comparable | Bar or Column Chart |
+| Bubble Chart | Only 2 dimensions of data | Scatter Plot |
+
+### 📏 Best Practices
+
+1. **Pie/Doughnut Charts**: Limit to 5-6 slices maximum. Order slices by size for better readability.
+2. **Bar Charts**: Always start the Y-axis at zero to avoid misleading visualizations.
+3. **Line Charts**: Use for continuous data only. Avoid for unrelated categories.
+4. **Radar Charts**: Ensure all axes use the same scale and are comparable metrics.
+5. **Bubble Charts**: Make sure bubble sizes are clearly distinguishable. Use radius (r) values that create visible differences.
+6. **Color Selection**: Use consistent color schemes. Avoid red/green combinations (color blindness).
 
 ## 📚 Components Reference
 
@@ -217,12 +350,21 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `item` | string | ✅ Yes | Data point label/name |
-| `value` | number | ✅ Yes | Data point value |
+| `value` | number | ✅ Yes* | Data point value (*Required for all chart types except bubble) |
+| `x` | number | ⚠️ Bubble | X-coordinate (required for bubble charts) |
+| `y` | number | ⚠️ Bubble | Y-coordinate (required for bubble charts) |
+| `r` | number | ⚠️ Bubble | Bubble radius (required for bubble charts) |
 
-**Example:**
+**Standard Example:**
 ```boxlang
 <bx:chartdata item="Product A" value="150">
 <bx:chartdata item="Product B" value="200">
+```
+
+**Bubble Chart Example:**
+```boxlang
+<bx:chartdata item="Product A" x="20" y="30" r="15">
+<bx:chartdata item="Product B" x="40" y="10" r="10">
 ```
 
 ## 💡 Examples
@@ -419,6 +561,30 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 ```
 
 **💡 Use Case:** Shows relationships between two variables, useful for correlation analysis.
+
+#### 🫧 Bubble Chart for Multi-dimensional Analysis
+
+Bubble charts display three dimensions of data using x and y coordinates plus bubble size.
+
+```boxlang
+<bx:chart title="Product Portfolio Analysis"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Market Share (%)" yaxistitle="Revenue ($M)"
+          showxgridlines="true" showygridlines="true">
+    <bx:chartseries type="bubble" 
+                    colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                    serieslabel="Product Performance">
+        <bx:chartdata item="Product A" x="20" y="30" r="15">
+        <bx:chartdata item="Product B" x="40" y="10" r="10">
+        <bx:chartdata item="Product C" x="30" y="20" r="25">
+        <bx:chartdata item="Product D" x="15" y="35" r="8">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Perfect for displaying three-dimensional data where the third dimension (bubble size) represents metrics like customer satisfaction, investment size, or population.
+
+**Note:** For bubble charts, use `x`, `y`, and `r` attributes instead of `value` in `<bx:chartdata>` components.
 
 #### 📱 Responsive Chart
 

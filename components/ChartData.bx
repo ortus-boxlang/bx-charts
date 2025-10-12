@@ -62,6 +62,17 @@ class{
 			"value": attributes.value
 		};
 
+		// For bubble charts, support optional x, y, r attributes
+		if ( structKeyExists( attributes, "x" ) ) {
+			dataPoint.x = attributes.x;
+		}
+		if ( structKeyExists( attributes, "y" ) ) {
+			dataPoint.y = attributes.y;
+		}
+		if ( structKeyExists( attributes, "r" ) ) {
+			dataPoint.r = attributes.r;
+		}
+
 		// Initialize chartData array if it doesn't exist
 		if ( !structKeyExists( parentState, "chartData" ) ) {
 			parentState.chartData = [];
