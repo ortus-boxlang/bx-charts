@@ -3,67 +3,7 @@
 <html>
 <head>
     <title>BoxLang Charts - All Chart Types</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: ##f5f7fa;
-        }
-        .header {
-            background: linear-gradient(135deg, ##667eea 0%, ##764ba2 100%);
-            padding: 40px 20px;
-            margin: -20px -20px 30px -20px;
-            text-align: center;
-        }
-        .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.5em;
-        }
-        .header p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        .chart-container {
-            background: white;
-            margin: 30px auto;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 800px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: ##667eea;
-            border-bottom: 3px solid ##667eea;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        .chart-info {
-            background: ##f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid ##667eea;
-        }
-        .chart-info strong {
-            color: ##667eea;
-        }
-        .back-link {
-            display: inline-block;
-            background: ##667eea;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 25px;
-            margin: 20px auto;
-            display: block;
-            width: fit-content;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            background: ##764ba2;
-        }
-    </style>
+    <bx:include template="includes/head.bxm">
 </head>
 <body>
     <div class="header">
@@ -88,6 +28,21 @@
                 <bx:chartdata item="Cache Memory" value="64" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" show3d="false" title="Memory Usage Distribution"
+          backgroundcolor="##ffffff" chartheight="300" chartwidth="600"
+          showlegend="true"&gt;
+    &lt;bx:chartseries type="pie" serieslabel="Memory Usage"&gt;
+        &lt;bx:chartdata item="Free Memory" value="512" /&gt;
+        &lt;bx:chartdata item="Used Memory" value="256" /&gt;
+        &lt;bx:chartdata item="Reserved Memory" value="128" /&gt;
+        &lt;bx:chartdata item="Cache Memory" value="64" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -107,6 +62,23 @@
                 <bx:chartdata item="Evictions" value="5" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" show3d="false" backgroundcolor="##ffffff"
+          chartwidth="600" chartheight="300" showlegend="true"
+          title="Performance Metrics"
+          xaxistitle="Metrics" yaxistitle="Count"
+          showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" serieslabel="Performance Data"&gt;
+        &lt;bx:chartdata item="Hits" value="150" /&gt;
+        &lt;bx:chartdata item="Misses" value="25" /&gt;
+        &lt;bx:chartdata item="Garbage Collections" value="10" /&gt;
+        &lt;bx:chartdata item="Evictions" value="5" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -128,6 +100,25 @@
                 <bx:chartdata item="9 PM" value="18" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Temperature Trend"
+          chartwidth="600" chartheight="300"
+          xaxistitle="Time" yaxistitle="Temperature (°C)"
+          showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="line" colorlist="FF6384"
+                    serieslabel="Daily Temperature"&gt;
+        &lt;bx:chartdata item="6 AM" value="15" /&gt;
+        &lt;bx:chartdata item="9 AM" value="18" /&gt;
+        &lt;bx:chartdata item="12 PM" value="24" /&gt;
+        &lt;bx:chartdata item="3 PM" value="26" /&gt;
+        &lt;bx:chartdata item="6 PM" value="22" /&gt;
+        &lt;bx:chartdata item="9 PM" value="18" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -146,6 +137,22 @@
                 <bx:chartdata item="Others" value="1" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Browser Market Share"
+          chartwidth="600" chartheight="300" showlegend="true"&gt;
+    &lt;bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                    serieslabel="Market Share"&gt;
+        &lt;bx:chartdata item="Chrome" value="65" /&gt;
+        &lt;bx:chartdata item="Firefox" value="18" /&gt;
+        &lt;bx:chartdata item="Safari" value="12" /&gt;
+        &lt;bx:chartdata item="Edge" value="4" /&gt;
+        &lt;bx:chartdata item="Others" value="1" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -165,6 +172,23 @@
                 <bx:chartdata item="DevOps" value="70" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Skills Assessment"
+          chartwidth="600" chartheight="400" showlegend="true"&gt;
+    &lt;bx:chartseries type="radar" colorlist="36A2EB"
+                    serieslabel="Developer Skills"&gt;
+        &lt;bx:chartdata item="JavaScript" value="90" /&gt;
+        &lt;bx:chartdata item="Python" value="75" /&gt;
+        &lt;bx:chartdata item="Java" value="85" /&gt;
+        &lt;bx:chartdata item="SQL" value="80" /&gt;
+        &lt;bx:chartdata item="BoxLang" value="95" /&gt;
+        &lt;bx:chartdata item="DevOps" value="70" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -183,6 +207,22 @@
                 <bx:chartdata item="Community" value="80" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Product Ratings"
+          chartwidth="600" chartheight="400" showlegend="true"&gt;
+    &lt;bx:chartseries type="polarArea" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                    serieslabel="Ratings"&gt;
+        &lt;bx:chartdata item="Quality" value="95" /&gt;
+        &lt;bx:chartdata item="Price" value="75" /&gt;
+        &lt;bx:chartdata item="Support" value="85" /&gt;
+        &lt;bx:chartdata item="Documentation" value="90" /&gt;
+        &lt;bx:chartdata item="Community" value="80" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -205,6 +245,26 @@
                 <bx:chartdata item="Sunday" value="1900" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Website Traffic Over Time"
+          chartwidth="600" chartheight="300"
+          xaxistitle="Time Period" yaxistitle="Visitors"
+          showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="area" colorlist="36A2EB"
+                    serieslabel="Daily Visitors"&gt;
+        &lt;bx:chartdata item="Monday" value="1200" /&gt;
+        &lt;bx:chartdata item="Tuesday" value="1350" /&gt;
+        &lt;bx:chartdata item="Wednesday" value="1100" /&gt;
+        &lt;bx:chartdata item="Thursday" value="1450" /&gt;
+        &lt;bx:chartdata item="Friday" value="1800" /&gt;
+        &lt;bx:chartdata item="Saturday" value="2100" /&gt;
+        &lt;bx:chartdata item="Sunday" value="1900" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -224,6 +284,23 @@
                 <bx:chartdata item="HR" value="340" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Department Budgets"
+          chartwidth="600" chartheight="300"
+          xaxistitle="Budget (thousands)" yaxistitle="Departments"
+          showxgridlines="false" showygridlines="true"&gt;
+    &lt;bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                    serieslabel="Budget Allocation"&gt;
+        &lt;bx:chartdata item="IT" value="850" /&gt;
+        &lt;bx:chartdata item="Marketing" value="620" /&gt;
+        &lt;bx:chartdata item="Sales" value="950" /&gt;
+        &lt;bx:chartdata item="HR" value="340" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -246,6 +323,26 @@
                 <bx:chartdata item="12" value="95" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Performance vs Experience"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Years of Experience" yaxistitle="Performance Score"
+          showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="scatter" colorlist="FF6384"
+                    serieslabel="Employee Data"&gt;
+        &lt;bx:chartdata item="1" value="65" /&gt;
+        &lt;bx:chartdata item="2" value="72" /&gt;
+        &lt;bx:chartdata item="3" value="78" /&gt;
+        &lt;bx:chartdata item="5" value="85" /&gt;
+        &lt;bx:chartdata item="7" value="88" /&gt;
+        &lt;bx:chartdata item="10" value="92" /&gt;
+        &lt;bx:chartdata item="12" value="95" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-container">
@@ -265,9 +362,26 @@
                 <bx:chartdata item="Product D" x="25" y="95" r="12" />
             </bx:chartseries>
         </bx:chart>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="png" title="Product Performance Analysis"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Market Share (%)" yaxistitle="Revenue (millions)"
+          showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bubble" colorlist="9966FF,36A2EB,FF6384,FFCE56"
+                    serieslabel="Products"&gt;
+        &lt;bx:chartdata item="Product A" x="20" y="85" r="15" /&gt;
+        &lt;bx:chartdata item="Product B" x="35" y="120" r="20" /&gt;
+        &lt;bx:chartdata item="Product C" x="15" y="65" r="10" /&gt;
+        &lt;bx:chartdata item="Product D" x="25" y="95" r="12" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <a href="index.bxm" class="back-link">← Back to Test Suite</a>
-
+	<bx:include template="includes/footer.bxm">
 </body>
 </html>

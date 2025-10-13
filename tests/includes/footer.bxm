@@ -1,0 +1,20 @@
+<!--- SyntaxHighlighter Scripts --->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<!--- BoxLang Brush v3 from https://github.com/ortus-boxlang/brush-boxlang --->
+<script src="https://cdn.jsdelivr.net/gh/ortus-boxlang/brush-boxlang@main/v3/brush-boxlang.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+</script>
+
+<footer>
+	<p>
+		<strong>BoxLang Charts Module</strong> by
+		<a href="https://www.ortussolutions.com" target="_blank">Ortus Solutions</a>
+	</p>
+	<p class="footer-links">
+		<a href="https://github.com/ortus-boxlang/bx-charts" target="_blank">GitHub Repository</a> |
+		<a href="https://boxlang.io" target="_blank">BoxLang Documentation</a> |
+		<a href="https://www.chartjs.org" target="_blank">Chart.js</a>
+	</p>
+</footer>

@@ -2,60 +2,7 @@
 <html>
 <head>
     <title>BoxLang Charts - Enhanced Features</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: ##f5f7fa;
-        }
-        .header {
-            background: linear-gradient(135deg, ##667eea 0%, ##764ba2 100%);
-            padding: 40px 20px;
-            margin: -20px -20px 30px -20px;
-            text-align: center;
-        }
-        .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.5em;
-        }
-        .header p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 1.1em;
-        }
-        .chart-section {
-            background: white;
-            margin: 30px auto;
-            padding: 30px;
-            max-width: 900px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .chart-title {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: ##667eea;
-            border-bottom: 3px solid ##667eea;
-            padding-bottom: 10px;
-        }
-        .chart-container { display: inline-block; margin: 10px; }
-        .back-link {
-            display: inline-block;
-            background: ##667eea;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 25px;
-            margin: 20px auto;
-            display: block;
-            width: fit-content;
-            font-weight: 600;
-        }
-        .back-link:hover {
-            background: ##764ba2;
-        }
-    </style>
+    <bx:include template="includes/head.bxm">
 </head>
 <body>
     <div class="header">
@@ -80,6 +27,22 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart title="JVM Memory"
+         backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="600"
+         showlegend="true"
+         xaxistitle="Memory Type" yaxistitle="Memory (KB)"&gt;
+    &lt;bx:chartseries type="pie" serieslabel="JVM Memory Distribution"&gt;
+        &lt;bx:chartdata item="Free Memory (KB)" value="512" /&gt;
+        &lt;bx:chartdata item="Used Memory (KB)" value="256" /&gt;
+        &lt;bx:chartdata item="Unallocated Memory (KB)" value="128" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -96,6 +59,22 @@
                     <bx:chartdata item="Evictions" value="5" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="500" showlegend="true"
+         xaxistitle="Metrics" yaxistitle="Count"
+         seriesplacement="cluster" showxgridlines="false" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" serieslabel="Cache Statistics"&gt;
+        &lt;bx:chartdata item="Hits" value="150" /&gt;
+        &lt;bx:chartdata item="Misses" value="25" /&gt;
+        &lt;bx:chartdata item="Garbage Collections" value="10" /&gt;
+        &lt;bx:chartdata item="Evictions" value="5" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -116,6 +95,24 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="300"
+         xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+         showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="area" colorlist="36A2EB" serieslabel="Memory Over Time"&gt;
+        &lt;bx:chartdata item="9:00 AM" value="512" /&gt;
+        &lt;bx:chartdata item="10:00 AM" value="678" /&gt;
+        &lt;bx:chartdata item="11:00 AM" value="543" /&gt;
+        &lt;bx:chartdata item="12:00 PM" value="721" /&gt;
+        &lt;bx:chartdata item="1:00 PM" value="634" /&gt;
+        &lt;bx:chartdata item="2:00 PM" value="587" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -131,6 +128,22 @@
                     <bx:chartdata item="Network" value="30" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="300"
+         xaxistitle="Usage Percentage" yaxistitle="Resources"&gt;
+    &lt;bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56"
+                    serieslabel="Current Usage"&gt;
+        &lt;bx:chartdata item="CPU" value="75" /&gt;
+        &lt;bx:chartdata item="Memory" value="60" /&gt;
+        &lt;bx:chartdata item="Disk I/O" value="45" /&gt;
+        &lt;bx:chartdata item="Network" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -151,6 +164,24 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="400"
+         xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
+         showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="scatter" colorlist="9966FF" serieslabel="Performance Data"&gt;
+        &lt;bx:chartdata item="Point 1" value="120" /&gt;
+        &lt;bx:chartdata item="Point 2" value="85" /&gt;
+        &lt;bx:chartdata item="Point 3" value="200" /&gt;
+        &lt;bx:chartdata item="Point 4" value="150" /&gt;
+        &lt;bx:chartdata item="Point 5" value="95" /&gt;
+        &lt;bx:chartdata item="Point 6" value="175" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -167,6 +198,23 @@
                     <bx:chartdata item="Server D" value="60" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="##ffffff"
+         chartwidth="600" chartheight="350"
+         xaxistitle="Servers" yaxistitle="Resource Usage (%)"
+         seriesplacement="stacked" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF9F40,4BC0C0,FF6384"
+                    serieslabel="Resource Distribution"&gt;
+        &lt;bx:chartdata item="Server A" value="30" /&gt;
+        &lt;bx:chartdata item="Server B" value="45" /&gt;
+        &lt;bx:chartdata item="Server C" value="25" /&gt;
+        &lt;bx:chartdata item="Server D" value="60" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -186,6 +234,23 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="##ffffff"
+         chartheight="350" chartwidth="600" showlegend="true"&gt;
+    &lt;bx:chartseries type="doughnut"
+                   colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                   serieslabel="Browser Market Share"&gt;
+        &lt;bx:chartdata item="Chrome" value="65" /&gt;
+        &lt;bx:chartdata item="Firefox" value="18" /&gt;
+        &lt;bx:chartdata item="Safari" value="12" /&gt;
+        &lt;bx:chartdata item="Edge" value="4" /&gt;
+        &lt;bx:chartdata item="Others" value="1" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -201,6 +266,21 @@
                     <bx:chartdata item="Item C" value="23" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         fontbold="true" fontitalic="true" fontsize="14"
+         foregroundcolor="##2E4057" xaxistitle="Categories" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF6B6B,4ECDC4,45B7D1" serieslabel="Styled Data"&gt;
+        &lt;bx:chartdata item="Item A" value="45" /&gt;
+        &lt;bx:chartdata item="Item B" value="67" /&gt;
+        &lt;bx:chartdata item="Item C" value="23" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -220,6 +300,23 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         showmarkers="true" markersize="8"
+         xaxistitle="Time Points" yaxistitle="Performance"&gt;
+    &lt;bx:chartseries type="line" colorlist="E74C3C" serieslabel="Performance Trend"&gt;
+        &lt;bx:chartdata item="Week 1" value="85" /&gt;
+        &lt;bx:chartdata item="Week 2" value="92" /&gt;
+        &lt;bx:chartdata item="Week 3" value="78" /&gt;
+        &lt;bx:chartdata item="Week 4" value="96" /&gt;
+        &lt;bx:chartdata item="Week 5" value="88" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -237,6 +334,22 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         scalefrom="0" scaleto="100"
+         xaxistitle="Metrics" yaxistitle="Percentage"&gt;
+    &lt;bx:chartseries type="bar" colorlist="3498DB" serieslabel="Performance Metrics"&gt;
+        &lt;bx:chartdata item="CPU Usage" value="75" /&gt;
+        &lt;bx:chartdata item="Memory Usage" value="60" /&gt;
+        &lt;bx:chartdata item="Disk Usage" value="45" /&gt;
+        &lt;bx:chartdata item="Network Usage" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -253,6 +366,21 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="##ffffff"
+         chartheight="350" chartwidth="600" showlegend="true"
+         categorylabelpositions="up_45"
+         xaxistitle="Long Category Names" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="9B59B6" serieslabel="Rotated Labels"&gt;
+        &lt;bx:chartdata item="Very Long Category Name A" value="25" /&gt;
+        &lt;bx:chartdata item="Another Long Category Name B" value="40" /&gt;
+        &lt;bx:chartdata item="Yet Another Long Name C" value="35" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -268,6 +396,21 @@
                     <bx:chartdata item="Section C" value="25" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         showtooltip="false" showxlabel="false" showborder="true"
+         yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="pie" colorlist="E67E22,27AE60,8E44AD" serieslabel="No Tooltips Demo"&gt;
+        &lt;bx:chartdata item="Section A" value="40" /&gt;
+        &lt;bx:chartdata item="Section B" value="35" /&gt;
+        &lt;bx:chartdata item="Section C" value="25" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -286,6 +429,22 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         sortxaxis="true"
+         xaxistitle="Sorted Categories" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="16A085" serieslabel="Alphabetically Sorted"&gt;
+        &lt;bx:chartdata item="Zebra" value="30" /&gt;
+        &lt;bx:chartdata item="Apple" value="50" /&gt;
+        &lt;bx:chartdata item="Banana" value="25" /&gt;
+        &lt;bx:chartdata item="Cherry" value="40" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
     </div>
 
     <div class="chart-section">
@@ -301,6 +460,21 @@
                     <bx:chartdata item="Click Me C" value="25" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="##ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         url="https://www.boxlang.io"
+         xaxistitle="Click any data point" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="doughnut" colorlist="F39C12,E74C3C,9B59B6" serieslabel="Clickable Chart"&gt;
+        &lt;bx:chartdata item="Click Me A" value="45" /&gt;
+        &lt;bx:chartdata item="Click Me B" value="30" /&gt;
+        &lt;bx:chartdata item="Click Me C" value="25" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -318,6 +492,22 @@
                     <bx:chartdata item="Point 4" value="30" />
                 </bx:chartseries>
             </bx:chart>
+        </div>
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="##F8F9FA"
+         chartheight="300" chartwidth="600" showlegend="true"
+         databackgroundcolor="##E8F6F3" foregroundcolor="##1B4F72"
+         xaxistitle="Items" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="area" colorlist="52C41A" serieslabel="Colored Background"&gt;
+        &lt;bx:chartdata item="Point 1" value="20" /&gt;
+        &lt;bx:chartdata item="Point 2" value="35" /&gt;
+        &lt;bx:chartdata item="Point 3" value="45" /&gt;
+        &lt;bx:chartdata item="Point 4" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
         </div>
     </div>
 
@@ -337,12 +527,29 @@
                 </bx:chartseries>
             </bx:chart>
         </div>
-        <div style="margin-top: 10px; color: ##666; font-size: 14px;">
+        <div class="code-container">
+            <div class="code-title">📝 Code:</div>
+            <pre class="brush: boxlang">
+&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="##F8F9FA"
+         chartheight="400" chartwidth="600" showlegend="true"
+         xaxistitle="Product Categories" yaxistitle="Performance Score"
+         showxgridlines="true" showygridlines="true"
+         databackgroundcolor="##E8F6F3" foregroundcolor="##1B4F72"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" serieslabel="Product Performance"&gt;
+        &lt;bx:chartdata item="Product A" value="85" /&gt;
+        &lt;bx:chartdata item="Product B" value="72" /&gt;
+        &lt;bx:chartdata item="Product C" value="91" /&gt;
+        &lt;bx:chartdata item="Product D" value="68" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+            </pre>
+        </div>
+        <div class="text-note">
             Enhanced chart with custom background colors and comprehensive styling options.
         </div>
     </div>
 
-    <hr style="margin: 40px 0;">
+    <hr class="divider">
 
     <h2>Enhanced Features Demonstrated:</h2>
     <ul>
@@ -366,6 +573,6 @@
     </ul>
 
     <a href="index.bxm" class="back-link">← Back to Test Suite</a>
-
+	<bx:include template="includes/footer.bxm">
 </body>
 </html>
