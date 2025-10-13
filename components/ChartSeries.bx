@@ -34,6 +34,24 @@ class{
 	property name="log";
 
 	/**
+	 * --------------------------------------------------------------------------
+	 * Static Chart Type Mappings
+	 * --------------------------------------------------------------------------
+	 */
+	static chartTypeMap = {
+		"pie": "pie",
+		"bar": "bar",
+		"line": "line",
+		"doughnut": "doughnut",
+		"radar": "radar",
+		"polararea": "polarArea",
+		"area": "line",
+		"horizontalbar": "bar",
+		"scatter": "scatter",
+		"bubble": "bubble"
+	};
+
+	/**
 	 * Defines a chart series with type and styling
 	 *
 	 * @param context The context of the execution (IBoxContext)
@@ -47,20 +65,21 @@ class{
 		// This component must be nested within a chart component
 		var parentState = context.findClosestComponent( "chart" );
 		if ( isNull( parentState ) ) {
-			throw new RuntimeException( "chartseries must be nested within a chart component" );
+			throw( type="BXChartException", message: "chartseries must be nested within a chart component" );
 		}
 
 		// Validate required attributes
 		if ( !structKeyExists( attributes, "type" ) || !len( trim( attributes.type ) ) ) {
-			throw new RuntimeException( "chartseries requires a 'type' attribute (pie, bar, line, etc.)" );
+			throw( type="BXChartException", message: "chartseries requires a 'type' attribute (pie, bar, line, etc.)" );
 		}
 
 		// Validate chart type
-		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" ];
+		var validTypes = [ "pie", "bar", "line", "doughnut", "radar", "polararea", "area", "horizontalbar", "scatter", "bubble" ];
 		var chartType = lcase( trim( attributes.type ) );
 		if ( !arrayContains( validTypes, chartType ) ) {
-			throw new RuntimeException( "Invalid chart type '##chartType##'. Valid types are: ##arrayToList( validTypes )##" );
+			throw ( type: "BXChartException", message: "Invalid chart type '#chartType#'. Valid types are: #arrayToList( validTypes )#" );
 		}
+		chartType = static.chartTypeMap[ chartType ];
 
 		// Initialize this series data structure
 		executionState.type = chartType;
@@ -87,9 +106,6 @@ class{
 
 		// Add this series to the parent chart
 		arrayAppend( parentState.chartSeries, seriesData );
-
-		// Log the series for debugging
-		variables.log.debug( "Added chart series: type=##chartType##, label=##executionState.serieslabel##, dataPoints=##arrayLen( executionState.chartData )##" );
 
 		return null; // Default return
 	}

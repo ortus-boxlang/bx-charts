@@ -18,3 +18,4 @@ testbox/**
 tests/results/**
 node_modules/
 package-lock.json
+boxlang_modules/**

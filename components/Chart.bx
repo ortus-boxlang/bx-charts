@@ -101,7 +101,7 @@ class{
 		var showLegend = attributes.showlegend ?: true;
 		var show3d = attributes.show3d ?: false;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
-		
+
 		// Responsive attributes
 		var responsive = attributes.responsive ?: true;
 		var maintainAspectRatio = attributes.maintainaspectratio ?: true;
@@ -442,8 +442,7 @@ class{
 		}
 
 		for ( var series in processedSeries ) {
-			config.type = series.type; // Use the series type
-
+			// Initialize dataset for this series
 			var dataset = {
 				"label": series.serieslabel ?: series.type,
 				"data": [],
@@ -478,7 +477,7 @@ class{
 
 			for ( var dataItem in series.chartData ) {
 				arrayAppend( labels, dataItem.item );
-				
+
 				// For bubble and scatter charts, handle x, y, r coordinates
 				if ( series.type == "bubble" && structKeyExists( dataItem, "x" ) && structKeyExists( dataItem, "y" ) && structKeyExists( dataItem, "r" ) ) {
 					arrayAppend( values, { "x": val( dataItem.x ), "y": val( dataItem.y ), "r": val( dataItem.r ) } );

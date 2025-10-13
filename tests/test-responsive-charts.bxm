@@ -1,21 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BoxLang Charts Test - Responsive Features</title>
+    <title>BoxLang Charts - Responsive Features</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: ##f5f5f5; }
-        .chart-section { margin: 30px 0; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .chart-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: ##333; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: ##f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, ##667eea 0%, ##764ba2 100%);
+            padding: 40px 20px;
+            margin: -20px -20px 30px -20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .chart-section {
+            background: white;
+            margin: 30px auto;
+            padding: 30px;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .chart-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: ##667eea;
+        }
         .chart-description { font-size: 14px; color: ##666; margin-bottom: 15px; }
         .chart-container { margin: 10px 0; }
         .responsive-container { width: 100%; max-width: 800px; padding: 10px; background: ##f9f9f9; border: 2px dashed ##ddd; }
-        h1 { color: ##2c3e50; }
         .feature-highlight { background: ##e8f4f8; padding: 10px; border-left: 4px solid ##3498db; margin: 10px 0; }
+        .back-link {
+            display: inline-block;
+            background: ##667eea;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: ##764ba2;
+        }
     </style>
 </head>
 <body>
-    <h1>BoxLang Charts - Responsive Features Test</h1>
-    <p>Resize your browser window to see responsive charts in action!</p>
+    <div class="header">
+        <h1>📱 BoxLang Charts - Responsive Features</h1>
+        <p>Resize your browser window to see responsive charts in action!</p>
+    </div>
+
+    <a href="index.bxm" class="back-link">← Back to Test Suite</a>
 
     <div class="chart-section">
         <div class="chart-title">1. Fully Responsive Chart (Default Behavior)</div>
@@ -24,16 +73,16 @@
             <strong>Attributes:</strong> responsive="true" (default), maintainAspectRatio="true" (default)
         </div>
         <div class="responsive-container">
-            <bx:chart title="Responsive Pie Chart" 
+            <bx:chart title="Responsive Pie Chart"
                      chartwidth="600" chartheight="300"
                      responsive="true"
                      maintainAspectRatio="true">
-                <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" 
+                <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
                                serieslabel="Market Share">
-                    <bx:chartdata item="Product A" value="150">
-                    <bx:chartdata item="Product B" value="200">
-                    <bx:chartdata item="Product C" value="100">
-                    <bx:chartdata item="Product D" value="75">
+                    <bx:chartdata item="Product A" value="150" />
+                    <bx:chartdata item="Product B" value="200" />
+                    <bx:chartdata item="Product C" value="100" />
+                    <bx:chartdata item="Product D" value="75" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -46,19 +95,19 @@
             <strong>Attributes:</strong> responsive="true", maintainAspectRatio="true", aspectRatio="3"
         </div>
         <div class="responsive-container">
-            <bx:chart title="Wide Format Bar Chart" 
+            <bx:chart title="Wide Format Bar Chart"
                      chartwidth="800" chartheight="300"
                      responsive="true"
                      maintainAspectRatio="true"
                      aspectRatio="3"
                      xaxistitle="Categories" yaxistitle="Values"
                      showygridlines="true">
-                <bx:chartseries type="bar" colorlist="131cd7,ED2939,4BC0C0,d47f00" 
+                <bx:chartseries type="bar" colorlist="131cd7,ED2939,4BC0C0,d47f00"
                                serieslabel="Performance Metrics">
-                    <bx:chartdata item="Q1" value="150">
-                    <bx:chartdata item="Q2" value="200">
-                    <bx:chartdata item="Q3" value="175">
-                    <bx:chartdata item="Q4" value="225">
+                    <bx:chartdata item="Q1" value="150" />
+                    <bx:chartdata item="Q2" value="200" />
+                    <bx:chartdata item="Q3" value="175" />
+                    <bx:chartdata item="Q4" value="225" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -71,20 +120,20 @@
             <strong>Attributes:</strong> responsive="true", maintainAspectRatio="false"
         </div>
         <div class="responsive-container" style="height: 400px;">
-            <bx:chart title="Flexible Height Line Chart" 
+            <bx:chart title="Flexible Height Line Chart"
                      chartwidth="600" chartheight="400"
                      responsive="true"
                      maintainAspectRatio="false"
                      xaxistitle="Time" yaxistitle="Value"
                      showxgridlines="true" showygridlines="true">
-                <bx:chartseries type="line" colorlist="36A2EB" 
+                <bx:chartseries type="line" colorlist="36A2EB"
                                serieslabel="Trend Data">
-                    <bx:chartdata item="Jan" value="100">
-                    <bx:chartdata item="Feb" value="150">
-                    <bx:chartdata item="Mar" value="130">
-                    <bx:chartdata item="Apr" value="180">
-                    <bx:chartdata item="May" value="200">
-                    <bx:chartdata item="Jun" value="175">
+                    <bx:chartdata item="Jan" value="100" />
+                    <bx:chartdata item="Feb" value="150" />
+                    <bx:chartdata item="Mar" value="130" />
+                    <bx:chartdata item="Apr" value="180" />
+                    <bx:chartdata item="May" value="200" />
+                    <bx:chartdata item="Jun" value="175" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -97,15 +146,15 @@
             <strong>Attributes:</strong> responsive="false"
         </div>
         <div class="responsive-container">
-            <bx:chart title="Fixed Size Doughnut Chart" 
+            <bx:chart title="Fixed Size Doughnut Chart"
                      chartwidth="400" chartheight="400"
                      responsive="false"
                      showlegend="true">
-                <bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56" 
+                <bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56"
                                serieslabel="Distribution">
-                    <bx:chartdata item="Category A" value="300">
-                    <bx:chartdata item="Category B" value="200">
-                    <bx:chartdata item="Category C" value="100">
+                    <bx:chartdata item="Category A" value="300" />
+                    <bx:chartdata item="Category B" value="200" />
+                    <bx:chartdata item="Category C" value="100" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -118,21 +167,21 @@
             <strong>Attributes:</strong> responsive="true", maintainAspectRatio="true", aspectRatio="1"
         </div>
         <div class="responsive-container">
-            <bx:chart title="Square Area Chart" 
+            <bx:chart title="Square Area Chart"
                      chartwidth="500" chartheight="500"
                      responsive="true"
                      maintainAspectRatio="true"
                      aspectRatio="1"
                      xaxistitle="Period" yaxistitle="Usage"
                      showxgridlines="true" showygridlines="true">
-                <bx:chartseries type="area" colorlist="9966FF" 
+                <bx:chartseries type="area" colorlist="9966FF"
                                serieslabel="Resource Usage">
-                    <bx:chartdata item="00:00" value="45">
-                    <bx:chartdata item="04:00" value="30">
-                    <bx:chartdata item="08:00" value="75">
-                    <bx:chartdata item="12:00" value="90">
-                    <bx:chartdata item="16:00" value="80">
-                    <bx:chartdata item="20:00" value="60">
+                    <bx:chartdata item="00:00" value="45" />
+                    <bx:chartdata item="04:00" value="30" />
+                    <bx:chartdata item="08:00" value="75" />
+                    <bx:chartdata item="12:00" value="90" />
+                    <bx:chartdata item="16:00" value="80" />
+                    <bx:chartdata item="20:00" value="60" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -145,18 +194,18 @@
             <strong>Attributes:</strong> responsive="true", maintainAspectRatio="true", aspectRatio="1.5"
         </div>
         <div class="responsive-container">
-            <bx:chart title="Resource Utilization" 
+            <bx:chart title="Resource Utilization"
                      chartwidth="600" chartheight="400"
                      responsive="true"
                      maintainAspectRatio="true"
                      aspectRatio="1.5"
                      xaxistitle="Percentage" yaxistitle="Resources">
-                <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" 
+                <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
                                serieslabel="Current Usage">
-                    <bx:chartdata item="CPU" value="75">
-                    <bx:chartdata item="Memory" value="60">
-                    <bx:chartdata item="Disk" value="45">
-                    <bx:chartdata item="Network" value="30">
+                    <bx:chartdata item="CPU" value="75" />
+                    <bx:chartdata item="Memory" value="60" />
+                    <bx:chartdata item="Disk" value="45" />
+                    <bx:chartdata item="Network" value="30" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -170,26 +219,26 @@
         </div>
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <div style="flex: 1; min-width: 300px;">
-                <bx:chart title="Chart 1" 
+                <bx:chart title="Chart 1"
                          chartwidth="400" chartheight="300"
                          responsive="true"
                          maintainAspectRatio="true">
                     <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56">
-                        <bx:chartdata item="A" value="100">
-                        <bx:chartdata item="B" value="150">
-                        <bx:chartdata item="C" value="75">
+                        <bx:chartdata item="A" value="100" />
+                        <bx:chartdata item="B" value="150" />
+                        <bx:chartdata item="C" value="75" />
                     </bx:chartseries>
                 </bx:chart>
             </div>
             <div style="flex: 1; min-width: 300px;">
-                <bx:chart title="Chart 2" 
+                <bx:chart title="Chart 2"
                          chartwidth="400" chartheight="300"
                          responsive="true"
                          maintainAspectRatio="true">
                     <bx:chartseries type="bar" colorlist="4BC0C0,9966FF,FF9F40">
-                        <bx:chartdata item="X" value="120">
-                        <bx:chartdata item="Y" value="90">
-                        <bx:chartdata item="Z" value="160">
+                        <bx:chartdata item="X" value="120" />
+                        <bx:chartdata item="Y" value="90" />
+                        <bx:chartdata item="Z" value="160" />
                     </bx:chartseries>
                 </bx:chart>
             </div>
@@ -203,17 +252,17 @@
             <strong>Attributes:</strong> responsive="true", resizeDelay="100" (100ms debounce)
         </div>
         <div class="responsive-container">
-            <bx:chart title="Optimized Responsive Chart" 
+            <bx:chart title="Optimized Responsive Chart"
                      chartwidth="600" chartheight="300"
                      responsive="true"
                      maintainAspectRatio="true"
                      resizeDelay="100">
-                <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" 
+                <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
                                serieslabel="Performance Data">
-                    <bx:chartdata item="Jan" value="120">
-                    <bx:chartdata item="Feb" value="150">
-                    <bx:chartdata item="Mar" value="135">
-                    <bx:chartdata item="Apr" value="180">
+                    <bx:chartdata item="Jan" value="120" />
+                    <bx:chartdata item="Feb" value="150" />
+                    <bx:chartdata item="Mar" value="135" />
+                    <bx:chartdata item="Apr" value="180" />
                 </bx:chartseries>
             </bx:chart>
         </div>
@@ -243,5 +292,8 @@
         </div>
     </div>
 
+    <a href="index.bxm" class="back-link">← Back to Test Suite</a>
+
 </body>
+</html>
 </html>

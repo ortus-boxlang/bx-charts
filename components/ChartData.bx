@@ -44,23 +44,31 @@ class{
 		// This component must be nested within a chartSeries component
 		var parentState = context.findClosestComponent( "chartseries" );
 		if ( isNull( parentState ) ) {
-			throw new RuntimeException( "chartdata must be nested within a chartseries component" );
+			throw( type: "BXChartException", message:"chartdata must be nested within a chartseries component" );
 		}
 
 		// Validate required attributes
 		if ( !structKeyExists( attributes, "item" ) || !len( trim( attributes.item ) ) ) {
-			throw new RuntimeException( "chartdata requires an 'item' attribute with the data label" );
+			throw( type: "BXChartException", message:"chartdata requires an 'item' attribute with the data label" );
 		}
 
-		if ( !structKeyExists( attributes, "value" ) ) {
-			throw new RuntimeException( "chartdata requires a 'value' attribute with the data value" );
+		// Check if this is a bubble chart (has x, y, r coordinates)
+		var isBubbleChart = structKeyExists( attributes, "x" ) && structKeyExists( attributes, "y" ) && structKeyExists( attributes, "r" );
+
+		// For non-bubble charts, value is required
+		if ( !structKeyExists( attributes, "value" ) && !isBubbleChart ) {
+			throw( type: "BXChartException", message:"chartdata requires a 'value' attribute (or x, y, r for bubble charts)" );
 		}
 
 		// Add this data point to the parent series
 		var dataPoint = {
-			"item": trim( attributes.item ),
-			"value": attributes.value
+			"item": trim( attributes.item )
 		};
+
+		// Add value if provided
+		if ( structKeyExists( attributes, "value" ) ) {
+			dataPoint.value = attributes.value;
+		}
 
 		// For bubble charts, support optional x, y, r attributes
 		if ( structKeyExists( attributes, "x" ) ) {
@@ -79,9 +87,6 @@ class{
 		}
 
 		arrayAppend( parentState.chartData, dataPoint );
-
-		// Log the data point for debugging
-		variables.log.debug( "Added chart data point: ##dataPoint.item## = ##dataPoint.value##" );
 
 		return null; // Default return
 	}

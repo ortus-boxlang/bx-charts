@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BoxLang Charts Module - Test Suite</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			background: linear-gradient(135deg, ##667eea 0%, ##764ba2 100%);
+			min-height: 100vh;
+			padding: 40px 20px;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		header {
+			text-align: center;
+			margin-bottom: 50px;
+		}
+
+		h1 {
+			font-size: 3em;
+			font-weight: 700;
+			margin-bottom: 10px;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+		}
+
+		.subtitle {
+			font-size: 1.3em;
+			opacity: 0.9;
+			margin-bottom: 10px;
+		}
+
+		.version {
+			display: inline-block;
+			background: rgba(255,255,255,0.2);
+			padding: 5px 15px;
+			border-radius: 20px;
+			font-size: 0.9em;
+			margin-top: 10px;
+		}
+
+		.intro {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			margin-bottom: 40px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+		}
+
+		.intro h2 {
+			color: ##667eea;
+			margin-bottom: 15px;
+			font-size: 1.8em;
+		}
+
+		.intro p {
+			color: ##555;
+			line-height: 1.6;
+			margin-bottom: 10px;
+		}
+
+		.features {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+			margin: 30px 0;
+		}
+
+		.feature {
+			background: ##f8f9fa;
+			padding: 20px;
+			border-radius: 8px;
+			border-left: 4px solid ##667eea;
+		}
+
+		.feature h3 {
+			color: ##667eea;
+			margin-bottom: 10px;
+			font-size: 1.2em;
+		}
+
+		.feature ul {
+			list-style: none;
+			padding-left: 0;
+		}
+
+		.feature li {
+			padding: 5px 0;
+			color: ##666;
+		}
+
+		.feature li:before {
+			content: "✓ ";
+			color: ##667eea;
+			font-weight: bold;
+		}
+
+		.test-links {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			gap: 25px;
+			margin-top: 30px;
+		}
+
+		.test-card {
+			background: white;
+			border-radius: 12px;
+			padding: 30px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			text-decoration: none;
+			color: inherit;
+			display: block;
+		}
+
+		.test-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+		}
+
+		.test-card h2 {
+			color: ##667eea;
+			font-size: 1.8em;
+			margin-bottom: 15px;
+		}
+
+		.test-card p {
+			color: ##666;
+			line-height: 1.6;
+			margin-bottom: 20px;
+		}
+
+		.chart-types {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 15px;
+		}
+
+		.chart-type {
+			background: ##667eea;
+			color: white;
+			padding: 5px 12px;
+			border-radius: 15px;
+			font-size: 0.85em;
+			font-weight: 500;
+		}
+
+		.btn {
+			display: inline-block;
+			background: ##667eea;
+			color: white;
+			padding: 12px 30px;
+			border-radius: 25px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: background 0.3s ease;
+			margin-top: 10px;
+		}
+
+		.btn:hover {
+			background: ##764ba2;
+		}
+
+		.btn-secondary {
+			background: ##6c757d;
+		}
+
+		.btn-secondary:hover {
+			background: ##5a6268;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 60px;
+			padding: 30px;
+			background: rgba(0,0,0,0.2);
+			border-radius: 12px;
+		}
+
+		footer a {
+			text-decoration: none;
+			font-weight: 600;
+		}
+
+		footer a:hover {
+			text-decoration: underline;
+		}
+
+		.highlight {
+			background: ##fff3cd;
+			padding: 20px;
+			border-left: 4px solid ##ffc107;
+			border-radius: 4px;
+			margin: 20px 0;
+		}
+
+		.highlight strong {
+			color: ##856404;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>📊 BoxLang Charts Module</h1>
+			<div class="subtitle">Interactive Chart.js Integration Test Suite</div>
+			<div class="version">v1.0.0</div>
+		</header>
+
+		<div class="intro">
+			<h2>Welcome to the BoxLang Charts Test Suite</h2>
+			<p>
+				This test suite demonstrates the comprehensive charting capabilities of the BoxLang Charts module.
+				Built on the powerful Chart.js library, this module brings beautiful, interactive data visualizations
+				to your BoxLang applications with minimal code.
+			</p>
+
+			<div class="highlight">
+				<strong>🎯 10 Chart Types Supported:</strong> pie, bar, line, doughnut, radar, polarArea, area, horizontalbar, scatter, bubble
+			</div>
+
+			<div class="features">
+				<div class="feature">
+					<h3>🎨 Styling</h3>
+					<ul>
+						<li>Custom colors</li>
+						<li>Font customization</li>
+						<li>Legends & titles</li>
+						<li>Background colors</li>
+					</ul>
+				</div>
+
+				<div class="feature">
+					<h3>📏 Layout</h3>
+					<ul>
+						<li>Responsive design</li>
+						<li>Custom dimensions</li>
+						<li>Aspect ratios</li>
+						<li>Grid lines</li>
+					</ul>
+				</div>
+
+				<div class="feature">
+					<h3>⚙️ Advanced</h3>
+					<ul>
+						<li>Stacked/clustered series</li>
+						<li>Axis titles</li>
+						<li>Multiple series</li>
+						<li>Data labels</li>
+					</ul>
+				</div>
+
+				<div class="feature">
+					<h3>🚀 Performance</h3>
+					<ul>
+						<li>Fast rendering</li>
+						<li>Canvas-based</li>
+						<li>Optimized assets</li>
+						<li>Production ready</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<h2>
+			📋 Test Examples
+		</h2>
+
+		<div class="test-links">
+			<a href="charts.bxm" class="test-card">
+				<h2>🎯 Comprehensive Examples</h2>
+				<p>
+					A complete showcase of all 10 supported chart types with various styling options,
+					axis configurations, and layout features. Perfect for learning the basics and
+					exploring different chart options.
+				</p>
+				<div class="chart-types">
+					<span class="chart-type">Pie</span>
+					<span class="chart-type">Bar</span>
+					<span class="chart-type">Line</span>
+					<span class="chart-type">Doughnut</span>
+					<span class="chart-type">Radar</span>
+					<span class="chart-type">PolarArea</span>
+					<span class="chart-type">Area</span>
+					<span class="chart-type">HorizontalBar</span>
+					<span class="chart-type">Scatter</span>
+					<span class="chart-type">Bubble</span>
+				</div>
+				<span class="btn">View Examples →</span>
+			</a>
+
+			<a href="test-charts-enhanced.bxm" class="test-card">
+				<h2>✨ Enhanced Features</h2>
+				<p>
+					Advanced chart configurations showcasing enhanced features like stacked series,
+					custom axis titles, grid line controls, and font styling. Demonstrates the
+					full power of the charting module.
+				</p>
+				<div class="chart-types">
+					<span class="chart-type">Axis Titles</span>
+					<span class="chart-type">Grid Lines</span>
+					<span class="chart-type">Stacked Series</span>
+					<span class="chart-type">Font Styling</span>
+					<span class="chart-type">Custom Colors</span>
+				</div>
+				<span class="btn">View Enhanced →</span>
+			</a>
+
+			<a href="test-responsive-charts.bxm" class="test-card">
+				<h2>📱 Responsive Features</h2>
+				<p>
+					Interactive demonstrations of responsive chart behavior with different aspect ratios,
+					container sizes, and mobile-friendly configurations. Resize your browser to see
+					charts adapt in real-time.
+				</p>
+				<div class="chart-types">
+					<span class="chart-type">Responsive</span>
+					<span class="chart-type">Aspect Ratios</span>
+					<span class="chart-type">Mobile-Ready</span>
+					<span class="chart-type">Container Sizing</span>
+				</div>
+				<span class="btn">View Responsive →</span>
+			</a>
+		</div>
+
+		<footer>
+			<p>
+				<strong>BoxLang Charts Module</strong> by
+				<a href="https://www.ortussolutions.com" target="_blank">Ortus Solutions</a>
+			</p>
+			<p style="margin-top: 10px;">
+				<a href="https://github.com/ortus-boxlang/bx-charts" target="_blank">GitHub Repository</a> |
+				<a href="https://boxlang.io" target="_blank">BoxLang Documentation</a> |
+				<a href="https://www.chartjs.org" target="_blank">Chart.js</a>
+			</p>
+		</footer>
+	</div>
+</body>
+</html>

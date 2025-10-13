@@ -1,116 +1,275 @@
 <!--- Test file for BoxLang Charts Module - Comprehensive Examples --->
+<!DOCTYPE html>
 <html>
 <head>
-    <title>BoxLang Charts Test - Enhanced Features</title>
+    <title>BoxLang Charts - All Chart Types</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .chart-container { margin: 30px 0; border: 1px solid #ddd; padding: 20px; }
-        h2 { color: #333; border-bottom: 2px solid #007acc; padding-bottom: 10px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: ##f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, ##667eea 0%, ##764ba2 100%);
+            padding: 40px 20px;
+            margin: -20px -20px 30px -20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .chart-container {
+            background: white;
+            margin: 30px auto;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: ##667eea;
+            border-bottom: 3px solid ##667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .chart-info {
+            background: ##f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid ##667eea;
+        }
+        .chart-info strong {
+            color: ##667eea;
+        }
+        .back-link {
+            display: inline-block;
+            background: ##667eea;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            background: ##764ba2;
+        }
     </style>
 </head>
 <body>
-    <h1>BoxLang Charts Test - Enhanced Features</h1>
+    <div class="header">
+        <h1>📊 BoxLang Charts - All Chart Types</h1>
+        <p>Comprehensive demonstration of all 10 supported chart types</p>
+    </div>
+
+    <a href="index.bxm" class="back-link">← Back to Test Suite</a>
 
     <div class="chart-container">
-        <h2>Pie Chart with Axis Titles and Custom Colors</h2>
+        <h2>1. Pie Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Showing proportions and percentages of a whole
+        </div>
         <bx:chart format="png" show3d="false" title="Memory Usage Distribution"
-                  backgroundcolor="##ffffff" chartheight="275" chartwidth="275"
+                  backgroundcolor="##ffffff" chartheight="300" chartwidth="400"
                   showlegend="true">
             <bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000, ffff00"
                             serieslabel="Memory Usage">
-                <bx:chartdata item="Free Memory" value="512">
-                <bx:chartdata item="Used Memory" value="256">
-                <bx:chartdata item="Reserved Memory" value="128">
-                <bx:chartdata item="Cache Memory" value="64">
+                <bx:chartdata item="Free Memory" value="512" />
+                <bx:chartdata item="Used Memory" value="256" />
+                <bx:chartdata item="Reserved Memory" value="128" />
+                <bx:chartdata item="Cache Memory" value="64" />
             </bx:chartseries>
         </bx:chart>
     </div>
 
     <div class="chart-container">
-        <h2>Bar Chart with Axis Titles and Grid Lines</h2>
+        <h2>2. Bar Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Comparing values across categories
+        </div>
         <bx:chart format="png" show3d="false" backgroundcolor="##ffffff"
-                  chartwidth="400" chartheight="300" showlegend="true"
+                  chartwidth="500" chartheight="300" showlegend="true"
                   title="Performance Metrics"
                   xaxistitle="Metrics" yaxistitle="Count"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00"
                             serieslabel="Performance Data">
-                <bx:chartdata item="Hits" value="150">
-                <bx:chartdata item="Misses" value="25">
-                <bx:chartdata item="Garbage Collections" value="10">
-                <bx:chartdata item="Evictions" value="5">
+                <bx:chartdata item="Hits" value="150" />
+                <bx:chartdata item="Misses" value="25" />
+                <bx:chartdata item="Garbage Collections" value="10" />
+                <bx:chartdata item="Evictions" value="5" />
             </bx:chartseries>
         </bx:chart>
     </div>
 
     <div class="chart-container">
-        <h2>Horizontal Bar Chart</h2>
-        <bx:chart format="png" title="Department Budgets"
-                  chartwidth="450" chartheight="300"
-                  xaxistitle="Budget (thousands)" yaxistitle="Departments"
-                  showxgridlines="false" showygridlines="true">
-            <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
-                            serieslabel="Budget Allocation">
-                <bx:chartdata item="IT" value="850">
-                <bx:chartdata item="Marketing" value="620">
-                <bx:chartdata item="Sales" value="950">
-                <bx:chartdata item="HR" value="340">
-            </bx:chartseries>
-        </bx:chart>
-    </div>
-
-    <div class="chart-container">
-        <h2>Area Chart Example</h2>
-        <bx:chart format="png" title="Website Traffic Over Time"
+        <h2>3. Line Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Showing trends over time or continuous data
+        </div>
+        <bx:chart format="png" title="Temperature Trend"
                   chartwidth="500" chartheight="300"
+                  xaxistitle="Time" yaxistitle="Temperature (°C)"
+                  showxgridlines="true" showygridlines="true">
+            <bx:chartseries type="line" colorlist="FF6384"
+                            serieslabel="Daily Temperature">
+                <bx:chartdata item="6 AM" value="15" />
+                <bx:chartdata item="9 AM" value="18" />
+                <bx:chartdata item="12 PM" value="24" />
+                <bx:chartdata item="3 PM" value="26" />
+                <bx:chartdata item="6 PM" value="22" />
+                <bx:chartdata item="9 PM" value="18" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+
+    <div class="chart-container">
+        <h2>4. Doughnut Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Similar to pie charts but with a hollow center for better readability
+        </div>
+        <bx:chart format="png" title="Browser Market Share"
+                  chartwidth="400" chartheight="300" showlegend="true">
+            <bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                            serieslabel="Market Share">
+                <bx:chartdata item="Chrome" value="65" />
+                <bx:chartdata item="Firefox" value="18" />
+                <bx:chartdata item="Safari" value="12" />
+                <bx:chartdata item="Edge" value="4" />
+                <bx:chartdata item="Others" value="1" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+
+    <div class="chart-container">
+        <h2>5. Radar Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Comparing multiple variables or showing multivariate data
+        </div>
+        <bx:chart format="png" title="Skills Assessment"
+                  chartwidth="400" chartheight="400" showlegend="true">
+            <bx:chartseries type="radar" colorlist="36A2EB"
+                            serieslabel="Developer Skills">
+                <bx:chartdata item="JavaScript" value="90" />
+                <bx:chartdata item="Python" value="75" />
+                <bx:chartdata item="Java" value="85" />
+                <bx:chartdata item="SQL" value="80" />
+                <bx:chartdata item="BoxLang" value="95" />
+                <bx:chartdata item="DevOps" value="70" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+
+    <div class="chart-container">
+        <h2>6. Polar Area Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Showing data in a circular format with different segment areas
+        </div>
+        <bx:chart format="png" title="Product Ratings"
+                  chartwidth="400" chartheight="400" showlegend="true">
+            <bx:chartseries type="polarArea" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                            serieslabel="Ratings">
+                <bx:chartdata item="Quality" value="95" />
+                <bx:chartdata item="Price" value="75" />
+                <bx:chartdata item="Support" value="85" />
+                <bx:chartdata item="Documentation" value="90" />
+                <bx:chartdata item="Community" value="80" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+
+    <div class="chart-container">
+        <h2>7. Area Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Emphasizing the magnitude of change over time
+        </div>
+        <bx:chart format="png" title="Website Traffic Over Time"
+                  chartwidth="600" chartheight="300"
                   xaxistitle="Time Period" yaxistitle="Visitors"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="area" colorlist="36A2EB"
                             serieslabel="Daily Visitors">
-                <bx:chartdata item="Monday" value="1200">
-                <bx:chartdata item="Tuesday" value="1350">
-                <bx:chartdata item="Wednesday" value="1100">
-                <bx:chartdata item="Thursday" value="1450">
-                <bx:chartdata item="Friday" value="1800">
-                <bx:chartdata item="Saturday" value="2100">
-                <bx:chartdata item="Sunday" value="1900">
+                <bx:chartdata item="Monday" value="1200" />
+                <bx:chartdata item="Tuesday" value="1350" />
+                <bx:chartdata item="Wednesday" value="1100" />
+                <bx:chartdata item="Thursday" value="1450" />
+                <bx:chartdata item="Friday" value="1800" />
+                <bx:chartdata item="Saturday" value="2100" />
+                <bx:chartdata item="Sunday" value="1900" />
             </bx:chartseries>
         </bx:chart>
     </div>
 
     <div class="chart-container">
-        <h2>Stacked Bar Chart</h2>
-        <bx:chart format="png" title="Quarterly Sales by Region"
-                  chartwidth="500" chartheight="350"
-                  xaxistitle="Quarters" yaxistitle="Sales (thousands)"
-                  showxgridlines="false" showygridlines="true"
-                  seriesplacement="stacked">
-            <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56"
-                            serieslabel="North Region">
-                <bx:chartdata item="Q1" value="120">
-                <bx:chartdata item="Q2" value="135">
-                <bx:chartdata item="Q3" value="145">
-                <bx:chartdata item="Q4" value="160">
+        <h2>8. Horizontal Bar Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Comparing categories when labels are long or when showing rankings
+        </div>
+        <bx:chart format="png" title="Department Budgets"
+                  chartwidth="500" chartheight="300"
+                  xaxistitle="Budget (thousands)" yaxistitle="Departments"
+                  showxgridlines="false" showygridlines="true">
+            <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                            serieslabel="Budget Allocation">
+                <bx:chartdata item="IT" value="850" />
+                <bx:chartdata item="Marketing" value="620" />
+                <bx:chartdata item="Sales" value="950" />
+                <bx:chartdata item="HR" value="340" />
             </bx:chartseries>
         </bx:chart>
     </div>
 
     <div class="chart-container">
-        <h2>Scatter Plot</h2>
+        <h2>9. Scatter Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Showing correlation between two variables
+        </div>
         <bx:chart format="png" title="Performance vs Experience"
-                  chartwidth="400" chartheight="300"
+                  chartwidth="500" chartheight="350"
                   xaxistitle="Years of Experience" yaxistitle="Performance Score"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="scatter" colorlist="FF6384"
                             serieslabel="Employee Data">
-                <bx:chartdata item="Employee A" value="85">
-                <bx:chartdata item="Employee B" value="92">
-                <bx:chartdata item="Employee C" value="78">
-                <bx:chartdata item="Employee D" value="95">
-                <bx:chartdata item="Employee E" value="88">
+                <bx:chartdata item="1" value="65" />
+                <bx:chartdata item="2" value="72" />
+                <bx:chartdata item="3" value="78" />
+                <bx:chartdata item="5" value="85" />
+                <bx:chartdata item="7" value="88" />
+                <bx:chartdata item="10" value="92" />
+                <bx:chartdata item="12" value="95" />
             </bx:chartseries>
         </bx:chart>
     </div>
+
+    <div class="chart-container">
+        <h2>10. Bubble Chart</h2>
+        <div class="chart-info">
+            <strong>Best for:</strong> Displaying three-dimensional data (x, y, and size)
+        </div>
+        <bx:chart format="png" title="Product Performance Analysis"
+                  chartwidth="500" chartheight="350"
+                  xaxistitle="Market Share (%)" yaxistitle="Revenue (millions)"
+                  showxgridlines="true" showygridlines="true">
+            <bx:chartseries type="bubble" colorlist="9966FF,36A2EB,FF6384,FFCE56"
+                            serieslabel="Products">
+                <bx:chartdata item="Product A" value="85" />
+                <bx:chartdata item="Product B" value="120" />
+                <bx:chartdata item="Product C" value="65" />
+                <bx:chartdata item="Product D" value="95" />
+            </bx:chartseries>
+        </bx:chart>
+    </div>
+
+    <a href="index.bxm" class="back-link">← Back to Test Suite</a>
 
 </body>
 </html>
