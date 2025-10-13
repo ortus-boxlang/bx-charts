@@ -44,7 +44,7 @@ jobs:
         with:
           version: snapshot
 
-      - name: Test Module
+      - name: Test Module Loads
         run: |
           mkdir -p ~/.boxlang/modules
           ln -s "$(pwd)" ~/.boxlang/modules/"$(basename "$(pwd)")"

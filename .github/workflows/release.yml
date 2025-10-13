@@ -23,6 +23,7 @@ on:
 env:
   MODULE_ID: ${{ github.event.repository.name }}
   JDK: 21
+  NODE: 20
   BUILD_ID: ${{ github.run_number }}
   SNAPSHOT: ${{ inputs.snapshot || false }}
 
@@ -51,6 +52,11 @@ jobs:
         uses: Ortus-Solutions/setup-commandbox@v2.0.1
         with:
           forgeboxAPIKey: ${{ secrets.FORGEBOX_API_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE }}
 
       - name: Setup Environment Variables For Build Process
         id: current_version
@@ -81,6 +87,7 @@ jobs:
         run: |
           npm install -g markdownlint-cli
           markdownlint changelog.md --fix
+          npm install
           boxlang Build.bx \
             --buildId=${{ env.BUILD_ID }} \
             --version=${{ env.MODULE_VERSION }} \
