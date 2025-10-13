@@ -103,7 +103,10 @@ var chartConfig = {
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
 - **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
-- **Dependencies**: Chart.js library managed manually in `/public/`
+- **Dependencies**: 
+  - Chart.js library automatically managed via npm (see package.json)
+  - Run `npm install` to download Chart.js to `/public/`
+  - Run `npm run update-chartjs` to update to latest Chart.js version
 - **Documentation**: [BoxLang MCP Server Docs](https://boxlang.ortusbooks.com/~gitbook/mcp)
 
 ### Component Development Lifecycle
@@ -113,6 +116,15 @@ var chartConfig = {
 4. Data aggregation happens during body processing
 
 ## Essential Commands & Tooling
+
+### Dependency Management
+```bash
+# Install Node.js dependencies and download Chart.js
+npm install
+
+# Update Chart.js to the latest version
+npm run update-chartjs
+```
 
 ### Build Commands
 ```bash
@@ -145,6 +157,7 @@ box run-script format:watch
 - Uses ForgeBox for distribution (`box.json` configuration)
 - Dependencies managed via CommandBox (`commandbox-boxlang`, `testbox`, etc.)
 - Static assets (Chart.js) included directly in `/public/` directory
+- Chart.js managed via npm - automatically downloads to `/public/` on `npm install`
 
 ## BoxLang-Specific Conventions
 

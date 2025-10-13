@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+- Automated chart.js installation and management via npm
+  - `package.json` with Chart.js dependency
+  - `npm install` to download Chart.js to `/public/`
+  - `npm run update-chartjs` to update to latest Chart.js version
 - Bubble chart support (`type="bubble"`)
   - New chart type for displaying three-dimensional data (x, y, radius)
   - Extended `<bx:chartdata>` component with `x`, `y`, and `r` attributes for bubble charts
@@ -30,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation for responsive features in readme.md
 
 ### Changed
+
 - Updated validTypes array in ChartSeries.bx to include "bubble"
 - Enhanced buildChartConfig() in Chart.bx to support bubble chart data structure
 - Updated renderChart to support responsive and non-responsive modes

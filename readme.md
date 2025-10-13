@@ -59,7 +59,7 @@ The module will automatically register and be available as `bxcharts` in your Bo
 
 Here's how to create your first chart in just a few lines:
 
-```boxlang
+```xml
 <bx:chart title="My First Chart" chartwidth="400" chartheight="300">
     <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56">
         <bx:chartdata item="Red" value="300">
@@ -76,54 +76,74 @@ That's it! 🎉 You now have a beautiful, interactive pie chart.
 The module supports 10 different chart types, each optimized for specific data visualization needs:
 
 ### 🥧 Pie Chart (`type="pie"`)
+
 Perfect for showing proportions and percentages of a whole.
+
 - **Best for**: Market share, budget allocation, survey results
 - **Data structure**: Single series with multiple data points
 
 ### 📊 Bar Chart (`type="bar"`)
+
 Great for comparing values across categories.
+
 - **Best for**: Comparing quantities, showing rankings, temporal data
 - **Features**: Supports stacking and clustering
 - **Data structure**: Single or multiple series
 
 ### 📈 Line Chart (`type="line"`)
+
 Ideal for showing trends over time.
+
 - **Best for**: Time series, trend analysis, continuous data
 - **Features**: Multiple series support, customizable markers
 - **Data structure**: One or more series with sequential data points
 
 ### 🍩 Doughnut Chart (`type="doughnut"`)
+
 Similar to pie charts but with a hole in the center.
+
 - **Best for**: Proportions with emphasis on total value
 - **Visual style**: Modern, clean look with central focus area
 
 ### 🕸️ Radar Chart (`type="radar"`)
+
 Shows multivariate data on a circular grid.
+
 - **Best for**: Comparing multiple variables, skill assessments, product comparisons
 - **Data structure**: Multiple data points forming a polygon
 
 ### 🎯 Polar Area Chart (`type="polarArea"`)
+
 Like a pie chart but with varying radius.
+
 - **Best for**: Showing proportions where magnitude matters
 - **Visual style**: Circular sectors with different radii
 
 ### 🏔️ Area Chart (`type="area"`)
+
 Line chart with filled area underneath.
+
 - **Best for**: Showing volume over time, cumulative data
 - **Features**: Emphasizes magnitude of change
 
 ### ↔️ Horizontal Bar Chart (`type="horizontalbar"`)
+
 Bar chart with horizontal orientation.
+
 - **Best for**: Long category names, rankings, comparisons
 - **Layout**: Left-to-right instead of bottom-to-top
 
 ### 🔵 Scatter Plot (`type="scatter"`)
+
 Shows relationship between two variables.
+
 - **Best for**: Correlation analysis, distribution patterns
 - **Data structure**: X-Y coordinate pairs
 
 ### 🫧 Bubble Chart (`type="bubble"`)
+
 Shows three-dimensional data using x, y coordinates and bubble size.
+
 - **Best for**: Multi-dimensional data analysis, comparative metrics, portfolio analysis
 - **Data structure**: X-Y coordinate pairs with radius (r) for bubble size
 - **Usage**: Use `x`, `y`, and `r` attributes in `<bx:chartdata>` instead of just `value`
@@ -145,69 +165,6 @@ Selecting the appropriate chart type is crucial for effective data visualization
 | Show 3D relationships | **Bubble** | Displays three metrics simultaneously (x, y, size) |
 | Compare with long labels | **Horizontal Bar** | Better readability for lengthy category names |
 | Emphasize volume/magnitude | **Area** | Highlights total quantity over time |
-
-### 🎨 Visual Examples
-
-<table>
-<tr>
-<td align="center" width="33%">
-<strong>🥧 Pie Chart</strong><br/>
-<img src="https://github.com/user-attachments/assets/1f39126f-eeb0-4333-8345-b130010e4b5b" width="280"/><br/>
-<em>Market share, budget allocation</em>
-</td>
-<td align="center" width="33%">
-<strong>📊 Bar Chart</strong><br/>
-<img src="https://github.com/user-attachments/assets/810328bd-0294-4ed1-bd1b-79f2e7eda566" width="280"/><br/>
-<em>Comparing quantities, rankings</em>
-</td>
-<td align="center" width="33%">
-<strong>📈 Line Chart</strong><br/>
-<img src="https://github.com/user-attachments/assets/ce8b6d2a-d08b-437f-8fc4-4025607c19ab" width="280"/><br/>
-<em>Trends over time, time series</em>
-</td>
-</tr>
-<tr>
-<td align="center" width="33%">
-<strong>🍩 Doughnut Chart</strong><br/>
-<img src="https://via.placeholder.com/280x200/FFCE56/333333?text=Doughnut+Chart" width="280"/><br/>
-<em>Modern proportions display</em>
-</td>
-<td align="center" width="33%">
-<strong>🕸️ Radar Chart</strong><br/>
-<img src="https://via.placeholder.com/280x200/4BC0C0/333333?text=Radar+Chart" width="280"/><br/>
-<em>Multi-variable comparison</em>
-</td>
-<td align="center" width="33%">
-<strong>🎯 Polar Area Chart</strong><br/>
-<img src="https://via.placeholder.com/280x200/9966FF/333333?text=Polar+Area" width="280"/><br/>
-<em>Proportions with magnitude</em>
-</td>
-</tr>
-<tr>
-<td align="center" width="33%">
-<strong>🏔️ Area Chart</strong><br/>
-<img src="https://via.placeholder.com/280x200/FF9F40/333333?text=Area+Chart" width="280"/><br/>
-<em>Volume over time</em>
-</td>
-<td align="center" width="33%">
-<strong>↔️ Horizontal Bar</strong><br/>
-<img src="https://via.placeholder.com/280x200/E74C3C/333333?text=Horizontal+Bar" width="280"/><br/>
-<em>Long labels, comparisons</em>
-</td>
-<td align="center" width="33%">
-<strong>🔵 Scatter Plot</strong><br/>
-<img src="https://via.placeholder.com/280x200/3498DB/333333?text=Scatter+Plot" width="280"/><br/>
-<em>Correlation analysis</em>
-</td>
-</tr>
-<tr>
-<td align="center" colspan="3">
-<strong>🫧 Bubble Chart</strong><br/>
-<img src="https://via.placeholder.com/280x200/9B59B6/333333?text=Bubble+Chart" width="280"/><br/>
-<em>Three-dimensional data (x, y, size)</em>
-</td>
-</tr>
-</table>
 
 ### 💡 Decision Tree
 
@@ -335,6 +292,7 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 | `serieslabel` | string | No | Label for this data series |
 
 **Example:**
+
 ```boxlang
 <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Sales Data">
     <!-- chartdata components here -->
@@ -356,12 +314,14 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 | `r` | number | ⚠️ Bubble | Bubble radius (required for bubble charts) |
 
 **Standard Example:**
+
 ```boxlang
 <bx:chartdata item="Product A" value="150">
 <bx:chartdata item="Product B" value="200">
 ```
 
 **Bubble Chart Example:**
+
 ```boxlang
 <bx:chartdata item="Product A" x="20" y="30" r="15">
 <bx:chartdata item="Product B" x="40" y="10" r="10">
@@ -373,9 +333,9 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 🥧 Simple Pie Chart
 
-```boxlang
-<bx:chart title="Memory Usage Distribution" 
-          chartwidth="400" chartheight="300" 
+```xml
+<bx:chart title="Memory Usage Distribution"
+          chartwidth="400" chartheight="300"
           showlegend="true">
     <bx:chartseries type="pie" colorlist="00ff00,0000ff,ff0000,ffff00"
                     serieslabel="Memory Usage">
@@ -391,13 +351,15 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 📊 Bar Chart with Grid Lines
 
-```boxlang
+```xml
 <bx:chart title="Performance Metrics"
-          chartwidth="500" chartheight="350" 
+          chartwidth="500" chartheight="350"
           xaxistitle="Metrics" yaxistitle="Count"
           showxgridlines="false" showygridlines="true">
-    <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00"
-                    serieslabel="Performance Data">
+    <bx:chartseries
+			type="bar"
+			colorlist="131cd7,ED2939,gray,d47f00"
+            serieslabel="Performance Data">
         <bx:chartdata item="Hits" value="150">
         <bx:chartdata item="Misses" value="25">
         <bx:chartdata item="Garbage Collections" value="10">
@@ -410,7 +372,7 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 📈 Line Chart for Time Series
 
-```boxlang
+```xml
 <bx:chart title="Website Traffic Over Time"
           chartwidth="600" chartheight="300"
           xaxistitle="Day" yaxistitle="Visitors"
@@ -432,11 +394,11 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 🍩 Doughnut Chart
 
-```boxlang
+```xml
 <bx:chart title="Browser Market Share"
           chartwidth="400" chartheight="400"
           showlegend="true">
-    <bx:chartseries type="doughnut" 
+    <bx:chartseries type="doughnut"
                     colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
                     serieslabel="Browser Usage">
         <bx:chartdata item="Chrome" value="65">
@@ -454,7 +416,7 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 🏔️ Area Chart with Styling
 
-```boxlang
+```xml
 <bx:chart title="Server Load Over Time"
           chartwidth="600" chartheight="350"
           xaxistitle="Time" yaxistitle="CPU Usage (%)"
@@ -477,12 +439,12 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### ↔️ Horizontal Bar Chart
 
-```boxlang
+```xml
 <bx:chart title="Department Budgets"
           chartwidth="500" chartheight="350"
           xaxistitle="Budget ($1000s)" yaxistitle="Department"
           showygridlines="true">
-    <bx:chartseries type="horizontalbar" 
+    <bx:chartseries type="horizontalbar"
                     colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
                     serieslabel="Budget Allocation">
         <bx:chartdata item="IT Department" value="850">
@@ -497,7 +459,7 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 📚 Stacked Bar Chart
 
-```boxlang
+```xml
 <bx:chart title="Quarterly Sales by Region"
           chartwidth="600" chartheight="400"
           xaxistitle="Quarter" yaxistitle="Sales ($1000s)"
@@ -524,7 +486,7 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 🎯 Radar Chart for Multi-dimensional Data
 
-```boxlang
+```xml
 <bx:chart title="Skills Assessment"
           chartwidth="500" chartheight="500"
           showlegend="true">
@@ -543,7 +505,7 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 #### 🔵 Scatter Plot for Correlation
 
-```boxlang
+```xml
 <bx:chart title="Response Time vs Throughput"
           chartwidth="600" chartheight="400"
           xaxistitle="Response Time (ms)" yaxistitle="Requests/sec"
@@ -566,12 +528,12 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 Bubble charts display three dimensions of data using x and y coordinates plus bubble size.
 
-```boxlang
+```xml
 <bx:chart title="Product Portfolio Analysis"
           chartwidth="600" chartheight="400"
           xaxistitle="Market Share (%)" yaxistitle="Revenue ($M)"
           showxgridlines="true" showygridlines="true">
-    <bx:chartseries type="bubble" 
+    <bx:chartseries type="bubble"
                     colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
                     serieslabel="Product Performance">
         <bx:chartdata item="Product A" x="20" y="30" r="15">
@@ -590,7 +552,7 @@ Bubble charts display three dimensions of data using x and y coordinates plus bu
 
 BoxLang Charts support responsive sizing that adapts to container width and screen sizes. This is ideal for responsive web applications and dashboards.
 
-```boxlang
+```xml
 <bx:chart title="Responsive Dashboard Chart"
           chartwidth="800" chartheight="400"
           responsive="true"
@@ -610,6 +572,7 @@ BoxLang Charts support responsive sizing that adapts to container width and scre
 **💡 Use Case:** Perfect for dashboards and mobile-friendly layouts where charts need to adapt to different screen sizes.
 
 **Responsive Tips:**
+
 - Charts resize automatically to fit their container width (up to `chartWidth`)
 - Use `maintainAspectRatio="false"` to fill specific container heights
 - Set custom aspect ratios: `2` for wide (2:1), `1` for square (1:1), `0.5` for tall (1:2)
@@ -622,17 +585,20 @@ BoxLang Charts support responsive sizing that adapts to container width and scre
 Control how multiple data series are displayed in bar charts:
 
 **Default (Side-by-side):**
-```boxlang
+
+```js
 seriesplacement="default"  <!-- or omit the attribute -->
 ```
 
 **Clustered (Grouped bars):**
-```boxlang
+
+```js
 seriesplacement="cluster"
 ```
 
 **Stacked (Bars on top of each other):**
-```boxlang
+
+```js
 seriesplacement="stacked"
 ```
 
@@ -640,7 +606,7 @@ seriesplacement="stacked"
 
 Colors can be specified in multiple formats:
 
-```boxlang
+```xml
 <!-- Hex colors (with or without #) -->
 colorlist="FF6384,36A2EB,FFCE56"
 colorlist="##FF6384,##36A2EB,##FFCE56"
@@ -653,6 +619,7 @@ colorlist="rgb(255,99,132),rgb(54,162,235)"
 ```
 
 **Color Best Practices:**
+
 - Use contrasting colors for better accessibility
 - Limit to 5-7 distinct colors for clarity
 - Consider colorblind-friendly palettes for inclusive design
@@ -662,14 +629,15 @@ colorlist="rgb(255,99,132),rgb(54,162,235)"
 
 Control axis ranges for better data visualization:
 
-```boxlang
-<bx:chart scalefrom="0" scaleto="100" 
+```xml
+<bx:chart scalefrom="0" scaleto="100"
           yaxistitle="Percentage">
     <!-- chart content -->
 </bx:chart>
 ```
 
 **Tips:**
+
 - Set `scaleFrom="0"` for bar charts to avoid misleading visualizations
 - Use custom scales to zoom into specific data ranges
 - Combine with `labelFormat` for custom axis labels
@@ -678,7 +646,7 @@ Control axis ranges for better data visualization:
 
 Format axis labels and rotate them for better readability:
 
-```boxlang
+```xml
 <!-- Format Y-axis labels -->
 <bx:chart labelFormat="{value}%" yaxistitle="Percentage">
 
@@ -687,6 +655,7 @@ Format axis labels and rotate them for better readability:
 ```
 
 **Label Position Options:**
+
 - `horizontal` - Standard horizontal labels (default)
 - `up_45` - 45° upward rotation
 - `up_90` - 90° upward (vertical)
@@ -698,7 +667,7 @@ Format axis labels and rotate them for better readability:
 
 Make charts interactive with click events:
 
-```boxlang
+```xml
 <bx:chart url="https://www.example.com/details">
     <!-- Clicking any data point opens this URL -->
 </bx:chart>
@@ -708,9 +677,9 @@ Make charts interactive with click events:
 
 Complete control over text appearance:
 
-```boxlang
-<bx:chart fontBold="true" 
-          fontItalic="false" 
+```xml
+<bx:chart fontBold="true"
+          fontItalic="false"
           fontSize="16"
           foregroundColor="##2C3E50"
           dataBackgroundColor="##ECF0F1">
@@ -722,8 +691,8 @@ Complete control over text appearance:
 
 Customize data point markers for line and scatter charts:
 
-```boxlang
-<bx:chart showMarkers="true" 
+```xml
+<bx:chart showMarkers="true"
           markerSize="8">
     <bx:chartseries type="line">
         <!-- Line chart with large markers -->
@@ -768,16 +737,19 @@ This module exposes most Chart.js capabilities through BoxLang attributes:
 Based on Chart.js documentation, here are some tips:
 
 **Performance:**
+
 - Use `resizeDelay` for charts that resize frequently
 - Limit data points to 100-200 for smooth animations
 - Disable animations for large datasets
 
 **Accessibility:**
+
 - Always provide axis titles with `xAxisTitle` and `yAxisTitle`
 - Use `seriesLabel` to describe each data series
 - Ensure color contrasts meet WCAG standards
 
 **Visual Design:**
+
 - Keep charts simple - one message per chart
 - Use appropriate chart types for your data
 - Add grid lines (`showYGridlines="true"`) for precise reading
@@ -790,6 +762,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** Chart area is blank or not visible.
 
 **Solutions:**
+
 - ✅ Ensure BoxLang web support is enabled
 - ✅ Check that `htmlHead()` BIF is available
 - ✅ Verify Chart.js library loads (check browser console)
@@ -800,6 +773,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** Custom colors not appearing correctly.
 
 **Solutions:**
+
 - ✅ Use hex format without # or with ## (BoxLang escaping): `colorlist="FF6384,36A2EB"`
 - ✅ Check color format: hex values should be 6 characters (e.g., `FF0000` not `F00`)
 - ✅ Named colors are case-insensitive: `red`, `Red`, `RED` all work
@@ -809,6 +783,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** Charts don't adapt to container size changes.
 
 **Solutions:**
+
 - ✅ Set `responsive="true"` (it's default, but verify)
 - ✅ Ensure parent container has defined width
 - ✅ Use `maintainAspectRatio="false"` if you need to fill specific heights
@@ -819,6 +794,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** Multiple series appear side-by-side instead of stacked.
 
 **Solutions:**
+
 - ✅ Add `seriesplacement="stacked"` to `<bx:chart>`
 - ✅ Ensure all series have the same chart type
 - ✅ Stacking only works with `bar`, `line`, and `area` chart types
@@ -828,6 +804,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** Chart renders but no data appears.
 
 **Solutions:**
+
 - ✅ Verify all `<bx:chartdata>` components have `item` and `value` attributes
 - ✅ Check that values are numeric (not strings)
 - ✅ Ensure `<bx:chartdata>` is nested inside `<bx:chartseries>`
@@ -838,6 +815,7 @@ Based on Chart.js documentation, here are some tips:
 **Problem:** X-axis labels overlap and are unreadable.
 
 **Solutions:**
+
 - ✅ Use `categoryLabelPositions="up_45"` to rotate labels
 - ✅ Increase `chartWidth` to give more space
 - ✅ Reduce font size with `fontSize="10"`
@@ -875,17 +853,36 @@ Excellent! Here's how to get started:
 #### Development Setup
 
 1. **Fork and Clone:**
+
    ```bash
    git clone https://github.com/YOUR-USERNAME/bx-charts.git
    cd bx-charts
    ```
 
 2. **Install Dependencies:**
+
    ```bash
+   # Install BoxLang dependencies
    box install
+   
+   # Install Node.js dependencies (Chart.js)
+   npm install
    ```
 
-3. **Start Format Watcher:**
+   The `npm install` command will automatically:
+   - Download the latest Chart.js library
+   - Copy it to the `public/` folder
+
+3. **Update Chart.js (Optional):**
+
+   To manually update Chart.js to the latest version:
+
+   ```bash
+   npm run update-chartjs
+   ```
+
+4. **Start Format Watcher:**
+
    ```bash
    box run-script format:watch
    ```
@@ -905,16 +902,6 @@ Excellent! Here's how to get started:
 - **Formatting**: Auto-format with `box run-script format`
 - **Coding Standards**: Follow [Ortus Coding Standards](https://github.com/Ortus-Solutions/coding-standards)
 
-#### Testing
-
-```bash
-# Run test suite
-boxlang tests/specs/ChartSpec.bx
-
-# Test enhanced features
-boxlang tests/test-charts-enhanced.bxm
-```
-
 ### 📚 Improve Documentation
 
 Documentation improvements are always welcome:
@@ -932,6 +919,7 @@ You can support BoxLang and all Ortus Solutions open source projects:
 - 💵 [One-time PayPal Donation](https://www.paypal.com/paypalme/ortussolutions)
 
 Patrons get exclusive benefits like:
+
 - Priority support
 - Early access to new features
 - FORGEBOX Pro account
@@ -1008,12 +996,7 @@ See [LICENSE](LICENSE) file for full details.
 - **CFCasts**: [https://www.cfcasts.com](https://www.cfcasts.com)
 - **Blog**: [https://www.ortussolutions.com/blog](https://www.ortussolutions.com/blog)
 
-
-## Ortus Sponsors
-
-[BoxLang](https://boxlang.io) is a professional open-source project and it is completely funded by the [community](https://patreon.com/ortussolutions) and [Ortus Solutions, Corp](https://www.ortussolutions.com). Ortus Patreons get many benefits like a cfcasts account, a FORGEBOX Pro account and so much more. If you are interested in becoming a sponsor, please visit our patronage page: [https://patreon.com/ortussolutions](https://patreon.com/ortussolutions)
-
-### THE DAILY BREAD
+## THE DAILY BREAD
 
 > "I am the way, and the truth, and the life; no one comes to the Father, but by me (JESUS)" Jn 14:1-12
 
