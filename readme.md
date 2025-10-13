@@ -55,6 +55,28 @@ box install bx-charts
 
 The module will automatically register and be available as `bxcharts` in your BoxLang applications.
 
+### Local Development Setup
+
+For local development and testing of the module itself:
+
+```bash
+# Clone the repository
+git clone https://github.com/ortus-boxlang/bx-charts.git
+cd bx-charts
+
+# Set up local development environment
+./setup.sh
+
+# Install dependencies
+box install
+npm install
+
+# Start the server for testing
+box start
+```
+
+This creates a symbolic link in `boxlang_modules/bx-charts` for local module development and testing.
+
 ## 🚀 Quick Start
 
 Here's how to create your first chart in just a few lines:
@@ -859,7 +881,16 @@ Excellent! Here's how to get started:
    cd bx-charts
    ```
 
-2. **Install Dependencies:**
+2. **Set up Local Development Environment:**
+
+   ```bash
+   # Creates symbolic link for local module development
+   ./setup.sh
+   ```
+
+   This script creates a `boxlang_modules/bx-charts` symbolic link pointing to the current directory, allowing you to test the module locally before publishing.
+
+3. **Install Dependencies:**
 
    ```bash
    # Install BoxLang dependencies
@@ -873,7 +904,7 @@ Excellent! Here's how to get started:
    - Download the latest Chart.js library
    - Copy it to the `public/` folder
 
-3. **Update Chart.js (Optional):**
+4. **Update Chart.js (Optional):**
 
    To manually update Chart.js to the latest version:
 
@@ -881,7 +912,37 @@ Excellent! Here's how to get started:
    npm run update-chartjs
    ```
 
-4. **Start Format Watcher:**
+5. **Test the Module Locally:**
+
+   Start a BoxLang server to test your changes:
+
+   ```bash
+   # Start the BoxLang server (uses server.json configuration)
+   box start
+
+   # Visit test pages in your browser
+   # http://localhost:8080/tests/ - Main test index
+   # http://localhost:8080/tests/test-charts-enhanced.bxm - Advanced chart examples
+   # http://localhost:8080/tests/test-responsive-charts.bxm - Responsive chart tests
+   ```
+
+   The test files in `/tests/` directory provide comprehensive examples of all chart types and features.
+
+6. **Build the Module (Optional):**
+
+   To build a distributable version of the module:
+
+   ```bash
+   # Build with default version (1.0.0)
+   boxlang Build.bx
+
+   # Build with specific version
+   boxlang Build.bx --version=1.2.3
+
+   # Built artifacts will be in build/artifacts/
+   ```
+
+7. **Start Format Watcher:**
 
    ```bash
    box run-script format:watch
@@ -938,7 +999,7 @@ Need help? Don't create an issue—use our support channels:
 Thank you to all our amazing contributors! ❤️
 
 <a href="https://github.com/ortus-boxlang/bx-charts/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ortus-boxlang/bx-charts"/>
+  <img src="https://contrib.rocks/image?repo=ortus-boxlang/bx-charts" alt="Contributors"/>
 </a>
 
 Made with [contributors-img](https://contrib.rocks)

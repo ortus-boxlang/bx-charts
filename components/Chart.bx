@@ -513,6 +513,7 @@ class{
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
 			} else if ( series.type == "line" ) {
+				config.type = "line";
 				dataset.borderColor = colors[1] ?: "##FF6384";
 				dataset.backgroundColor = normalizedDataBackgroundColor ?: "transparent";
 				dataset.fill = false;
@@ -530,6 +531,14 @@ class{
 				dataset.backgroundColor = colors;
 				dataset.borderColor = colors;
 				dataset.borderWidth = 2;
+			} else if ( series.type == "pie" ) {
+				config.type = "pie";
+			} else if ( series.type == "doughnut" ) {
+				config.type = "doughnut";
+			} else if ( series.type == "radar" ) {
+				config.type = "radar";
+			} else if ( series.type == "polararea" ) {
+				config.type = "polarArea";
 			}
 
 			// Handle series placement for bar charts

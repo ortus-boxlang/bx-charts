@@ -79,10 +79,9 @@
             <strong>Best for:</strong> Showing proportions and percentages of a whole
         </div>
         <bx:chart format="png" show3d="false" title="Memory Usage Distribution"
-                  backgroundcolor="##ffffff" chartheight="300" chartwidth="400"
+                  backgroundcolor="##ffffff" chartheight="300" chartwidth="600"
                   showlegend="true">
-            <bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000, ffff00"
-                            serieslabel="Memory Usage">
+            <bx:chartseries type="pie" serieslabel="Memory Usage">
                 <bx:chartdata item="Free Memory" value="512" />
                 <bx:chartdata item="Used Memory" value="256" />
                 <bx:chartdata item="Reserved Memory" value="128" />
@@ -97,12 +96,11 @@
             <strong>Best for:</strong> Comparing values across categories
         </div>
         <bx:chart format="png" show3d="false" backgroundcolor="##ffffff"
-                  chartwidth="500" chartheight="300" showlegend="true"
+                  chartwidth="600" chartheight="300" showlegend="true"
                   title="Performance Metrics"
                   xaxistitle="Metrics" yaxistitle="Count"
                   showxgridlines="true" showygridlines="true">
-            <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00"
-                            serieslabel="Performance Data">
+            <bx:chartseries type="bar" serieslabel="Performance Data">
                 <bx:chartdata item="Hits" value="150" />
                 <bx:chartdata item="Misses" value="25" />
                 <bx:chartdata item="Garbage Collections" value="10" />
@@ -117,7 +115,7 @@
             <strong>Best for:</strong> Showing trends over time or continuous data
         </div>
         <bx:chart format="png" title="Temperature Trend"
-                  chartwidth="500" chartheight="300"
+                  chartwidth="600" chartheight="300"
                   xaxistitle="Time" yaxistitle="Temperature (°C)"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="line" colorlist="FF6384"
@@ -138,7 +136,7 @@
             <strong>Best for:</strong> Similar to pie charts but with a hollow center for better readability
         </div>
         <bx:chart format="png" title="Browser Market Share"
-                  chartwidth="400" chartheight="300" showlegend="true">
+                  chartwidth="600" chartheight="300" showlegend="true">
             <bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
                             serieslabel="Market Share">
                 <bx:chartdata item="Chrome" value="65" />
@@ -156,7 +154,7 @@
             <strong>Best for:</strong> Comparing multiple variables or showing multivariate data
         </div>
         <bx:chart format="png" title="Skills Assessment"
-                  chartwidth="400" chartheight="400" showlegend="true">
+                  chartwidth="600" chartheight="400" showlegend="true">
             <bx:chartseries type="radar" colorlist="36A2EB"
                             serieslabel="Developer Skills">
                 <bx:chartdata item="JavaScript" value="90" />
@@ -175,7 +173,7 @@
             <strong>Best for:</strong> Showing data in a circular format with different segment areas
         </div>
         <bx:chart format="png" title="Product Ratings"
-                  chartwidth="400" chartheight="400" showlegend="true">
+                  chartwidth="600" chartheight="400" showlegend="true">
             <bx:chartseries type="polarArea" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
                             serieslabel="Ratings">
                 <bx:chartdata item="Quality" value="95" />
@@ -215,7 +213,7 @@
             <strong>Best for:</strong> Comparing categories when labels are long or when showing rankings
         </div>
         <bx:chart format="png" title="Department Budgets"
-                  chartwidth="500" chartheight="300"
+                  chartwidth="600" chartheight="300"
                   xaxistitle="Budget (thousands)" yaxistitle="Departments"
                   showxgridlines="false" showygridlines="true">
             <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
@@ -234,7 +232,7 @@
             <strong>Best for:</strong> Showing correlation between two variables
         </div>
         <bx:chart format="png" title="Performance vs Experience"
-                  chartwidth="500" chartheight="350"
+                  chartwidth="600" chartheight="350"
                   xaxistitle="Years of Experience" yaxistitle="Performance Score"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="scatter" colorlist="FF6384"
@@ -256,15 +254,15 @@
             <strong>Best for:</strong> Displaying three-dimensional data (x, y, and size)
         </div>
         <bx:chart format="png" title="Product Performance Analysis"
-                  chartwidth="500" chartheight="350"
+                  chartwidth="600" chartheight="350"
                   xaxistitle="Market Share (%)" yaxistitle="Revenue (millions)"
                   showxgridlines="true" showygridlines="true">
             <bx:chartseries type="bubble" colorlist="9966FF,36A2EB,FF6384,FFCE56"
                             serieslabel="Products">
-                <bx:chartdata item="Product A" value="85" />
-                <bx:chartdata item="Product B" value="120" />
-                <bx:chartdata item="Product C" value="65" />
-                <bx:chartdata item="Product D" value="95" />
+                <bx:chartdata item="Product A" x="20" y="85" r="15" />
+                <bx:chartdata item="Product B" x="35" y="120" r="20" />
+                <bx:chartdata item="Product C" x="15" y="65" r="10" />
+                <bx:chartdata item="Product D" x="25" y="95" r="12" />
             </bx:chartseries>
         </bx:chart>
     </div>

@@ -7,10 +7,11 @@
 **Target Audience**: BoxLang developers who need to integrate data visualization capabilities into their web applications. Suitable for both beginners and advanced users with varying levels of charting experience.
 
 **Key Features**:
-- Support for 9+ chart types (pie, bar, line, doughnut, radar, area, scatter, etc.)
+- Support for 10 chart types (pie, bar, line, doughnut, radar, area, scatter, bubble, etc.)
 - Nested component architecture for intuitive data organization
 - Responsive design with customizable dimensions and styling
 - Advanced features like stacked/clustered series, axis titles, grid lines
+- Bubble chart support with x, y, r coordinate system
 - Static asset serving with security and content-type management
 
 **Runtime Requirements**: BoxLang 1.0.0+ with web support for `htmlHead()` BIF
@@ -59,7 +60,7 @@ class{
 
 ### Supported Chart Types
 - **Basic**: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`
-- **Enhanced**: `area`, `horizontalbar`, `scatter`
+- **Enhanced**: `area`, `horizontalbar`, `scatter`, `bubble`
 
 ### Chart Attributes (`<bx:chart>`)
 - **Dimensions**: `chartwidth`, `chartheight` (default: 400x300)
@@ -74,7 +75,8 @@ class{
 - **Data Source**: Contains `<bx:chartdata>` components
 
 ### Data Attributes (`<bx:chartdata>`)
-- **Required**: `item` (label), `value` (numeric value)
+- **Required**: `item` (label), `value` (numeric value for most charts)
+- **Bubble Charts**: `item`, `x`, `y`, `r` (coordinates and radius instead of value)
 
 ## Chart-Specific Patterns
 
@@ -103,6 +105,7 @@ var chartConfig = {
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
 - **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
+- **Local Development Setup**: Run `./setup.sh` to create symbolic link in `boxlang_modules/bx-charts` for local module development
 - **Dependencies**:
   - Chart.js library automatically managed via npm (see package.json)
   - Run `npm install` to download Chart.js to `/public/`
@@ -117,8 +120,11 @@ var chartConfig = {
 
 ## Essential Commands & Tooling
 
-### Dependency Management
+### Local Development Setup
 ```bash
+# Set up local development environment (creates symbolic link)
+./setup.sh
+
 # Install Node.js dependencies and download Chart.js
 npm install
 
@@ -173,9 +179,10 @@ box run-script format:watch
 - Render HTML canvas elements with inline JavaScript initialization
 
 ### Chart.js Integration
-- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`, `area`, `horizontalbar`, `scatter`
+- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`, `area`, `horizontalbar`, `scatter`, `bubble`
 - Color support: hex colors with `##` prefix (BoxLang escapes `#` for interpolation, so `##` becomes literal `#`)
 - Advanced features: stacked/clustered series, grid line control, axis titles
+- Bubble chart support: uses x, y coordinates and r for bubble size
 - Responsive by default, custom dimensions via `chartwidth`/`chartheight`
 
 ### Color Handling Patterns
@@ -192,6 +199,7 @@ if ( left( color, 2 ) == "##" ) {
 - `area` → Chart.js `line` with `fill: true`
 - `horizontalbar` → Chart.js `bar` with `indexAxis: "y"`
 - `scatter` → Chart.js `scatter` with `showLine: false`
+- `bubble` → Chart.js `bubble` with x, y, r coordinate system
 - `stacked` → Chart.js bar with `scales.x.stacked: true, scales.y.stacked: true`
 
 ## Coding Standards & Best Practices
@@ -247,6 +255,17 @@ if ( left( color, 2 ) == "##" ) {
     <bx:chartseries type="area" colorlist="36A2EB" serieslabel="Performance">
         <bx:chartdata item="Jan" value="100">
         <bx:chartdata item="Feb" value="150">
+    </bx:chartseries>
+</bx:chart>
+```
+
+### Bubble Chart with Three Dimensions
+```boxlang
+<bx:chart title="Portfolio Analysis" xaxistitle="Risk" yaxistitle="Return">
+    <bx:chartseries type="bubble" colorlist="FF6384" serieslabel="Investments">
+        <bx:chartdata item="Stock A" x="20" y="15" r="10">
+        <bx:chartdata item="Stock B" x="40" y="25" r="15">
+        <bx:chartdata item="Bond C" x="10" y="8" r="5">
     </bx:chartseries>
 </bx:chart>
 ```
