@@ -864,7 +864,7 @@ Excellent! Here's how to get started:
    ```bash
    # Install BoxLang dependencies
    box install
-   
+
    # Install Node.js dependencies (Chart.js)
    npm install
    ```

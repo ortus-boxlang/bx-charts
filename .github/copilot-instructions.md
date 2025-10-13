@@ -103,7 +103,7 @@ var chartConfig = {
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
 - **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
-- **Dependencies**: 
+- **Dependencies**:
   - Chart.js library automatically managed via npm (see package.json)
   - Run `npm install` to download Chart.js to `/public/`
   - Run `npm run update-chartjs` to update to latest Chart.js version
