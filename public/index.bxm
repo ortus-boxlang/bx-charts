@@ -65,10 +65,10 @@
 
 		// Set the content type
 		bx:header name="Content-Type" value="#contentType#";
-		// Set caching headers for 1 week
-		bx:header name="Cache-Control" value="public, max-age=604800";
-		bx:header name="Pragma" value="";
-		bx:header name="Expires" value="#dateAdd( "s", 604800, now() )#";
+		// Disable caching for immediate updates during development
+		bx:header name="Cache-Control" value="no-cache, no-store, must-revalidate";
+		bx:header name="Pragma" value="no-cache";
+		bx:header name="Expires" value="0";
 		// Output the file
 		bx:content file="#filePath#" type="#contentType#" reset="true";
 		return;

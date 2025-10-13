@@ -68,10 +68,12 @@
     <div class="chart-section">
         <div class="chart-title">1. Pie Chart with Axis Titles and Custom Colors</div>
         <div class="chart-container">
-            <bx:chart format="canvas" title="JVM Memory Usage" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="400" showlegend="true"
+            <bx:chart title="JVM Memory"
+					backgroundcolor="##ffffff"
+                     chartwidth="600" chartheight="600"
+					 showlegend="true"
                      xaxistitle="Memory Type" yaxistitle="Memory (KB)">
-                <bx:chartseries type="pie" colorlist="00ff00, 0000ff, ff0000" serieslabel="JVM Memory Distribution">
+                <bx:chartseries type="pie" serieslabel="JVM Memory Distribution">
                     <bx:chartdata item="Free Memory (KB)" value="512" />
                     <bx:chartdata item="Used Memory (KB)" value="256" />
                     <bx:chartdata item="Unallocated Memory (KB)" value="128" />
@@ -84,10 +86,10 @@
         <div class="chart-title">2. Bar Chart with Grid Lines and Series Placement</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="##ffffff"
-                     chartwidth="500" chartheight="350" showlegend="true"
+                     chartwidth="600" chartheight="500" showlegend="true"
                      xaxistitle="Metrics" yaxistitle="Count"
                      seriesplacement="cluster" showxgridlines="false" showygridlines="true">
-                <bx:chartseries type="bar" colorlist="131cd7,ED2939,gray,d47f00" serieslabel="Cache Statistics">
+                <bx:chartseries type="bar" serieslabel="Cache Statistics">
                     <bx:chartdata item="Hits" value="150" />
                     <bx:chartdata item="Misses" value="25" />
                     <bx:chartdata item="Garbage Collections" value="10" />
@@ -120,7 +122,7 @@
         <div class="chart-title">4. Horizontal Bar Chart</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Resource Utilization" backgroundcolor="##ffffff"
-                     chartwidth="450" chartheight="300"
+                     chartwidth="600" chartheight="300"
                      xaxistitle="Usage Percentage" yaxistitle="Resources">
                 <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Current Usage">
                     <bx:chartdata item="CPU" value="75" />
@@ -136,7 +138,7 @@
         <div class="chart-title">5. Scatter Plot</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Performance Correlation" backgroundcolor="##ffffff"
-                     chartwidth="500" chartheight="400"
+                     chartwidth="600" chartheight="400"
                      xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
                      showxgridlines="true" showygridlines="true">
                 <bx:chartseries type="scatter" colorlist="9966FF" serieslabel="Performance Data">
@@ -155,7 +157,7 @@
         <div class="chart-title">6. Stacked Bar Chart</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="##ffffff"
-                     chartwidth="500" chartheight="350"
+                     chartwidth="600" chartheight="350"
                      xaxistitle="Servers" yaxistitle="Resource Usage (%)"
                      seriesplacement="stacked" showygridlines="true">
                 <bx:chartseries type="bar" colorlist="FF9F40,4BC0C0,FF6384" serieslabel="Resource Distribution">
@@ -172,7 +174,7 @@
         <div class="chart-title">7. Doughnut Chart with Enhanced Styling</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="##ffffff"
-                     chartheight="350" chartwidth="350" showlegend="true">
+                     chartheight="350" chartwidth="600" showlegend="true">
                 <bx:chartseries type="doughnut"
                                colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
                                serieslabel="Browser Market Share">
@@ -190,7 +192,7 @@
         <div class="chart-title">8. Font Styling Test - Bold, Italic, Custom Size</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="400" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      fontbold="true" fontitalic="true" fontsize="14"
                      foregroundcolor="##2E4057" xaxistitle="Categories" yaxistitle="Values">
                 <bx:chartseries type="bar" colorlist="FF6B6B,4ECDC4,45B7D1" serieslabel="Styled Data">
@@ -206,7 +208,7 @@
         <div class="chart-title">9. Marker Control Test - Line Chart with Custom Markers</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="500" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      showmarkers="true" markersize="8"
                      xaxistitle="Time Points" yaxistitle="Performance">
                 <bx:chartseries type="line" colorlist="E74C3C" serieslabel="Performance Trend">
@@ -224,7 +226,7 @@
         <div class="chart-title">10. Scale Control Test - Custom Min/Max Values</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="500" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      scalefrom="0" scaleto="100"
                      xaxistitle="Metrics" yaxistitle="Percentage">
                 <bx:chartseries type="bar" colorlist="3498DB" serieslabel="Performance Metrics">
@@ -241,7 +243,7 @@
         <div class="chart-title">11. Label Positioning Test - Rotated Category Labels</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="##ffffff"
-                     chartheight="350" chartwidth="500" showlegend="true"
+                     chartheight="350" chartwidth="600" showlegend="true"
                      categorylabelpositions="up_45"
                      xaxistitle="Long Category Names" yaxistitle="Values">
                 <bx:chartseries type="bar" colorlist="9B59B6" serieslabel="Rotated Labels">
@@ -257,7 +259,7 @@
         <div class="chart-title">12. Display Control Test - No Tooltips, No X Labels, With Border</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Display Control Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="400" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      showtooltip="false" showxlabel="false" showborder="true"
                      yaxistitle="Values">
                 <bx:chartseries type="pie" colorlist="E67E22,27AE60,8E44AD" serieslabel="No Tooltips Demo">
@@ -273,7 +275,7 @@
         <div class="chart-title">13. Data Sorting Test - Alphabetical Order</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="500" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      sortxaxis="true"
                      xaxistitle="Sorted Categories" yaxistitle="Values">
                 <bx:chartseries type="bar" colorlist="16A085" serieslabel="Alphabetically Sorted">
@@ -290,7 +292,7 @@
         <div class="chart-title">14. Click URL Test - Interactive Chart</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="##ffffff"
-                     chartheight="300" chartwidth="400" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      url="https://www.boxlang.io"
                      xaxistitle="Click any data point" yaxistitle="Values">
                 <bx:chartseries type="doughnut" colorlist="F39C12,E74C3C,9B59B6" serieslabel="Clickable Chart">
@@ -306,7 +308,7 @@
         <div class="chart-title">15. Background Color Test - Data Background Color</div>
         <div class="chart-container">
             <bx:chart format="canvas" title="Background Color Demo" backgroundcolor="##F8F9FA"
-                     chartheight="300" chartwidth="500" showlegend="true"
+                     chartheight="300" chartwidth="600" showlegend="true"
                      databackgroundcolor="##E8F6F3" foregroundcolor="##1B4F72"
                      xaxistitle="Items" yaxistitle="Values">
                 <bx:chartseries type="area" colorlist="52C41A" serieslabel="Colored Background">

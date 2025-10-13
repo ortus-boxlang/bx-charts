@@ -558,6 +558,13 @@ class{
 
 	/**
 	 * Renders the chart HTML canvas and JavaScript initialization
+	 *
+	 * @context The context to write output to
+	 * @chartId The unique ID for the chart canvas
+	 * @chartWidth The width of the chart in pixels
+	 * @chartHeight The height of the chart in pixels
+	 * @config The Chart.js configuration object
+	 * @responsive Whether the chart is responsive
 	 */
 	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive ) {
 		// Handle special JavaScript functions that can't be JSON serialized
