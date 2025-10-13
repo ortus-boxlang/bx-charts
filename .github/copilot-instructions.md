@@ -21,7 +21,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 
 - **Module System**: BoxLang modules follow a specific structure with `ModuleConfig.bx` as the entry point
 - **Components**: Chart-related components (Chart, ChartData, ChartSeries) that can be used in both script and template syntax
-- **Asset Serving**: Static assets (JS/CSS) served via `Asset.bx` proxy from `/public/` directory
+- **Asset Serving**: Static assets (JS/CSS) served via `index.bxm` proxy from `/public/` directory
 - **Module Mapping**: All modules are registered with prefix `bxModules.{mapping}` (this module uses `bxcharts`)
 
 ## File Structure & Patterns
@@ -30,7 +30,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 - `ModuleConfig.bx` - Module descriptor with lifecycle methods (`configure()`, `onLoad()`, `onUnload()`)
 - `box.json` - ForgeBox package descriptor with BoxLang-specific metadata
 - `Build.bx` - BoxLang build script for packaging (not Gradle/Maven)
-- `Asset.bx` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/Asset.bx?method=deliver&target=filename`
+- `index.bxm` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/index.bxm?target=filename`
 
 ### Component Architecture (`components/`)
 All components follow this pattern:
@@ -85,7 +85,7 @@ class{
 
 ### Asset Management
 - Chart.js library stored in `/public/chart.min.js`
-- Served via `Asset.bx?method=deliver&target=chart.min.js`
+- Served via `index.bxm?target=chart.min.js`
 - HTML head injection using `htmlHead()` BIF from BoxLang web support
 
 ### Chart Configuration Pattern
@@ -256,12 +256,12 @@ if ( left( color, 2 ) == "##" ) {
 - **Chart.bx** - Main component with Chart.js integration and HTML rendering
 - **ChartSeries.bx** - Series data collection and validation patterns
 - **ChartData.bx** - Simple child component registration pattern
-- **Asset.bx** - Static file serving with security and content-type handling
+- **index.bxm** - Static file serving with security and content-type handling
 
 ## Common Tasks
 
 - **Add chart types**: Update `validTypes` array in ChartSeries.bx
 - **Add chart options**: Extend `buildChartConfig()` method in Chart.bx
-- **Add static assets**: Place in `/public/` and serve via `Asset.bx?method=deliver&target=filename`
+- **Add static assets**: Place in `/public/` and serve via `index.bxm?target=filename`
 - **Test charts**: Use `test-charts-enhanced.bx` example file
 - **Debug data flow**: Check execution state in parent components

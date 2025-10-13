@@ -10,6 +10,9 @@
         "args":"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
     },
     "web":{
+        "rules":[
+            "not path-suffix( .bxm ) -> framework-rewrite()"
+        ],
         "HTTP":{
             "port":62804
         }

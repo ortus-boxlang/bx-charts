@@ -1,14 +1,8 @@
-class{
+<bx:script>
+	// This component serves static assets
+	publicPath = getDirectoryFromPath( getCurrentTemplatePath() );
 
-	static {
-		publicPath = getDirectoryFromPath( getCurrentTemplatePath() );
-	}
-
-	/**
-	 * Deliver a static asset from the lib folder
-	 * Usage: /bxmodules/bxcharts/public/Asset.bx?method=deliver&target=path/to/asset.js
-	 */
-	remote function deliver(){
+	function deliver(){
 		param name="url.target" default="";
 
 		// If the target is empty do a 404
@@ -18,7 +12,7 @@ class{
 		}
 
 		// Check if the target exists in the lib folder
-		var filePath = static.publicPath & url.target;
+		var filePath = publicPath & url.target;
 		if( NOT fileExists( filePath ) ){
 			bx:header statusCode="404";
 			return;
@@ -79,5 +73,5 @@ class{
 		bx:content file="#filePath#" type="#contentType#" reset="true";
 		return;
 	}
-
-}
+	deliver()
+</bx:script>

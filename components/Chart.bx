@@ -207,8 +207,8 @@ class{
 		if ( !context.hasAttachment( "chartJSLoaded" ) ) {
 			context.putAttachment( "chartJSLoaded", true );
 
-			// Include Chart.js from our lib folder via Asset.bx
-			var scriptTag = '<script src="/bxmodules/bxcharts/public/Asset.bx?method=deliver&target=chart.min.js"></script>';
+			// Include Chart.js from our public folder
+			var scriptTag = '<script src="/bxmodules/bxcharts/public/index.bxm?target=chart.min.js"></script>';
 
 			// Call the htmlHead BIF to add the script tag
 			htmlHead( scriptTag );
