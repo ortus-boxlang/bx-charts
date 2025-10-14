@@ -55,6 +55,16 @@ box install bx-charts
 
 The module will automatically register and be available as `bxcharts` in your BoxLang applications.
 
+### 🚧 Rewrites CAUTION
+
+If you are using a URL rewriting mechanism (like `.htaccess` for Apache or URL rewrite rules in Nginx), ensure that requests to static assets (like JavaScript and CSS files) are properly routed to the `boxlang_modules/bx-charts/assets/` directory. This is crucial for the Chart.js library and any other assets to load correctly.  Also, make sure you are not rewriting the following directory from which assets are delivered from the module:`
+
+```
+/bxModules/bxCharts/public/index.bxm
+```
+
+The following must passthrough with no rewrites.
+
 ### Local Development Setup
 
 For local development and testing of the module itself:
