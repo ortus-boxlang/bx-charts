@@ -61,7 +61,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="JVM Memory"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="JVM Memory"
          backgroundcolor="####ffffff"
          chartwidth="600" chartheight="600"
          showlegend="true"
@@ -106,7 +106,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="500" showlegend="true"
          xaxistitle="Metrics" yaxistitle="Count"
          seriesplacement="cluster" showxgridlines="false" showygridlines="true"&gt;
@@ -153,7 +153,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="300"
          xaxistitle="Time" yaxistitle="Memory Usage (MB)"
          showxgridlines="true" showygridlines="true"&gt;
@@ -200,7 +200,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="300"
          xaxistitle="Usage Percentage" yaxistitle="Resources"&gt;
     &lt;bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56"
@@ -247,7 +247,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="400"
          xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
          showxgridlines="true" showygridlines="true"&gt;
@@ -295,7 +295,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="350"
          xaxistitle="Servers" yaxistitle="Resource Usage (%)"
          seriesplacement="stacked" showygridlines="true"&gt;
@@ -342,7 +342,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="####ffffff"
          chartheight="350" chartwidth="600" showlegend="true"&gt;
     &lt;bx:chartseries type="doughnut"
                    colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
@@ -387,7 +387,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          fontbold="true" fontitalic="true" fontsize="14"
          foregroundcolor="####2E4057" xaxistitle="Categories" yaxistitle="Values"&gt;
@@ -432,7 +432,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          showmarkers="true" markersize="8"
          xaxistitle="Time Points" yaxistitle="Performance"&gt;
@@ -478,7 +478,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          scalefrom="0" scaleto="100"
          xaxistitle="Metrics" yaxistitle="Percentage"&gt;
@@ -522,7 +522,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="####ffffff"
          chartheight="350" chartwidth="600" showlegend="true"
          categorylabelpositions="up_45"
          xaxistitle="Long Category Names" yaxistitle="Values"&gt;
@@ -565,7 +565,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          showtooltip="false" showxlabel="false" showborder="true"
          yaxistitle="Values"&gt;
@@ -609,7 +609,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          sortxaxis="true"
          xaxistitle="Sorted Categories" yaxistitle="Values"&gt;
@@ -653,7 +653,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="####ffffff"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          url="https://www.boxlang.io"
          xaxistitle="Click any data point" yaxistitle="Values"&gt;
@@ -697,7 +697,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="####F8F9FA"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="####F8F9FA"
          chartheight="300" chartwidth="600" showlegend="true"
          databackgroundcolor="####E8F6F3" foregroundcolor="####1B4F72"
          xaxistitle="Items" yaxistitle="Values"&gt;
@@ -743,7 +743,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="####F8F9FA"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="####F8F9FA"
          chartheight="400" chartwidth="600" showlegend="true"
          xaxistitle="Product Categories" yaxistitle="Performance Score"
          showxgridlines="true" showygridlines="true"

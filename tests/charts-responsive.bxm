@@ -68,7 +68,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Responsive Pie Chart"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Responsive Pie Chart"
          chartwidth="600" chartheight="300"
          responsive="true"
          maintainAspectRatio="true"&gt;
@@ -121,7 +121,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Wide Format Bar Chart"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Wide Format Bar Chart"
          chartwidth="800" chartheight="300"
          responsive="true"
          maintainAspectRatio="true"
@@ -177,7 +177,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Fill Container Chart"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Fill Container Chart"
          chartwidth="600" chartheight="400"
          responsive="true"
          maintainAspectRatio="false"
@@ -235,13 +235,13 @@
                                     <i class="bi bi-code-slash"></i> Source Code
                                 </span>
                             </div>
-                            <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Mobile-Friendly Doughnut"
+                            <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Mobile-Friendly Doughnut"
          chartwidth="400" chartheight="400"
          responsive="true"
          maintainAspectRatio="true"
          aspectRatio="1"
          showlegend="true"&gt;
-    &lt;bx:chartseries type="doughnut" 
+    &lt;bx:chartseries type="doughnut"
                    colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
                    serieslabel="Mobile Stats"&gt;
         &lt;bx:chartdata item="iOS" value="45" /&gt;
@@ -288,7 +288,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Fixed Size Chart"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Fixed Size Chart"
          chartwidth="500" chartheight="250"
          responsive="false"
          xaxistitle="Fixed Dimensions" yaxistitle="Values"&gt;
@@ -341,7 +341,7 @@
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Vertical Rankings"
+                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Vertical Rankings"
          chartwidth="500" chartheight="600"
          responsive="true"
          maintainAspectRatio="true"
@@ -413,7 +413,7 @@
                             <i class="bi bi-code-slash"></i> Source Code (Layout)
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;div class="row"&gt;
+                    <pre class="brush: xml; toolbar: false;">&lt;div class="row"&gt;
     &lt;div class="col-md-6"&gt;
         &lt;bx:chart title="Left Chart - Area" responsive="true" ...&gt;
             ...
@@ -508,7 +508,7 @@
                             <i class="bi bi-code-slash"></i> Source Code (Layout)
                         </span>
                     </div>
-                    <pre class="brush: boxlang; toolbar: false;">&lt;div class="row g-3"&gt;
+                    <pre class="brush: xml; toolbar: false;">&lt;div class="row g-3"&gt;
     &lt;div class="col-lg-6"&gt;
         &lt;bx:chart title="Sales" responsive="true" ...&gt;...&lt;/bx:chart&gt;
     &lt;/div&gt;
