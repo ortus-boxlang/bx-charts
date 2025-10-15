@@ -15,7 +15,7 @@
 				 📈 Charts Module
 			</h1>
 			<p class="lead mb-4">
-				Beautiful, Interactive Data Visualizations Powered by Chart.js
+				Beautiful, Interactive Data Visualizations with BoxLang Charts
 			</p>
 			<div class="d-flex justify-content-center gap-3">
 				<a href="#getting-started" class="btn btn-lg btn-outline-dark px-4">
@@ -66,7 +66,7 @@
 		<div id="getting-started" class="row mb-5">
 			<div class="col-lg-8 mx-auto">
 				<div class="text-center mb-4">
-					<h2 class="display-5 fw-bold">Welcome to the Test Suite</h2>
+					<h2 class="display-5 fw-bold">Welcome to the Charts Explorer</h2>
 					<p class="lead text-muted">
 						Explore comprehensive examples showcasing the power of BoxLang Charts
 					</p>
@@ -75,7 +75,7 @@
 				<div class="alert alert-primary border-0 shadow-sm" role="alert">
 					<h5 class="alert-heading"><i class="bi bi-info-circle"></i> What's Included</h5>
 					<p class="mb-0">
-						This test suite demonstrates all chart types, styling options, advanced features,
+						This explorer demonstrates all chart types, styling options, advanced features,
 						and responsive behaviors. Each example includes complete source code with syntax highlighting.
 					</p>
 				</div>
