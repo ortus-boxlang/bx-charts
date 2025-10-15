@@ -10,13 +10,13 @@ FROM ortussolutions/boxlang:miniserver-1.6.0
 ENV MAX_MEMORY=512m \
 	MIN_MEMORY=512m
 
-# Enable rewrites to support clean URLs (default behavior)
-# REWRITE_FILE defaults to index.bxm which is what we use
-ENV REWRITES=true
+# Disable URL rewrites
+# Must set REWRITES=false (for run.sh script) which then sets BOXLANG_REWRITES=false
+# The run.sh script in the base image converts REWRITES → BOXLANG_REWRITES
+ENV REWRITES=false
 
-# Copy the Charts Explorer application files from the tests directory
 # The base image already sets WORKDIR to /app and uses nobody:root ownership
-COPY tests/ /app/
+COPY explorer/ /app/
 
 # Create bx-charts module structure and copy module files
 RUN mkdir -p /app/boxlang_modules/bx-charts
@@ -25,6 +25,7 @@ RUN mkdir -p /app/boxlang_modules/bx-charts
 COPY components /app/boxlang_modules/bx-charts/components
 COPY public /app/boxlang_modules/bx-charts/public
 COPY ModuleConfig.bx /app/boxlang_modules/bx-charts/ModuleConfig.bx
+COPY box.json /app/boxlang_modules/bx-charts/box.json
 
 # Port 8080 is exposed by base image but we declare it here for clarity
 EXPOSE 8080

@@ -18,8 +18,7 @@ docker rm -f charts-explorer 2>/dev/null || true
 docker build --pull --no-cache -f explorer/Dockerfile -t boxlang-charts-explorer .
 
 # Run the container
-docker run -d \
-  --name charts-explorer \
+docker run --name charts-explorer \
   -p 8080:8080 \
   boxlang-charts-explorer
 
