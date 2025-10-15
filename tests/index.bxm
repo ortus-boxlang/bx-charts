@@ -245,13 +245,22 @@
 						</div>
 
 						<!--- Source Code --->
-						<div class="code-display">
+						<div class="code-display" x-data="copyCode">
 							<div class="code-display-header">
 								<span class="code-display-title">
 									<i class="bi bi-file-earmark-code"></i> Simple Pie Chart
 								</span>
+								<button
+									@click="copyToClipboard( 'quickChartCode' )"
+									class="btn btn-sm btn-copy"
+									:class="{ 'btn-copy-success': copied }"
+									type="button"
+								>
+									<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+									<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+								</button>
 							</div>
-							<pre class="brush: xml; toolbar: false;">
+							<pre data-lang="xml" id="quickChartCode">
 &lt;bx:chart title="Sales Data" chartwidth="600" chartheight="300"&gt;
     &lt;bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56"&gt;
         &lt;bx:chartdata item="Q1" value="150" /&gt;
