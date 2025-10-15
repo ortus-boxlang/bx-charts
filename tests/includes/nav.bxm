@@ -1,0 +1,13 @@
+<!--- Navigation --->
+<nav class="navbar navbar-boxlang navbar-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="index.bxm">
+			<img src="includes/boxlang-dark.svg" alt="BoxLang Logo">
+		</a>
+		<bx:if !cgi.script_name.findNoCase( "index.bxm" )>
+			<a href="index.bxm" class="btn btn-outline-light btn-sm">
+				<i class="bi bi-arrow-left"></i> Back to Suite
+			</a>
+		</bx:if>
+	</div>
+</nav>

@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>BoxLang Charts Module - Test Suite</title>
-	<bx:include template="includes/head.bxm">
-</head>
+<!--- Head Section --->
+<bx:include template="includes/head.bxm">
 <body>
 	<!--- Navigation --->
-	<nav class="navbar navbar-boxlang navbar-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="index.bxm">
-				<img src="includes/boxlang-dark.svg" alt="BoxLang Logo">
-				<span>BoxLang Charts</span>
-			</a>
-			<span class="badge bg-light text-dark">v1.0.0</span>
-		</div>
-	</nav>
-
+	<bx:include template="includes/nav.bxm">
 	<!--- Hero Header --->
 	<div class="hero-header">
 		<div class="container text-center">

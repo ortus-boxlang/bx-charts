@@ -1,22 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>BoxLang Charts - Enhanced Features</title>
-    <bx:include template="includes/head.bxm">
-</head>
+<bx:include template="includes/head.bxm">
 <body>
-    <!--- Navigation --->
-    <nav class="navbar navbar-boxlang navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.bxm">
-                <img src="includes/boxlang-light.svg" alt="BoxLang Logo">
-                <span>BoxLang Charts</span>
-            </a>
-            <a href="index.bxm" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-arrow-left"></i> Back to Suite
-            </a>
-        </div>
-    </nav>
+	<!--- Navigation --->
+	<bx:include template="includes/nav.bxm">
 
     <!--- Hero Header --->
     <div class="hero-header">
