@@ -1,19 +1,23 @@
 {
-	"name": "bx-charts",
-	"app": {
-		"cfengine": "boxlang@be"
-	},
-	"jvm": {
-		"heapSize": "512",
-		"javaVersion": "openjdk21_jre",
-		"args": "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
-	},
-	"web": {
-		"rewrites": {
-			"enable": true
-		}
-	},
-	"scripts": {
-		"onServerInitialInstall": "install bx-esapi"
-	}
+    "name":"bx-charts",
+    "app":{
+        "cfengine":"boxlang@be",
+        "serverHomeDirectory":".engine"
+    },
+    "jvm":{
+        "heapSize":"512",
+        "javaVersion":"openjdk21_jre",
+        "args":"-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8888"
+    },
+    "web":{
+        "rules":[
+            "not path-suffix( .bxm ) -> framework-rewrite()"
+        ],
+        "HTTP":{
+            "port":62804
+        }
+    },
+    "scripts":{
+        "onServerInitialInstall":"install bx-esapi"
+    }
 }

@@ -1,14 +1,8 @@
-class{
+<bx:script>
+	// This component serves static assets
+	publicPath = getDirectoryFromPath( getCurrentTemplatePath() );
 
-	static {
-		publicPath = getDirectoryFromPath( getCurrentTemplatePath() );
-	}
-
-	/**
-	 * Deliver a static asset from the lib folder
-	 * Usage: /bxmodules/bxcharts/public/Asset.bx?target=path/to/asset.js
-	 */
-	remote function deliver(){
+	function deliver(){
 		param name="url.target" default="";
 
 		// If the target is empty do a 404
@@ -18,7 +12,7 @@ class{
 		}
 
 		// Check if the target exists in the lib folder
-		var filePath = static.publicPath & url.target;
+		var filePath = publicPath & url.target;
 		if( NOT fileExists( filePath ) ){
 			bx:header statusCode="404";
 			return;
@@ -71,13 +65,13 @@ class{
 
 		// Set the content type
 		bx:header name="Content-Type" value="#contentType#";
-		// Set caching headers for 1 week
-		bx:header name="Cache-Control" value="public, max-age=604800";
-		bx:header name="Pragma" value="";
-		bx:header name="Expires" value="#dateAdd( "s", 604800, now() )#";
+		// Disable caching for immediate updates during development
+		bx:header name="Cache-Control" value="no-cache, no-store, must-revalidate";
+		bx:header name="Pragma" value="no-cache";
+		bx:header name="Expires" value="0";
 		// Output the file
 		bx:content file="#filePath#" type="#contentType#" reset="true";
 		return;
 	}
-
-}
+	deliver()
+</bx:script>

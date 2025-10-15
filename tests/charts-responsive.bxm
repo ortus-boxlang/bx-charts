@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<bx:include template="includes/head.bxm">
+<body>
+    <!--- Navigation --->
+	<bx:include template="includes/nav.bxm">
+
+    <!--- Hero Header --->
+    <div class="hero-header">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="bi bi-phone-landscape"></i> Responsive Features
+            </h1>
+            <p class="lead">
+                Charts that automatically adapt to any screen size and device
+            </p>
+            <div class="alert alert-light d-inline-block mt-3" role="alert">
+                <i class="bi bi-arrows-angle-expand"></i> Resize your browser window to see responsive charts in action!
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <!--- Chart 1: Fully Responsive (Default) --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-arrows-fullscreen text-primary"></i> 1. Fully Responsive Chart (Default Behavior)
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Chart automatically resizes to fit container while maintaining aspect ratio
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="true"</code> (default), <code>maintainAspectRatio="true"</code> (default)
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Responsive Pie Chart"
+                             chartwidth="600" chartheight="300"
+                             responsive="true"
+                             maintainAspectRatio="true">
+                        <bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                                       serieslabel="Market Share">
+                            <bx:chartdata item="Product A" value="150" />
+                            <bx:chartdata item="Product B" value="200" />
+                            <bx:chartdata item="Product C" value="100" />
+                            <bx:chartdata item="Product D" value="75" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode1' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode1">&lt;bx:chart title="Responsive Pie Chart"
+         chartwidth="600" chartheight="300"
+         responsive="true"
+         maintainAspectRatio="true"&gt;
+    &lt;bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+                   serieslabel="Market Share"&gt;
+        &lt;bx:chartdata item="Product A" value="150" /&gt;
+        &lt;bx:chartdata item="Product B" value="200" /&gt;
+        &lt;bx:chartdata item="Product C" value="100" /&gt;
+        &lt;bx:chartdata item="Product D" value="75" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 2: Custom Aspect Ratio --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-aspect-ratio text-success"></i> 2. Responsive Chart with Custom Aspect Ratio
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Uses custom aspect ratio of 3 for extra-wide format (default is 2)
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="true"</code>, <code>maintainAspectRatio="true"</code>, <code>aspectRatio="3"</code>
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Wide Format Bar Chart"
+                             chartwidth="800" chartheight="300"
+                             responsive="true"
+                             maintainAspectRatio="true"
+                             aspectRatio="3"
+                             xaxistitle="Categories" yaxistitle="Values"
+                             showygridlines="true">
+                        <bx:chartseries type="bar" colorlist="131cd7,ED2939,4BC0C0,d47f00"
+                                       serieslabel="Performance Metrics">
+                            <bx:chartdata item="Q1" value="150" />
+                            <bx:chartdata item="Q2" value="200" />
+                            <bx:chartdata item="Q3" value="175" />
+                            <bx:chartdata item="Q4" value="225" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode2' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode2">&lt;bx:chart title="Wide Format Bar Chart"
+         chartwidth="800" chartheight="300"
+         responsive="true"
+         maintainAspectRatio="true"
+         aspectRatio="3"
+         xaxistitle="Categories" yaxistitle="Values"
+         showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" colorlist="131cd7,ED2939,4BC0C0,d47f00"
+                   serieslabel="Performance Metrics"&gt;
+        &lt;bx:chartdata item="Q1" value="150" /&gt;
+        &lt;bx:chartdata item="Q2" value="200" /&gt;
+        &lt;bx:chartdata item="Q3" value="175" /&gt;
+        &lt;bx:chartdata item="Q4" value="225" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 3: No Aspect Ratio Constraint --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-arrows-expand text-info"></i> 3. Responsive Without Aspect Ratio Constraint
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Chart fills container completely in both width and height (no aspect ratio maintained)
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="true"</code>, <code>maintainAspectRatio="false"</code>
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Fill Container Chart"
+                             chartwidth="600" chartheight="400"
+                             responsive="true"
+                             maintainAspectRatio="false"
+                             xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+                             showxgridlines="true" showygridlines="true">
+                        <bx:chartseries type="line" colorlist="9966FF" serieslabel="Memory Over Time">
+                            <bx:chartdata item="9:00 AM" value="512" />
+                            <bx:chartdata item="10:00 AM" value="678" />
+                            <bx:chartdata item="11:00 AM" value="543" />
+                            <bx:chartdata item="12:00 PM" value="721" />
+                            <bx:chartdata item="1:00 PM" value="634" />
+                            <bx:chartdata item="2:00 PM" value="587" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode3' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode3">&lt;bx:chart title="Fill Container Chart"
+         chartwidth="600" chartheight="400"
+         responsive="true"
+         maintainAspectRatio="false"
+         xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+         showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="line" colorlist="9966FF" serieslabel="Memory Over Time"&gt;
+        &lt;bx:chartdata item="9:00 AM" value="512" /&gt;
+        &lt;bx:chartdata item="10:00 AM" value="678" /&gt;
+        &lt;bx:chartdata item="11:00 AM" value="543" /&gt;
+        &lt;bx:chartdata item="12:00 PM" value="721" /&gt;
+        &lt;bx:chartdata item="1:00 PM" value="634" /&gt;
+        &lt;bx:chartdata item="2:00 PM" value="587" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 4: Mobile-Optimized (Square) --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-phone text-warning"></i> 4. Mobile-Optimized Square Chart
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Square aspect ratio (1:1) ideal for mobile displays and social media
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="true"</code>, <code>aspectRatio="1"</code>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="chart-display">
+                            <bx:chart title="Mobile-Friendly Doughnut"
+                                     chartwidth="400" chartheight="400"
+                                     responsive="true"
+                                     maintainAspectRatio="true"
+                                     aspectRatio="1"
+                                     showlegend="true">
+                                <bx:chartseries type="doughnut" colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                                               serieslabel="Mobile Stats">
+                                    <bx:chartdata item="iOS" value="45" />
+                                    <bx:chartdata item="Android" value="40" />
+                                    <bx:chartdata item="Other" value="15" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                                    <i class="bi bi-code-slash"></i> Source Code
+                                </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode4' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode4">&lt;bx:chart title="Mobile-Friendly Doughnut"
+         chartwidth="400" chartheight="400"
+         responsive="true"
+         maintainAspectRatio="true"
+         aspectRatio="1"
+         showlegend="true"&gt;
+    &lt;bx:chartseries type="doughnut"
+                   colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                   serieslabel="Mobile Stats"&gt;
+        &lt;bx:chartdata item="iOS" value="45" /&gt;
+        &lt;bx:chartdata item="Android" value="40" /&gt;
+        &lt;bx:chartdata item="Other" value="15" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 5: Fixed Size (Non-Responsive) --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-pin-angle text-danger"></i> 5. Fixed Size Chart (Non-Responsive)
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Chart maintains fixed dimensions regardless of container size
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="false"</code> - Chart will NOT resize on window changes
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Fixed Size Chart"
+                             chartwidth="500" chartheight="250"
+                             responsive="false"
+                             xaxistitle="Fixed Dimensions" yaxistitle="Values">
+                        <bx:chartseries type="bar" colorlist="E74C3C,3498DB" serieslabel="Fixed Data">
+                            <bx:chartdata item="Item 1" value="85" />
+                            <bx:chartdata item="Item 2" value="92" />
+                            <bx:chartdata item="Item 3" value="78" />
+                            <bx:chartdata item="Item 4" value="65" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode5' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode5">&lt;bx:chart title="Fixed Size Chart"
+         chartwidth="500" chartheight="250"
+         responsive="false"
+         xaxistitle="Fixed Dimensions" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="E74C3C,3498DB" serieslabel="Fixed Data"&gt;
+        &lt;bx:chartdata item="Item 1" value="85" /&gt;
+        &lt;bx:chartdata item="Item 2" value="92" /&gt;
+        &lt;bx:chartdata item="Item 3" value="78" /&gt;
+        &lt;bx:chartdata item="Item 4" value="65" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 6: Tall Vertical Format --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-arrows-vertical text-primary"></i> 6. Tall Vertical Format Chart
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Tall aspect ratio (0.8) perfect for horizontal bar charts and rankings
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Attributes:</strong> <code>responsive="true"</code>, <code>aspectRatio="0.8"</code>
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Vertical Rankings"
+                             chartwidth="500" chartheight="600"
+                             responsive="true"
+                             maintainAspectRatio="true"
+                             aspectRatio="0.8"
+                             xaxistitle="Score" yaxistitle="Team"
+                             showxgridlines="true">
+                        <bx:chartseries type="horizontalbar" colorlist="2ECC71,F39C12,E74C3C,9B59B6,3498DB"
+                                       serieslabel="Team Performance">
+                            <bx:chartdata item="Team Alpha" value="95" />
+                            <bx:chartdata item="Team Beta" value="88" />
+                            <bx:chartdata item="Team Gamma" value="82" />
+                            <bx:chartdata item="Team Delta" value="76" />
+                            <bx:chartdata item="Team Epsilon" value="70" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode6' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode6">&lt;bx:chart title="Vertical Rankings"
+         chartwidth="500" chartheight="600"
+         responsive="true"
+         maintainAspectRatio="true"
+         aspectRatio="0.8"
+         xaxistitle="Score" yaxistitle="Team"
+         showxgridlines="true"&gt;
+    &lt;bx:chartseries type="horizontalbar" colorlist="2ECC71,F39C12,E74C3C,9B59B6,3498DB"
+                   serieslabel="Team Performance"&gt;
+        &lt;bx:chartdata item="Team Alpha" value="95" /&gt;
+        &lt;bx:chartdata item="Team Beta" value="88" /&gt;
+        &lt;bx:chartdata item="Team Gamma" value="82" /&gt;
+        &lt;bx:chartdata item="Team Delta" value="76" /&gt;
+        &lt;bx:chartdata item="Team Epsilon" value="70" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 7: Side-by-Side Responsive --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-layout-split text-success"></i> 7. Side-by-Side Responsive Charts
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Two responsive charts in Bootstrap grid - stack on mobile, side-by-side on desktop
+                </div>
+                <div class="alert alert-info mb-4" role="alert">
+                    <strong>Layout:</strong> Uses Bootstrap <code>col-md-6</code> for responsive column layout
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="chart-display">
+                            <bx:chart title="Left Chart - Area"
+                                     chartwidth="400" chartheight="300"
+                                     responsive="true"
+                                     xaxistitle="Time" yaxistitle="Usage"
+                                     showygridlines="true">
+                                <bx:chartseries type="area" colorlist="1ABC9C" serieslabel="CPU Usage">
+                                    <bx:chartdata item="00:00" value="45" />
+                                    <bx:chartdata item="06:00" value="52" />
+                                    <bx:chartdata item="12:00" value="68" />
+                                    <bx:chartdata item="18:00" value="55" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="chart-display">
+                            <bx:chart title="Right Chart - Radar"
+                                     chartwidth="400" chartheight="300"
+                                     responsive="true">
+                                <bx:chartseries type="radar" colorlist="E74C3C" serieslabel="Server Metrics">
+                                    <bx:chartdata item="CPU" value="80" />
+                                    <bx:chartdata item="Memory" value="65" />
+                                    <bx:chartdata item="Disk" value="45" />
+                                    <bx:chartdata item="Network" value="70" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code (Layout)
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode7' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode7">&lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;
+        &lt;bx:chart title="Left Chart - Area" responsive="true" ...&gt;
+            ...
+        &lt;/bx:chart&gt;
+    &lt;/div&gt;
+    &lt;div class="col-md-6"&gt;
+        &lt;bx:chart title="Right Chart - Radar" responsive="true" ...&gt;
+            ...
+        &lt;/bx:chart&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 8: Dashboard Layout --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-grid-3x3-gap text-info"></i> 8. Dashboard Layout (4 Charts Grid)
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Responsive dashboard with 4 charts - 2x2 grid on desktop, stacked on mobile
+                </div>
+                <div class="alert alert-info mb-4" role="alert">
+                    <strong>Layout:</strong> Uses Bootstrap <code>col-lg-6</code> for responsive 2x2 grid
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                        <div class="chart-display">
+                            <bx:chart title="Sales"
+                                     chartwidth="400" chartheight="250"
+                                     responsive="true"
+                                     maintainAspectRatio="true">
+                                <bx:chartseries type="pie" colorlist="FF6384,36A2EB" serieslabel="Sales">
+                                    <bx:chartdata item="Online" value="65" />
+                                    <bx:chartdata item="Retail" value="35" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-display">
+                            <bx:chart title="Traffic"
+                                     chartwidth="400" chartheight="250"
+                                     responsive="true"
+                                     maintainAspectRatio="true"
+                                     showygridlines="true">
+                                <bx:chartseries type="bar" colorlist="4BC0C0" serieslabel="Visitors">
+                                    <bx:chartdata item="Mon" value="120" />
+                                    <bx:chartdata item="Tue" value="150" />
+                                    <bx:chartdata item="Wed" value="135" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-display">
+                            <bx:chart title="Performance"
+                                     chartwidth="400" chartheight="250"
+                                     responsive="true"
+                                     maintainAspectRatio="true">
+                                <bx:chartseries type="radar" colorlist="FFCE56" serieslabel="Metrics">
+                                    <bx:chartdata item="Speed" value="75" />
+                                    <bx:chartdata item="Quality" value="85" />
+                                    <bx:chartdata item="Cost" value="60" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="chart-display">
+                            <bx:chart title="Trends"
+                                     chartwidth="400" chartheight="250"
+                                     responsive="true"
+                                     maintainAspectRatio="true"
+                                     showygridlines="true">
+                                <bx:chartseries type="line" colorlist="9966FF" serieslabel="Growth">
+                                    <bx:chartdata item="Jan" value="100" />
+                                    <bx:chartdata item="Feb" value="125" />
+                                    <bx:chartdata item="Mar" value="150" />
+                                </bx:chartseries>
+                            </bx:chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="code-display mt-3">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code (Layout)
+                        </span>
+                    </div>
+                    <pre data-lang="xml">&lt;div class="row g-3"&gt;
+    &lt;div class="col-lg-6"&gt;
+        &lt;bx:chart title="Sales" responsive="true" ...&gt;...&lt;/bx:chart&gt;
+    &lt;/div&gt;
+    &lt;div class="col-lg-6"&gt;
+        &lt;bx:chart title="Traffic" responsive="true" ...&gt;...&lt;/bx:chart&gt;
+    &lt;/div&gt;
+    &lt;div class="col-lg-6"&gt;
+        &lt;bx:chart title="Performance" responsive="true" ...&gt;...&lt;/bx:chart&gt;
+    &lt;/div&gt;
+    &lt;div class="col-lg-6"&gt;
+        &lt;bx:chart title="Trends" responsive="true" ...&gt;...&lt;/bx:chart&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Feature Summary --->
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-body p-4">
+                <h4 class="card-title mb-4"><i class="bi bi-star-fill text-warning"></i> Responsive Features Demonstrated</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <h6 class="text-primary"><i class="bi bi-check2-circle"></i> Responsive Attributes</h6>
+                        <ul class="list-unstyled ms-3">
+                            <li><i class="bi bi-arrow-right-short"></i> <code>responsive="true|false"</code></li>
+                            <li><i class="bi bi-arrow-right-short"></i> <code>maintainAspectRatio="true|false"</code></li>
+                            <li><i class="bi bi-arrow-right-short"></i> <code>aspectRatio="1|2|3|0.8"</code></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-success"><i class="bi bi-check2-circle"></i> Common Use Cases</h6>
+                        <ul class="list-unstyled ms-3">
+                            <li><i class="bi bi-arrow-right-short"></i> Mobile-first responsive design</li>
+                            <li><i class="bi bi-arrow-right-short"></i> Dashboard grid layouts</li>
+                            <li><i class="bi bi-arrow-right-short"></i> Side-by-side comparisons</li>
+                            <li><i class="bi bi-arrow-right-short"></i> Fixed-size embeds</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="alert alert-light mb-0" role="alert">
+                    <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Best Practices</h6>
+                    <ul class="mb-0 small">
+                        <li>Use <code>responsive="true"</code> for most web applications</li>
+                        <li>Adjust <code>aspectRatio</code> based on chart content and container size</li>
+                        <li>Set <code>maintainAspectRatio="false"</code> for dashboard cards with fixed heights</li>
+                        <li>Combine with Bootstrap grid for professional responsive layouts</li>
+                        <li>Test on multiple screen sizes to ensure optimal display</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--- Back to Suite Button --->
+        <div class="text-center my-5">
+            <a href="index.bxm" class="btn btn-boxlang btn-lg">
+                <i class="bi bi-arrow-left"></i> Back to Test Suite
+            </a>
+        </div>
+    </div>
+
+    <bx:include template="includes/footer.bxm">
+</body>
+</html>

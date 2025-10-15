@@ -1,0 +1,28 @@
+{
+	"name": "bx-charts",
+	"version": "1.0.0",
+	"description": "BoxLang Charts Module - Chart.js integration for BoxLang",
+	"private": true,
+	"scripts": {
+		"postinstall": "npm run copy-chartjs",
+		"copy-chartjs": "cp node_modules/chart.js/dist/chart.umd.js public/chart.min.js",
+		"update-chartjs": "npm install chart.js@latest && npm run copy-chartjs"
+	},
+	"dependencies": {
+		"chart.js": "^4.5.1"
+	},
+	"devDependencies": {},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ortus-boxlang/bx-charts"
+	},
+	"keywords": [
+		"boxlang",
+		"charts",
+		"chartjs",
+		"visualization",
+		"data-visualization"
+	],
+	"author": "Ortus Solutions",
+	"license": "Apache-2.0"
+}

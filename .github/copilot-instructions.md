@@ -7,10 +7,11 @@
 **Target Audience**: BoxLang developers who need to integrate data visualization capabilities into their web applications. Suitable for both beginners and advanced users with varying levels of charting experience.
 
 **Key Features**:
-- Support for 9+ chart types (pie, bar, line, doughnut, radar, area, scatter, etc.)
+- Support for 10 chart types (pie, bar, line, doughnut, radar, area, scatter, bubble, etc.)
 - Nested component architecture for intuitive data organization
 - Responsive design with customizable dimensions and styling
 - Advanced features like stacked/clustered series, axis titles, grid lines
+- Bubble chart support with x, y, r coordinate system
 - Static asset serving with security and content-type management
 
 **Runtime Requirements**: BoxLang 1.0.0+ with web support for `htmlHead()` BIF
@@ -21,7 +22,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 
 - **Module System**: BoxLang modules follow a specific structure with `ModuleConfig.bx` as the entry point
 - **Components**: Chart-related components (Chart, ChartData, ChartSeries) that can be used in both script and template syntax
-- **Asset Serving**: Static assets (JS/CSS) served via `Asset.bx` proxy from `/public/` directory
+- **Asset Serving**: Static assets (JS/CSS) served via `index.bxm` proxy from `/public/` directory
 - **Module Mapping**: All modules are registered with prefix `bxModules.{mapping}` (this module uses `bxcharts`)
 
 ## File Structure & Patterns
@@ -30,7 +31,7 @@ This is a **BoxLang module** that provides comprehensive charting capabilities u
 - `ModuleConfig.bx` - Module descriptor with lifecycle methods (`configure()`, `onLoad()`, `onUnload()`)
 - `box.json` - ForgeBox package descriptor with BoxLang-specific metadata
 - `Build.bx` - BoxLang build script for packaging (not Gradle/Maven)
-- `Asset.bx` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/Asset.bx?method=deliver&target=filename`
+- `index.bxm` - Static asset proxy for serving files from `/public/` via `/bxmodules/bxcharts/public/index.bxm?target=filename`
 
 ### Component Architecture (`components/`)
 All components follow this pattern:
@@ -59,7 +60,7 @@ class{
 
 ### Supported Chart Types
 - **Basic**: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`
-- **Enhanced**: `area`, `horizontalbar`, `scatter`
+- **Enhanced**: `area`, `horizontalbar`, `scatter`, `bubble`
 
 ### Chart Attributes (`<bx:chart>`)
 - **Dimensions**: `chartwidth`, `chartheight` (default: 400x300)
@@ -74,7 +75,8 @@ class{
 - **Data Source**: Contains `<bx:chartdata>` components
 
 ### Data Attributes (`<bx:chartdata>`)
-- **Required**: `item` (label), `value` (numeric value)
+- **Required**: `item` (label), `value` (numeric value for most charts)
+- **Bubble Charts**: `item`, `x`, `y`, `r` (coordinates and radius instead of value)
 
 ## Chart-Specific Patterns
 
@@ -85,7 +87,7 @@ class{
 
 ### Asset Management
 - Chart.js library stored in `/public/chart.min.js`
-- Served via `Asset.bx?method=deliver&target=chart.min.js`
+- Served via `index.bxm?target=chart.min.js`
 - HTML head injection using `htmlHead()` BIF from BoxLang web support
 
 ### Chart Configuration Pattern
@@ -103,7 +105,11 @@ var chartConfig = {
 ### Building & Testing
 - **Build**: `boxlang Build.bx [--version=x.y.z]` - Creates distributable zip in `build/artifacts/`
 - **Test**: Uses TestBox framework with specs in `tests/specs/` (`.bxm` extension for templates, `.bx` for classes)
-- **Dependencies**: Chart.js library managed manually in `/public/`
+- **Local Development Setup**: Run `./setup.sh` to create symbolic link in `boxlang_modules/bx-charts` for local module development
+- **Dependencies**:
+  - Chart.js library automatically managed via npm (see package.json)
+  - Run `npm install` to download Chart.js to `/public/`
+  - Run `npm run update-chartjs` to update to latest Chart.js version
 - **Documentation**: [BoxLang MCP Server Docs](https://boxlang.ortusbooks.com/~gitbook/mcp)
 
 ### Component Development Lifecycle
@@ -113,6 +119,18 @@ var chartConfig = {
 4. Data aggregation happens during body processing
 
 ## Essential Commands & Tooling
+
+### Local Development Setup
+```bash
+# Set up local development environment (creates symbolic link)
+./setup.sh
+
+# Install Node.js dependencies and download Chart.js
+npm install
+
+# Update Chart.js to the latest version
+npm run update-chartjs
+```
 
 ### Build Commands
 ```bash
@@ -145,6 +163,7 @@ box run-script format:watch
 - Uses ForgeBox for distribution (`box.json` configuration)
 - Dependencies managed via CommandBox (`commandbox-boxlang`, `testbox`, etc.)
 - Static assets (Chart.js) included directly in `/public/` directory
+- Chart.js managed via npm - automatically downloads to `/public/` on `npm install`
 
 ## BoxLang-Specific Conventions
 
@@ -160,9 +179,10 @@ box run-script format:watch
 - Render HTML canvas elements with inline JavaScript initialization
 
 ### Chart.js Integration
-- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`, `area`, `horizontalbar`, `scatter`
+- Chart types: `pie`, `bar`, `line`, `doughnut`, `radar`, `polarArea`, `area`, `horizontalbar`, `scatter`, `bubble`
 - Color support: hex colors with `##` prefix (BoxLang escapes `#` for interpolation, so `##` becomes literal `#`)
 - Advanced features: stacked/clustered series, grid line control, axis titles
+- Bubble chart support: uses x, y coordinates and r for bubble size
 - Responsive by default, custom dimensions via `chartwidth`/`chartheight`
 
 ### Color Handling Patterns
@@ -179,6 +199,7 @@ if ( left( color, 2 ) == "##" ) {
 - `area` → Chart.js `line` with `fill: true`
 - `horizontalbar` → Chart.js `bar` with `indexAxis: "y"`
 - `scatter` → Chart.js `scatter` with `showLine: false`
+- `bubble` → Chart.js `bubble` with x, y, r coordinate system
 - `stacked` → Chart.js bar with `scales.x.stacked: true, scales.y.stacked: true`
 
 ## Coding Standards & Best Practices
@@ -238,17 +259,28 @@ if ( left( color, 2 ) == "##" ) {
 </bx:chart>
 ```
 
+### Bubble Chart with Three Dimensions
+```boxlang
+<bx:chart title="Portfolio Analysis" xaxistitle="Risk" yaxistitle="Return">
+    <bx:chartseries type="bubble" colorlist="FF6384" serieslabel="Investments">
+        <bx:chartdata item="Stock A" x="20" y="15" r="10">
+        <bx:chartdata item="Stock B" x="40" y="25" r="15">
+        <bx:chartdata item="Bond C" x="10" y="8" r="5">
+    </bx:chartseries>
+</bx:chart>
+```
+
 ## Key Files to Reference
 
 - **Chart.bx** - Main component with Chart.js integration and HTML rendering
 - **ChartSeries.bx** - Series data collection and validation patterns
 - **ChartData.bx** - Simple child component registration pattern
-- **Asset.bx** - Static file serving with security and content-type handling
+- **index.bxm** - Static file serving with security and content-type handling
 
 ## Common Tasks
 
 - **Add chart types**: Update `validTypes` array in ChartSeries.bx
 - **Add chart options**: Extend `buildChartConfig()` method in Chart.bx
-- **Add static assets**: Place in `/public/` and serve via `Asset.bx?method=deliver&target=filename`
+- **Add static assets**: Place in `/public/` and serve via `index.bxm?target=filename`
 - **Test charts**: Use `test-charts-enhanced.bx` example file
 - **Debug data flow**: Check execution state in parent components

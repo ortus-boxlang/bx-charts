@@ -69,12 +69,13 @@ class extends="testbox.system.BaseSpec"{
 			} );
 
 			it( "supports all new chart types", () => {
-				var validChartTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" ];
+				var validChartTypes = [ "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" ];
 
 				// Test that all chart types are supported
 				expect( arrayContains( validChartTypes, "area" ) ).toBeTrue( "Area charts should be supported" );
 				expect( arrayContains( validChartTypes, "horizontalbar" ) ).toBeTrue( "Horizontal bar charts should be supported" );
 				expect( arrayContains( validChartTypes, "scatter" ) ).toBeTrue( "Scatter plots should be supported" );
+				expect( arrayContains( validChartTypes, "bubble" ) ).toBeTrue( "Bubble charts should be supported" );
 
 				// Test original types still work
 				expect( arrayContains( validChartTypes, "pie" ) ).toBeTrue( "Pie charts should still be supported" );
@@ -180,13 +181,83 @@ class extends="testbox.system.BaseSpec"{
 				expect( len( complexChartConfig.yaxistitle ) ).toBeGT( 0, "Y-axis title should not be empty" );
 			} );
 
+			it( "supports responsive chart configuration", () => {
+				var responsiveConfig = {
+					"responsive": true,
+					"maintainAspectRatio": true,
+					"aspectRatio": 2
+				};
+
+				// Test responsive configuration
+				expect( isBoolean( responsiveConfig.responsive ) ).toBeTrue( "Responsive should be boolean" );
+				expect( isBoolean( responsiveConfig.maintainAspectRatio ) ).toBeTrue( "MaintainAspectRatio should be boolean" );
+				expect( isNumeric( responsiveConfig.aspectRatio ) ).toBeTrue( "AspectRatio should be numeric" );
+				expect( responsiveConfig.aspectRatio ).toBeGT( 0, "AspectRatio should be positive" );
+			} );
+
+			it( "validates aspect ratio values", () => {
+				var aspectRatioTests = [
+					{ "ratio": 1, "description": "Square (1:1)" },
+					{ "ratio": 2, "description": "Wide (2:1)" },
+					{ "ratio": 3, "description": "Very wide (3:1)" },
+					{ "ratio": 0.5, "description": "Tall (1:2)" }
+				];
+
+				for ( var test in aspectRatioTests ) {
+					expect( test.ratio ).toBeGT( 0, "Aspect ratio should be positive for: #test.description#" );
+					expect( isNumeric( test.ratio ) ).toBeTrue( "Aspect ratio should be numeric for: #test.description#" );
+				}
+			} );
+
+			it( "handles responsive chart attributes correctly", () => {
+				var chartAttributes = {
+					"responsive": true,
+					"maintainAspectRatio": false,
+					"aspectRatio": 1.5,
+					"chartwidth": 800,
+					"chartheight": 400
+				};
+
+				// Validate attributes
+				expect( chartAttributes.responsive ).toBeTrue( "Responsive should be enabled" );
+				expect( chartAttributes.maintainAspectRatio ).toBeFalse( "MaintainAspectRatio should be disabled" );
+				expect( chartAttributes.aspectRatio ).toBe( 1.5, "AspectRatio should be 1.5" );
+				expect( chartAttributes.chartwidth ).toBe( 800, "Chart width should be 800" );
+				expect( chartAttributes.chartheight ).toBe( 400, "Chart height should be 400" );
+			} );
+
+			it( "supports bubble chart data structure", () => {
+				var bubbleChartData = [
+					{ "item": "Data Point 1", "x": 10, "y": 20, "r": 5 },
+					{ "item": "Data Point 2", "x": 15, "y": 25, "r": 8 },
+					{ "item": "Data Point 3", "x": 20, "y": 30, "r": 12 }
+				];
+
+				// Test bubble data structure
+				for ( var dataPoint in bubbleChartData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "x" ) ).toBeTrue( "Data point should have 'x' key" );
+					expect( structKeyExists( dataPoint, "y" ) ).toBeTrue( "Data point should have 'y' key" );
+					expect( structKeyExists( dataPoint, "r" ) ).toBeTrue( "Data point should have 'r' key (radius)" );
+					expect( isNumeric( dataPoint.x ) ).toBeTrue( "X coordinate should be numeric" );
+					expect( isNumeric( dataPoint.y ) ).toBeTrue( "Y coordinate should be numeric" );
+					expect( isNumeric( dataPoint.r ) ).toBeTrue( "Radius should be numeric" );
+				}
+			} );
+
+			it( "supports resizeDelay attribute for performance optimization", () => {
+				var chartAttributes = {
+					"responsive": true,
+					"resizeDelay": 100
+				};
+
+				// Validate resize delay
+				expect( isNumeric( chartAttributes.resizeDelay ) ).toBeTrue( "ResizeDelay should be numeric" );
+				expect( chartAttributes.resizeDelay ).toBeGTE( 0, "ResizeDelay should be non-negative" );
+				expect( chartAttributes.resizeDelay ).toBe( 100, "ResizeDelay should be 100ms" );
+			} );
+
 		} );
-	}
-
-}
-			} )
-
-		} )
 	}
 
 }

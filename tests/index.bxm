@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--- Head Section --->
+<bx:include template="includes/head.bxm">
+<body>
+	<!--- Navigation --->
+	<bx:include template="includes/nav.bxm">
+	<!--- Hero Header --->
+	<div class="hero-header">
+		<div class="container text-center">
+			<h1 class="display-3 fw-bold mb-3">
+				<div>
+					<img src="includes/boxlang-dark.svg" alt="BoxLang Logo" style="height: 100px; vertical-align: middle;">
+				</div>
+				 📈 Charts Module
+			</h1>
+			<p class="lead mb-4">
+				Beautiful, Interactive Data Visualizations Powered by Chart.js
+			</p>
+			<div class="d-flex justify-content-center gap-3">
+				<a href="#getting-started" class="btn btn-lg btn-outline-dark px-4">
+					<i class="bi bi-rocket-takeoff"></i> Get Started
+				</a>
+				<a href="https://github.com/ortus-boxlang/bx-charts" target="_blank" class="btn btn-lg btn-outline-dark px-4">
+					<i class="bi bi-github"></i> GitHub
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<!--- Main Content --->
+	<div class="container my-5">
+		<!--- Stats Row --->
+		<div class="row g-4 mb-5">
+			<div class="col-md-3 col-sm-6 animate-fade-in">
+				<div class="stat-card">
+					<i class="bi bi-graph-up-arrow text-primary" style="font-size: 2rem;"></i>
+					<span class="stat-number">10</span>
+					<span class="stat-label">Chart Types</span>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 animate-fade-in" style="animation-delay: 0.1s;">
+				<div class="stat-card">
+					<i class="bi bi-palette text-success" style="font-size: 2rem;"></i>
+					<span class="stat-number">∞</span>
+					<span class="stat-label">Custom Colors</span>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 animate-fade-in" style="animation-delay: 0.2s;">
+				<div class="stat-card">
+					<i class="bi bi-phone text-info" style="font-size: 2rem;"></i>
+					<span class="stat-number">100%</span>
+					<span class="stat-label">Responsive</span>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 animate-fade-in" style="animation-delay: 0.3s;">
+				<div class="stat-card">
+					<i class="bi bi-lightning text-warning" style="font-size: 2rem;"></i>
+					<span class="stat-number">Fast</span>
+					<span class="stat-label">Performance</span>
+				</div>
+			</div>
+		</div>
+
+		<!--- Introduction --->
+		<div id="getting-started" class="row mb-5">
+			<div class="col-lg-8 mx-auto">
+				<div class="text-center mb-4">
+					<h2 class="display-5 fw-bold">Welcome to the Test Suite</h2>
+					<p class="lead text-muted">
+						Explore comprehensive examples showcasing the power of BoxLang Charts
+					</p>
+				</div>
+
+				<div class="alert alert-primary border-0 shadow-sm" role="alert">
+					<h5 class="alert-heading"><i class="bi bi-info-circle"></i> What's Included</h5>
+					<p class="mb-0">
+						This test suite demonstrates all chart types, styling options, advanced features,
+						and responsive behaviors. Each example includes complete source code with syntax highlighting.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!--- Feature Grid --->
+		<div class="row g-4 mb-5">
+			<div class="col-md-3 col-sm-6">
+				<div class="feature-box h-100">
+					<h5><i class="bi bi-palette-fill"></i> Rich Styling</h5>
+					<ul class="list-unstyled small mb-0">
+						<li>✓ Custom colors</li>
+						<li>✓ Font customization</li>
+						<li>✓ Legends & titles</li>
+						<li>✓ Background colors</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="feature-box h-100">
+					<h5><i class="bi bi-aspect-ratio"></i> Flexible Layout</h5>
+					<ul class="list-unstyled small mb-0">
+						<li>✓ Responsive design</li>
+						<li>✓ Custom dimensions</li>
+						<li>✓ Aspect ratios</li>
+						<li>✓ Grid line control</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="feature-box h-100">
+					<h5><i class="bi bi-gear-fill"></i> Advanced Options</h5>
+					<ul class="list-unstyled small mb-0">
+						<li>✓ Stacked series</li>
+						<li>✓ Axis titles</li>
+						<li>✓ Multiple datasets</li>
+						<li>✓ Data labels</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="feature-box h-100">
+					<h5><i class="bi bi-rocket-fill"></i> Performance</h5>
+					<ul class="list-unstyled small mb-0">
+						<li>✓ Fast rendering</li>
+						<li>✓ Canvas-based</li>
+						<li>✓ CDN optimized</li>
+						<li>✓ Production ready</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--- Test Suite Cards --->
+		<div class="text-center mb-4">
+			<h2 class="display-6 fw-bold">Interactive Test Examples</h2>
+			<p class="text-muted">Choose a test suite to explore different charting capabilities</p>
+		</div>
+
+		<div class="row g-4 mb-5">
+			<!--- Comprehensive Examples Card --->
+			<div class="col-lg-4">
+				<div class="chart-card h-100">
+					<div class="chart-card-header">
+						<h3 class="chart-card-title">
+							<i class="bi bi-collection text-primary"></i> All Chart Types
+						</h3>
+					</div>
+					<div class="chart-card-body">
+						<p class="text-muted">
+							A complete showcase of all 10 supported chart types with various styling options,
+							axis configurations, and layout features.
+						</p>
+						<div class="mb-3">
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Pie</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Bar</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Line</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Doughnut</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Radar</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Polar Area</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Area</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Horizontal Bar</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Scatter</span>
+							<span class="badge bg-primary-subtle text-primary me-1 mb-1">Bubble</span>
+						</div>
+						<a href="charts.bxm" class="btn btn-boxlang w-100">
+							View Examples <i class="bi bi-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!--- Enhanced Features Card --->
+			<div class="col-lg-4">
+				<div class="chart-card h-100">
+					<div class="chart-card-header">
+						<h3 class="chart-card-title">
+							<i class="bi bi-stars text-warning"></i> Enhanced Features
+						</h3>
+					</div>
+					<div class="chart-card-body">
+						<p class="text-muted">
+							Advanced chart configurations showcasing enhanced features like stacked series,
+							custom axis titles, and comprehensive styling options.
+						</p>
+						<div class="mb-3">
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Axis Titles</span>
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Grid Lines</span>
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Stacked Series</span>
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Font Styling</span>
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Custom Markers</span>
+							<span class="badge bg-warning-subtle text-warning me-1 mb-1">Interactive</span>
+						</div>
+						<a href="charts-enhanced.bxm" class="btn btn-boxlang w-100">
+							View Enhanced <i class="bi bi-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!--- Responsive Features Card --->
+			<div class="col-lg-4">
+				<div class="chart-card h-100">
+					<div class="chart-card-header">
+						<h3 class="chart-card-title">
+							<i class="bi bi-phone-landscape text-success"></i> Responsive Design
+						</h3>
+					</div>
+					<div class="chart-card-body">
+						<p class="text-muted">
+							Interactive demonstrations of responsive chart behavior with different aspect ratios
+							and container sizes. Resize your browser to see charts adapt.
+						</p>
+						<div class="mb-3">
+							<span class="badge bg-success-subtle text-success me-1 mb-1">Responsive</span>
+							<span class="badge bg-success-subtle text-success me-1 mb-1">Aspect Ratios</span>
+							<span class="badge bg-success-subtle text-success me-1 mb-1">Mobile-Ready</span>
+							<span class="badge bg-success-subtle text-success me-1 mb-1">Container Sizing</span>
+							<span class="badge bg-success-subtle text-success me-1 mb-1">Flexible Height</span>
+						</div>
+						<a href="charts-responsive.bxm" class="btn btn-boxlang w-100">
+							View Responsive <i class="bi bi-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--- Quick Start --->
+		<div class="row mb-5">
+			<div class="col-lg-12 mx-auto">
+				<div class="card border-0 shadow-sm">
+					<div class="card-body p-4">
+						<h4 class="card-title mb-3"><i class="bi bi-code-square"></i> Quick Start Example</h4>
+						<p class="text-muted">Get started with just a few lines of BoxLang code:</p>
+
+						<!--- Live Chart Demo --->
+						<div class="chart-display mb-3">
+							<bx:chart title="Sales Data" chartwidth="800" responsive="true">
+								<bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56">
+									<bx:chartdata item="Q1" value="150" />
+									<bx:chartdata item="Q2" value="200" />
+									<bx:chartdata item="Q3" value="175" />
+								</bx:chartseries>
+							</bx:chart>
+						</div>
+
+						<!--- Source Code --->
+						<div class="code-display" x-data="copyCode">
+							<div class="code-display-header">
+								<span class="code-display-title">
+									<i class="bi bi-file-earmark-code"></i> Simple Pie Chart
+								</span>
+								<button
+									@click="copyToClipboard( 'quickChartCode' )"
+									class="btn btn-sm btn-copy"
+									:class="{ 'btn-copy-success': copied }"
+									type="button"
+								>
+									<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+									<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+								</button>
+							</div>
+							<pre data-lang="xml" id="quickChartCode">
+&lt;bx:chart title="Sales Data" chartwidth="600" chartheight="300"&gt;
+    &lt;bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56"&gt;
+        &lt;bx:chartdata item="Q1" value="150" /&gt;
+        &lt;bx:chartdata item="Q2" value="200" /&gt;
+        &lt;bx:chartdata item="Q3" value="175" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;
+</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<bx:include template="includes/footer.bxm">
+</body>
+</html>

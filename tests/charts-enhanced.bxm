@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<bx:include template="includes/head.bxm">
+<body>
+	<!--- Navigation --->
+	<bx:include template="includes/nav.bxm">
+
+    <!--- Hero Header --->
+    <div class="hero-header">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="bi bi-stars"></i> Enhanced Features
+            </h1>
+            <p class="lead">
+                Advanced configurations with stacked series, axis titles, and custom styling
+            </p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <!--- Chart 1: Pie Chart with Axis Titles --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-pie-chart text-primary"></i> 1. Pie Chart with Axis Titles and Custom Colors
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Demonstrates axis titles on pie charts with custom color palette
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="JVM Memory"
+                            backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="600"
+                            showlegend="true"
+                            xaxistitle="Memory Type" yaxistitle="Memory (KB)">
+                        <bx:chartseries type="pie" serieslabel="JVM Memory Distribution">
+                            <bx:chartdata item="Free Memory (KB)" value="512" />
+                            <bx:chartdata item="Used Memory (KB)" value="256" />
+                            <bx:chartdata item="Unallocated Memory (KB)" value="128" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode1' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode1">&lt;bx:chart title="JVM Memory"
+         backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="600"
+         showlegend="true"
+         xaxistitle="Memory Type" yaxistitle="Memory (KB)"&gt;
+    &lt;bx:chartseries type="pie" serieslabel="JVM Memory Distribution"&gt;
+        &lt;bx:chartdata item="Free Memory (KB)" value="512" /&gt;
+        &lt;bx:chartdata item="Used Memory (KB)" value="256" /&gt;
+        &lt;bx:chartdata item="Unallocated Memory (KB)" value="128" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 2: Bar Chart with Grid Lines --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-bar-chart-fill text-success"></i> 2. Bar Chart with Grid Lines and Series Placement
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Custom grid line controls with clustered series placement
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="500" showlegend="true"
+                            xaxistitle="Metrics" yaxistitle="Count"
+                            seriesplacement="cluster" showxgridlines="false" showygridlines="true">
+                        <bx:chartseries type="bar" serieslabel="Cache Statistics">
+                            <bx:chartdata item="Hits" value="150" />
+                            <bx:chartdata item="Misses" value="25" />
+                            <bx:chartdata item="Garbage Collections" value="10" />
+                            <bx:chartdata item="Evictions" value="5" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode2' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode2">&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="500" showlegend="true"
+         xaxistitle="Metrics" yaxistitle="Count"
+         seriesplacement="cluster" showxgridlines="false" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" serieslabel="Cache Statistics"&gt;
+        &lt;bx:chartdata item="Hits" value="150" /&gt;
+        &lt;bx:chartdata item="Misses" value="25" /&gt;
+        &lt;bx:chartdata item="Garbage Collections" value="10" /&gt;
+        &lt;bx:chartdata item="Evictions" value="5" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 3: Area Chart --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-graph-up text-info"></i> 3. Area Chart (Time Series)
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Time series data with filled area and dual gridlines
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="300"
+                            xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+                            showxgridlines="true" showygridlines="true">
+                        <bx:chartseries type="area" colorlist="36A2EB" serieslabel="Memory Over Time">
+                            <bx:chartdata item="9:00 AM" value="512" />
+                            <bx:chartdata item="10:00 AM" value="678" />
+                            <bx:chartdata item="11:00 AM" value="543" />
+                            <bx:chartdata item="12:00 PM" value="721" />
+                            <bx:chartdata item="1:00 PM" value="634" />
+                            <bx:chartdata item="2:00 PM" value="587" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode3' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode3">&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="300"
+         xaxistitle="Time" yaxistitle="Memory Usage (MB)"
+         showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="area" colorlist="36A2EB" serieslabel="Memory Over Time"&gt;
+        &lt;bx:chartdata item="9:00 AM" value="512" /&gt;
+        &lt;bx:chartdata item="10:00 AM" value="678" /&gt;
+        &lt;bx:chartdata item="11:00 AM" value="543" /&gt;
+        &lt;bx:chartdata item="12:00 PM" value="721" /&gt;
+        &lt;bx:chartdata item="1:00 PM" value="634" /&gt;
+        &lt;bx:chartdata item="2:00 PM" value="587" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 4: Horizontal Bar --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-bar-chart-steps text-warning"></i> 4. Horizontal Bar Chart
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Horizontal orientation with custom axis titles
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Resource Utilization" backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="300"
+                            xaxistitle="Usage Percentage" yaxistitle="Resources">
+                        <bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56"
+                                        serieslabel="Current Usage">
+                            <bx:chartdata item="CPU" value="75" />
+                            <bx:chartdata item="Memory" value="60" />
+                            <bx:chartdata item="Disk I/O" value="45" />
+                            <bx:chartdata item="Network" value="30" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode4' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode4">&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="300"
+         xaxistitle="Usage Percentage" yaxistitle="Resources"&gt;
+    &lt;bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56"
+                    serieslabel="Current Usage"&gt;
+        &lt;bx:chartdata item="CPU" value="75" /&gt;
+        &lt;bx:chartdata item="Memory" value="60" /&gt;
+        &lt;bx:chartdata item="Disk I/O" value="45" /&gt;
+        &lt;bx:chartdata item="Network" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 5: Scatter Plot --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-grid-3x3 text-danger"></i> 5. Scatter Plot
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Correlation analysis with gridlines for precision reading
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Performance Correlation" backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="400"
+                            xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
+                            showxgridlines="true" showygridlines="true">
+                        <bx:chartseries type="scatter" colorlist="9966FF" serieslabel="Performance Data">
+                            <bx:chartdata item="Point 1" value="120" />
+                            <bx:chartdata item="Point 2" value="85" />
+                            <bx:chartdata item="Point 3" value="200" />
+                            <bx:chartdata item="Point 4" value="150" />
+                            <bx:chartdata item="Point 5" value="95" />
+                            <bx:chartdata item="Point 6" value="175" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode5' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode5">&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="400"
+         xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
+         showxgridlines="true" showygridlines="true"&gt;
+    &lt;bx:chartseries type="scatter" colorlist="9966FF" serieslabel="Performance Data"&gt;
+        &lt;bx:chartdata item="Point 1" value="120" /&gt;
+        &lt;bx:chartdata item="Point 2" value="85" /&gt;
+        &lt;bx:chartdata item="Point 3" value="200" /&gt;
+        &lt;bx:chartdata item="Point 4" value="150" /&gt;
+        &lt;bx:chartdata item="Point 5" value="95" /&gt;
+        &lt;bx:chartdata item="Point 6" value="175" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 6: Stacked Bar --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-stack text-primary"></i> 6. Stacked Bar Chart
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Stacked series placement for cumulative data visualization
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="##ffffff"
+                            chartwidth="600" chartheight="350"
+                            xaxistitle="Servers" yaxistitle="Resource Usage (%)"
+                            seriesplacement="stacked" showygridlines="true">
+                        <bx:chartseries type="bar" colorlist="FF9F40,4BC0C0,FF6384"
+                                        serieslabel="Resource Distribution">
+                            <bx:chartdata item="Server A" value="30" />
+                            <bx:chartdata item="Server B" value="45" />
+                            <bx:chartdata item="Server C" value="25" />
+                            <bx:chartdata item="Server D" value="60" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode6' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode6">&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="####ffffff"
+         chartwidth="600" chartheight="350"
+         xaxistitle="Servers" yaxistitle="Resource Usage (%)"
+         seriesplacement="stacked" showygridlines="true"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF9F40,4BC0C0,FF6384"
+                    serieslabel="Resource Distribution"&gt;
+        &lt;bx:chartdata item="Server A" value="30" /&gt;
+        &lt;bx:chartdata item="Server B" value="45" /&gt;
+        &lt;bx:chartdata item="Server C" value="25" /&gt;
+        &lt;bx:chartdata item="Server D" value="60" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 7: Doughnut --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-circle text-success"></i> 7. Doughnut Chart
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Multi-color doughnut with legend positioning
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="##ffffff"
+                            chartheight="350" chartwidth="600" showlegend="true">
+                        <bx:chartseries type="doughnut"
+                                       colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                                       serieslabel="Market Share">
+                            <bx:chartdata item="Chrome" value="65" />
+                            <bx:chartdata item="Firefox" value="18" />
+                            <bx:chartdata item="Safari" value="12" />
+                            <bx:chartdata item="Edge" value="4" />
+                            <bx:chartdata item="Others" value="1" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode7' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode7">&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="####ffffff"
+         chartheight="350" chartwidth="600" showlegend="true"&gt;
+    &lt;bx:chartseries type="doughnut"
+                   colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+                   serieslabel="Market Share"&gt;
+        &lt;bx:chartdata item="Chrome" value="65" /&gt;
+        &lt;bx:chartdata item="Firefox" value="18" /&gt;
+        &lt;bx:chartdata item="Safari" value="12" /&gt;
+        &lt;bx:chartdata item="Edge" value="4" /&gt;
+        &lt;bx:chartdata item="Others" value="1" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 8: Font Styling --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-fonts text-info"></i> 8. Font Styling Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Custom font properties (bold, italic, size) and foreground colors
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            fontbold="true" fontitalic="true" fontsize="14"
+                            foregroundcolor="##2E4057" xaxistitle="Categories" yaxistitle="Values">
+                        <bx:chartseries type="bar" colorlist="FF6B6B,4ECDC4,45B7D1" serieslabel="Styled Data">
+                            <bx:chartdata item="Item A" value="45" />
+                            <bx:chartdata item="Item B" value="32" />
+                            <bx:chartdata item="Item C" value="23" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode8' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode8">&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         fontbold="true" fontitalic="true" fontsize="14"
+         foregroundcolor="####2E4057" xaxistitle="Categories" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF6B6B,4ECDC4,45B7D1" serieslabel="Styled Data"&gt;
+        &lt;bx:chartdata item="Item A" value="45" /&gt;
+        &lt;bx:chartdata item="Item B" value="32" /&gt;
+        &lt;bx:chartdata item="Item C" value="23" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 9: Marker Control --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-circle-fill text-warning"></i> 9. Marker Control Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Custom marker visibility and size controls
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            showmarkers="true" markersize="8"
+                            xaxistitle="Time Points" yaxistitle="Performance">
+                        <bx:chartseries type="line" colorlist="E74C3C" serieslabel="Performance Trend">
+                            <bx:chartdata item="Week 1" value="68" />
+                            <bx:chartdata item="Week 2" value="74" />
+                            <bx:chartdata item="Week 3" value="79" />
+                            <bx:chartdata item="Week 4" value="83" />
+                            <bx:chartdata item="Week 5" value="88" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode9' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode9">&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         showmarkers="true" markersize="8"
+         xaxistitle="Time Points" yaxistitle="Performance"&gt;
+    &lt;bx:chartseries type="line" colorlist="E74C3C" serieslabel="Performance Trend"&gt;
+        &lt;bx:chartdata item="Week 1" value="68" /&gt;
+        &lt;bx:chartdata item="Week 2" value="74" /&gt;
+        &lt;bx:chartdata item="Week 3" value="79" /&gt;
+        &lt;bx:chartdata item="Week 4" value="83" /&gt;
+        &lt;bx:chartdata item="Week 5" value="88" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 10: Scale Control --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-rulers text-danger"></i> 10. Scale Control Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Custom scale range with scalefrom and scaleto attributes
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            scalefrom="0" scaleto="100"
+                            xaxistitle="Metrics" yaxistitle="Percentage">
+                        <bx:chartseries type="bar" colorlist="3498DB" serieslabel="Performance Metrics">
+                            <bx:chartdata item="CPU Usage" value="75" />
+                            <bx:chartdata item="Memory Usage" value="60" />
+                            <bx:chartdata item="Disk Usage" value="45" />
+                            <bx:chartdata item="Network Usage" value="30" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode10' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode10">&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         scalefrom="0" scaleto="100"
+         xaxistitle="Metrics" yaxistitle="Percentage"&gt;
+    &lt;bx:chartseries type="bar" colorlist="3498DB" serieslabel="Performance Metrics"&gt;
+        &lt;bx:chartdata item="CPU Usage" value="75" /&gt;
+        &lt;bx:chartdata item="Memory Usage" value="60" /&gt;
+        &lt;bx:chartdata item="Disk Usage" value="45" /&gt;
+        &lt;bx:chartdata item="Network Usage" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 11: Label Positioning --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-tag text-primary"></i> 11. Label Positioning Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Rotated category labels for long text labels
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="##ffffff"
+                            chartheight="350" chartwidth="600" showlegend="true"
+                            categorylabelpositions="up_45"
+                            xaxistitle="Long Category Names" yaxistitle="Values">
+                        <bx:chartseries type="bar" colorlist="9B59B6" serieslabel="Rotated Labels">
+                            <bx:chartdata item="Very Long Category Name A" value="42" />
+                            <bx:chartdata item="Another Long Name B" value="28" />
+                            <bx:chartdata item="Yet Another Long Name C" value="35" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode11' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode11">&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="####ffffff"
+         chartheight="350" chartwidth="600" showlegend="true"
+         categorylabelpositions="up_45"
+         xaxistitle="Long Category Names" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="9B59B6" serieslabel="Rotated Labels"&gt;
+        &lt;bx:chartdata item="Very Long Category Name A" value="42" /&gt;
+        &lt;bx:chartdata item="Another Long Name B" value="28" /&gt;
+        &lt;bx:chartdata item="Yet Another Long Name C" value="35" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 12: Display Control --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-eye-slash text-success"></i> 12. Display Control Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Toggle tooltips, labels, and borders for clean displays
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Display Control Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            showtooltip="false" showxlabel="false" showborder="true"
+                            yaxistitle="Values">
+                        <bx:chartseries type="pie" colorlist="E67E22,27AE60,8E44AD" serieslabel="No Tooltips Demo">
+                            <bx:chartdata item="Section A" value="40" />
+                            <bx:chartdata item="Section B" value="35" />
+                            <bx:chartdata item="Section C" value="25" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode12' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode12">&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         showtooltip="false" showxlabel="false" showborder="true"
+         yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="pie" colorlist="E67E22,27AE60,8E44AD" serieslabel="No Tooltips Demo"&gt;
+        &lt;bx:chartdata item="Section A" value="40" /&gt;
+        &lt;bx:chartdata item="Section B" value="35" /&gt;
+        &lt;bx:chartdata item="Section C" value="25" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 13: Sorted Data --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-sort-alpha-down text-info"></i> 13. Sorted Data Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Automatic alphabetical sorting of x-axis categories
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            sortxaxis="true"
+                            xaxistitle="Sorted Categories" yaxistitle="Values">
+                        <bx:chartseries type="bar" colorlist="16A085" serieslabel="Alphabetically Sorted">
+                            <bx:chartdata item="Zebra" value="35" />
+                            <bx:chartdata item="Apple" value="45" />
+                            <bx:chartdata item="Mango" value="30" />
+                            <bx:chartdata item="Cherry" value="40" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode13' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode13">&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         sortxaxis="true"
+         xaxistitle="Sorted Categories" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="bar" colorlist="16A085" serieslabel="Alphabetically Sorted"&gt;
+        &lt;bx:chartdata item="Zebra" value="35" /&gt;
+        &lt;bx:chartdata item="Apple" value="45" /&gt;
+        &lt;bx:chartdata item="Mango" value="30" /&gt;
+        &lt;bx:chartdata item="Cherry" value="40" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 14: Interactive Chart --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-hand-index text-warning"></i> 14. Interactive Chart Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Clickable chart data points with URL navigation
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="##ffffff"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            url="https://www.boxlang.io"
+                            xaxistitle="Click any data point" yaxistitle="Values">
+                        <bx:chartseries type="doughnut" colorlist="F39C12,E74C3C,9B59B6" serieslabel="Clickable Chart">
+                            <bx:chartdata item="Click Me A" value="35" />
+                            <bx:chartdata item="Click Me B" value="40" />
+                            <bx:chartdata item="Click Me C" value="25" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode14' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode14">&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="####ffffff"
+         chartheight="300" chartwidth="600" showlegend="true"
+         url="https://www.boxlang.io"
+         xaxistitle="Click any data point" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="doughnut" colorlist="F39C12,E74C3C,9B59B6" serieslabel="Clickable Chart"&gt;
+        &lt;bx:chartdata item="Click Me A" value="35" /&gt;
+        &lt;bx:chartdata item="Click Me B" value="40" /&gt;
+        &lt;bx:chartdata item="Click Me C" value="25" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 15: Background Colors --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-palette-fill text-danger"></i> 15. Background Color Demo
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Custom background and foreground color combinations
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Background Color Demo" backgroundcolor="##F8F9FA"
+                            chartheight="300" chartwidth="600" showlegend="true"
+                            databackgroundcolor="##E8F6F3" foregroundcolor="##1B4F72"
+                            xaxistitle="Items" yaxistitle="Values">
+                        <bx:chartseries type="area" colorlist="52C41A" serieslabel="Colored Background">
+                            <bx:chartdata item="Point 1" value="45" />
+                            <bx:chartdata item="Point 2" value="52" />
+                            <bx:chartdata item="Point 3" value="38" />
+                            <bx:chartdata item="Point 4" value="30" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode15' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode15">&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="####F8F9FA"
+         chartheight="300" chartwidth="600" showlegend="true"
+         databackgroundcolor="####E8F6F3" foregroundcolor="####1B4F72"
+         xaxistitle="Items" yaxistitle="Values"&gt;
+    &lt;bx:chartseries type="area" colorlist="52C41A" serieslabel="Colored Background"&gt;
+        &lt;bx:chartdata item="Point 1" value="45" /&gt;
+        &lt;bx:chartdata item="Point 2" value="52" /&gt;
+        &lt;bx:chartdata item="Point 3" value="38" /&gt;
+        &lt;bx:chartdata item="Point 4" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 16: Enhanced Bar --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-bar-chart-line text-primary"></i> 16. Enhanced Performance Analysis
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Combines multiple enhancements - gridlines, colors, axis titles, and custom styling
+                </div>
+                <div class="chart-display">
+                    <bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="##F8F9FA"
+                            chartheight="400" chartwidth="600" showlegend="true"
+                            xaxistitle="Product Categories" yaxistitle="Performance Score"
+                            showxgridlines="true" showygridlines="true"
+                            databackgroundcolor="##E8F6F3" foregroundcolor="##1B4F72">
+                        <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" serieslabel="Product Performance">
+                            <bx:chartdata item="Product A" value="85" />
+                            <bx:chartdata item="Product B" value="92" />
+                            <bx:chartdata item="Product C" value="78" />
+                            <bx:chartdata item="Product D" value="68" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode16' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode16">&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="####F8F9FA"
+         chartheight="400" chartwidth="600" showlegend="true"
+         xaxistitle="Product Categories" yaxistitle="Performance Score"
+         showxgridlines="true" showygridlines="true"
+         databackgroundcolor="####E8F6F3" foregroundcolor="####1B4F72"&gt;
+    &lt;bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56,4BC0C0" serieslabel="Product Performance"&gt;
+        &lt;bx:chartdata item="Product A" value="85" /&gt;
+        &lt;bx:chartdata item="Product B" value="92" /&gt;
+        &lt;bx:chartdata item="Product C" value="78" /&gt;
+        &lt;bx:chartdata item="Product D" value="68" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+                <div class="alert alert-info mt-3" role="alert">
+                    <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Advanced Features Summary</h6>
+                    <p class="mb-0 small">
+                        This example demonstrates how multiple enhanced features can be combined to create
+                        professional, data-rich visualizations with precise control over every aspect of the chart.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--- Feature Summary --->
+        <div class="card border-0 shadow-sm mb-5">
+            <div class="card-body p-4">
+                <h4 class="card-title mb-4"><i class="bi bi-star-fill text-warning"></i> Enhanced Features Demonstrated</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Axis titles (X and Y)</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Grid line controls</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Stacked series placement</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Font customization (bold, italic, size)</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Custom marker controls</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Scale range control</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Label positioning</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Display toggles</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Automatic data sorting</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Interactive click URLs</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Background colors (chart & data)</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Foreground color control</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Custom color palettes</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Series placement (cluster/stacked)</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Legend positioning</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Border control</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- Back to Suite Button --->
+        <div class="text-center my-5">
+            <a href="index.bxm" class="btn btn-boxlang btn-lg">
+                <i class="bi bi-arrow-left"></i> Back to Test Suite
+            </a>
+        </div>
+    </div>
+
+    <bx:include template="includes/footer.bxm">
+</body>
+</html>

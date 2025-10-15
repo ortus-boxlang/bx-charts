@@ -23,6 +23,7 @@ on:
 env:
   MODULE_ID: ${{ github.event.repository.name }}
   JDK: 21
+  NODE: 20
   BUILD_ID: ${{ github.run_number }}
   SNAPSHOT: ${{ inputs.snapshot || false }}
 
@@ -52,6 +53,11 @@ jobs:
         with:
           forgeboxAPIKey: ${{ secrets.FORGEBOX_API_TOKEN }}
 
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE }}
+
       - name: Setup Environment Variables For Build Process
         id: current_version
         run: |
@@ -68,7 +74,6 @@ jobs:
           if [ $GITHUB_REF == 'refs/heads/development' ]
           then
             echo "BRANCH=development" >> $GITHUB_ENV
-            echo "MODULE_VERSION=${MODULE_VERSION}-snapshot" >> $GITHUB_ENV
           fi
 
       - name: Update changelog [unreleased] with latest version
@@ -82,6 +87,7 @@ jobs:
         run: |
           npm install -g markdownlint-cli
           markdownlint changelog.md --fix
+          npm install
           boxlang Build.bx \
             --buildId=${{ env.BUILD_ID }} \
             --version=${{ env.MODULE_VERSION }} \
@@ -112,17 +118,16 @@ jobs:
           path: |
             changelog.md
 
-      # UNCOMMENT THE FOLLOWING LINES TO ENABLE S3 UPLOADS
-      # - name: Upload Distributions to S3
-      #   uses: jakejarvis/s3-sync-action@master
-      #   with:
-      #     args: --acl public-read
-      #   env:
-      #     AWS_S3_BUCKET: "downloads.ortussolutions.com"
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
-      #     SOURCE_DIR: "build/artifacts"
-      #     DEST_DIR: "ortussolutions/boxlang-modules/${{ env.MODULE_ID }}/${{ env.MODULE_VERSION }}"
+      - name: Upload Distributions to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read
+        env:
+          AWS_S3_BUCKET: "downloads.ortussolutions.com"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_SECRET }}
+          SOURCE_DIR: "build/artifacts"
+          DEST_DIR: "ortussolutions/boxlang-modules/${{ env.MODULE_ID }}/${{ env.MODULE_VERSION }}"
 
       - name: Publish to ForgeBox
         run: |
@@ -141,18 +146,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: refs/tags/v${{ env.MODULE_VERSION }}
 
-      # UNCOMMENT THE FOLLOWING LINES TO ENABLE SLACK NOTIFICATIONS
-      # - name: Inform Slack
-      #   if: ${{ always() }}
-      #   uses: rtCamp/action-slack-notify@v2
-      #   env:
-      #     SLACK_CHANNEL: coding
-      #     SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
-      #     SLACK_ICON_EMOJI: ":bell:"
-      #     SLACK_MESSAGE: "Module ${{ env.MODULE_ID }} v${{ env.MODULE_VERSION }} Built with ${{ job.status }}!"
-      #     SLACK_TITLE: "BoxLang Module ${{ env.MODULE_ID }}"
-      #     SLACK_USERNAME: CI
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Inform Slack
+        if: ${{ always() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: coding
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_ICON_EMOJI: ":bell:"
+          SLACK_MESSAGE: "Module ${{ env.MODULE_ID }} v${{ env.MODULE_VERSION }} Built with ${{ job.status }}!"
+          SLACK_TITLE: "BoxLang Module ${{ env.MODULE_ID }}"
+          SLACK_USERNAME: CI
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   ##########################################################################################
   # Prep Next Release
