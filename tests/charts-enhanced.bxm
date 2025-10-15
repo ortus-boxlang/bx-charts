@@ -42,13 +42,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode1' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="JVM Memory"
+                    <pre data-lang="xml" id="enhancedCode1">&lt;bx:chart title="JVM Memory"
          backgroundcolor="####ffffff"
          chartwidth="600" chartheight="600"
          showlegend="true"
@@ -87,13 +95,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode2' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode2">&lt;bx:chart format="canvas" title="Cache Performance Report" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="500" showlegend="true"
          xaxistitle="Metrics" yaxistitle="Count"
          seriesplacement="cluster" showxgridlines="false" showygridlines="true"&gt;
@@ -134,13 +150,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode3' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode3">&lt;bx:chart format="canvas" title="Memory Usage Trend" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="300"
          xaxistitle="Time" yaxistitle="Memory Usage (MB)"
          showxgridlines="true" showygridlines="true"&gt;
@@ -181,13 +205,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode4' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode4">&lt;bx:chart format="canvas" title="Resource Utilization" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="300"
          xaxistitle="Usage Percentage" yaxistitle="Resources"&gt;
     &lt;bx:chartseries type="horizontalbar" colorlist="FF6384,36A2EB,FFCE56"
@@ -228,13 +260,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode5' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode5">&lt;bx:chart format="canvas" title="Performance Correlation" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="400"
          xaxistitle="Response Time (ms)" yaxistitle="Throughput (req/s)"
          showxgridlines="true" showygridlines="true"&gt;
@@ -276,13 +316,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode6' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode6">&lt;bx:chart format="canvas" title="Server Resource Usage" backgroundcolor="####ffffff"
          chartwidth="600" chartheight="350"
          xaxistitle="Servers" yaxistitle="Resource Usage (%)"
          seriesplacement="stacked" showygridlines="true"&gt;
@@ -323,13 +371,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode7' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode7">&lt;bx:chart format="canvas" title="Browser Usage Statistics" backgroundcolor="####ffffff"
          chartheight="350" chartwidth="600" showlegend="true"&gt;
     &lt;bx:chartseries type="doughnut"
                    colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
@@ -368,13 +424,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode8' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode8">&lt;bx:chart format="canvas" title="Font Styling Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          fontbold="true" fontitalic="true" fontsize="14"
          foregroundcolor="####2E4057" xaxistitle="Categories" yaxistitle="Values"&gt;
@@ -413,13 +477,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode9' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode9">&lt;bx:chart format="canvas" title="Marker Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          showmarkers="true" markersize="8"
          xaxistitle="Time Points" yaxistitle="Performance"&gt;
@@ -459,13 +531,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode10' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode10">&lt;bx:chart format="canvas" title="Scale Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          scalefrom="0" scaleto="100"
          xaxistitle="Metrics" yaxistitle="Percentage"&gt;
@@ -503,13 +583,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode11' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode11">&lt;bx:chart format="canvas" title="Label Positioning Demo" backgroundcolor="####ffffff"
          chartheight="350" chartwidth="600" showlegend="true"
          categorylabelpositions="up_45"
          xaxistitle="Long Category Names" yaxistitle="Values"&gt;
@@ -546,13 +634,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode12' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode12">&lt;bx:chart format="canvas" title="Display Control Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          showtooltip="false" showxlabel="false" showborder="true"
          yaxistitle="Values"&gt;
@@ -590,13 +686,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode13' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode13">&lt;bx:chart format="canvas" title="Sorted Data Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          sortxaxis="true"
          xaxistitle="Sorted Categories" yaxistitle="Values"&gt;
@@ -634,13 +738,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode14' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="####ffffff"
+                    <pre data-lang="xml" id="enhancedCode14">&lt;bx:chart format="canvas" title="Interactive Chart Demo" backgroundcolor="####ffffff"
          chartheight="300" chartwidth="600" showlegend="true"
          url="https://www.boxlang.io"
          xaxistitle="Click any data point" yaxistitle="Values"&gt;
@@ -678,13 +790,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode15' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="####F8F9FA"
+                    <pre data-lang="xml" id="enhancedCode15">&lt;bx:chart format="canvas" title="Background Color Demo" backgroundcolor="####F8F9FA"
          chartheight="300" chartwidth="600" showlegend="true"
          databackgroundcolor="####E8F6F3" foregroundcolor="####1B4F72"
          xaxistitle="Items" yaxistitle="Values"&gt;
@@ -724,13 +844,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode16' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="####F8F9FA"
+                    <pre data-lang="xml" id="enhancedCode16">&lt;bx:chart format="canvas" title="Enhanced Performance Analysis" backgroundcolor="####F8F9FA"
          chartheight="400" chartwidth="600" showlegend="true"
          xaxistitle="Product Categories" yaxistitle="Performance Score"
          showxgridlines="true" showygridlines="true"

@@ -49,13 +49,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode1' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Responsive Pie Chart"
+                    <pre data-lang="xml" id="enhancedCode1">&lt;bx:chart title="Responsive Pie Chart"
          chartwidth="600" chartheight="300"
          responsive="true"
          maintainAspectRatio="true"&gt;
@@ -102,13 +110,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode2' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Wide Format Bar Chart"
+                    <pre data-lang="xml" id="enhancedCode2">&lt;bx:chart title="Wide Format Bar Chart"
          chartwidth="800" chartheight="300"
          responsive="true"
          maintainAspectRatio="true"
@@ -158,13 +174,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode3' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Fill Container Chart"
+                    <pre data-lang="xml" id="enhancedCode3">&lt;bx:chart title="Fill Container Chart"
          chartwidth="600" chartheight="400"
          responsive="true"
          maintainAspectRatio="false"
@@ -216,13 +240,21 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="code-display">
-                            <div class="code-display-header">
-                                <span class="code-display-title">
+                        <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
                                     <i class="bi bi-code-slash"></i> Source Code
                                 </span>
-                            </div>
-                            <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Mobile-Friendly Doughnut"
+                        <button
+                            @click="copyToClipboard( 'enhancedCode4' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode4">&lt;bx:chart title="Mobile-Friendly Doughnut"
          chartwidth="400" chartheight="400"
          responsive="true"
          maintainAspectRatio="true"
@@ -269,13 +301,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode5' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Fixed Size Chart"
+                    <pre data-lang="xml" id="enhancedCode5">&lt;bx:chart title="Fixed Size Chart"
          chartwidth="500" chartheight="250"
          responsive="false"
          xaxistitle="Fixed Dimensions" yaxistitle="Values"&gt;
@@ -322,13 +362,21 @@
                         </bx:chartseries>
                     </bx:chart>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode6' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Vertical Rankings"
+                    <pre data-lang="xml" id="enhancedCode6">&lt;bx:chart title="Vertical Rankings"
          chartwidth="500" chartheight="600"
          responsive="true"
          maintainAspectRatio="true"
@@ -394,13 +442,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="code-display">
+                <div class="code-display" x-data="copyCode">
                     <div class="code-display-header">
                         <span class="code-display-title">
                             <i class="bi bi-code-slash"></i> Source Code (Layout)
                         </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode7' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;div class="row"&gt;
+                    <pre data-lang="xml" id="enhancedCode7">&lt;div class="row"&gt;
     &lt;div class="col-md-6"&gt;
         &lt;bx:chart title="Left Chart - Area" responsive="true" ...&gt;
             ...
@@ -495,7 +551,7 @@
                             <i class="bi bi-code-slash"></i> Source Code (Layout)
                         </span>
                     </div>
-                    <pre class="brush: xml; toolbar: false;">&lt;div class="row g-3"&gt;
+                    <pre data-lang="xml">&lt;div class="row g-3"&gt;
     &lt;div class="col-lg-6"&gt;
         &lt;bx:chart title="Sales" responsive="true" ...&gt;...&lt;/bx:chart&gt;
     &lt;/div&gt;
