@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2025-10-15
+
 ### Added
 
 - Automated chart.js installation and management via npm
@@ -44,7 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2025-10-11
 
+## [1.0.0] - 2025-10-11
+
 - First iteration of this module
 
-[unreleased]: https://github.com/ortus-boxlang/bx-charts/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/ortus-boxlang/bx-charts/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/ortus-boxlang/bx-charts/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/ortus-boxlang/bx-charts/compare/v1.0.0...v1.0.0
