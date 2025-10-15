@@ -259,7 +259,7 @@
 									<i class="bi bi-file-earmark-code"></i> Simple Pie Chart
 								</span>
 							</div>
-							<pre class="brush: boxlang; toolbar: false;">&lt;bx:chart title="Sales Data" chartwidth="400" chartheight="300"&gt;
+							<pre class="brush: xml; toolbar: false;">&lt;bx:chart title="Sales Data" chartwidth="400" chartheight="300"&gt;
     &lt;bx:chartseries type="pie" colorlist="FF6384,36A2EB,FFCE56"&gt;
         &lt;bx:chartdata item="Q1" value="150" /&gt;
         &lt;bx:chartdata item="Q2" value="200" /&gt;

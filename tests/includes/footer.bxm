@@ -1,6 +1,7 @@
 <!--- SyntaxHighlighter Scripts --->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.min.js"></script>
 <!--- BoxLang Brush v3 from https://github.com/ortus-boxlang/brush-boxlang --->
 <script src="https://cdn.jsdelivr.net/gh/ortus-boxlang/brush-boxlang@main/v3/brush-boxlang.js"></script>
 <script type="text/javascript">
