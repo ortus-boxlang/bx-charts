@@ -30,7 +30,11 @@
 			<div class="col-md-4 mb-3">
 				<h6 class="text-white mb-3">About</h6>
 				<p class="text-white-50">Created by <a href="https://www.ortussolutions.com" target="_blank" class="text-white">Ortus Solutions</a></p>
-				<p class="text-white-50"><small>Version 1.0.0</small></p>
+				<p class="text-white-50">
+					<bx:output>
+					<small>Version #server.boxlang.modules.bxcharts.version#</small>
+					</bx:output>
+				</p>
 			</div>
 		</div>
 		<hr class="border-secondary">
