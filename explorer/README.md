@@ -15,7 +15,7 @@ This is the **BoxLang Charts Explorer** - an interactive showcase of all chart t
 # Build the Docker image (from parent directory)
 cd /path/to/bx-charts
 docker rm -f charts-explorer 2>/dev/null || true
-docker build --pull --no-cache -f explorer/Dockerfile -t boxlang-charts-explorer .
+docker build --pull --no-cache -f Dockerfile -t boxlang-charts-explorer .
 
 # Run the container
 docker run --name charts-explorer \
