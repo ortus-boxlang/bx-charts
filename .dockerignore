@@ -1,8 +1,10 @@
 # Exclude these files from Docker build context
 .git
 .gitignore
+.github
+.vscode
+.dockerignore
+.DS_Store
 *.md
 Dockerfile
-.dockerignore
 node_modules
-.DS_Store
