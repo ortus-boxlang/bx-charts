@@ -20,16 +20,19 @@
 	<div class="hero-header">
 		<div class="container text-center">
 			<h1 class="display-3 fw-bold mb-3">
-				<i class="bi bi-bar-chart-fill"></i> BoxLang Charts Module
+				<div>
+					<img src="includes/boxlang-dark.svg" alt="BoxLang Logo" style="height: 100px; vertical-align: middle;">
+				</div>
+				 📈 Charts Module
 			</h1>
 			<p class="lead mb-4">
 				Beautiful, Interactive Data Visualizations Powered by Chart.js
 			</p>
 			<div class="d-flex justify-content-center gap-3">
-				<a href="##getting-started" class="btn btn-lg px-4">
+				<a href="##getting-started" class="btn btn-lg btn-outline-dark px-4">
 					<i class="bi bi-rocket-takeoff"></i> Get Started
 				</a>
-				<a href="https://github.com/ortus-boxlang/bx-charts" target="_blank" class="btn btn-lg px-4">
+				<a href="https://github.com/ortus-boxlang/bx-charts" target="_blank" class="btn btn-lg btn-outline-dark px-4">
 					<i class="bi bi-github"></i> GitHub
 				</a>
 			</div>
