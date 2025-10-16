@@ -13,6 +13,58 @@
  *   </bx:chartseries>
  * </bx:chart>
  * </pre>
+ * <p>
+ * <h2>Attributes</h2>
+ * <h3>Core Attributes</h3>
+ * <ul>
+ *   <li><b>title</b> (string, optional) - Chart title displayed at the top. Default: ""</li>
+ *   <li><b>chartWidth</b> (number, optional) - Chart width in pixels. Default: 400</li>
+ *   <li><b>chartHeight</b> (number, optional) - Chart height in pixels. Default: 300</li>
+ *   <li><b>backgroundColor</b> (string, optional) - Background color (hex or named color). Default: "#ffffff"</li>
+ *   <li><b>showLegend</b> (boolean, optional) - Display legend for multi-series charts. Default: true</li>
+ * </ul>
+ * <h3>Responsive Attributes</h3>
+ * <ul>
+ *   <li><b>responsive</b> (boolean, optional) - Enable responsive resizing. Default: true</li>
+ *   <li><b>maintainAspectRatio</b> (boolean, optional) - Maintain width/height ratio. Default: true</li>
+ *   <li><b>aspectRatio</b> (number, optional) - Aspect ratio (width/height). Default: 2</li>
+ *   <li><b>resizeDelay</b> (number, optional) - Delay before resize (ms). Default: 0</li>
+ * </ul>
+ * <h3>Styling Attributes</h3>
+ * <ul>
+ *   <li><b>font</b> (string, optional) - Font family for chart text</li>
+ *   <li><b>fontBold</b> (boolean, optional) - Bold text. Default: false</li>
+ *   <li><b>fontItalic</b> (boolean, optional) - Italic text. Default: false</li>
+ *   <li><b>fontSize</b> (number, optional) - Font size in pixels. Default: 12</li>
+ *   <li><b>foregroundColor</b> (string, optional) - Text color. Default: "#333333"</li>
+ *   <li><b>dataBackgroundColor</b> (string, optional) - Data area background color</li>
+ * </ul>
+ * <h3>Axis Configuration</h3>
+ * <ul>
+ *   <li><b>xAxisTitle</b> (string, optional) - X-axis title. Default: ""</li>
+ *   <li><b>yAxisTitle</b> (string, optional) - Y-axis title. Default: ""</li>
+ *   <li><b>showXGridlines</b> (boolean, optional) - Show X-axis grid lines. Default: false</li>
+ *   <li><b>showYGridlines</b> (boolean, optional) - Show Y-axis grid lines. Default: true</li>
+ *   <li><b>showXLabel</b> (boolean, optional) - Display X-axis labels. Default: true</li>
+ *   <li><b>scaleFrom</b> (number, optional) - Y-axis minimum value</li>
+ *   <li><b>scaleTo</b> (number, optional) - Y-axis maximum value</li>
+ *   <li><b>sortXAxis</b> (boolean, optional) - Sort labels alphabetically. Default: false</li>
+ * </ul>
+ * <h3>Display Options</h3>
+ * <ul>
+ *   <li><b>showBorder</b> (boolean, optional) - Display chart border. Default: false</li>
+ *   <li><b>showMarkers</b> (boolean, optional) - Show data point markers. Default: true</li>
+ *   <li><b>showTooltip</b> (boolean, optional) - Enable tooltips. Default: true</li>
+ *   <li><b>markerSize</b> (number, optional) - Marker size in pixels. Default: 4</li>
+ *   <li><b>show3D</b> (boolean, optional) - 3D appearance (limited support). Default: false</li>
+ * </ul>
+ * <h3>Advanced Options</h3>
+ * <ul>
+ *   <li><b>seriesPlacement</b> (string, optional) - Series layout: "default", "cluster", "stacked". Default: "default"</li>
+ *   <li><b>labelFormat</b> (string, optional) - Y-axis label format (use {value} placeholder). Default: ""</li>
+ *   <li><b>categoryLabelPositions</b> (string, optional) - Label rotation: "horizontal", "up_45", "up_90", "down_45", "down_90", "vertical". Default: "horizontal"</li>
+ *   <li><b>url</b> (string, optional) - URL to open when clicking data points. Default: ""</li>
+ * </ul>
  */
 @BoxComponent( "chart" )
 @AllowsBody( true )

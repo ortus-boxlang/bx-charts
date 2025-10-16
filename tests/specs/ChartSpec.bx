@@ -257,6 +257,68 @@ class extends="testbox.system.BaseSpec"{
 				expect( chartAttributes.resizeDelay ).toBe( 100, "ResizeDelay should be 100ms" );
 			} );
 
+			it( "can use query as data source with default column names", () => {
+				// Create test query
+				var testQuery = queryNew(
+					"item,value",
+					"varchar,integer",
+					[
+						{ "item": "Product A", "value": 100 },
+						{ "item": "Product B", "value": 200 },
+						{ "item": "Product C", "value": 150 }
+					]
+				);
+
+				// Validate query structure
+				expect( testQuery.recordCount ).toBe( 3, "Query should have 3 records" );
+				expect( listFindNoCase( testQuery.columnList, "item" ) ).toBeGT( 0, "Query should have 'item' column" );
+				expect( listFindNoCase( testQuery.columnList, "value" ) ).toBeGT( 0, "Query should have 'value' column" );
+			} );
+
+			it( "can use query with custom column names", () => {
+				// Create test query with custom columns
+				var testQuery = queryNew(
+					"category,amount",
+					"varchar,integer",
+					[
+						{ "category": "Sales", "amount": 5000 },
+						{ "category": "Marketing", "amount": 3000 },
+						{ "category": "Operations", "amount": 4000 }
+					]
+				);
+
+				// Validate query structure
+				expect( testQuery.recordCount ).toBe( 3, "Query should have 3 records" );
+				expect( listFindNoCase( testQuery.columnList, "category" ) ).toBeGT( 0, "Query should have 'category' column" );
+				expect( listFindNoCase( testQuery.columnList, "amount" ) ).toBeGT( 0, "Query should have 'amount' column" );
+			} );
+
+			it( "validates query has records", () => {
+				// Create empty query
+				var emptyQuery = queryNew( "item,value", "varchar,integer" );
+
+				// Validate empty query
+				expect( emptyQuery.recordCount ).toBe( 0, "Empty query should have 0 records" );
+			} );
+
+			it( "validates query column existence", () => {
+				// Create test query
+				var testQuery = queryNew(
+					"name,count",
+					"varchar,integer",
+					[
+						{ "name": "Test", "count": 10 }
+					]
+				);
+
+				var queryColumns = listToArray( testQuery.columnList );
+				
+				// Validate columns
+				expect( arrayContainsNoCase( queryColumns, "name" ) ).toBeTrue( "Query should have 'name' column" );
+				expect( arrayContainsNoCase( queryColumns, "count" ) ).toBeTrue( "Query should have 'count' column" );
+				expect( arrayContainsNoCase( queryColumns, "invalid" ) ).toBeFalse( "Query should not have 'invalid' column" );
+			} );
+
 		} );
 	}
 

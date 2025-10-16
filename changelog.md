@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Query data source support in ChartSeries component
+  - `query` attribute - Query object to use as data source, eliminating need for manual chartData components
+  - `itemColumn` attribute - Specifies the query column containing labels (default: "item")
+  - `valueColumn` attribute - Specifies the query column containing values (default: "value")
+  - Automatic query validation with descriptive error messages
+  - Internal `convertQueryToChartData()` method for query-to-array conversion
+- Comprehensive component documentation
+  - Added detailed JavaDoc-style documentation to Chart.bx with all attributes categorized
+  - Added detailed JavaDoc-style documentation to ChartSeries.bx with query usage examples
+  - Added detailed JavaDoc-style documentation to ChartData.bx with bubble chart examples
+- Updated readme.md with query data source examples and usage guidelines
+
+### Changed
+
+- ChartSeries component now supports optional body content (changed from RequiresBody=true to RequiresBody=false)
+- Enhanced error messages with more descriptive validation feedback
+
 ## [1.1.0] - 2025-10-15
 
 ### Added

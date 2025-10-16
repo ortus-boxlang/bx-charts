@@ -319,15 +319,26 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `type` | string | ✅ Yes | Chart type: "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" |
+| `type` | string | ✅ Yes | Chart type: "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" |
 | `colorlist` | string | No | Comma-separated color list (hex or named colors) |
 | `serieslabel` | string | No | Label for this data series |
+| `query` | query | No | Query object to use as data source. When provided, no child chartData components are required |
+| `itemColumn` | string | No | Name of the query column containing labels. Default: "item" |
+| `valueColumn` | string | No | Name of the query column containing values. Default: "value" |
 
-**Example:**
+**Example with chartData components:**
 
 ```boxlang
 <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Sales Data">
-    <!-- chartdata components here -->
+    <bx:chartdata item="Product A" value="150">
+    <bx:chartdata item="Product B" value="200">
+</bx:chartseries>
+```
+
+**Example with query:**
+
+```boxlang
+<bx:chartseries type="bar" query="#myQuery#" itemColumn="category" valueColumn="amount" serieslabel="Sales Data">
 </bx:chartseries>
 ```
 
@@ -515,6 +526,46 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 ```
 
 **💡 Use Case:** Shows both individual values and totals across categories. Perfect for comparing parts of a whole across different groups.
+
+#### 📊 Chart with Query Data Source
+
+BoxLang Charts can use query objects as data sources, eliminating the need for manual chartData components.
+
+```xml
+<bx:script>
+	// Create a query with sales data
+	salesQuery = queryNew(
+		"product,revenue",
+		"varchar,integer",
+		[
+			{ "product": "Product A", "revenue": 15000 },
+			{ "product": "Product B", "revenue": 23000 },
+			{ "product": "Product C", "revenue": 18000 },
+			{ "product": "Product D", "revenue": 12000 }
+		]
+	);
+</bx:script>
+
+<bx:chart title="Product Revenue"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Products" yaxistitle="Revenue ($)"
+          showygridlines="true">
+    <bx:chartseries type="bar" 
+                    query="#salesQuery#" 
+                    itemColumn="product" 
+                    valueColumn="revenue"
+                    colorlist="36A2EB"
+                    serieslabel="Revenue">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Perfect for database-driven charts where data comes from queries. Reduces boilerplate code and makes charts more maintainable.
+
+**Query Requirements:**
+- Query must contain at least one record
+- `itemColumn` must exist in the query (defaults to "item")
+- `valueColumn` must exist in the query (defaults to "value")
 
 #### 🎯 Radar Chart for Multi-dimensional Data
 
