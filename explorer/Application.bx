@@ -1,7 +1,7 @@
 class{
 
 	function onRequestStart( string targetPage ) {
-		BoxModuleReload( "bxcharts")
+		//BoxModuleReload( "bxcharts")
 		return true;
     }
 
