@@ -18,6 +18,18 @@
  * </bx:chartseries>
  * </pre>
  * <p>
+ * Usage with data array (structs):
+ * <pre>
+ * <bx:chartseries type="pie" data="#[{item:'A',value:100},{item:'B',value:200}]#">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
+ * Usage with data array (positional):
+ * <pre>
+ * <bx:chartseries type="bar" data="#[['Product A',100],['Product B',200]]#">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
  * <h2>Attributes</h2>
  * <ul>
  *   <li><b>type</b> (string, required) - Chart type: pie, bar, line, doughnut, radar, polarArea, area, horizontalbar, scatter, bubble</li>
@@ -26,6 +38,7 @@
  *   <li><b>query</b> (query, optional) - Query object to use as data source. When provided, no child chartData components are required</li>
  *   <li><b>itemColumn</b> (string, optional) - Name of the query column containing labels. Default: "item"</li>
  *   <li><b>valueColumn</b> (string, optional) - Name of the query column containing values. Default: "value"</li>
+ *   <li><b>data</b> (array, optional) - Array data source. Can be array of structs [{item:"x",value:123}] or array of arrays [["x",123]]. For bubble charts use x,y,r instead of value</li>
  * </ul>
  */
 @BoxComponent( "chartseries" )
@@ -106,6 +119,9 @@ class{
 		// Check if using query data source
 		var hasQuery = structKeyExists( attributes, "query" ) && !isNull( attributes.query );
 		
+		// Check if using array data source
+		var hasData = structKeyExists( attributes, "data" ) && !isNull( attributes.data );
+		
 		if ( hasQuery ) {
 			// Use query as data source
 			var itemColumn = attributes.itemColumn ?: "item";
@@ -117,6 +133,9 @@ class{
 				itemColumn, 
 				valueColumn 
 			);
+		} else if ( hasData ) {
+			// Use array as data source
+			executionState.chartData = convertArrayToChartData( attributes.data, chartType );
 		} else {
 			// Process the body to collect chartdata components
 			var buffer = newBuffer();
@@ -187,6 +206,136 @@ class{
 				"item": trim( query[ itemColumn ][ row ] ),
 				"value": query[ valueColumn ][ row ]
 			};
+			arrayAppend( chartData, dataPoint );
+		}
+
+		return chartData;
+	}
+
+	/**
+	 * Converts an array to chart data objects
+	 * Supports two formats:
+	 * 1. Array of structs: [{item:"x",value:123}] or [{item:"x",x:1,y:2,r:3}] for bubble
+	 * 2. Array of arrays: [["x",123]] or [["x",x,y,r]] for bubble
+	 *
+	 * @param dataArray The array to convert
+	 * @param chartType The type of chart (used to determine if it's a bubble chart)
+	 *
+	 * @return Array of chart data objects with item and value (or x,y,r) properties
+	 */
+	private function convertArrayToChartData( required dataArray, required chartType ){
+		// Validate that the array is not empty
+		if ( !isArray( dataArray ) ) {
+			throw( 
+				type: "BXChartException", 
+				message: "The data attribute must be an array. Received: #getMetadata( dataArray ).name#" 
+			);
+		}
+		
+		if ( arrayLen( dataArray ) == 0 ) {
+			throw( 
+				type: "BXChartException", 
+				message: "The data array must contain at least one element." 
+			);
+		}
+
+		var chartData = [];
+		var isBubbleChart = ( lcase( chartType ) == "bubble" );
+		
+		// Detect format based on first element
+		var firstElement = dataArray[1];
+		var isStructFormat = isStruct( firstElement );
+		var isArrayFormat = isArray( firstElement );
+		
+		if ( !isStructFormat && !isArrayFormat ) {
+			throw( 
+				type: "BXChartException", 
+				message: "The data array must contain either structs or arrays. First element type: #getMetadata( firstElement ).name#" 
+			);
+		}
+		
+		// Process array based on format
+		for ( var i = 1; i <= arrayLen( dataArray ); i++ ) {
+			var element = dataArray[i];
+			var dataPoint = {};
+			
+			if ( isStructFormat ) {
+				// Array of structs format: [{item:"x",value:123}] or [{item:"x",x:1,y:2,r:3}]
+				if ( !isStruct( element ) ) {
+					throw( 
+						type: "BXChartException", 
+						message: "Mixed array formats detected. Element #i# is not a struct but first element was a struct." 
+					);
+				}
+				
+				// Validate required keys
+				if ( !structKeyExists( element, "item" ) ) {
+					throw( 
+						type: "BXChartException", 
+						message: "Data struct at index #i# is missing required 'item' key. Available keys: #structKeyList(element)#" 
+					);
+				}
+				
+				dataPoint.item = trim( element.item );
+				
+				// For bubble charts, expect x, y, r
+				if ( isBubbleChart ) {
+					if ( structKeyExists( element, "x" ) && structKeyExists( element, "y" ) && structKeyExists( element, "r" ) ) {
+						dataPoint.x = element.x;
+						dataPoint.y = element.y;
+						dataPoint.r = element.r;
+					} else {
+						throw( 
+							type: "BXChartException", 
+							message: "Bubble chart data struct at index #i# must have 'x', 'y', and 'r' keys. Available keys: #structKeyList(element)#" 
+						);
+					}
+				} else {
+					// For other charts, expect value
+					if ( !structKeyExists( element, "value" ) ) {
+						throw( 
+							type: "BXChartException", 
+							message: "Data struct at index #i# is missing required 'value' key. Available keys: #structKeyList(element)#" 
+						);
+					}
+					dataPoint.value = element.value;
+				}
+			} else {
+				// Array of arrays format: [["x",123]] or [["x",x,y,r]]
+				if ( !isArray( element ) ) {
+					throw( 
+						type: "BXChartException", 
+						message: "Mixed array formats detected. Element #i# is not an array but first element was an array." 
+					);
+				}
+				
+				var elementLen = arrayLen( element );
+				
+				// For bubble charts, expect [item, x, y, r] (4 elements)
+				if ( isBubbleChart ) {
+					if ( elementLen != 4 ) {
+						throw( 
+							type: "BXChartException", 
+							message: "Bubble chart data array at index #i# must have exactly 4 elements [item, x, y, r]. Found #elementLen# elements." 
+						);
+					}
+					dataPoint.item = trim( element[1] );
+					dataPoint.x = element[2];
+					dataPoint.y = element[3];
+					dataPoint.r = element[4];
+				} else {
+					// For other charts, expect [item, value] (2 elements)
+					if ( elementLen != 2 ) {
+						throw( 
+							type: "BXChartException", 
+							message: "Data array at index #i# must have exactly 2 elements [item, value]. Found #elementLen# elements." 
+						);
+					}
+					dataPoint.item = trim( element[1] );
+					dataPoint.value = element[2];
+				}
+			}
+			
 			arrayAppend( chartData, dataPoint );
 		}
 

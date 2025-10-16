@@ -325,6 +325,7 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 | `query` | query | No | Query object to use as data source. When provided, no child chartData components are required |
 | `itemColumn` | string | No | Name of the query column containing labels. Default: "item" |
 | `valueColumn` | string | No | Name of the query column containing values. Default: "value" |
+| `data` | array | No | Array data source. Can be array of structs `[{item:"x",value:123}]` or array of arrays `[["x",123]]`. For bubble charts use `x`, `y`, `r` instead of `value` |
 
 **Example with chartData components:**
 
@@ -339,6 +340,44 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 
 ```boxlang
 <bx:chartseries type="bar" query="#myQuery#" itemColumn="category" valueColumn="amount" serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with array of structs:**
+
+```boxlang
+<bx:chartseries type="pie" 
+    data="#[
+        {item:'Product A', value:100},
+        {item:'Product B', value:200},
+        {item:'Product C', value:150}
+    ]#"
+    serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with array of arrays (positional):**
+
+```boxlang
+<bx:chartseries type="bar" 
+    data="#[
+        ['Product A', 100],
+        ['Product B', 200],
+        ['Product C', 150]
+    ]#"
+    serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with bubble chart (array of structs):**
+
+```boxlang
+<bx:chartseries type="bubble" 
+    data="#[
+        {item:'Point A', x:10, y:20, r:5},
+        {item:'Point B', x:15, y:25, r:8}
+    ]#"
+    serieslabel="Data Points">
 </bx:chartseries>
 ```
 
@@ -566,6 +605,101 @@ BoxLang Charts can use query objects as data sources, eliminating the need for m
 - Query must contain at least one record
 - `itemColumn` must exist in the query (defaults to "item")
 - `valueColumn` must exist in the query (defaults to "value")
+
+#### 📊 Chart with Array Data Source
+
+BoxLang Charts also support arrays as data sources, providing flexibility when working with JSON data or dynamically generated data.
+
+**Array of Structs Format:**
+
+```xml
+<bx:chart title="Sales by Product"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Products" yaxistitle="Revenue ($)">
+    <bx:chartseries type="bar" 
+                    data="#[
+                        {item:'Product A', value:15000},
+                        {item:'Product B', value:23000},
+                        {item:'Product C', value:18000}
+                    ]#"
+                    colorlist="36A2EB"
+                    serieslabel="Revenue">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Array of Arrays Format (Positional):**
+
+```xml
+<bx:chart title="Sales by Product"
+          chartwidth="600" chartheight="400">
+    <bx:chartseries type="pie" 
+                    data="#[
+                        ['Product A', 15000],
+                        ['Product B', 23000],
+                        ['Product C', 18000]
+                    ]#"
+                    colorlist="FF6384,36A2EB,FFCE56">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Bubble Chart with Array of Structs:**
+
+```xml
+<bx:chart title="Portfolio Analysis"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Risk" yaxistitle="Return">
+    <bx:chartseries type="bubble" 
+                    data="#[
+                        {item:'Stock A', x:20, y:15, r:10},
+                        {item:'Stock B', x:40, y:25, r:15},
+                        {item:'Bond C', x:10, y:8, r:5}
+                    ]#"
+                    colorlist="FF6384,36A2EB,FFCE56">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Bubble Chart with Array of Arrays:**
+
+```xml
+<bx:chartseries type="bubble" 
+                data="#[
+                    ['Stock A', 20, 15, 10],
+                    ['Stock B', 40, 25, 15],
+                    ['Bond C', 10, 8, 5]
+                ]#">
+</bx:chartseries>
+```
+
+**💡 Use Case:** Perfect for working with JSON data from APIs, dynamically generated data, or when you want a compact data format without the overhead of chartData components.
+
+**Array Data Requirements:**
+- Array must not be empty
+- All elements must use the same format (all structs or all arrays)
+- For standard charts: structs need `item` and `value` keys, arrays need 2 elements `[item, value]`
+- For bubble charts: structs need `item`, `x`, `y`, `r` keys, arrays need 4 elements `[item, x, y, r]`
+
+**Dynamic Array Example:**
+
+```xml
+<bx:script>
+    // Build data array dynamically
+    chartData = [];
+    for (i = 1; i <= 5; i++) {
+        arrayAppend(chartData, {
+            item: "Item " & i,
+            value: randRange(100, 500)
+        });
+    }
+</bx:script>
+
+<bx:chart title="Dynamic Data">
+    <bx:chartseries type="bar" data="#chartData#">
+    </bx:chartseries>
+</bx:chart>
+```
 
 #### 🎯 Radar Chart for Multi-dimensional Data
 
