@@ -881,6 +881,237 @@
             </div>
         </div>
 
+        <!--- Chart 17: Multi-Series with Per-Series Border Styling --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-palette text-warning"></i> 17. Multi-Series with Per-Series Border Styling
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Each series with distinct border styling (color, width, radius)
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Quarterly Performance Analysis"
+                            chartwidth="700" chartheight="400"
+                            xaxistitle="Quarter" yaxistitle="Amount ($K)"
+                            showlegend="true"
+                            showygridlines="true"
+                            backgroundcolor="##ffffff">
+                        <bx:chartseries type="bar"
+                                        colorlist="3498db"
+                                        serieslabel="Revenue"
+                                        bordercolor="##2980b9"
+                                        borderwidth="3"
+                                        borderradius="8">
+                            <bx:chartdata item="Q1" value="125" />
+                            <bx:chartdata item="Q2" value="158" />
+                            <bx:chartdata item="Q3" value="142" />
+                            <bx:chartdata item="Q4" value="189" />
+                        </bx:chartseries>
+                        <bx:chartseries type="bar"
+                                        colorlist="e74c3c"
+                                        serieslabel="Expenses"
+                                        bordercolor="##c0392b"
+                                        borderwidth="2"
+                                        borderradius="4">
+                            <bx:chartdata item="Q1" value="95" />
+                            <bx:chartdata item="Q2" value="102" />
+                            <bx:chartdata item="Q3" value="98" />
+                            <bx:chartdata item="Q4" value="115" />
+                        </bx:chartseries>
+                        <bx:chartseries type="bar"
+                                        colorlist="2ecc71"
+                                        serieslabel="Net Profit"
+                                        bordercolor="##27ae60"
+                                        borderwidth="4"
+                                        borderradius="6">
+                            <bx:chartdata item="Q1" value="30" />
+                            <bx:chartdata item="Q2" value="56" />
+                            <bx:chartdata item="Q3" value="44" />
+                            <bx:chartdata item="Q4" value="74" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode17' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode17">&lt;bx:chart title="Quarterly Performance Analysis"
+         chartwidth="700" chartheight="400"
+         xaxistitle="Quarter" yaxistitle="Amount ($K)"
+         showlegend="true"
+         showygridlines="true"
+         backgroundcolor="####ffffff"&gt;
+    &lt;bx:chartseries type="bar"
+                    colorlist="3498db"
+                    serieslabel="Revenue"
+                    bordercolor="####2980b9"
+                    borderwidth="3"
+                    borderradius="8"&gt;
+        &lt;bx:chartdata item="Q1" value="125" /&gt;
+        &lt;bx:chartdata item="Q2" value="158" /&gt;
+        &lt;bx:chartdata item="Q3" value="142" /&gt;
+        &lt;bx:chartdata item="Q4" value="189" /&gt;
+    &lt;/bx:chartseries&gt;
+    &lt;bx:chartseries type="bar"
+                    colorlist="e74c3c"
+                    serieslabel="Expenses"
+                    bordercolor="####c0392b"
+                    borderwidth="2"
+                    borderradius="4"&gt;
+        &lt;bx:chartdata item="Q1" value="95" /&gt;
+        &lt;bx:chartdata item="Q2" value="102" /&gt;
+        &lt;bx:chartdata item="Q3" value="98" /&gt;
+        &lt;bx:chartdata item="Q4" value="115" /&gt;
+    &lt;/bx:chartseries&gt;
+    &lt;bx:chartseries type="bar"
+                    colorlist="2ecc71"
+                    serieslabel="Net Profit"
+                    bordercolor="####27ae60"
+                    borderwidth="4"
+                    borderradius="6"&gt;
+        &lt;bx:chartdata item="Q1" value="30" /&gt;
+        &lt;bx:chartdata item="Q2" value="56" /&gt;
+        &lt;bx:chartdata item="Q3" value="44" /&gt;
+        &lt;bx:chartdata item="Q4" value="74" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+                <div class="alert alert-info mt-3" role="alert">
+                    <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Series-Level Override</h6>
+                    <p class="mb-0 small">
+                        Each series uses <code>bordercolor</code>, <code>borderwidth</code>, and <code>borderradius</code> 
+                        attributes to override chart-level defaults. This allows each data series to have distinct visual emphasis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--- Chart 18: Line Chart with Variable Border Widths --->
+        <div class="chart-card animate-fade-in mb-4">
+            <div class="chart-card-header">
+                <h3 class="chart-card-title">
+                    <i class="bi bi-graph-up text-success"></i> 18. Line Chart with Variable Border Widths
+                </h3>
+            </div>
+            <div class="chart-card-body">
+                <div class="info-badge mb-3">
+                    <strong>Feature:</strong> Different line thicknesses to emphasize primary vs secondary metrics
+                </div>
+                <div class="chart-display">
+                    <bx:chart title="Website Traffic Trends"
+                            chartwidth="700" chartheight="400"
+                            xaxistitle="Month" yaxistitle="Visits (K)"
+                            showlegend="true"
+                            showygridlines="true"
+                            showmarkers="true"
+                            backgroundcolor="##ffffff">
+                        <bx:chartseries type="line"
+                                        colorlist="e74c3c"
+                                        serieslabel="Total Visitors (Primary)"
+                                        bordercolor="##c0392b"
+                                        borderwidth="5">
+                            <bx:chartdata item="Jan" value="125" />
+                            <bx:chartdata item="Feb" value="142" />
+                            <bx:chartdata item="Mar" value="158" />
+                            <bx:chartdata item="Apr" value="171" />
+                        </bx:chartseries>
+                        <bx:chartseries type="line"
+                                        colorlist="3498db"
+                                        serieslabel="Returning Visitors"
+                                        bordercolor="##2980b9"
+                                        borderwidth="2">
+                            <bx:chartdata item="Jan" value="45" />
+                            <bx:chartdata item="Feb" value="52" />
+                            <bx:chartdata item="Mar" value="61" />
+                            <bx:chartdata item="Apr" value="68" />
+                        </bx:chartseries>
+                        <bx:chartseries type="line"
+                                        colorlist="95a5a6"
+                                        serieslabel="Bounce Rate Reference"
+                                        bordercolor="##7f8c8d"
+                                        borderwidth="1">
+                            <bx:chartdata item="Jan" value="35" />
+                            <bx:chartdata item="Feb" value="32" />
+                            <bx:chartdata item="Mar" value="28" />
+                            <bx:chartdata item="Apr" value="30" />
+                        </bx:chartseries>
+                    </bx:chart>
+                </div>
+                <div class="code-display" x-data="copyCode">
+                    <div class="code-display-header">
+                        <span class="code-display-title">
+                            <i class="bi bi-code-slash"></i> Source Code
+                        </span>
+                        <button
+                            @click="copyToClipboard( 'enhancedCode18' )"
+                            class="btn btn-sm btn-copy"
+                            :class="{ 'btn-copy-success': copied }"
+                            type="button">
+                            <i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+                            <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                        </button>
+                    </div>
+                    <pre data-lang="xml" id="enhancedCode18">&lt;bx:chart title="Website Traffic Trends"
+         chartwidth="700" chartheight="400"
+         xaxistitle="Month" yaxistitle="Visits (K)"
+         showlegend="true"
+         showygridlines="true"
+         showmarkers="true"&gt;
+    &lt;bx:chartseries type="line"
+                    colorlist="e74c3c"
+                    serieslabel="Total Visitors (Primary)"
+                    bordercolor="####c0392b"
+                    borderwidth="5"&gt;
+        &lt;bx:chartdata item="Jan" value="125" /&gt;
+        &lt;bx:chartdata item="Feb" value="142" /&gt;
+        &lt;bx:chartdata item="Mar" value="158" /&gt;
+        &lt;bx:chartdata item="Apr" value="171" /&gt;
+    &lt;/bx:chartseries&gt;
+    &lt;bx:chartseries type="line"
+                    colorlist="3498db"
+                    serieslabel="Returning Visitors"
+                    bordercolor="####2980b9"
+                    borderwidth="2"&gt;
+        &lt;bx:chartdata item="Jan" value="45" /&gt;
+        &lt;bx:chartdata item="Feb" value="52" /&gt;
+        &lt;bx:chartdata item="Mar" value="61" /&gt;
+        &lt;bx:chartdata item="Apr" value="68" /&gt;
+    &lt;/bx:chartseries&gt;
+    &lt;bx:chartseries type="line"
+                    colorlist="95a5a6"
+                    serieslabel="Bounce Rate Reference"
+                    bordercolor="####7f8c8d"
+                    borderwidth="1"&gt;
+        &lt;bx:chartdata item="Jan" value="35" /&gt;
+        &lt;bx:chartdata item="Feb" value="32" /&gt;
+        &lt;bx:chartdata item="Mar" value="28" /&gt;
+        &lt;bx:chartdata item="Apr" value="30" /&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+                </div>
+                <div class="alert alert-success mt-3" role="alert">
+                    <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Visual Hierarchy</h6>
+                    <p class="mb-0 small">
+                        Use varying <code>borderwidth</code> values (5px, 2px, 1px) to create visual hierarchy, 
+                        drawing attention to the most important data series while keeping secondary metrics visible but subtle.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <!--- Feature Summary --->
         <div class="card border-0 shadow-sm mb-5">
             <div class="card-body p-4">
@@ -907,7 +1138,8 @@
                             <li><i class="bi bi-check-circle-fill text-success"></i> Custom color palettes</li>
                             <li><i class="bi bi-check-circle-fill text-success"></i> Series placement (cluster/stacked)</li>
                             <li><i class="bi bi-check-circle-fill text-success"></i> Legend positioning</li>
-                            <li><i class="bi bi-check-circle-fill text-success"></i> Border control</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Border control (chart & series level)</li>
+                            <li><i class="bi bi-check-circle-fill text-success"></i> Per-series border styling</li>
                         </ul>
                     </div>
                 </div>

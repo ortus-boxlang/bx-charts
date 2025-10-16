@@ -465,7 +465,76 @@ class extends="testbox.system.BaseSpec"{
 				}
 			} );
 
+
+		} );
+
+		describe( "Series-Level Border Attributes", () => {
+
+			it( "supports series-level borderColor that overrides chart-level", () => {
+				// Test series-level borderColor validation
+				var seriesBorderColors = [ "##FF0000", "red", "##2c3e50", "blue" ];
+
+				for ( var color in seriesBorderColors ) {
+					expect( len( trim( color ) ) ).toBeGT( 0, "Series borderColor '#color#' should not be empty" );
+					// Validate hex format (starts with ## and 6 chars) or named color
+					if ( left( color, 2 ) == "##" ) {
+						expect( len( color ) ).toBe( 8, "Hex color '#color#' should be 8 characters (## + 6 digits)" );
+					}
+				}
+
+				// Test chart types that support borderColor
+				var supportedTypes = [ "bar", "line", "area", "pie", "doughnut", "radar", "polarArea", "bubble", "horizontalbar" ];
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderColor" );
+				}
+
+				// scatter does NOT support borderColor
+				expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", "scatter" ) ).toBe( 0, "scatter should not support borderColor" );
+			} );
+
+			it( "supports series-level borderWidth that overrides chart-level", () => {
+				// Test series-level borderWidth validation
+				var seriesWidths = [ 1, 2, 3, 5, 10 ];
+
+				for ( var width in seriesWidths ) {
+					expect( isNumeric( width ) ).toBeTrue( "Series borderWidth should be numeric" );
+					expect( width ).toBeGT( 0, "Series borderWidth should be positive" );
+				}
+
+				// Test chart types that support borderWidth
+				var supportedTypes = [ "bar", "line", "area", "pie", "doughnut", "radar", "polarArea", "bubble", "horizontalbar" ];
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderWidth" );
+				}
+
+				// scatter does NOT support borderWidth
+				expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", "scatter" ) ).toBe( 0, "scatter should not support borderWidth" );
+			} );
+
+			it( "supports series-level borderRadius that overrides chart-level for bar charts only", () => {
+				// Test series-level borderRadius validation
+				var seriesRadii = [ 0, 4, 6, 8, 10, 15 ];
+
+				for ( var radius in seriesRadii ) {
+					expect( isNumeric( radius ) ).toBeTrue( "Series borderRadius should be numeric" );
+					expect( radius ).toBeGTE( 0, "Series borderRadius should be non-negative" );
+				}
+
+				// Test chart types that support borderRadius (bar and horizontalbar only)
+				var supportedTypes = [ "bar", "horizontalbar" ];
+				var unsupportedTypes = [ "line", "area", "pie", "doughnut", "radar", "polarArea", "scatter", "bubble" ];
+
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderRadius" );
+				}
+
+				for ( var type in unsupportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBe( 0, "#type# should not support series-level borderRadius" );
+				}
+			} );
+
 		} );
 	}
 
 }
+```}

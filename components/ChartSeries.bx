@@ -32,6 +32,9 @@
  * <p>
  * <h2>Attributes</h2>
  * <ul>
+ *   <li><b>bordercolor</b> (string, optional) - Border color for this series (hex or named color). Overrides chart-level bordercolor. Not applicable for scatter charts.</li>
+ *   <li><b>borderradius</b> (numeric, optional) - Border radius in pixels for this series. Only applicable for bar and horizontalbar charts. Overrides chart-level borderradius.</li>
+ *   <li><b>borderwidth</b> (numeric, optional) - Border width in pixels for this series. Not applicable for scatter charts. Overrides chart-level borderwidth.</li>
  *   <li><b>colorlist</b> (string, optional) - Comma-separated list of colors (hex or named colors) for chart data points</li>
  *   <li><b>data</b> (array, optional) - Array data source. Can be array of structs [{item:"x",value:123}] or array of arrays [["x",123]]. For bubble charts use x,y,r instead of value</li>
  *   <li><b>itemColumn</b> (string, optional) - Name of the query column containing labels. Default: "item"</li>
@@ -114,6 +117,9 @@ class{
 		executionState.type = chartType;
 		executionState.colorlist = attributes.colorlist ?: "";
 		executionState.serieslabel = attributes.serieslabel ?: chartType;
+		executionState.bordercolor = attributes.bordercolor ?: "";
+		executionState.borderwidth = attributes.borderwidth ?: 0;
+		executionState.borderradius = attributes.borderradius ?: 0;
 		executionState.chartData = [];
 
 		// Check if using query data source
@@ -152,6 +158,9 @@ class{
 			"type": chartType,
 			"colorlist": executionState.colorlist,
 			"serieslabel": executionState.serieslabel,
+			"bordercolor": executionState.bordercolor,
+			"borderwidth": executionState.borderwidth,
+			"borderradius": executionState.borderradius,
 			"chartData": executionState.chartData
 		};
 

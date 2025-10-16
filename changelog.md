@@ -11,21 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `borderColor` attribute for Chart component
-  - Controls border color for all chart elements (bars, lines, pie slices, bubbles, etc.)
+- `borderColor` attribute for Chart component and ChartSeries component
+  - Chart level: Controls border color for all chart elements globally
+  - Series level: Overrides chart-level borderColor for individual series
   - Accepts hexadecimal values (e.g., `##FF0000`) or named colors (e.g., `red`)
-  - Applies globally to all chart elements when specified
   - Falls back to series colors when not specified
   - Works with chart types: bar, line, area, pie, doughnut, radar, polarArea, bubble, horizontalbar
-  - Comprehensive documentation in Chart.bx component
-- `borderWidth` attribute for Chart component
-  - Controls border width in pixels for chart elements
+  - Comprehensive documentation in Chart.bx and ChartSeries.bx components
+- `borderWidth` attribute for Chart component and ChartSeries component
+  - Chart level: Controls border width in pixels for all chart elements globally
+  - Series level: Overrides chart-level borderWidth for individual series
   - Applies to chart types: bar, line, area, pie, doughnut, radar, polarArea, bubble, horizontalbar
   - Default values: 1 for bar, 2 for pie/doughnut/polarArea/bubble, 3 for line/area/radar
   - Set to custom value to override defaults (e.g., `borderwidth="5"`)
   - Works in conjunction with borderColor attribute
-- `borderRadius` attribute for Chart component
-  - Controls border radius in pixels for rounded corners on bars
+- `borderRadius` attribute for Chart component and ChartSeries component
+  - Chart level: Controls border radius in pixels for all bars globally
+  - Series level: Overrides chart-level borderRadius for individual series
   - Applies to chart types: bar, horizontalbar only
   - Default: 0 (sharp corners)
   - Set to positive value for rounded bars (e.g., `borderradius="10"`)

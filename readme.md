@@ -325,6 +325,9 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 | `type` | string | ✅ Yes | Chart type: "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" |
 | `colorlist` | string | No | Comma-separated color list (hex or named colors) |
 | `serieslabel` | string | No | Label for this data series |
+| `borderColor` | string | No | Border color for this series (hex or named color). Overrides chart-level borderColor. Not applicable for scatter charts. |
+| `borderWidth` | number | No | Border width in pixels for this series. Overrides chart-level borderWidth. Not applicable for scatter charts. |
+| `borderRadius` | number | No | Border radius in pixels for this series. Only applicable for bar and horizontalbar charts. Overrides chart-level borderRadius. |
 | `query` | query | No | Query object to use as data source. When provided, no child chartData components are required |
 | `itemColumn` | string | No | Name of the query column containing labels. Default: "item" |
 | `valueColumn` | string | No | Name of the query column containing values. Default: "value" |
@@ -565,6 +568,41 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 ```
 
 **💡 Use Case:** Create modern, polished bar charts with rounded corners and custom border styling. `borderRadius` only applies to bar and horizontalbar chart types. `borderWidth` applies to bar, line, area, pie, doughnut, radar, polarArea, and bubble charts.
+
+#### 🎨 Multi-Series Chart with Per-Series Border Styling
+
+```xml
+<bx:chart title="Quarterly Performance Comparison"
+          chartwidth="700" chartheight="400"
+          xaxistitle="Quarter" yaxistitle="Revenue ($K)"
+          showlegend="true"
+          showygridlines="true">
+    <bx:chartseries type="bar"
+                    colorlist="3498db"
+                    serieslabel="Sales"
+                    bordercolor="##2980b9"
+                    borderwidth="2"
+                    borderradius="6">
+        <bx:chartdata item="Q1" value="125">
+        <bx:chartdata item="Q2" value="158">
+        <bx:chartdata item="Q3" value="142">
+        <bx:chartdata item="Q4" value="189">
+    </bx:chartseries>
+    <bx:chartseries type="bar"
+                    colorlist="e74c3c"
+                    serieslabel="Expenses"
+                    bordercolor="##c0392b"
+                    borderwidth="3"
+                    borderradius="4">
+        <bx:chartdata item="Q1" value="95">
+        <bx:chartdata item="Q2" value="102">
+        <bx:chartdata item="Q3" value="98">
+        <bx:chartdata item="Q4" value="115">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Create multi-series charts where each series has its own distinct border styling. Series-level border attributes (`bordercolor`, `borderwidth`, `borderradius`) override chart-level defaults, allowing fine-grained control over visual appearance. Perfect for comparing multiple data sets with different visual emphasis.
 
 #### ↔️ Horizontal Bar Chart
 

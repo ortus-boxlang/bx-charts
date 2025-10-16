@@ -569,6 +569,11 @@ class{
 			dataset.data = values;
 			dataset.backgroundColor = colors;
 
+			// Get series-level border attributes (override chart-level)
+			var seriesBorderColor = structKeyExists( series, "bordercolor" ) && len( series.bordercolor ) ? normalizeColor( series.bordercolor ) : normalizedBorderColor;
+			var seriesBorderWidth = structKeyExists( series, "borderwidth" ) && series.borderwidth > 0 ? series.borderwidth : borderWidth;
+			var seriesBorderRadius = structKeyExists( series, "borderradius" ) && series.borderradius > 0 ? series.borderradius : borderRadius;
+
 			// Chart type specific settings
 			if ( series.type == "bar" || series.type == "horizontalbar" ) {
 				if ( series.type == "horizontalbar" ) {
@@ -577,33 +582,33 @@ class{
 				} else {
 					config.type = "bar";
 				}
-				// Use borderColor attribute if specified, otherwise use series colors
-				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : colors;
-				// Use borderWidth attribute if specified, otherwise default to 1
-				dataset.borderWidth = borderWidth > 0 ? borderWidth : 1;
-				// Use borderRadius attribute if specified (bar charts only)
-				if ( borderRadius > 0 ) {
-					dataset.borderRadius = borderRadius;
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series colors
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : colors;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 1
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 1;
+				// Use series-level borderRadius if specified (bar charts only)
+				if ( seriesBorderRadius > 0 ) {
+					dataset.borderRadius = seriesBorderRadius;
 				}
 			} else if ( series.type == "area" ) {
 				config.type = "line";
 				dataset.fill = true;
-				// Use borderColor attribute if specified, otherwise use series color
-				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = colors[1] ?: "##FF6384";
-				// Use borderWidth attribute if specified, otherwise default to 3
-				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 				// Apply marker settings for area charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
 			} else if ( series.type == "line" ) {
 				config.type = "line";
-				// Use borderColor attribute if specified, otherwise use series color
-				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = normalizedDataBackgroundColor ?: "transparent";
 				dataset.fill = false;
-				// Use borderWidth attribute if specified, otherwise default to 3
-				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 				// Apply marker settings for line charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
@@ -616,39 +621,39 @@ class{
 			} else if ( series.type == "bubble" ) {
 				config.type = "bubble";
 				dataset.backgroundColor = colors;
-				// Use borderColor attribute if specified, otherwise use series colors
-				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : colors;
-				// Use borderWidth attribute if specified, otherwise default to 2
-				dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series colors
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : colors;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
 			} else if ( series.type == "pie" ) {
 				config.type = "pie";
-				// For pie charts, borderColor applies to all slices
-				if ( len( normalizedBorderColor ) > 0 ) {
-					dataset.borderColor = normalizedBorderColor;
-					// Use borderWidth attribute if specified, otherwise default to 2
-					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
+				// For pie charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
 				}
 			} else if ( series.type == "doughnut" ) {
 				config.type = "doughnut";
-				// For doughnut charts, borderColor applies to all slices
-				if ( len( normalizedBorderColor ) > 0 ) {
-					dataset.borderColor = normalizedBorderColor;
-					// Use borderWidth attribute if specified, otherwise default to 2
-					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
+				// For doughnut charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
 				}
 			} else if ( series.type == "radar" ) {
 				config.type = "radar";
-				// Use borderColor attribute if specified, otherwise use series color
-				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
-				// Use borderWidth attribute if specified, otherwise default to 3
-				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 			} else if ( series.type == "polararea" ) {
 				config.type = "polarArea";
-				// For polar area charts, borderColor applies to all segments
-				if ( len( normalizedBorderColor ) > 0 ) {
-					dataset.borderColor = normalizedBorderColor;
-					// Use borderWidth attribute if specified, otherwise default to 2
-					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
+				// For polar area charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
 				}
 			}
 
