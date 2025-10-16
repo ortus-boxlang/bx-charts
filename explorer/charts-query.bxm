@@ -1,95 +1,105 @@
+<!--- Query-Based Charts - Using Database Queries as Chart Data Sources --->
+<!DOCTYPE html>
+<html lang="en">
 <bx:include template="includes/head.bxm">
+<body>
+	<!--- Navigation --->
+	<bx:include template="includes/nav.bxm">
 
-<div class="container-fluid mt-4">
-	<div class="row">
-		<div class="col-12">
-			<h1 class="display-4 mb-4">📊 Query-Based Charts</h1>
+	<!--- Hero Header --->
+	<div class="hero-header">
+		<div class="container text-center">
+			<h1 class="display-4 fw-bold mb-3">
+				<i class="bi bi-database-fill"></i> Query-Based Charts
+			</h1>
 			<p class="lead">
-				This page demonstrates using query data sources with charts, eliminating the need for manual chartData components.
+				Streamline your charting workflow with direct query integration
 			</p>
 		</div>
 	</div>
 
-	<bx:script>
-		// Create sample queries for testing
+	<div class="container my-5">
+		<bx:script>
+			// Create sample queries for testing
 
-		// Query with default column names (item, value)
-		salesQuery = queryNew(
-			"item,value",
-			"varchar,integer",
-			[
-				{ "item": "Product A", "value": 15000 },
-				{ "item": "Product B", "value": 23000 },
-				{ "item": "Product C", "value": 18000 },
-				{ "item": "Product D", "value": 12000 },
-				{ "item": "Product E", "value": 27000 }
-			]
-		);
+			// Query with default column names (item, value)
+			salesQuery = queryNew(
+				"item,value",
+				"varchar,integer",
+				[
+					{ "item": "Product A", "value": 15000 },
+					{ "item": "Product B", "value": 23000 },
+					{ "item": "Product C", "value": 18000 },
+					{ "item": "Product D", "value": 12000 },
+					{ "item": "Product E", "value": 27000 }
+				]
+			);
 
-		// Query with custom column names
-		departmentQuery = queryNew(
-			"department,budget",
-			"varchar,integer",
-			[
-				{ "department": "Engineering", "budget": 850 },
-				{ "department": "Marketing", "budget": 620 },
-				{ "department": "Sales", "budget": 950 },
-				{ "department": "HR", "budget": 340 },
-				{ "department": "Operations", "budget": 720 }
-			]
-		);
+			// Query with custom column names
+			departmentQuery = queryNew(
+				"department,budget",
+				"varchar,integer",
+				[
+					{ "department": "Engineering", "budget": 850 },
+					{ "department": "Marketing", "budget": 620 },
+					{ "department": "Sales", "budget": 950 },
+					{ "department": "HR", "budget": 340 },
+					{ "department": "Operations", "budget": 720 }
+				]
+			);
 
-		// Monthly data query
-		monthlyQuery = queryNew(
-			"month,revenue",
-			"varchar,integer",
-			[
-				{ "month": "January", "revenue": 120000 },
-				{ "month": "February", "revenue": 135000 },
-				{ "month": "March", "revenue": 148000 },
-				{ "month": "April", "revenue": 162000 },
-				{ "month": "May", "revenue": 178000 },
-				{ "month": "June", "revenue": 195000 }
-			]
-		);
+			// Monthly data query
+			monthlyQuery = queryNew(
+				"month,revenue",
+				"varchar,integer",
+				[
+					{ "month": "January", "revenue": 120000 },
+					{ "month": "February", "revenue": 135000 },
+					{ "month": "March", "revenue": 148000 },
+					{ "month": "April", "revenue": 162000 },
+					{ "month": "May", "revenue": 178000 },
+					{ "month": "June", "revenue": 195000 }
+				]
+			);
 
-		// Regional sales query
-		regionalQuery = queryNew(
-			"region,sales",
-			"varchar,integer",
-			[
-				{ "region": "North America", "sales": 450 },
-				{ "region": "Europe", "sales": 380 },
-				{ "region": "Asia Pacific", "sales": 520 },
-				{ "region": "Latin America", "sales": 210 },
-				{ "region": "Middle East", "sales": 180 }
-			]
-		);
+			// Regional sales query
+			regionalQuery = queryNew(
+				"region,sales",
+				"varchar,integer",
+				[
+					{ "region": "North America", "sales": 450 },
+					{ "region": "Europe", "sales": 380 },
+					{ "region": "Asia Pacific", "sales": 520 },
+					{ "region": "Latin America", "sales": 210 },
+					{ "region": "Middle East", "sales": 180 }
+				]
+			);
 
-		// Performance metrics query
-		metricsQuery = queryNew(
-			"metric,count",
-			"varchar,integer",
-			[
-				{ "metric": "Page Views", "count": 15420 },
-				{ "metric": "Unique Visitors", "count": 8750 },
-				{ "metric": "New Users", "count": 3240 },
-				{ "metric": "Returning Users", "count": 5510 }
-			]
-		);
-	</bx:script>
+			// Performance metrics query
+			metricsQuery = queryNew(
+				"metric,count",
+				"varchar,integer",
+				[
+					{ "metric": "Page Views", "count": 15420 },
+					{ "metric": "Unique Visitors", "count": 8750 },
+					{ "metric": "New Users", "count": 3240 },
+					{ "metric": "Returning Users", "count": 5510 }
+				]
+			);
+			</bx:script>
 
-	<!-- Query with Default Column Names -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-primary text-white">
-					<h3 class="mb-0">📈 Bar Chart with Query (Default Columns)</h3>
+		<!--- Chart 1: Bar Chart with Default Query Columns --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-bar-chart-fill text-primary"></i> 1. Bar Chart with Query (Default Columns)
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Query columns:</strong> <code>item</code> and <code>value</code> (defaults, no mapping needed)
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Using query with default column names: <code>item</code> and <code>value</code>
-					</p>
+				<div class="chart-display">
 					<bx:chart title="Product Sales Revenue"
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Products" yaxistitle="Revenue ($)"
@@ -102,21 +112,51 @@
 						</bx:chartseries>
 					</bx:chart>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryBarChartCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryBarChartCode">&lt;bx:chart
+    title="Product Sales Revenue"
+    chartwidth="800"
+    chartheight="400"
+    xaxistitle="Products"
+    yaxistitle="Revenue ($)"
+    showygridlines="true"
+    backgroundcolor="####f8f9fa"&gt;
+    &lt;bx:chartseries
+        type="bar"
+        query="####salesQuery####"
+        colorlist="36A2EB"
+        serieslabel="Sales Revenue"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Query with Custom Column Names -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-success text-white">
-					<h3 class="mb-0">🏢 Horizontal Bar Chart with Query (Custom Columns)</h3>
+		<!--- Chart 2: Horizontal Bar Chart with Custom Columns --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-bar-chart text-success"></i> 2. Horizontal Bar Chart with Query (Custom Columns)
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Query columns:</strong> <code>department</code> and <code>budget</code> (custom mapping with itemColumn/valueColumn)
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Using query with custom column names: <code>department</code> and <code>budget</code>
-					</p>
+				<div class="chart-display">
 					<bx:chart title="Department Budgets ($1000s)"
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Budget" yaxistitle="Department"
@@ -130,26 +170,58 @@
 						</bx:chartseries>
 					</bx:chart>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryHorizontalBarCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryHorizontalBarCode">&lt;bx:chart
+    title="Department Budgets ($1000s)"
+    chartwidth="800"
+    chartheight="400"
+    xaxistitle="Budget"
+    yaxistitle="Department"
+    showxgridlines="true"&gt;
+    &lt;bx:chartseries
+        type="horizontalbar"
+        query="####departmentQuery####"
+        itemColumn="department"
+        valueColumn="budget"
+        colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+        serieslabel="Budget Allocation"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
+			</div>
+		</div>	<!-- Line Chart with Query -->
 			</div>
 		</div>
-	</div>
 
-	<!-- Line Chart with Query -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-info text-white">
-					<h3 class="mb-0">📈 Line Chart with Query Data</h3>
+		<!--- Chart 3: Line Chart with Query --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-graph-up text-info"></i> 3. Line Chart with Query Data
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Best for:</strong> Visualizing trends over time with query data
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Monthly revenue trend using query data source
-					</p>
+				<div class="chart-display">
 					<bx:chart title="Monthly Revenue Trend"
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Month" yaxistitle="Revenue ($)"
-							  showygridlines="true"
-							  markersize="6">
+							  showygridlines="true">
 						<bx:chartseries type="line" 
 										query="#monthlyQuery#"
 										itemColumn="month"
@@ -159,21 +231,52 @@
 						</bx:chartseries>
 					</bx:chart>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryLineChartCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryLineChartCode">&lt;bx:chart
+    title="Monthly Revenue Trend"
+    chartwidth="800"
+    chartheight="400"
+    xaxistitle="Month"
+    yaxistitle="Revenue ($)"
+    showygridlines="true"&gt;
+    &lt;bx:chartseries
+        type="line"
+        query="####monthlyQuery####"
+        itemColumn="month"
+        valueColumn="revenue"
+        colorlist="9966FF"
+        serieslabel="Revenue"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Pie Chart with Query -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-warning text-dark">
-					<h3 class="mb-0">🥧 Pie Chart with Query Data</h3>
+		<!--- Chart 4: Pie Chart with Query --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-pie-chart-fill text-warning"></i> 4. Pie Chart with Query Data
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Best for:</strong> Showing proportions from query results
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Regional sales distribution using query
-					</p>
+				<div class="chart-display">
 					<div class="d-flex justify-content-center">
 						<bx:chart title="Sales by Region"
 								  chartwidth="600" chartheight="600"
@@ -188,21 +291,50 @@
 						</bx:chart>
 					</div>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryPieChartCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryPieChartCode">&lt;bx:chart
+    title="Sales by Region"
+    chartwidth="600"
+    chartheight="600"
+    showlegend="true"&gt;
+    &lt;bx:chartseries
+        type="pie"
+        query="####regionalQuery####"
+        itemColumn="region"
+        valueColumn="sales"
+        colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
+        serieslabel="Regional Sales"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Doughnut Chart with Query -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-secondary text-white">
-					<h3 class="mb-0">🍩 Doughnut Chart with Query Data</h3>
+		<!--- Chart 5: Doughnut Chart with Query --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-circle text-secondary"></i> 5. Doughnut Chart with Query Data
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Best for:</strong> Performance metrics and KPI visualization
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Performance metrics visualization using query
-					</p>
+				<div class="chart-display">
 					<div class="d-flex justify-content-center">
 						<bx:chart title="Website Performance Metrics"
 								  chartwidth="600" chartheight="600"
@@ -218,21 +350,51 @@
 						</bx:chart>
 					</div>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryDoughnutChartCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryDoughnutChartCode">&lt;bx:chart
+    title="Website Performance Metrics"
+    chartwidth="600"
+    chartheight="600"
+    showlegend="true"
+    backgroundcolor="####ffffff"&gt;
+    &lt;bx:chartseries
+        type="doughnut"
+        query="####metricsQuery####"
+        itemColumn="metric"
+        valueColumn="count"
+        colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
+        serieslabel="Metrics"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Area Chart with Query -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header" style="background-color: ##6f42c1; color: white;">
-					<h3 class="mb-0">🏔️ Area Chart with Query Data</h3>
+		<!--- Chart 6: Area Chart with Query --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header">
+				<h3 class="chart-card-title">
+					<i class="bi bi-tsunami text-purple"></i> 6. Area Chart with Query Data
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="info-badge mb-3">
+					<strong>Best for:</strong> Revenue trends with filled area emphasis
 				</div>
-				<div class="card-body">
-					<p class="text-muted">
-						Revenue trend with filled area using query data
-					</p>
+				<div class="chart-display">
 					<bx:chart title="Revenue Growth Over Time"
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Month" yaxistitle="Revenue ($)"
@@ -247,49 +409,96 @@
 						</bx:chartseries>
 					</bx:chart>
 				</div>
+				<div class="code-display" x-data="copyCode">
+					<div class="code-display-header">
+						<span class="code-display-title">
+							<i class="bi bi-code-slash"></i> Source Code
+						</span>
+						<button
+							@click="copyToClipboard( 'queryAreaChartCode' )"
+							class="btn btn-sm btn-copy"
+							:class="{ 'btn-copy-success': copied }"
+							type="button">
+							<i class="bi" :class="copied ? 'bi-check2' : 'bi-clipboard'"></i>
+							<span x-text="copied ? 'Copied!' : 'Copy'"></span>
+						</button>
+					</div>
+					<pre data-lang="xml" id="queryAreaChartCode">&lt;bx:chart
+    title="Revenue Growth Over Time"
+    chartwidth="800"
+    chartheight="400"
+    xaxistitle="Month"
+    yaxistitle="Revenue ($)"
+    showygridlines="true"
+    showxgridlines="false"&gt;
+    &lt;bx:chartseries
+        type="area"
+        query="####monthlyQuery####"
+        itemColumn="month"
+        valueColumn="revenue"
+        colorlist="6f42c1"
+        serieslabel="Revenue Growth"&gt;
+    &lt;/bx:chartseries&gt;
+&lt;/bx:chart&gt;</pre>
+				</div>
+			</div>
+		</div>
+
+		<!--- Documentation Card --->
+		<div class="chart-card animate-fade-in mb-4">
+			<div class="chart-card-header bg-dark text-white">
+				<h3 class="chart-card-title">
+					<i class="bi bi-book-fill"></i> Query-Based Charts Documentation
+				</h3>
+			</div>
+			<div class="chart-card-body">
+				<div class="row">
+					<div class="col-md-6">
+						<h5><i class="bi bi-check2-circle text-success"></i> Benefits</h5>
+						<ul class="list-unstyled ms-3">
+							<li><i class="bi bi-arrow-right-short"></i> No manual <code>&lt;bx:chartdata&gt;</code> components needed</li>
+							<li><i class="bi bi-arrow-right-short"></i> Cleaner, more maintainable code</li>
+							<li><i class="bi bi-arrow-right-short"></i> Perfect for database-driven charts</li>
+							<li><i class="bi bi-arrow-right-short"></i> Reduced boilerplate code</li>
+							<li><i class="bi bi-arrow-right-short"></i> Dynamic data from queries</li>
+						</ul>
+
+						<h5 class="mt-4"><i class="bi bi-gear-fill text-primary"></i> Query Requirements</h5>
+						<ul class="list-unstyled ms-3">
+							<li><i class="bi bi-check2-circle text-success"></i> Query must contain at least one record</li>
+							<li><i class="bi bi-check2-circle text-success"></i> <code>itemColumn</code> must exist (default: "item")</li>
+							<li><i class="bi bi-check2-circle text-success"></i> <code>valueColumn</code> must exist (default: "value")</li>
+						</ul>
+					</div>
+
+					<div class="col-md-6">
+						<h5><i class="bi bi-code-square text-info"></i> Usage Examples</h5>
+						
+						<p class="mb-2"><strong>With default column names:</strong></p>
+						<pre class="bg-light p-3 rounded"><code>&lt;bx:chartseries
+    type="pie"
+    query="####myQuery####"&gt;
+&lt;/bx:chartseries&gt;</code></pre>
+
+						<p class="mb-2 mt-3"><strong>With custom column names:</strong></p>
+						<pre class="bg-light p-3 rounded"><code>&lt;bx:chartseries
+    type="bar"
+    query="####myQuery####"
+    itemColumn="category"
+    valueColumn="amount"&gt;
+&lt;/bx:chartseries&gt;</code></pre>
+
+						<div class="alert alert-info mt-3">
+							<i class="bi bi-info-circle-fill"></i>
+							<strong>Tip:</strong> If your query columns are named <code>item</code> and <code>value</code>, you don't need to specify <code>itemColumn</code> or <code>valueColumn</code> attributes!
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Documentation -->
-	<div class="row mb-5">
-		<div class="col-12">
-			<div class="card shadow">
-				<div class="card-header bg-dark text-white">
-					<h3 class="mb-0">📚 Using Queries with Charts</h3>
-				</div>
-				<div class="card-body">
-					<h5>Benefits of Query-Based Charts</h5>
-					<ul>
-						<li>Eliminates need for manual <code>&lt;bx:chartdata&gt;</code> components</li>
-						<li>Cleaner, more maintainable code</li>
-						<li>Perfect for database-driven charts</li>
-						<li>Reduces boilerplate code</li>
-					</ul>
-
-					<h5 class="mt-4">Query Requirements</h5>
-					<ul>
-						<li>Query must contain at least one record</li>
-						<li><code>itemColumn</code> must exist in the query (defaults to "item")</li>
-						<li><code>valueColumn</code> must exist in the query (defaults to "value")</li>
-					</ul>
-
-					<h5 class="mt-4">Usage Example</h5>
-					<pre><code>&lt;bx:chartseries type="bar" 
-                query="##myQuery##"
-                itemColumn="category"
-                valueColumn="amount"
-                serieslabel="Sales Data"&gt;
-&lt;/bx:chartseries&gt;</code></pre>
-
-					<h5 class="mt-4">Default Column Names</h5>
-					<p>If your query columns are named <code>item</code> and <code>value</code>, you don't need to specify column names:</p>
-					<pre><code>&lt;bx:chartseries type="pie" query="##myQuery##"&gt;
-&lt;/bx:chartseries&gt;</code></pre>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<bx:include template="includes/footer.bxm">
+	<!--- Footer --->
+	<bx:include template="includes/footer.bxm">
+</body>
+</html>
