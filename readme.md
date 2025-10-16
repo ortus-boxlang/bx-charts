@@ -278,6 +278,9 @@ The main container component that renders charts using Chart.js.
 | `fontSize` | number | 12 | Font size in pixels |
 | `foregroundColor` | string | "#333333" | Text color |
 | `dataBackgroundColor` | string | - | Data area background color |
+| `borderColor` | string | - | Border color for chart elements (hex or named color). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble |
+| `borderWidth` | number | varies | Border width in pixels. Defaults: 1 (bar), 2 (pie/doughnut/polarArea/bubble), 3 (line/area/radar). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble |
+| `borderRadius` | number | 0 | Border radius in pixels for rounded corners. Applies to: bar, horizontalbar only |
 
 #### 📏 Axis Configuration
 
@@ -319,15 +322,68 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `type` | string | ✅ Yes | Chart type: "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter" |
+| `type` | string | ✅ Yes | Chart type: "pie", "bar", "line", "doughnut", "radar", "polarArea", "area", "horizontalbar", "scatter", "bubble" |
 | `colorlist` | string | No | Comma-separated color list (hex or named colors) |
 | `serieslabel` | string | No | Label for this data series |
+| `borderColor` | string | No | Border color for this series (hex or named color). Overrides chart-level borderColor. Not applicable for scatter charts. |
+| `borderWidth` | number | No | Border width in pixels for this series. Overrides chart-level borderWidth. Not applicable for scatter charts. |
+| `borderRadius` | number | No | Border radius in pixels for this series. Only applicable for bar and horizontalbar charts. Overrides chart-level borderRadius. |
+| `query` | query | No | Query object to use as data source. When provided, no child chartData components are required |
+| `itemColumn` | string | No | Name of the query column containing labels. Default: "item" |
+| `valueColumn` | string | No | Name of the query column containing values. Default: "value" |
+| `data` | array | No | Array data source. Can be array of structs `[{item:"x",value:123}]` or array of arrays `[["x",123]]`. For bubble charts use `x`, `y`, `r` instead of `value` |
 
-**Example:**
+**Example with chartData components:**
 
 ```boxlang
 <bx:chartseries type="bar" colorlist="FF6384,36A2EB,FFCE56" serieslabel="Sales Data">
-    <!-- chartdata components here -->
+    <bx:chartdata item="Product A" value="150">
+    <bx:chartdata item="Product B" value="200">
+</bx:chartseries>
+```
+
+**Example with query:**
+
+```boxlang
+<bx:chartseries type="bar" query="#myQuery#" itemColumn="category" valueColumn="amount" serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with array of structs:**
+
+```boxlang
+<bx:chartseries type="pie"
+    data="#[
+        {item:'Product A', value:100},
+        {item:'Product B', value:200},
+        {item:'Product C', value:150}
+    ]#"
+    serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with array of arrays (positional):**
+
+```boxlang
+<bx:chartseries type="bar"
+    data="#[
+        ['Product A', 100],
+        ['Product B', 200],
+        ['Product C', 150]
+    ]#"
+    serieslabel="Sales Data">
+</bx:chartseries>
+```
+
+**Example with bubble chart (array of structs):**
+
+```boxlang
+<bx:chartseries type="bubble"
+    data="#[
+        {item:'Point A', x:10, y:20, r:5},
+        {item:'Point B', x:15, y:25, r:8}
+    ]#"
+    serieslabel="Data Points">
 </bx:chartseries>
 ```
 
@@ -469,6 +525,85 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 **💡 Use Case:** Shows volume or magnitude over time with emphasis on total quantity.
 
+#### 🎨 Chart with Custom Border Color
+
+```xml
+<bx:chart title="Sales Performance"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Products" yaxistitle="Units Sold"
+          showygridlines="true"
+          bordercolor="##2c3e50">
+    <bx:chartseries type="bar"
+                    colorlist="3498db"
+                    serieslabel="Units Sold">
+        <bx:chartdata item="Product A" value="145">
+        <bx:chartdata item="Product B" value="220">
+        <bx:chartdata item="Product C" value="185">
+        <bx:chartdata item="Product D" value="310">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Add professional borders to chart elements. Works with bar, line, area, pie, doughnut, radar, polarArea, and bubble charts.
+
+#### 🎯 Chart with Custom Border Width and Radius
+
+```xml
+<bx:chart title="Modern Sales Dashboard"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Products" yaxistitle="Revenue"
+          showygridlines="true"
+          bordercolor="##e74c3c"
+          borderwidth="3"
+          borderradius="10">
+    <bx:chartseries type="bar"
+                    colorlist="3498db,9b59b6,2ecc71,f39c12"
+                    serieslabel="Q4 Revenue">
+        <bx:chartdata item="Product A" value="45000">
+        <bx:chartdata item="Product B" value="62000">
+        <bx:chartdata item="Product C" value="38000">
+        <bx:chartdata item="Product D" value="71000">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Create modern, polished bar charts with rounded corners and custom border styling. `borderRadius` only applies to bar and horizontalbar chart types. `borderWidth` applies to bar, line, area, pie, doughnut, radar, polarArea, and bubble charts.
+
+#### 🎨 Multi-Series Chart with Per-Series Border Styling
+
+```xml
+<bx:chart title="Quarterly Performance Comparison"
+          chartwidth="700" chartheight="400"
+          xaxistitle="Quarter" yaxistitle="Revenue ($K)"
+          showlegend="true"
+          showygridlines="true">
+    <bx:chartseries type="bar"
+                    colorlist="3498db"
+                    serieslabel="Sales"
+                    bordercolor="##2980b9"
+                    borderwidth="2"
+                    borderradius="6">
+        <bx:chartdata item="Q1" value="125">
+        <bx:chartdata item="Q2" value="158">
+        <bx:chartdata item="Q3" value="142">
+        <bx:chartdata item="Q4" value="189">
+    </bx:chartseries>
+    <bx:chartseries type="bar"
+                    colorlist="e74c3c"
+                    serieslabel="Expenses"
+                    bordercolor="##c0392b"
+                    borderwidth="3"
+                    borderradius="4">
+        <bx:chartdata item="Q1" value="95">
+        <bx:chartdata item="Q2" value="102">
+        <bx:chartdata item="Q3" value="98">
+        <bx:chartdata item="Q4" value="115">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Create multi-series charts where each series has its own distinct border styling. Series-level border attributes (`bordercolor`, `borderwidth`, `borderradius`) override chart-level defaults, allowing fine-grained control over visual appearance. Perfect for comparing multiple data sets with different visual emphasis.
+
 #### ↔️ Horizontal Bar Chart
 
 ```xml
@@ -515,6 +650,141 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 ```
 
 **💡 Use Case:** Shows both individual values and totals across categories. Perfect for comparing parts of a whole across different groups.
+
+#### 📊 Chart with Query Data Source
+
+BoxLang Charts can use query objects as data sources, eliminating the need for manual chartData components.
+
+```xml
+<bx:script>
+	// Create a query with sales data
+	salesQuery = queryNew(
+		"product,revenue",
+		"varchar,integer",
+		[
+			{ "product": "Product A", "revenue": 15000 },
+			{ "product": "Product B", "revenue": 23000 },
+			{ "product": "Product C", "revenue": 18000 },
+			{ "product": "Product D", "revenue": 12000 }
+		]
+	);
+</bx:script>
+
+<bx:chart title="Product Revenue"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Products" yaxistitle="Revenue ($)"
+          showygridlines="true">
+    <bx:chartseries type="bar"
+                    query="#salesQuery#"
+                    itemColumn="product"
+                    valueColumn="revenue"
+                    colorlist="36A2EB"
+                    serieslabel="Revenue">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Perfect for database-driven charts where data comes from queries. Reduces boilerplate code and makes charts more maintainable.
+
+**Query Requirements:**
+- Query must contain at least one record
+- `itemColumn` must exist in the query (defaults to "item")
+- `valueColumn` must exist in the query (defaults to "value")
+
+#### 📊 Chart with Array Data Source
+
+BoxLang Charts also support arrays as data sources, providing flexibility when working with JSON data or dynamically generated data.
+
+**Array of Structs Format:**
+
+```xml
+<bx:chart title="Sales by Product"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Products" yaxistitle="Revenue ($)">
+    <bx:chartseries type="bar"
+                    data="#[
+                        {item:'Product A', value:15000},
+                        {item:'Product B', value:23000},
+                        {item:'Product C', value:18000}
+                    ]#"
+                    colorlist="36A2EB"
+                    serieslabel="Revenue">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Array of Arrays Format (Positional):**
+
+```xml
+<bx:chart title="Sales by Product"
+          chartwidth="600" chartheight="400">
+    <bx:chartseries type="pie"
+                    data="#[
+                        ['Product A', 15000],
+                        ['Product B', 23000],
+                        ['Product C', 18000]
+                    ]#"
+                    colorlist="FF6384,36A2EB,FFCE56">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Bubble Chart with Array of Structs:**
+
+```xml
+<bx:chart title="Portfolio Analysis"
+          chartwidth="600" chartheight="400"
+          xaxistitle="Risk" yaxistitle="Return">
+    <bx:chartseries type="bubble"
+                    data="#[
+                        {item:'Stock A', x:20, y:15, r:10},
+                        {item:'Stock B', x:40, y:25, r:15},
+                        {item:'Bond C', x:10, y:8, r:5}
+                    ]#"
+                    colorlist="FF6384,36A2EB,FFCE56">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**Bubble Chart with Array of Arrays:**
+
+```xml
+<bx:chartseries type="bubble"
+                data="#[
+                    ['Stock A', 20, 15, 10],
+                    ['Stock B', 40, 25, 15],
+                    ['Bond C', 10, 8, 5]
+                ]#">
+</bx:chartseries>
+```
+
+**💡 Use Case:** Perfect for working with JSON data from APIs, dynamically generated data, or when you want a compact data format without the overhead of chartData components.
+
+**Array Data Requirements:**
+- Array must not be empty
+- All elements must use the same format (all structs or all arrays)
+- For standard charts: structs need `item` and `value` keys, arrays need 2 elements `[item, value]`
+- For bubble charts: structs need `item`, `x`, `y`, `r` keys, arrays need 4 elements `[item, x, y, r]`
+
+**Dynamic Array Example:**
+
+```xml
+<bx:script>
+    // Build data array dynamically
+    chartData = [];
+    for (i = 1; i <= 5; i++) {
+        arrayAppend(chartData, {
+            item: "Item " & i,
+            value: randRange(100, 500)
+        });
+    }
+</bx:script>
+
+<bx:chart title="Dynamic Data">
+    <bx:chartseries type="bar" data="#chartData#">
+    </bx:chartseries>
+</bx:chart>
+```
 
 #### 🎯 Radar Chart for Multi-dimensional Data
 

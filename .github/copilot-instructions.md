@@ -202,6 +202,31 @@ if ( left( color, 2 ) == "##" ) {
 - `bubble` → Chart.js `bubble` with x, y, r coordinate system
 - `stacked` → Chart.js bar with `scales.x.stacked: true, scales.y.stacked: true`
 
+### Border Attribute Support by Chart Type
+
+**borderColor** - Applies to:
+- ✅ `bar` - border around bars
+- ✅ `horizontalbar` - border around horizontal bars
+- ✅ `line` - line border/stroke
+- ✅ `area` - area border/stroke
+- ✅ `pie` - border around pie slices
+- ✅ `doughnut` - border around doughnut segments
+- ✅ `radar` - radar line border
+- ✅ `polarArea` - border around polar area segments
+- ✅ `bubble` - border around bubble circles
+- ❌ `scatter` - no border (uses point colors only)
+
+**borderWidth** - Applies to same chart types as borderColor:
+- ✅ `bar`, `horizontalbar` - default: 1
+- ✅ `line`, `area`, `radar` - default: 3
+- ✅ `pie`, `doughnut`, `polarArea`, `bubble` - default: 2
+- ❌ `scatter` - no border width
+
+**borderRadius** - Applies to:
+- ✅ `bar` - rounded corners on bars
+- ✅ `horizontalbar` - rounded corners on horizontal bars
+- ❌ All other chart types - not applicable (no rectangular elements)
+
 ## Coding Standards & Best Practices
 
 ### BoxLang Component Conventions
@@ -210,6 +235,7 @@ if ( left( color, 2 ) == "##" ) {
 - Use `processBody(context, body, buffer)` pattern for nested content
 - Check `bodyResult.isEarlyExit()` after processing child components
 - Validate required attributes early and throw descriptive errors
+- **Static blocks must be defined AFTER property definitions** - BoxLang requires properties to be declared before static initializers
 
 
 ### Naming Conventions

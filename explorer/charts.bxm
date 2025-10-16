@@ -32,7 +32,7 @@
                 <div class="chart-display">
                     <bx:chart format="png" show3d="false" title="Memory Usage Distribution"
                               backgroundcolor="##ffffff" chartheight="300" chartwidth="600"
-                              showlegend="true">
+                              showlegend="true" bordercolor="##2c3e50" borderwidth="3">
                         <bx:chartseries type="pie" serieslabel="Memory Usage">
                             <bx:chartdata item="Free Memory" value="512" />
                             <bx:chartdata item="Used Memory" value="256" />
@@ -59,10 +59,12 @@
     format="png"
     show3d="false"
     title="Memory Usage Distribution"
-    backgroundcolor="####ffffff"
+    backgroundcolor="##ffffff"
     chartheight="300"
     chartwidth="600"
-    showlegend="true"&gt;
+    showlegend="true"
+    bordercolor="##2c3e50"
+    borderwidth="3"&gt;
     &lt;bx:chartseries type="pie" serieslabel="Memory Usage"&gt;
         &lt;bx:chartdata item="Free Memory" value="512" /&gt;
         &lt;bx:chartdata item="Used Memory" value="256" /&gt;
@@ -90,7 +92,8 @@
                               chartwidth="600" chartheight="300" showlegend="true"
                               title="Performance Metrics"
                               xaxistitle="Metrics" yaxistitle="Count"
-                              showxgridlines="true" showygridlines="true">
+                              showxgridlines="true" showygridlines="true"
+                              bordercolor="##28a745" borderwidth="2" borderradius="8">
                         <bx:chartseries type="bar" serieslabel="Performance Data">
                             <bx:chartdata item="Hits" value="150" />
                             <bx:chartdata item="Misses" value="25" />
@@ -116,7 +119,7 @@
                     <pre data-lang="xml" id="barChartCode">&lt;bx:chart
     format="png"
     show3d="false"
-    backgroundcolor="####ffffff"
+    backgroundcolor="##ffffff"
     chartwidth="600"
     chartheight="300"
     showlegend="true"
@@ -124,7 +127,10 @@
     xaxistitle="Metrics"
     yaxistitle="Count"
     showxgridlines="true"
-    showygridlines="true"&gt;
+    showygridlines="true"
+    bordercolor="##28a745"
+    borderwidth="2"
+    borderradius="8"&gt;
     &lt;bx:chartseries type="bar" serieslabel="Performance Data"&gt;
         &lt;bx:chartdata item="Hits" value="150" /&gt;
         &lt;bx:chartdata item="Misses" value="25" /&gt;

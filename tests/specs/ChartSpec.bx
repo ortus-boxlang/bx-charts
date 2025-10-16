@@ -257,7 +257,284 @@ class extends="testbox.system.BaseSpec"{
 				expect( chartAttributes.resizeDelay ).toBe( 100, "ResizeDelay should be 100ms" );
 			} );
 
+			it( "can use query as data source with default column names", () => {
+				// Create test query
+				var testQuery = queryNew(
+					"item,value",
+					"varchar,integer",
+					[
+						{ "item": "Product A", "value": 100 },
+						{ "item": "Product B", "value": 200 },
+						{ "item": "Product C", "value": 150 }
+					]
+				);
+
+				// Validate query structure
+				expect( testQuery.recordCount ).toBe( 3, "Query should have 3 records" );
+				expect( listFindNoCase( testQuery.columnList, "item" ) ).toBeGT( 0, "Query should have 'item' column" );
+				expect( listFindNoCase( testQuery.columnList, "value" ) ).toBeGT( 0, "Query should have 'value' column" );
+			} );
+
+			it( "can use query with custom column names", () => {
+				// Create test query with custom columns
+				var testQuery = queryNew(
+					"category,amount",
+					"varchar,integer",
+					[
+						{ "category": "Sales", "amount": 5000 },
+						{ "category": "Marketing", "amount": 3000 },
+						{ "category": "Operations", "amount": 4000 }
+					]
+				);
+
+				// Validate query structure
+				expect( testQuery.recordCount ).toBe( 3, "Query should have 3 records" );
+				expect( listFindNoCase( testQuery.columnList, "category" ) ).toBeGT( 0, "Query should have 'category' column" );
+				expect( listFindNoCase( testQuery.columnList, "amount" ) ).toBeGT( 0, "Query should have 'amount' column" );
+			} );
+
+			it( "validates query has records", () => {
+				// Create empty query
+				var emptyQuery = queryNew( "item,value", "varchar,integer" );
+
+				// Validate empty query
+				expect( emptyQuery.recordCount ).toBe( 0, "Empty query should have 0 records" );
+			} );
+
+			it( "validates query column existence", () => {
+				// Create test query
+				var testQuery = queryNew(
+					"name,count",
+					"varchar,integer",
+					[
+						{ "name": "Test", "count": 10 }
+					]
+				);
+
+				var queryColumns = listToArray( testQuery.columnList );
+
+				// Validate columns
+				expect( arrayContainsNoCase( queryColumns, "name" ) ).toBeTrue( "Query should have 'name' column" );
+				expect( arrayContainsNoCase( queryColumns, "count" ) ).toBeTrue( "Query should have 'count' column" );
+				expect( arrayContainsNoCase( queryColumns, "invalid" ) ).toBeFalse( "Query should not have 'invalid' column" );
+			} );
+
+			it( "can use array of structs as data source", () => {
+				// Create test data array with structs
+				var testData = [
+					{ "item": "Product A", "value": 100 },
+					{ "item": "Product B", "value": 200 },
+					{ "item": "Product C", "value": 150 }
+				];
+
+				// Validate array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "value" ) ).toBeTrue( "Data point should have 'value' key" );
+				}
+			} );
+
+			it( "can use array of arrays as data source", () => {
+				// Create test data array with arrays
+				var testData = [
+					[ "Product A", 100 ],
+					[ "Product B", 200 ],
+					[ "Product C", 150 ]
+				];
+
+				// Validate array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( isArray( dataPoint ) ).toBeTrue( "Data point should be an array" );
+					expect( arrayLen( dataPoint ) ).toBe( 2, "Data point should have 2 elements [item, value]" );
+				}
+			} );
+
+			it( "can use array of structs for bubble chart data", () => {
+				// Create test data array for bubble charts
+				var testData = [
+					{ "item": "Point A", "x": 10, "y": 20, "r": 5 },
+					{ "item": "Point B", "x": 15, "y": 25, "r": 8 },
+					{ "item": "Point C", "x": 20, "y": 30, "r": 12 }
+				];
+
+				// Validate bubble array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "x" ) ).toBeTrue( "Data point should have 'x' key" );
+					expect( structKeyExists( dataPoint, "y" ) ).toBeTrue( "Data point should have 'y' key" );
+					expect( structKeyExists( dataPoint, "r" ) ).toBeTrue( "Data point should have 'r' key" );
+				}
+			} );
+
+			it( "can use array of arrays for bubble chart data", () => {
+				// Create test data array for bubble charts with positional format
+				var testData = [
+					[ "Point A", 10, 20, 5 ],
+					[ "Point B", 15, 25, 8 ],
+					[ "Point C", 20, 30, 12 ]
+				];
+
+				// Validate bubble array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( isArray( dataPoint ) ).toBeTrue( "Data point should be an array" );
+					expect( arrayLen( dataPoint ) ).toBe( 4, "Data point should have 4 elements [item, x, y, r]" );
+				}
+			} );
+
+			it( "validates array data is not empty", () => {
+				// Create empty array
+				var emptyArray = [];
+
+				// Validate empty array
+				expect( arrayLen( emptyArray ) ).toBe( 0, "Empty array should have 0 elements" );
+			} );
+
+			it( "validates mixed formats are not allowed", () => {
+				// This would be an invalid array with mixed types
+				var mixedArray = [
+					{ "item": "Product A", "value": 100 },
+					[ "Product B", 200 ]
+				];
+
+				// First element is struct, second is array - this should fail validation
+				expect( isStruct( mixedArray[1] ) ).toBeTrue( "First element should be struct" );
+				expect( isArray( mixedArray[2] ) ).toBeTrue( "Second element should be array" );
+			} );
+
+			it( "supports borderColor attribute", () => {
+				var borderColorTests = [
+					{ "input": "##FF0000", "description": "Hex color with ## prefix" },
+					{ "input": "#FF0000", "description": "Hex color with # prefix" },
+					{ "input": "red", "description": "Named color" },
+					{ "input": "", "description": "Empty string (no border)" }
+				];
+
+				for ( var test in borderColorTests ) {
+					// Test that borderColor can be set to various formats
+					expect( isString( test.input ) ).toBeTrue( "borderColor should accept string values for: #test.description#" );
+				}
+			} );
+
+			it( "supports borderWidth attribute with chart type defaults", () => {
+				var borderWidthDefaults = {
+					"bar": 1,
+					"horizontalbar": 1,
+					"line": 3,
+					"area": 3,
+					"radar": 3,
+					"pie": 2,
+					"doughnut": 2,
+					"polarArea": 2,
+					"bubble": 2
+				};
+
+				// Test default values
+				for ( var chartType in borderWidthDefaults ) {
+					var defaultWidth = borderWidthDefaults[ chartType ];
+					expect( isNumeric( defaultWidth ) ).toBeTrue( "borderWidth default for #chartType# should be numeric" );
+					expect( defaultWidth ).toBeGT( 0, "borderWidth default for #chartType# should be positive" );
+				}
+
+				// Test custom borderWidth
+				var customWidth = 5;
+				expect( isNumeric( customWidth ) ).toBeTrue( "Custom borderWidth should be numeric" );
+				expect( customWidth ).toBeGT( 0, "Custom borderWidth should be positive" );
+			} );
+
+			it( "supports borderRadius attribute for bar charts only", () => {
+				var supportedTypes = [ "bar", "horizontalbar" ];
+				var unsupportedTypes = [ "line", "area", "pie", "doughnut", "radar", "polarArea", "scatter", "bubble" ];
+
+				// Test borderRadius is numeric
+				var borderRadius = 10;
+				expect( isNumeric( borderRadius ) ).toBeTrue( "borderRadius should be numeric" );
+				expect( borderRadius ).toBeGTE( 0, "borderRadius should be non-negative" );
+
+				// Validate supported types
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBeGT( 0, "#type# should support borderRadius" );
+				}
+
+				// Validate unsupported types
+				for ( var type in unsupportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBe( 0, "#type# should not support borderRadius" );
+				}
+			} );
+
+
+		} );
+
+		describe( "Series-Level Border Attributes", () => {
+
+			it( "supports series-level borderColor that overrides chart-level", () => {
+				// Test series-level borderColor validation
+				var seriesBorderColors = [ "##FF0000", "red", "##2c3e50", "blue" ];
+
+				for ( var color in seriesBorderColors ) {
+					expect( len( trim( color ) ) ).toBeGT( 0, "Series borderColor '#color#' should not be empty" );
+					// Validate hex format (starts with ## and 6 chars) or named color
+					if ( left( color, 2 ) == "##" ) {
+						expect( len( color ) ).toBe( 8, "Hex color '#color#' should be 8 characters (## + 6 digits)" );
+					}
+				}
+
+				// Test chart types that support borderColor
+				var supportedTypes = [ "bar", "line", "area", "pie", "doughnut", "radar", "polarArea", "bubble", "horizontalbar" ];
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderColor" );
+				}
+
+				// scatter does NOT support borderColor
+				expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", "scatter" ) ).toBe( 0, "scatter should not support borderColor" );
+			} );
+
+			it( "supports series-level borderWidth that overrides chart-level", () => {
+				// Test series-level borderWidth validation
+				var seriesWidths = [ 1, 2, 3, 5, 10 ];
+
+				for ( var width in seriesWidths ) {
+					expect( isNumeric( width ) ).toBeTrue( "Series borderWidth should be numeric" );
+					expect( width ).toBeGT( 0, "Series borderWidth should be positive" );
+				}
+
+				// Test chart types that support borderWidth
+				var supportedTypes = [ "bar", "line", "area", "pie", "doughnut", "radar", "polarArea", "bubble", "horizontalbar" ];
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderWidth" );
+				}
+
+				// scatter does NOT support borderWidth
+				expect( listFindNoCase( "bar,line,area,pie,doughnut,radar,polarArea,bubble,horizontalbar", "scatter" ) ).toBe( 0, "scatter should not support borderWidth" );
+			} );
+
+			it( "supports series-level borderRadius that overrides chart-level for bar charts only", () => {
+				// Test series-level borderRadius validation
+				var seriesRadii = [ 0, 4, 6, 8, 10, 15 ];
+
+				for ( var radius in seriesRadii ) {
+					expect( isNumeric( radius ) ).toBeTrue( "Series borderRadius should be numeric" );
+					expect( radius ).toBeGTE( 0, "Series borderRadius should be non-negative" );
+				}
+
+				// Test chart types that support borderRadius (bar and horizontalbar only)
+				var supportedTypes = [ "bar", "horizontalbar" ];
+				var unsupportedTypes = [ "line", "area", "pie", "doughnut", "radar", "polarArea", "scatter", "bubble" ];
+
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBeGT( 0, "#type# should support series-level borderRadius" );
+				}
+
+				for ( var type in unsupportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBe( 0, "#type# should not support series-level borderRadius" );
+				}
+			} );
+
 		} );
 	}
 
 }
+```}

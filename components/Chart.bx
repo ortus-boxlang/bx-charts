@@ -13,6 +13,61 @@
  *   </bx:chartseries>
  * </bx:chart>
  * </pre>
+ * <p>
+ * <h2>Attributes</h2>
+ * <h3>Core Attributes</h3>
+ * <ul>
+ *   <li><b>title</b> (string, optional) - Chart title displayed at the top. Default: ""</li>
+ *   <li><b>chartWidth</b> (number, optional) - Chart width in pixels. Default: 400</li>
+ *   <li><b>chartHeight</b> (number, optional) - Chart height in pixels. Default: 300</li>
+ *   <li><b>backgroundColor</b> (string, optional) - Background color (hex or named color). Default: "#ffffff"</li>
+ *   <li><b>showLegend</b> (boolean, optional) - Display legend for multi-series charts. Default: true</li>
+ * </ul>
+ * <h3>Responsive Attributes</h3>
+ * <ul>
+ *   <li><b>responsive</b> (boolean, optional) - Enable responsive resizing. Default: true</li>
+ *   <li><b>maintainAspectRatio</b> (boolean, optional) - Maintain width/height ratio. Default: true</li>
+ *   <li><b>aspectRatio</b> (number, optional) - Aspect ratio (width/height). Default: 2</li>
+ *   <li><b>resizeDelay</b> (number, optional) - Delay before resize (ms). Default: 0</li>
+ * </ul>
+ * <h3>Styling Attributes</h3>
+ * <ul>
+ *   <li><b>font</b> (string, optional) - Font family for chart text</li>
+ *   <li><b>fontBold</b> (boolean, optional) - Bold text. Default: false</li>
+ *   <li><b>fontItalic</b> (boolean, optional) - Italic text. Default: false</li>
+ *   <li><b>fontSize</b> (number, optional) - Font size in pixels. Default: 12</li>
+ *   <li><b>foregroundColor</b> (string, optional) - Text color. Default: "#333333"</li>
+ *   <li><b>dataBackgroundColor</b> (string, optional) - Data area background color</li>
+ *   <li><b>borderColor</b> (string, optional) - Border color for chart elements (hex or named color). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: ""</li>
+ *   <li><b>borderWidth</b> (number, optional) - Border width in pixels. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: 1 for bar, 2 for pie/doughnut/polarArea/bubble, 3 for line/area/radar</li>
+ *   <li><b>borderRadius</b> (number, optional) - Border radius in pixels for rounded corners. Applies to: bar, horizontalbar only. Default: 0</li>
+ * </ul>
+ * <h3>Axis Configuration</h3>
+ * <ul>
+ *   <li><b>xAxisTitle</b> (string, optional) - X-axis title. Default: ""</li>
+ *   <li><b>yAxisTitle</b> (string, optional) - Y-axis title. Default: ""</li>
+ *   <li><b>showXGridlines</b> (boolean, optional) - Show X-axis grid lines. Default: false</li>
+ *   <li><b>showYGridlines</b> (boolean, optional) - Show Y-axis grid lines. Default: true</li>
+ *   <li><b>showXLabel</b> (boolean, optional) - Display X-axis labels. Default: true</li>
+ *   <li><b>scaleFrom</b> (number, optional) - Y-axis minimum value</li>
+ *   <li><b>scaleTo</b> (number, optional) - Y-axis maximum value</li>
+ *   <li><b>sortXAxis</b> (boolean, optional) - Sort labels alphabetically. Default: false</li>
+ * </ul>
+ * <h3>Display Options</h3>
+ * <ul>
+ *   <li><b>showBorder</b> (boolean, optional) - Display chart border. Default: false</li>
+ *   <li><b>showMarkers</b> (boolean, optional) - Show data point markers. Default: true</li>
+ *   <li><b>showTooltip</b> (boolean, optional) - Enable tooltips. Default: true</li>
+ *   <li><b>markerSize</b> (number, optional) - Marker size in pixels. Default: 4</li>
+ *   <li><b>show3D</b> (boolean, optional) - 3D appearance (limited support). Default: false</li>
+ * </ul>
+ * <h3>Advanced Options</h3>
+ * <ul>
+ *   <li><b>seriesPlacement</b> (string, optional) - Series layout: "default", "cluster", "stacked". Default: "default"</li>
+ *   <li><b>labelFormat</b> (string, optional) - Y-axis label format (use {value} placeholder). Default: ""</li>
+ *   <li><b>categoryLabelPositions</b> (string, optional) - Label rotation: "horizontal", "up_45", "up_90", "down_45", "down_90", "vertical". Default: "horizontal"</li>
+ *   <li><b>url</b> (string, optional) - URL to open when clicking data points. Default: ""</li>
+ * </ul>
  */
 @BoxComponent( "chart" )
 @AllowsBody( true )
@@ -36,6 +91,13 @@ class{
 	property name="log";
 
 	/**
+	 * --------------------------------------------------------------------------
+	 * Static Properties
+	 * --------------------------------------------------------------------------
+	 */
+	static DEFAULT_COLOR_LIST = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
+
+	/**
 	 * Renders a chart using Chart.js
 	 *
 	 * @param context The context of the execution (IBoxContext)
@@ -46,6 +108,9 @@ class{
 	 * Supported attributes
 	 *
 	 * @attribute.backgroundColor - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
+	 * @attribute.borderColor - string, optional -  Border color for chart elements like bars, lines, and pie slices. Hexadecimal value or supported named color. For a hex value, use the form: borderColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: Uses series colors if not specified.
+	 * @attribute.borderWidth - number, optional -  Border width in pixels. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: 1 for bar, 2 for pie/doughnut/polarArea/bubble, 3 for line/area/radar.
+	 * @attribute.borderRadius - number, optional -  Border radius in pixels for rounded corners on bars. Applies to: bar, horizontalbar only. Default: 0.
 	 * @attribute.chartHeight - number, optional -  Chart height; integer number of pixels
 	 * @attribute.chartWidth - number, optional -  Chart width; integer number of pixels
 	 * @attribute.responsive - boolean, optional -  Enable responsive behavior. When true, chart resizes with container. Default: true
@@ -127,6 +192,9 @@ class{
 		// Color attributes - newly implemented
 		var dataBackgroundColor = attributes.databackgroundcolor ?: "";
 		var foregroundColor = attributes.foregroundcolor ?: "##333333";
+		var borderColor = attributes.bordercolor ?: "";
+		var borderWidth = attributes.borderwidth ?: 0; // 0 means use chart type defaults
+		var borderRadius = attributes.borderradius ?: 0;
 
 		// Display control attributes - newly implemented
 		var showBorder = attributes.showborder ?: false;
@@ -178,6 +246,9 @@ class{
 			fontSize,
 			dataBackgroundColor,
 			foregroundColor,
+			borderColor,
+			borderWidth,
+			borderRadius,
 			showBorder,
 			showMarkers,
 			showXLabel,
@@ -259,6 +330,9 @@ class{
 		fontSize,
 		dataBackgroundColor,
 		foregroundColor,
+		borderColor,
+		borderWidth,
+		borderRadius,
 		showBorder,
 		showMarkers,
 		showXLabel,
@@ -278,6 +352,7 @@ class{
 		// Normalize colors
 		var normalizedForegroundColor = normalizeColor( foregroundColor );
 		var normalizedDataBackgroundColor = normalizeColor( dataBackgroundColor );
+		var normalizedBorderColor = normalizeColor( borderColor );
 
 		// Build font configuration
 		var fontStyle = "";
@@ -472,7 +547,7 @@ class{
 
 			// Default colors if none provided
 			if ( arrayLen( colorList ) == 0 ) {
-				colorList = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
+				colorList = static.DEFAULT_COLOR_LIST;
 			}
 
 			for ( var dataItem in series.chartData ) {
@@ -494,6 +569,11 @@ class{
 			dataset.data = values;
 			dataset.backgroundColor = colors;
 
+			// Get series-level border attributes (override chart-level)
+			var seriesBorderColor = structKeyExists( series, "bordercolor" ) && len( series.bordercolor ) ? normalizeColor( series.bordercolor ) : normalizedBorderColor;
+			var seriesBorderWidth = structKeyExists( series, "borderwidth" ) && series.borderwidth > 0 ? series.borderwidth : borderWidth;
+			var seriesBorderRadius = structKeyExists( series, "borderradius" ) && series.borderradius > 0 ? series.borderradius : borderRadius;
+
 			// Chart type specific settings
 			if ( series.type == "bar" || series.type == "horizontalbar" ) {
 				if ( series.type == "horizontalbar" ) {
@@ -502,21 +582,33 @@ class{
 				} else {
 					config.type = "bar";
 				}
-				dataset.borderColor = colors;
-				dataset.borderWidth = 1;
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series colors
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : colors;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 1
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 1;
+				// Use series-level borderRadius if specified (bar charts only)
+				if ( seriesBorderRadius > 0 ) {
+					dataset.borderRadius = seriesBorderRadius;
+				}
 			} else if ( series.type == "area" ) {
 				config.type = "line";
 				dataset.fill = true;
-				dataset.borderColor = colors[1] ?: "##FF6384";
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = colors[1] ?: "##FF6384";
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 				// Apply marker settings for area charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
 			} else if ( series.type == "line" ) {
 				config.type = "line";
-				dataset.borderColor = colors[1] ?: "##FF6384";
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = normalizedDataBackgroundColor ?: "transparent";
 				dataset.fill = false;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 				// Apply marker settings for line charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
@@ -529,16 +621,40 @@ class{
 			} else if ( series.type == "bubble" ) {
 				config.type = "bubble";
 				dataset.backgroundColor = colors;
-				dataset.borderColor = colors;
-				dataset.borderWidth = 2;
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series colors
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : colors;
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
 			} else if ( series.type == "pie" ) {
 				config.type = "pie";
+				// For pie charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
+				}
 			} else if ( series.type == "doughnut" ) {
 				config.type = "doughnut";
+				// For doughnut charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
+				}
 			} else if ( series.type == "radar" ) {
 				config.type = "radar";
+				// Use series-level borderColor if specified, otherwise use chart-level, otherwise use series color
+				dataset.borderColor = len( seriesBorderColor ) > 0 ? seriesBorderColor : ( colors[1] ?: "##FF6384" );
+				// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 3
+				dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 3;
 			} else if ( series.type == "polararea" ) {
 				config.type = "polarArea";
+				// For polar area charts, use series-level borderColor if specified, otherwise chart-level
+				if ( len( seriesBorderColor ) > 0 ) {
+					dataset.borderColor = seriesBorderColor;
+					// Use series-level borderWidth if specified, otherwise use chart-level, otherwise default to 2
+					dataset.borderWidth = seriesBorderWidth > 0 ? seriesBorderWidth : 2;
+				}
 			}
 
 			// Handle series placement for bar charts

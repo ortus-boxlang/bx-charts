@@ -1,50 +1,50 @@
 {
-	"name": "BoxLang Charts",
-	"version": "1.1.0",
-	"location": "https://downloads.ortussolutions.com/ortussolutions/boxlang-modules/bx-charts/@build.version@/bx-charts-@build.version@.zip",
-	"author": "Ortus Solutions",
-	"homepage": "https://github.com/ortus-boxlang/bx-charts",
-	"documentation": "https://github.com/ortus-boxlang/bx-charts",
-	"repository": {
-		"type": "git",
-		"URL": "https://github.com/ortus-boxlang/bx-charts"
-	},
-	"bugs": "https://ortussolutions.atlassian.net/browse/BLMODULES",
-	"slug": "bx-charts",
-	"shortDescription": "A charting module for BoxLang",
-	"type": "boxlang-modules",
-	"keywords": [
-		"boxlang"
-	],
-	"boxlang": {
-		"minimumVersion": "1.0.0",
-		"moduleName": "bxcharts"
-	},
-	"private": false,
-	"license": [
-		{
-			"type": "Apache-2.0",
-			"URL": "https://www.apache.org/licenses/LICENSE-2.0"
-		}
-	],
-	"devDependencies": {
-		"commandbox-boxlang": "*",
-		"commandbox-cfformat": "*",
-		"commandbox-docbox": "*",
-		"testbox": "*"
-	},
-	"ignore": [
-		"**/.*",
-		"/src/**",
-		"gradle/**",
-		"tests/**",
-		".github/**",
-		".vscode/**",
-		"server.json",
-		"Build.bx"
-	],
-	"scripts": {},
-	"installPaths": {
-		"testbox": "testbox/"
-	}
+    "name":"BoxLang Charts",
+    "version":"1.2.0",
+    "location":"https://downloads.ortussolutions.com/ortussolutions/boxlang-modules/bx-charts/@build.version@/bx-charts-@build.version@.zip",
+    "author":"Ortus Solutions",
+    "homepage":"https://github.com/ortus-boxlang/bx-charts",
+    "documentation":"https://github.com/ortus-boxlang/bx-charts",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/ortus-boxlang/bx-charts"
+    },
+    "bugs":"https://ortussolutions.atlassian.net/browse/BLMODULES",
+    "slug":"bx-charts",
+    "shortDescription":"A charting module for BoxLang",
+    "type":"boxlang-modules",
+    "keywords":[
+        "boxlang"
+    ],
+    "boxlang":{
+        "minimumVersion":"1.0.0",
+        "moduleName":"bxcharts"
+    },
+    "private":false,
+    "license":[
+        {
+            "type":"Apache-2.0",
+            "URL":"https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    ],
+    "devDependencies":{
+        "commandbox-boxlang":"*",
+        "commandbox-cfformat":"*",
+        "commandbox-docbox":"*",
+        "testbox":"*"
+    },
+    "ignore":[
+        "**/.*",
+        "/src/**",
+        "gradle/**",
+        "tests/**",
+        ".github/**",
+        ".vscode/**",
+        "server.json",
+        "Build.bx"
+    ],
+    "scripts":{},
+    "installPaths":{
+        "testbox":"testbox/"
+    }
 }

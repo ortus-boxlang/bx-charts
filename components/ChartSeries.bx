@@ -2,19 +2,51 @@
  * BoxLang ChartSeries Component - Defines a data series for charts
  * <p>
  * This component must be nested within a chart component.
- * It defines the chart type and styling, and contains chartData components.
+ * It defines the chart type and styling, and contains chartData components or uses a query data source.
  * <p>
- * Usage:
+ * Usage with chartData components:
  * <pre>
  * <bx:chartseries type="pie" colorlist="red,blue,green">
  *   <bx:chartdata item="Item 1" value="100">
  *   <bx:chartdata item="Item 2" value="200">
  * </bx:chartseries>
  * </pre>
+ * <p>
+ * Usage with query:
+ * <pre>
+ * <bx:chartseries type="bar" query="#myQuery#" itemColumn="category" valueColumn="amount">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
+ * Usage with data array (structs):
+ * <pre>
+ * <bx:chartseries type="pie" data="#[{item:'A',value:100},{item:'B',value:200}]#">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
+ * Usage with data array (positional):
+ * <pre>
+ * <bx:chartseries type="bar" data="#[['Product A',100],['Product B',200]]#">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
+ * <h2>Attributes</h2>
+ * <ul>
+ *   <li><b>bordercolor</b> (string, optional) - Border color for this series (hex or named color). Overrides chart-level bordercolor. Not applicable for scatter charts.</li>
+ *   <li><b>borderradius</b> (numeric, optional) - Border radius in pixels for this series. Only applicable for bar and horizontalbar charts. Overrides chart-level borderradius.</li>
+ *   <li><b>borderwidth</b> (numeric, optional) - Border width in pixels for this series. Not applicable for scatter charts. Overrides chart-level borderwidth.</li>
+ *   <li><b>colorlist</b> (string, optional) - Comma-separated list of colors (hex or named colors) for chart data points</li>
+ *   <li><b>data</b> (array, optional) - Array data source. Can be array of structs [{item:"x",value:123}] or array of arrays [["x",123]]. For bubble charts use x,y,r instead of value</li>
+ *   <li><b>itemColumn</b> (string, optional) - Name of the query column containing labels. Default: "item"</li>
+ *   <li><b>query</b> (query, optional) - Query object to use as data source. When provided, no child chartData components are required</li>
+ *   <li><b>serieslabel</b> (string, optional) - Label for this data series, defaults to chart type</li>
+ *   <li><b>type</b> (string, required) - Chart type: pie, bar, line, doughnut, radar, polarArea, area, horizontalbar, scatter, bubble</li>
+ *   <li><b>valueColumn</b> (string, optional) - Name of the query column containing values. Default: "value"</li>
+ * </ul>
  */
 @BoxComponent( "chartseries" )
 @AllowsBody( true )
-@RequiresBody( true )
+@RequiresBody( false )
 class{
 
 	/**
@@ -85,15 +117,40 @@ class{
 		executionState.type = chartType;
 		executionState.colorlist = attributes.colorlist ?: "";
 		executionState.serieslabel = attributes.serieslabel ?: chartType;
+		executionState.bordercolor = attributes.bordercolor ?: "";
+		executionState.borderwidth = attributes.borderwidth ?: 0;
+		executionState.borderradius = attributes.borderradius ?: 0;
 		executionState.chartData = [];
 
-		// Process the body to collect chartdata components
-		var buffer = newBuffer();
-		var bodyResult = processBody( context, body, buffer );
+		// Check if using query data source
+		var hasQuery = structKeyExists( attributes, "query" ) && !isNull( attributes.query );
 
-		// If there was a return statement inside our body, we early exit now
-		if ( bodyResult.isEarlyExit() ) {
-			return bodyResult;
+		// Check if using array data source
+		var hasData = structKeyExists( attributes, "data" ) && !isNull( attributes.data );
+
+		if ( hasQuery ) {
+			// Use query as data source
+			var itemColumn = attributes.itemColumn ?: "item";
+			var valueColumn = attributes.valueColumn ?: "value";
+
+			// Convert query to chart data array
+			executionState.chartData = convertQueryToChartData(
+				attributes.query,
+				itemColumn,
+				valueColumn
+			);
+		} else if ( hasData ) {
+			// Use array as data source
+			executionState.chartData = convertArrayToChartData( attributes.data, chartType );
+		} else {
+			// Process the body to collect chartdata components
+			var buffer = newBuffer();
+			var bodyResult = processBody( context, body, buffer );
+
+			// If there was a return statement inside our body, we early exit now
+			if ( bodyResult.isEarlyExit() ) {
+				return bodyResult;
+			}
 		}
 
 		// Create the series data structure
@@ -101,6 +158,9 @@ class{
 			"type": chartType,
 			"colorlist": executionState.colorlist,
 			"serieslabel": executionState.serieslabel,
+			"bordercolor": executionState.bordercolor,
+			"borderwidth": executionState.borderwidth,
+			"borderradius": executionState.borderradius,
 			"chartData": executionState.chartData
 		};
 
@@ -108,6 +168,187 @@ class{
 		arrayAppend( parentState.chartSeries, seriesData );
 
 		return null; // Default return
+	}
+
+	/**
+	 * Converts a query to an array of chart data objects
+	 *
+	 * @param query The query object to convert
+	 * @param itemColumn The name of the column containing item labels
+	 * @param valueColumn The name of the column containing values
+	 *
+	 * @return Array of chart data objects with item and value properties
+	 */
+	private function convertQueryToChartData( required query, required itemColumn, required valueColumn ){
+		// Validate that the query has records
+		if ( query.recordCount == 0 ) {
+			throw(
+				type: "BXChartException",
+				message: "Query data source must contain at least one record. The provided query is empty."
+			);
+		}
+
+		// Get query column names for validation
+		var queryColumns = listToArray( query.columnList );
+
+		// Validate itemColumn exists
+		if ( !arrayContainsNoCase( queryColumns, itemColumn ) ) {
+			throw(
+				type: "BXChartException",
+				message: "The itemColumn '#itemColumn#' does not exist in the query. Available columns: #query.columnList#"
+			);
+		}
+
+		// Validate valueColumn exists
+		if ( !arrayContainsNoCase( queryColumns, valueColumn ) ) {
+			throw(
+				type: "BXChartException",
+				message: "The valueColumn '#valueColumn#' does not exist in the query. Available columns: #query.columnList#"
+			);
+		}
+
+		// Convert query to array of data objects
+		var chartData = [];
+
+		for ( var row = 1; row <= query.recordCount; row++ ) {
+			var dataPoint = {
+				"item": trim( query[ itemColumn ][ row ] ),
+				"value": query[ valueColumn ][ row ]
+			};
+			arrayAppend( chartData, dataPoint );
+		}
+
+		return chartData;
+	}
+
+	/**
+	 * Converts an array to chart data objects
+	 * Supports two formats:
+	 * 1. Array of structs: [{item:"x",value:123}] or [{item:"x",x:1,y:2,r:3}] for bubble
+	 * 2. Array of arrays: [["x",123]] or [["x",x,y,r]] for bubble
+	 *
+	 * @param dataArray The array to convert
+	 * @param chartType The type of chart (used to determine if it's a bubble chart)
+	 *
+	 * @return Array of chart data objects with item and value (or x,y,r) properties
+	 */
+	private function convertArrayToChartData( required dataArray, required chartType ){
+		// Validate that the array is not empty
+		if ( !isArray( dataArray ) ) {
+			throw(
+				type: "BXChartException",
+				message: "The data attribute must be an array. Received: #getMetadata( dataArray ).name#"
+			);
+		}
+
+		if ( arrayLen( dataArray ) == 0 ) {
+			throw(
+				type: "BXChartException",
+				message: "The data array must contain at least one element."
+			);
+		}
+
+		var chartData = [];
+		var isBubbleChart = ( lcase( chartType ) == "bubble" );
+
+		// Detect format based on first element
+		var firstElement = dataArray[1];
+		var isStructFormat = isStruct( firstElement );
+		var isArrayFormat = isArray( firstElement );
+
+		if ( !isStructFormat && !isArrayFormat ) {
+			throw(
+				type: "BXChartException",
+				message: "The data array must contain either structs or arrays. First element type: #getMetadata( firstElement ).name#"
+			);
+		}
+
+		// Process array based on format
+		for ( var i = 1; i <= arrayLen( dataArray ); i++ ) {
+			var element = dataArray[i];
+			var dataPoint = {};
+
+			if ( isStructFormat ) {
+				// Array of structs format: [{item:"x",value:123}] or [{item:"x",x:1,y:2,r:3}]
+				if ( !isStruct( element ) ) {
+					throw(
+						type: "BXChartException",
+						message: "Mixed array formats detected. Element #i# is not a struct but first element was a struct."
+					);
+				}
+
+				// Validate required keys
+				if ( !structKeyExists( element, "item" ) ) {
+					throw(
+						type: "BXChartException",
+						message: "Data struct at index #i# is missing required 'item' key. Available keys: #structKeyList(element)#"
+					);
+				}
+
+				dataPoint.item = trim( element.item );
+
+				// For bubble charts, expect x, y, r
+				if ( isBubbleChart ) {
+					if ( structKeyExists( element, "x" ) && structKeyExists( element, "y" ) && structKeyExists( element, "r" ) ) {
+						dataPoint.x = element.x;
+						dataPoint.y = element.y;
+						dataPoint.r = element.r;
+					} else {
+						throw(
+							type: "BXChartException",
+							message: "Bubble chart data struct at index #i# must have 'x', 'y', and 'r' keys. Available keys: #structKeyList(element)#"
+						);
+					}
+				} else {
+					// For other charts, expect value
+					if ( !structKeyExists( element, "value" ) ) {
+						throw(
+							type: "BXChartException",
+							message: "Data struct at index #i# is missing required 'value' key. Available keys: #structKeyList(element)#"
+						);
+					}
+					dataPoint.value = element.value;
+				}
+			} else {
+				// Array of arrays format: [["x",123]] or [["x",x,y,r]]
+				if ( !isArray( element ) ) {
+					throw(
+						type: "BXChartException",
+						message: "Mixed array formats detected. Element #i# is not an array but first element was an array."
+					);
+				}
+
+				var elementLen = arrayLen( element );
+
+				// For bubble charts, expect [item, x, y, r] (4 elements)
+				if ( isBubbleChart ) {
+					if ( elementLen != 4 ) {
+						throw(
+							type: "BXChartException",
+							message: "Bubble chart data array at index #i# must have exactly 4 elements [item, x, y, r]. Found #elementLen# elements."
+						);
+					}
+					dataPoint.item = trim( element[1] );
+					dataPoint.x = element[2];
+					dataPoint.y = element[3];
+					dataPoint.r = element[4];
+				} else {
+					// For other charts, expect [item, value] (2 elements)
+					if ( elementLen != 2 ) {
+						throw(
+							type: "BXChartException",
+							message: "Data array at index #i# must have exactly 2 elements [item, value]. Found #elementLen# elements."
+						);
+					}
+					dataPoint.item = trim( element[1] );
+					dataPoint.value = element[2];
+				}
+			}
+
+			arrayAppend( chartData, dataPoint );
+		}
+
+		return chartData;
 	}
 
 }
