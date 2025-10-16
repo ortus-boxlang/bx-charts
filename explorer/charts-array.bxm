@@ -170,7 +170,8 @@
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Month" yaxistitle="Revenue ($)"
 							  showygridlines="true"
-							  markersize="6">
+							  markersize="6"
+							  bordercolor="##9966FF">
 						<bx:chartseries type="line"
 										data="#[
 											{item:'January',value:120000},
@@ -206,7 +207,8 @@
     xaxistitle="Month"
     yaxistitle="Revenue ($)"
     showygridlines="true"
-    markersize="6"&gt;
+    markersize="6"
+    bordercolor="####9966FF"&gt;
     &lt;bx:chartseries
         type="line"
         data="####[

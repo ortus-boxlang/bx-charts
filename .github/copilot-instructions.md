@@ -210,6 +210,7 @@ if ( left( color, 2 ) == "##" ) {
 - Use `processBody(context, body, buffer)` pattern for nested content
 - Check `bodyResult.isEarlyExit()` after processing child components
 - Validate required attributes early and throw descriptive errors
+- **Static blocks must be defined AFTER property definitions** - BoxLang requires properties to be declared before static initializers
 
 
 ### Naming Conventions

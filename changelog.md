@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `borderColor` attribute for Chart component
+  - Controls border color for all chart elements (bars, lines, pie slices, bubbles, etc.)
+  - Accepts hexadecimal values (e.g., `##FF0000`) or named colors (e.g., `red`)
+  - Applies globally to all chart elements when specified
+  - Falls back to series colors when not specified
+  - Works with all 10 chart types (pie, bar, line, doughnut, radar, area, scatter, bubble, polarArea, horizontalbar)
+  - Comprehensive documentation in Chart.bx component
 - Array data source support in ChartSeries component
   - `data` attribute - Array to use as data source, providing flexible alternative to chartData components and queries
   - Supports array of structs format: `[{item:"Product A",value:100}, {item:"Product B",value:200}]`

@@ -278,6 +278,7 @@ The main container component that renders charts using Chart.js.
 | `fontSize` | number | 12 | Font size in pixels |
 | `foregroundColor` | string | "#333333" | Text color |
 | `dataBackgroundColor` | string | - | Data area background color |
+| `borderColor` | string | - | Border color for chart elements (hex or named color) |
 
 #### 📏 Axis Configuration
 
@@ -346,7 +347,7 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 **Example with array of structs:**
 
 ```boxlang
-<bx:chartseries type="pie" 
+<bx:chartseries type="pie"
     data="#[
         {item:'Product A', value:100},
         {item:'Product B', value:200},
@@ -359,7 +360,7 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 **Example with array of arrays (positional):**
 
 ```boxlang
-<bx:chartseries type="bar" 
+<bx:chartseries type="bar"
     data="#[
         ['Product A', 100],
         ['Product B', 200],
@@ -372,7 +373,7 @@ Defines a data series within a chart. Must be nested inside `<bx:chart>`.
 **Example with bubble chart (array of structs):**
 
 ```boxlang
-<bx:chartseries type="bubble" 
+<bx:chartseries type="bubble"
     data="#[
         {item:'Point A', x:10, y:20, r:5},
         {item:'Point B', x:15, y:25, r:8}
@@ -519,6 +520,27 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 
 **💡 Use Case:** Shows volume or magnitude over time with emphasis on total quantity.
 
+#### 🎨 Chart with Custom Border Color
+
+```xml
+<bx:chart title="Sales Performance"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Products" yaxistitle="Units Sold"
+          showygridlines="true"
+          bordercolor="##2c3e50">
+    <bx:chartseries type="bar"
+                    colorlist="3498db"
+                    serieslabel="Units Sold">
+        <bx:chartdata item="Product A" value="145">
+        <bx:chartdata item="Product B" value="220">
+        <bx:chartdata item="Product C" value="185">
+        <bx:chartdata item="Product D" value="310">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Add professional borders to chart elements. Works with all chart types including pie, bar, line, and bubble charts.
+
 #### ↔️ Horizontal Bar Chart
 
 ```xml
@@ -589,9 +611,9 @@ BoxLang Charts can use query objects as data sources, eliminating the need for m
           chartwidth="600" chartheight="400"
           xaxistitle="Products" yaxistitle="Revenue ($)"
           showygridlines="true">
-    <bx:chartseries type="bar" 
-                    query="#salesQuery#" 
-                    itemColumn="product" 
+    <bx:chartseries type="bar"
+                    query="#salesQuery#"
+                    itemColumn="product"
                     valueColumn="revenue"
                     colorlist="36A2EB"
                     serieslabel="Revenue">
@@ -616,7 +638,7 @@ BoxLang Charts also support arrays as data sources, providing flexibility when w
 <bx:chart title="Sales by Product"
           chartwidth="600" chartheight="400"
           xaxistitle="Products" yaxistitle="Revenue ($)">
-    <bx:chartseries type="bar" 
+    <bx:chartseries type="bar"
                     data="#[
                         {item:'Product A', value:15000},
                         {item:'Product B', value:23000},
@@ -633,7 +655,7 @@ BoxLang Charts also support arrays as data sources, providing flexibility when w
 ```xml
 <bx:chart title="Sales by Product"
           chartwidth="600" chartheight="400">
-    <bx:chartseries type="pie" 
+    <bx:chartseries type="pie"
                     data="#[
                         ['Product A', 15000],
                         ['Product B', 23000],
@@ -650,7 +672,7 @@ BoxLang Charts also support arrays as data sources, providing flexibility when w
 <bx:chart title="Portfolio Analysis"
           chartwidth="600" chartheight="400"
           xaxistitle="Risk" yaxistitle="Return">
-    <bx:chartseries type="bubble" 
+    <bx:chartseries type="bubble"
                     data="#[
                         {item:'Stock A', x:20, y:15, r:10},
                         {item:'Stock B', x:40, y:25, r:15},
@@ -664,7 +686,7 @@ BoxLang Charts also support arrays as data sources, providing flexibility when w
 **Bubble Chart with Array of Arrays:**
 
 ```xml
-<bx:chartseries type="bubble" 
+<bx:chartseries type="bubble"
                 data="#[
                     ['Stock A', 20, 15, 10],
                     ['Stock B', 40, 25, 15],
