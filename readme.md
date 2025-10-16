@@ -278,7 +278,9 @@ The main container component that renders charts using Chart.js.
 | `fontSize` | number | 12 | Font size in pixels |
 | `foregroundColor` | string | "#333333" | Text color |
 | `dataBackgroundColor` | string | - | Data area background color |
-| `borderColor` | string | - | Border color for chart elements (hex or named color) |
+| `borderColor` | string | - | Border color for chart elements (hex or named color). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble |
+| `borderWidth` | number | varies | Border width in pixels. Defaults: 1 (bar), 2 (pie/doughnut/polarArea/bubble), 3 (line/area/radar). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble |
+| `borderRadius` | number | 0 | Border radius in pixels for rounded corners. Applies to: bar, horizontalbar only |
 
 #### 📏 Axis Configuration
 
@@ -539,7 +541,30 @@ Defines individual data points within a series. Must be nested inside `<bx:chart
 </bx:chart>
 ```
 
-**💡 Use Case:** Add professional borders to chart elements. Works with all chart types including pie, bar, line, and bubble charts.
+**💡 Use Case:** Add professional borders to chart elements. Works with bar, line, area, pie, doughnut, radar, polarArea, and bubble charts.
+
+#### 🎯 Chart with Custom Border Width and Radius
+
+```xml
+<bx:chart title="Modern Sales Dashboard"
+          chartwidth="600" chartheight="350"
+          xaxistitle="Products" yaxistitle="Revenue"
+          showygridlines="true"
+          bordercolor="##e74c3c"
+          borderwidth="3"
+          borderradius="10">
+    <bx:chartseries type="bar"
+                    colorlist="3498db,9b59b6,2ecc71,f39c12"
+                    serieslabel="Q4 Revenue">
+        <bx:chartdata item="Product A" value="45000">
+        <bx:chartdata item="Product B" value="62000">
+        <bx:chartdata item="Product C" value="38000">
+        <bx:chartdata item="Product D" value="71000">
+    </bx:chartseries>
+</bx:chart>
+```
+
+**💡 Use Case:** Create modern, polished bar charts with rounded corners and custom border styling. `borderRadius` only applies to bar and horizontalbar chart types. `borderWidth` applies to bar, line, area, pie, doughnut, radar, polarArea, and bubble charts.
 
 #### ↔️ Horizontal Bar Chart
 

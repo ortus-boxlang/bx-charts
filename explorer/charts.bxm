@@ -32,7 +32,7 @@
                 <div class="chart-display">
                     <bx:chart format="png" show3d="false" title="Memory Usage Distribution"
                               backgroundcolor="##ffffff" chartheight="300" chartwidth="600"
-                              showlegend="true" bordercolor="##2c3e50">
+                              showlegend="true" bordercolor="##2c3e50" borderwidth="3">
                         <bx:chartseries type="pie" serieslabel="Memory Usage">
                             <bx:chartdata item="Free Memory" value="512" />
                             <bx:chartdata item="Used Memory" value="256" />
@@ -63,7 +63,8 @@
     chartheight="300"
     chartwidth="600"
     showlegend="true"
-    bordercolor="##2c3e50"&gt;
+    bordercolor="##2c3e50"
+    borderwidth="3"&gt;
     &lt;bx:chartseries type="pie" serieslabel="Memory Usage"&gt;
         &lt;bx:chartdata item="Free Memory" value="512" /&gt;
         &lt;bx:chartdata item="Used Memory" value="256" /&gt;
@@ -92,7 +93,7 @@
                               title="Performance Metrics"
                               xaxistitle="Metrics" yaxistitle="Count"
                               showxgridlines="true" showygridlines="true"
-                              bordercolor="##28a745">
+                              bordercolor="##28a745" borderwidth="2" borderradius="8">
                         <bx:chartseries type="bar" serieslabel="Performance Data">
                             <bx:chartdata item="Hits" value="150" />
                             <bx:chartdata item="Misses" value="25" />
@@ -127,7 +128,9 @@
     yaxistitle="Count"
     showxgridlines="true"
     showygridlines="true"
-    bordercolor="##28a745"&gt;
+    bordercolor="##28a745"
+    borderwidth="2"
+    borderradius="8"&gt;
     &lt;bx:chartseries type="bar" serieslabel="Performance Data"&gt;
         &lt;bx:chartdata item="Hits" value="150" /&gt;
         &lt;bx:chartdata item="Misses" value="25" /&gt;

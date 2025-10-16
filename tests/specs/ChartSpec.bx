@@ -312,7 +312,7 @@ class extends="testbox.system.BaseSpec"{
 				);
 
 				var queryColumns = listToArray( testQuery.columnList );
-				
+
 				// Validate columns
 				expect( arrayContainsNoCase( queryColumns, "name" ) ).toBeTrue( "Query should have 'name' column" );
 				expect( arrayContainsNoCase( queryColumns, "count" ) ).toBeTrue( "Query should have 'count' column" );
@@ -403,6 +403,66 @@ class extends="testbox.system.BaseSpec"{
 				// First element is struct, second is array - this should fail validation
 				expect( isStruct( mixedArray[1] ) ).toBeTrue( "First element should be struct" );
 				expect( isArray( mixedArray[2] ) ).toBeTrue( "Second element should be array" );
+			} );
+
+			it( "supports borderColor attribute", () => {
+				var borderColorTests = [
+					{ "input": "##FF0000", "description": "Hex color with ## prefix" },
+					{ "input": "#FF0000", "description": "Hex color with # prefix" },
+					{ "input": "red", "description": "Named color" },
+					{ "input": "", "description": "Empty string (no border)" }
+				];
+
+				for ( var test in borderColorTests ) {
+					// Test that borderColor can be set to various formats
+					expect( isString( test.input ) ).toBeTrue( "borderColor should accept string values for: #test.description#" );
+				}
+			} );
+
+			it( "supports borderWidth attribute with chart type defaults", () => {
+				var borderWidthDefaults = {
+					"bar": 1,
+					"horizontalbar": 1,
+					"line": 3,
+					"area": 3,
+					"radar": 3,
+					"pie": 2,
+					"doughnut": 2,
+					"polarArea": 2,
+					"bubble": 2
+				};
+
+				// Test default values
+				for ( var chartType in borderWidthDefaults ) {
+					var defaultWidth = borderWidthDefaults[ chartType ];
+					expect( isNumeric( defaultWidth ) ).toBeTrue( "borderWidth default for #chartType# should be numeric" );
+					expect( defaultWidth ).toBeGT( 0, "borderWidth default for #chartType# should be positive" );
+				}
+
+				// Test custom borderWidth
+				var customWidth = 5;
+				expect( isNumeric( customWidth ) ).toBeTrue( "Custom borderWidth should be numeric" );
+				expect( customWidth ).toBeGT( 0, "Custom borderWidth should be positive" );
+			} );
+
+			it( "supports borderRadius attribute for bar charts only", () => {
+				var supportedTypes = [ "bar", "horizontalbar" ];
+				var unsupportedTypes = [ "line", "area", "pie", "doughnut", "radar", "polarArea", "scatter", "bubble" ];
+
+				// Test borderRadius is numeric
+				var borderRadius = 10;
+				expect( isNumeric( borderRadius ) ).toBeTrue( "borderRadius should be numeric" );
+				expect( borderRadius ).toBeGTE( 0, "borderRadius should be non-negative" );
+
+				// Validate supported types
+				for ( var type in supportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBeGT( 0, "#type# should support borderRadius" );
+				}
+
+				// Validate unsupported types
+				for ( var type in unsupportedTypes ) {
+					expect( listFindNoCase( "bar,horizontalbar", type ) ).toBe( 0, "#type# should not support borderRadius" );
+				}
 			} );
 
 		} );

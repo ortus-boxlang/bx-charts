@@ -38,7 +38,9 @@
  *   <li><b>fontSize</b> (number, optional) - Font size in pixels. Default: 12</li>
  *   <li><b>foregroundColor</b> (string, optional) - Text color. Default: "#333333"</li>
  *   <li><b>dataBackgroundColor</b> (string, optional) - Data area background color</li>
- *   <li><b>borderColor</b> (string, optional) - Border color for chart elements (hex or named color). Default: ""</li>
+ *   <li><b>borderColor</b> (string, optional) - Border color for chart elements (hex or named color). Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: ""</li>
+ *   <li><b>borderWidth</b> (number, optional) - Border width in pixels. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: 1 for bar, 2 for pie/doughnut/polarArea/bubble, 3 for line/area/radar</li>
+ *   <li><b>borderRadius</b> (number, optional) - Border radius in pixels for rounded corners. Applies to: bar, horizontalbar only. Default: 0</li>
  * </ul>
  * <h3>Axis Configuration</h3>
  * <ul>
@@ -106,7 +108,9 @@ class{
 	 * Supported attributes
 	 *
 	 * @attribute.backgroundColor - string, optional -  Color of the area between the data background and the chart border, around labels and around the legend. Hexadecimal value or supported named color. For a hex value, use the form: textColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none.
-	 * @attribute.borderColor - string, optional -  Border color for chart elements like bars, lines, and pie slices. Hexadecimal value or supported named color. For a hex value, use the form: borderColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Default: Uses series colors if not specified.
+	 * @attribute.borderColor - string, optional -  Border color for chart elements like bars, lines, and pie slices. Hexadecimal value or supported named color. For a hex value, use the form: borderColor = "##xxxxxx", where x = 0-9 or A-F; use two hash signs or none. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: Uses series colors if not specified.
+	 * @attribute.borderWidth - number, optional -  Border width in pixels. Applies to: bar, line, area, pie, doughnut, radar, polarArea, bubble. Default: 1 for bar, 2 for pie/doughnut/polarArea/bubble, 3 for line/area/radar.
+	 * @attribute.borderRadius - number, optional -  Border radius in pixels for rounded corners on bars. Applies to: bar, horizontalbar only. Default: 0.
 	 * @attribute.chartHeight - number, optional -  Chart height; integer number of pixels
 	 * @attribute.chartWidth - number, optional -  Chart width; integer number of pixels
 	 * @attribute.responsive - boolean, optional -  Enable responsive behavior. When true, chart resizes with container. Default: true
@@ -189,6 +193,8 @@ class{
 		var dataBackgroundColor = attributes.databackgroundcolor ?: "";
 		var foregroundColor = attributes.foregroundcolor ?: "##333333";
 		var borderColor = attributes.bordercolor ?: "";
+		var borderWidth = attributes.borderwidth ?: 0; // 0 means use chart type defaults
+		var borderRadius = attributes.borderradius ?: 0;
 
 		// Display control attributes - newly implemented
 		var showBorder = attributes.showborder ?: false;
@@ -241,6 +247,8 @@ class{
 			dataBackgroundColor,
 			foregroundColor,
 			borderColor,
+			borderWidth,
+			borderRadius,
 			showBorder,
 			showMarkers,
 			showXLabel,
@@ -323,6 +331,8 @@ class{
 		dataBackgroundColor,
 		foregroundColor,
 		borderColor,
+		borderWidth,
+		borderRadius,
 		showBorder,
 		showMarkers,
 		showXLabel,
@@ -569,13 +579,20 @@ class{
 				}
 				// Use borderColor attribute if specified, otherwise use series colors
 				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : colors;
-				dataset.borderWidth = 1;
+				// Use borderWidth attribute if specified, otherwise default to 1
+				dataset.borderWidth = borderWidth > 0 ? borderWidth : 1;
+				// Use borderRadius attribute if specified (bar charts only)
+				if ( borderRadius > 0 ) {
+					dataset.borderRadius = borderRadius;
+				}
 			} else if ( series.type == "area" ) {
 				config.type = "line";
 				dataset.fill = true;
 				// Use borderColor attribute if specified, otherwise use series color
 				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = colors[1] ?: "##FF6384";
+				// Use borderWidth attribute if specified, otherwise default to 3
+				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
 				// Apply marker settings for area charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
@@ -585,6 +602,8 @@ class{
 				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
 				dataset.backgroundColor = normalizedDataBackgroundColor ?: "transparent";
 				dataset.fill = false;
+				// Use borderWidth attribute if specified, otherwise default to 3
+				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
 				// Apply marker settings for line charts
 				dataset.pointRadius = showMarkers ? markerSize : 0;
 				dataset.pointHoverRadius = showMarkers ? markerSize + 2 : 0;
@@ -599,31 +618,37 @@ class{
 				dataset.backgroundColor = colors;
 				// Use borderColor attribute if specified, otherwise use series colors
 				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : colors;
-				dataset.borderWidth = 2;
+				// Use borderWidth attribute if specified, otherwise default to 2
+				dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
 			} else if ( series.type == "pie" ) {
 				config.type = "pie";
 				// For pie charts, borderColor applies to all slices
 				if ( len( normalizedBorderColor ) > 0 ) {
 					dataset.borderColor = normalizedBorderColor;
-					dataset.borderWidth = 2;
+					// Use borderWidth attribute if specified, otherwise default to 2
+					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
 				}
 			} else if ( series.type == "doughnut" ) {
 				config.type = "doughnut";
 				// For doughnut charts, borderColor applies to all slices
 				if ( len( normalizedBorderColor ) > 0 ) {
 					dataset.borderColor = normalizedBorderColor;
-					dataset.borderWidth = 2;
+					// Use borderWidth attribute if specified, otherwise default to 2
+					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
 				}
 			} else if ( series.type == "radar" ) {
 				config.type = "radar";
 				// Use borderColor attribute if specified, otherwise use series color
 				dataset.borderColor = len( normalizedBorderColor ) > 0 ? normalizedBorderColor : ( colors[1] ?: "##FF6384" );
+				// Use borderWidth attribute if specified, otherwise default to 3
+				dataset.borderWidth = borderWidth > 0 ? borderWidth : 3;
 			} else if ( series.type == "polararea" ) {
 				config.type = "polarArea";
 				// For polar area charts, borderColor applies to all segments
 				if ( len( normalizedBorderColor ) > 0 ) {
 					dataset.borderColor = normalizedBorderColor;
-					dataset.borderWidth = 2;
+					// Use borderWidth attribute if specified, otherwise default to 2
+					dataset.borderWidth = borderWidth > 0 ? borderWidth : 2;
 				}
 			}
 
