@@ -992,7 +992,7 @@
                 <div class="alert alert-info mt-3" role="alert">
                     <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Series-Level Override</h6>
                     <p class="mb-0 small">
-                        Each series uses <code>bordercolor</code>, <code>borderwidth</code>, and <code>borderradius</code> 
+                        Each series uses <code>bordercolor</code>, <code>borderwidth</code>, and <code>borderradius</code>
                         attributes to override chart-level defaults. This allows each data series to have distinct visual emphasis.
                     </p>
                 </div>
@@ -1105,7 +1105,7 @@
                 <div class="alert alert-success mt-3" role="alert">
                     <h6 class="alert-heading"><i class="bi bi-lightbulb"></i> Visual Hierarchy</h6>
                     <p class="mb-0 small">
-                        Use varying <code>borderwidth</code> values (5px, 2px, 1px) to create visual hierarchy, 
+                        Use varying <code>borderwidth</code> values (5px, 2px, 1px) to create visual hierarchy,
                         drawing attention to the most important data series while keeping secondary metrics visible but subtle.
                     </p>
                 </div>
