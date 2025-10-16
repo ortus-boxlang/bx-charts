@@ -105,7 +105,7 @@
 							  xaxistitle="Products" yaxistitle="Revenue ($)"
 							  showygridlines="true"
 							  backgroundcolor="##f8f9fa">
-						<bx:chartseries type="bar" 
+						<bx:chartseries type="bar"
 										query="#salesQuery#"
 										colorlist="36A2EB"
 										serieslabel="Sales Revenue">
@@ -161,7 +161,7 @@
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Budget" yaxistitle="Department"
 							  showxgridlines="true">
-						<bx:chartseries type="horizontalbar" 
+						<bx:chartseries type="horizontalbar"
 										query="#departmentQuery#"
 										itemColumn="department"
 										valueColumn="budget"
@@ -222,7 +222,7 @@
 							  chartwidth="800" chartheight="400"
 							  xaxistitle="Month" yaxistitle="Revenue ($)"
 							  showygridlines="true">
-						<bx:chartseries type="line" 
+						<bx:chartseries type="line"
 										query="#monthlyQuery#"
 										itemColumn="month"
 										valueColumn="revenue"
@@ -281,7 +281,7 @@
 						<bx:chart title="Sales by Region"
 								  chartwidth="600" chartheight="600"
 								  showlegend="true">
-							<bx:chartseries type="pie" 
+							<bx:chartseries type="pie"
 											query="#regionalQuery#"
 											itemColumn="region"
 											valueColumn="sales"
@@ -340,7 +340,7 @@
 								  chartwidth="600" chartheight="600"
 								  showlegend="true"
 								  backgroundcolor="##ffffff">
-							<bx:chartseries type="doughnut" 
+							<bx:chartseries type="doughnut"
 											query="#metricsQuery#"
 											itemColumn="metric"
 											valueColumn="count"
@@ -400,7 +400,7 @@
 							  xaxistitle="Month" yaxistitle="Revenue ($)"
 							  showygridlines="true"
 							  showxgridlines="false">
-						<bx:chartseries type="area" 
+						<bx:chartseries type="area"
 										query="#monthlyQuery#"
 										itemColumn="month"
 										valueColumn="revenue"
@@ -473,7 +473,7 @@
 
 					<div class="col-md-6">
 						<h5><i class="bi bi-code-square text-info"></i> Usage Examples</h5>
-						
+
 						<p class="mb-2"><strong>With default column names:</strong></p>
 						<pre class="bg-light p-3 rounded"><code>&lt;bx:chartseries
     type="pie"
