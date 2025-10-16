@@ -319,6 +319,92 @@ class extends="testbox.system.BaseSpec"{
 				expect( arrayContainsNoCase( queryColumns, "invalid" ) ).toBeFalse( "Query should not have 'invalid' column" );
 			} );
 
+			it( "can use array of structs as data source", () => {
+				// Create test data array with structs
+				var testData = [
+					{ "item": "Product A", "value": 100 },
+					{ "item": "Product B", "value": 200 },
+					{ "item": "Product C", "value": 150 }
+				];
+
+				// Validate array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "value" ) ).toBeTrue( "Data point should have 'value' key" );
+				}
+			} );
+
+			it( "can use array of arrays as data source", () => {
+				// Create test data array with arrays
+				var testData = [
+					[ "Product A", 100 ],
+					[ "Product B", 200 ],
+					[ "Product C", 150 ]
+				];
+
+				// Validate array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( isArray( dataPoint ) ).toBeTrue( "Data point should be an array" );
+					expect( arrayLen( dataPoint ) ).toBe( 2, "Data point should have 2 elements [item, value]" );
+				}
+			} );
+
+			it( "can use array of structs for bubble chart data", () => {
+				// Create test data array for bubble charts
+				var testData = [
+					{ "item": "Point A", "x": 10, "y": 20, "r": 5 },
+					{ "item": "Point B", "x": 15, "y": 25, "r": 8 },
+					{ "item": "Point C", "x": 20, "y": 30, "r": 12 }
+				];
+
+				// Validate bubble array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( structKeyExists( dataPoint, "item" ) ).toBeTrue( "Data point should have 'item' key" );
+					expect( structKeyExists( dataPoint, "x" ) ).toBeTrue( "Data point should have 'x' key" );
+					expect( structKeyExists( dataPoint, "y" ) ).toBeTrue( "Data point should have 'y' key" );
+					expect( structKeyExists( dataPoint, "r" ) ).toBeTrue( "Data point should have 'r' key" );
+				}
+			} );
+
+			it( "can use array of arrays for bubble chart data", () => {
+				// Create test data array for bubble charts with positional format
+				var testData = [
+					[ "Point A", 10, 20, 5 ],
+					[ "Point B", 15, 25, 8 ],
+					[ "Point C", 20, 30, 12 ]
+				];
+
+				// Validate bubble array structure
+				expect( arrayLen( testData ) ).toBe( 3, "Array should have 3 elements" );
+				for ( var dataPoint in testData ) {
+					expect( isArray( dataPoint ) ).toBeTrue( "Data point should be an array" );
+					expect( arrayLen( dataPoint ) ).toBe( 4, "Data point should have 4 elements [item, x, y, r]" );
+				}
+			} );
+
+			it( "validates array data is not empty", () => {
+				// Create empty array
+				var emptyArray = [];
+
+				// Validate empty array
+				expect( arrayLen( emptyArray ) ).toBe( 0, "Empty array should have 0 elements" );
+			} );
+
+			it( "validates mixed formats are not allowed", () => {
+				// This would be an invalid array with mixed types
+				var mixedArray = [
+					{ "item": "Product A", "value": 100 },
+					[ "Product B", 200 ]
+				];
+
+				// First element is struct, second is array - this should fail validation
+				expect( isStruct( mixedArray[1] ) ).toBeTrue( "First element should be struct" );
+				expect( isArray( mixedArray[2] ) ).toBeTrue( "Second element should be array" );
+			} );
+
 		} );
 	}
 

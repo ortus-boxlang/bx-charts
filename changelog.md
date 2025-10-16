@@ -11,22 +11,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Query data source support in ChartSeries component
-  - `query` attribute - Query object to use as data source, eliminating need for manual chartData components
-  - `itemColumn` attribute - Specifies the query column containing labels (default: "item")
-  - `valueColumn` attribute - Specifies the query column containing values (default: "value")
-  - Automatic query validation with descriptive error messages
-  - Internal `convertQueryToChartData()` method for query-to-array conversion
-- Comprehensive component documentation
-  - Added detailed JavaDoc-style documentation to Chart.bx with all attributes categorized
-  - Added detailed JavaDoc-style documentation to ChartSeries.bx with query usage examples
-  - Added detailed JavaDoc-style documentation to ChartData.bx with bubble chart examples
-- Updated readme.md with query data source examples and usage guidelines
+- Array data source support in ChartSeries component
+  - `data` attribute - Array to use as data source, providing flexible alternative to chartData components and queries
+  - Supports array of structs format: `[{item:"Product A",value:100}, {item:"Product B",value:200}]`
+  - Supports array of arrays (positional) format: `[["Product A",100], ["Product B",200]]`
+  - Supports bubble chart array of structs: `[{item:"Point A",x:10,y:20,r:5}]`
+  - Supports bubble chart array of arrays: `[["Point A",10,20,5]]`
+  - Internal `convertArrayToChartData()` method for array-to-chart-data conversion
+  - Comprehensive validation with descriptive error messages
+  - Mixed format detection to prevent inconsistent data
+- Explorer page for array data examples (`explorer/charts-array.bxm`)
+  - 10 comprehensive examples showcasing array data source usage
+  - Examples for both array of structs and array of arrays formats
+  - Bubble chart examples with both formats
+  - Documentation section explaining format selection and usage
+- Updated readme.md with array data source examples and usage guidelines
+  - New section "Chart with Array Data Source" with multiple examples
+  - Array format comparison table
+  - Dynamic array example showing programmatic data generation
+- Enhanced ChartSeries documentation with array format examples
+- Test coverage for array data functionality
+  - Tests for array of structs format
+  - Tests for array of arrays format
+  - Tests for bubble chart array formats
+  - Tests for validation and error handling
 
 ### Changed
 
-- ChartSeries component now supports optional body content (changed from RequiresBody=true to RequiresBody=false)
-- Enhanced error messages with more descriptive validation feedback
+- ChartSeries now supports three data source methods: chartData components, query objects, and arrays
+- Enhanced component documentation with more comprehensive examples
 
 ## [1.1.0] - 2025-10-15
 

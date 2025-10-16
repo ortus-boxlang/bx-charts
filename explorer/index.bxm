@@ -252,6 +252,32 @@
 					</div>
 				</div>
 			</div>
+
+			<!--- Array-Based Charts Card --->
+			<div class="col-lg-4">
+				<div class="chart-card h-100">
+					<div class="chart-card-header">
+						<h3 class="chart-card-title">
+							<i class="bi bi-list-ul text-danger"></i> Array Data Sources
+						</h3>
+					</div>
+					<div class="chart-card-body">
+						<p class="text-muted">
+							Use arrays directly as data sources with flexible format support. Choose between
+							array of structs or array of arrays (positional) based on your needs.
+						</p>
+						<div class="mb-3">
+							<span class="badge bg-danger-subtle text-danger me-1 mb-1">Array Support</span>
+							<span class="badge bg-danger-subtle text-danger me-1 mb-1">Flexible Format</span>
+							<span class="badge bg-danger-subtle text-danger me-1 mb-1">JSON-Ready</span>
+							<span class="badge bg-danger-subtle text-danger me-1 mb-1">Dynamic Data</span>
+						</div>
+						<a href="charts-array.bxm" class="btn btn-boxlang w-100">
+							View Array Examples <i class="bi bi-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!--- Quick Start --->
