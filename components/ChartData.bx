@@ -4,10 +4,24 @@
  * This component must be nested within a chartSeries component.
  * It defines individual data points with labels and values.
  * <p>
- * Usage:
+ * Usage for standard charts:
  * <pre>
  * <bx:chartdata item="Label" value="100">
  * </pre>
+ * <p>
+ * Usage for bubble charts:
+ * <pre>
+ * <bx:chartdata item="Label" x="10" y="20" r="5">
+ * </pre>
+ * <p>
+ * <h2>Attributes</h2>
+ * <ul>
+ *   <li><b>item</b> (string, required) - Data point label/name</li>
+ *   <li><b>value</b> (number, required*) - Data point value (*Required for all chart types except bubble)</li>
+ *   <li><b>x</b> (number, optional) - X-coordinate (required for bubble charts)</li>
+ *   <li><b>y</b> (number, optional) - Y-coordinate (required for bubble charts)</li>
+ *   <li><b>r</b> (number, optional) - Bubble radius (required for bubble charts)</li>
+ * </ul>
  */
 @BoxComponent( "chartdata" )
 @AllowsBody( false )

@@ -2,19 +2,35 @@
  * BoxLang ChartSeries Component - Defines a data series for charts
  * <p>
  * This component must be nested within a chart component.
- * It defines the chart type and styling, and contains chartData components.
+ * It defines the chart type and styling, and contains chartData components or uses a query data source.
  * <p>
- * Usage:
+ * Usage with chartData components:
  * <pre>
  * <bx:chartseries type="pie" colorlist="red,blue,green">
  *   <bx:chartdata item="Item 1" value="100">
  *   <bx:chartdata item="Item 2" value="200">
  * </bx:chartseries>
  * </pre>
+ * <p>
+ * Usage with query:
+ * <pre>
+ * <bx:chartseries type="bar" query="#myQuery#" itemColumn="category" valueColumn="amount">
+ * </bx:chartseries>
+ * </pre>
+ * <p>
+ * <h2>Attributes</h2>
+ * <ul>
+ *   <li><b>type</b> (string, required) - Chart type: pie, bar, line, doughnut, radar, polarArea, area, horizontalbar, scatter, bubble</li>
+ *   <li><b>colorlist</b> (string, optional) - Comma-separated list of colors (hex or named colors) for chart data points</li>
+ *   <li><b>serieslabel</b> (string, optional) - Label for this data series, defaults to chart type</li>
+ *   <li><b>query</b> (query, optional) - Query object to use as data source. When provided, no child chartData components are required</li>
+ *   <li><b>itemColumn</b> (string, optional) - Name of the query column containing labels. Default: "item"</li>
+ *   <li><b>valueColumn</b> (string, optional) - Name of the query column containing values. Default: "value"</li>
+ * </ul>
  */
 @BoxComponent( "chartseries" )
 @AllowsBody( true )
-@RequiresBody( true )
+@RequiresBody( false )
 class{
 
 	/**
@@ -87,13 +103,29 @@ class{
 		executionState.serieslabel = attributes.serieslabel ?: chartType;
 		executionState.chartData = [];
 
-		// Process the body to collect chartdata components
-		var buffer = newBuffer();
-		var bodyResult = processBody( context, body, buffer );
+		// Check if using query data source
+		var hasQuery = structKeyExists( attributes, "query" ) && !isNull( attributes.query );
+		
+		if ( hasQuery ) {
+			// Use query as data source
+			var itemColumn = attributes.itemColumn ?: "item";
+			var valueColumn = attributes.valueColumn ?: "value";
+			
+			// Convert query to chart data array
+			executionState.chartData = convertQueryToChartData( 
+				attributes.query, 
+				itemColumn, 
+				valueColumn 
+			);
+		} else {
+			// Process the body to collect chartdata components
+			var buffer = newBuffer();
+			var bodyResult = processBody( context, body, buffer );
 
-		// If there was a return statement inside our body, we early exit now
-		if ( bodyResult.isEarlyExit() ) {
-			return bodyResult;
+			// If there was a return statement inside our body, we early exit now
+			if ( bodyResult.isEarlyExit() ) {
+				return bodyResult;
+			}
 		}
 
 		// Create the series data structure
@@ -108,6 +140,57 @@ class{
 		arrayAppend( parentState.chartSeries, seriesData );
 
 		return null; // Default return
+	}
+
+	/**
+	 * Converts a query to an array of chart data objects
+	 *
+	 * @param query The query object to convert
+	 * @param itemColumn The name of the column containing item labels
+	 * @param valueColumn The name of the column containing values
+	 *
+	 * @return Array of chart data objects with item and value properties
+	 */
+	private function convertQueryToChartData( required query, required itemColumn, required valueColumn ){
+		// Validate that the query has records
+		if ( query.recordCount == 0 ) {
+			throw( 
+				type: "BXChartException", 
+				message: "Query data source must contain at least one record. The provided query is empty." 
+			);
+		}
+
+		// Get query column names for validation
+		var queryColumns = listToArray( query.columnList );
+		
+		// Validate itemColumn exists
+		if ( !arrayContainsNoCase( queryColumns, itemColumn ) ) {
+			throw( 
+				type: "BXChartException", 
+				message: "The itemColumn '#itemColumn#' does not exist in the query. Available columns: #query.columnList#" 
+			);
+		}
+		
+		// Validate valueColumn exists
+		if ( !arrayContainsNoCase( queryColumns, valueColumn ) ) {
+			throw( 
+				type: "BXChartException", 
+				message: "The valueColumn '#valueColumn#' does not exist in the query. Available columns: #query.columnList#" 
+			);
+		}
+
+		// Convert query to array of data objects
+		var chartData = [];
+		
+		for ( var row = 1; row <= query.recordCount; row++ ) {
+			var dataPoint = {
+				"item": trim( query[ itemColumn ][ row ] ),
+				"value": query[ valueColumn ][ row ]
+			};
+			arrayAppend( chartData, dataPoint );
+		}
+
+		return chartData;
 	}
 
 }
