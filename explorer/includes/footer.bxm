@@ -4,14 +4,13 @@
 		<div class="row">
 			<div class="col-md-4 mb-3">
 				<h5 class="text-white mb-3"><i class="bi bi-box-seam"></i> BoxLang Charts</h5>
-				<p class="text-white-50">A comprehensive charting module powered by Chart.js for the BoxLang runtime.</p>
+				<p class="text-white-50">A comprehensive charting module for the BoxLang runtime.</p>
 			</div>
 			<div class="col-md-4 mb-3">
 				<h6 class="text-white mb-3"><strong>Quick Links</strong></h6>
 				<ul class="list-unstyled">
 					<li><a href="https://github.com/ortus-boxlang/bx-charts" target="_blank" class="text-white-50 text-decoration-none"><i class="bi bi-github"></i> GitHub Repository</a></li>
 					<li><a href="https://boxlang.ortusbooks.com/boxlang-framework/modularity/charts" target="_blank" class="text-white-50 text-decoration-none"><i class="bi bi-book"></i> BoxLang Docs</a></li>
-					<li><a href="https://www.chartjs.org" target="_blank" class="text-white-50 text-decoration-none"><i class="bi bi-graph-up"></i> Chart.js</a></li>
 				</ul>
 			</div>
 			<div class="col-md-4 mb-3">

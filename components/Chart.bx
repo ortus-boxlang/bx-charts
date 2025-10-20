@@ -1,7 +1,7 @@
 /**
- * BoxLang Chart Component - Renders charts using Chart.js
+ * BoxLang Chart Component - Renders charts
  * <p>
- * This component creates interactive charts using the Chart.js library.
+ * This component creates interactive charts
  * It processes chartSeries and chartData child components to build the chart configuration.
  * <p>
  * Basic Usage:
@@ -98,7 +98,7 @@ class{
 	static DEFAULT_COLOR_LIST = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
 
 	/**
-	 * Renders a chart using Chart.js
+	 * Renders chart based on provided attributes and body content.
 	 *
 	 * @param context The context of the execution (IBoxContext)
 	 * @param attributes The attributes of the component that were passed in
@@ -143,12 +143,11 @@ class{
 	 * @attribute.sortXAxis - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale.
 	 * @attribute.url - string, optional -  URL to open if the user clicks item in a data series.
 	 *
-	 * Unimplemented attributes (not feasible with Chart.js or not essential)
 	 * @attribute.format - string, optional -  File format in which to save graph. Not implemented (web charts only support canvas/HTML)
 	 * @attribute.name - string, optional -  Page variable name. Not implemented (not applicable to web charts)
-	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not implemented (limited Chart.js support)
-	 * @attribute.xOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
-	 * @attribute.yOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
+	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not implemented
+	 * @attribute.xOffset - number, optional -  Applies if show3D="yes".
+	 * @attribute.yOffset - number, optional -  Applies if show3D="yes".
 	 * @attribute.base64 - boolean, optional -  Render chart inline using a base64 data url. Not implemented (complex feature, not essential)
 	 *
 	 * @return A BodyResult instance or null for a default result return.
@@ -226,8 +225,8 @@ class{
 			return bodyResult;
 		}
 
-		// Ensure Chart.js is loaded
-		ensureChartJSLoaded( context );
+		// Ensure ChartLib	is loaded
+		ensureLibIsLoaded( context );
 
 		// Build the chart configuration
 		var chartConfig = buildChartConfig(
@@ -271,14 +270,12 @@ class{
 	}
 
 	/**
-	 * Ensures Chart.js library is loaded in the page head
+	 * Ensures chart library is loaded in the page head
 	 */
-	private function ensureChartJSLoaded( required context ) {
-		// Use the BoxLang web htmlHead() BIF to include Chart.js
+	private function ensureLibIsLoaded( required context ) {
 		if ( !context.hasAttachment( "chartJSLoaded" ) ) {
 			context.putAttachment( "chartJSLoaded", true );
 
-			// Include Chart.js from our public folder
 			var scriptTag = '<script src="/bxmodules/bxcharts/public/index.bxm?target=chart.min.js"></script>';
 
 			// Call the htmlHead BIF to add the script tag
@@ -287,7 +284,7 @@ class{
 	}
 
 	/**
-	 * Normalizes color values to proper hex format for Chart.js
+	 * Normalizes color values to proper hex format
 	 */
 	private function normalizeColor( required color ) {
 		if ( len( color ) == 0 ) {
@@ -312,7 +309,7 @@ class{
 	}
 
 	/**
-	 * Builds Chart.js configuration from collected series data
+	 * Builds configuration from collected series data
 	 */
 	private function buildChartConfig(
 		required array chartSeries,
@@ -663,7 +660,6 @@ class{
 					config.options.scales.x.stacked = true;
 					config.options.scales.y.stacked = true;
 				}
-				// Note: "cluster" is the default behavior for Chart.js
 			}
 
 			arrayAppend( config.data.datasets, dataset );
@@ -679,7 +675,7 @@ class{
 	 * @chartId The unique ID for the chart canvas
 	 * @chartWidth The width of the chart in pixels
 	 * @chartHeight The height of the chart in pixels
-	 * @config The Chart.js configuration object
+	 * @config The chart configuration object
 	 * @responsive Whether the chart is responsive
 	 */
 	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive ) {
