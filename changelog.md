@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Improved handling of font styles for bold and italic.
 - Corrected all boolean attribute defaults in Chart.bx and ChartSeries.bx components
   - Ensured boolean attributes default to `false` unless explicitly set to `true`
   - Reviewed and updated documentation to reflect accurate default values

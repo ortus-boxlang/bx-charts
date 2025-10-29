@@ -352,16 +352,9 @@ class{
 		var normalizedBorderColor = normalizeColor( borderColor );
 
 		// Build font configuration
-		var fontStyle = "";
-		if ( fontBold && fontItalic ) {
-			fontStyle = "bold italic";
-		} else if ( fontBold ) {
-			fontStyle = "bold";
-		} else if ( fontItalic ) {
-			fontStyle = "italic";
-		} else {
-			fontStyle = "normal";
-		}
+		// Chart.js uses separate properties for weight (bold) and style (italic)
+		var fontWeight = fontBold ? "bold" : "normal";
+		var fontStyleValue = fontItalic ? "italic" : "normal";
 
 		var config = {
 			"type": "pie", // Default to pie, will be overridden by series
@@ -380,7 +373,8 @@ class{
 						"text": title,
 						"font": {
 							"size": fontSize,
-							"style": fontStyle
+							"weight": fontWeight,
+							"style": fontStyleValue
 						},
 						"color": normalizedForegroundColor
 					},
@@ -389,7 +383,8 @@ class{
 						"labels": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
@@ -406,7 +401,8 @@ class{
 							"text": xAxisTitle,
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						},
@@ -416,7 +412,8 @@ class{
 						"ticks": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
@@ -428,7 +425,8 @@ class{
 							"text": yAxisTitle,
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						},
@@ -438,7 +436,8 @@ class{
 						"ticks": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
