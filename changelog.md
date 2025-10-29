@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `backgroundColor` attribute in Chart component
+  - Now correctly applies background color to chart container div
+  - Supports hexadecimal values (e.g., `##FFFFFF`) and named colors (e.g., `white`)
+  - Added padding to prevent chart elements from touching container edges
+- Improved handling of font styles for bold and italic.
+- Corrected all boolean attribute defaults in Chart.bx and ChartSeries.bx components
+  - Ensured boolean attributes default to `false` unless explicitly set to `true`
+  - Reviewed and updated documentation to reflect accurate default values
+
 ## [1.2.0] - 2025-10-16
 
 ### Added
@@ -68,10 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Automated chart.js installation and management via npm
-  - `package.json` with Chart.js dependency
-  - `npm install` to download Chart.js to `/public/`
-  - `npm run update-chartjs` to update to latest Chart.js version
 - Bubble chart support (`type="bubble"`)
   - New chart type for displaying three-dimensional data (x, y, radius)
   - Extended `<bx:chartdata>` component with `x`, `y`, and `r` attributes for bubble charts
@@ -82,7 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Visual examples table with images for all 10 chart types
   - Decision tree for selecting appropriate chart type
   - Common pitfalls and best practices guide
-- Responsive chart support with Chart.js features
+- Responsive chart support features
   - `responsive` attribute (default: true) - Chart resizes to fit container width
   - `maintainAspectRatio` attribute (default: true) - Maintains width/height ratio during resize
   - `aspectRatio` attribute (default: 2) - Custom aspect ratio (width/height)

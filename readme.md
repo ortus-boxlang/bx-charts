@@ -7,7 +7,7 @@
 |:------------------------------------------------------:|
 ```
 
-> 📊 A comprehensive charting module for BoxLang that brings beautiful, interactive charts to your web applications using Chart.js!
+> 📊 A comprehensive charting module for BoxLang that brings beautiful, interactive charts to your web applications
 
 This module provides powerful chart generation capabilities to the [BoxLang](https://boxlang.io) language, making it easy to create stunning data visualizations with minimal code.
 
@@ -23,7 +23,6 @@ This module provides powerful chart generation capabilities to the [BoxLang](htt
   - [Basic Examples](#basic-examples)
   - [Advanced Examples](#advanced-examples)
 - [Advanced Features](#-advanced-features)
-- [Chart.js Integration](#-chartjs-integration)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing](#-contributing)
 - [Support & Resources](#-support--resources)
@@ -35,7 +34,6 @@ This module provides powerful chart generation capabilities to the [BoxLang](htt
 - 📱 **Responsive Design**: Charts automatically adapt to container sizes and screen dimensions
 - 🎯 **Easy to Use**: Simple BoxLang component syntax with nested data structure
 - 🎭 **Highly Customizable**: Extensive styling options including colors, fonts, axes, and grid lines
-- ⚡ **Powered by Chart.js**: Built on the popular Chart.js library for modern, interactive charts
 - 📊 **Advanced Features**: Stacked/clustered series, axis titles, custom scales, and tooltips
 - 🔧 **Zero Configuration**: Sensible defaults get you started quickly
 - 💪 **Production Ready**: Built by Ortus Solutions with enterprise-grade quality
@@ -57,7 +55,7 @@ The module will automatically register and be available as `bxcharts` in your Bo
 
 ### 🚧 Rewrites CAUTION
 
-If you are using a URL rewriting mechanism (like `.htaccess` for Apache or URL rewrite rules in Nginx), ensure that requests to static assets (like JavaScript and CSS files) are properly routed to the `boxlang_modules/bx-charts/assets/` directory. This is crucial for the Chart.js library and any other assets to load correctly.  Also, make sure you are not rewriting the following directory from which assets are delivered from the module:`
+If you are using a URL rewriting mechanism (like `.htaccess` for Apache or URL rewrite rules in Nginx), ensure that requests to static assets (like JavaScript and CSS files) are properly routed to the `boxlang_modules/bx-charts/assets/` directory.  Also, make sure you are not rewriting the following directory from which assets are delivered from the module:`
 
 ```
 /bxModules/bxCharts/public/index.bxm
@@ -247,7 +245,7 @@ What do you want to visualize?
 
 ### 📊 `<bx:chart>` Component
 
-The main container component that renders charts using Chart.js.
+The main container component that renders charts
 
 #### Core Attributes
 
@@ -1002,61 +1000,6 @@ Customize data point markers for line and scatter charts:
 </bx:chart>
 ```
 
-## 🔧 Chart.js Integration
-
-This module is built on [Chart.js v4.x](https://www.chartjs.org/), one of the most popular JavaScript charting libraries.
-
-### 📚 Chart.js Resources
-
-- **Official Documentation**: [https://www.chartjs.org/docs/latest/](https://www.chartjs.org/docs/latest/)
-- **Chart Types Guide**: [https://www.chartjs.org/docs/latest/charts/](https://www.chartjs.org/docs/latest/charts/)
-- **Configuration Options**: [https://www.chartjs.org/docs/latest/configuration/](https://www.chartjs.org/docs/latest/configuration/)
-- **Samples**: [https://www.chartjs.org/samples/](https://www.chartjs.org/samples/)
-
-### 🎨 Chart.js Features Supported
-
-This module exposes most Chart.js capabilities through BoxLang attributes:
-
-- ✅ All major chart types (pie, bar, line, doughnut, radar, polar area, scatter)
-- ✅ Responsive and adaptive sizing
-- ✅ Custom colors and styling
-- ✅ Axis configuration and grid lines
-- ✅ Legends and tooltips
-- ✅ Stacked and grouped series
-- ✅ Custom scales and ranges
-- ✅ Font styling and customization
-
-### 🔌 How It Works
-
-1. **Component Processing**: BoxLang components collect your chart data
-2. **Configuration Building**: Data is transformed into Chart.js configuration
-3. **Asset Loading**: Chart.js library is automatically included via `htmlHead()`
-4. **Rendering**: HTML canvas element is created with inline JavaScript initialization
-5. **Interaction**: Chart.js handles all user interactions and animations
-
-### 💡 Chart.js Best Practices
-
-Based on Chart.js documentation, here are some tips:
-
-**Performance:**
-
-- Use `resizeDelay` for charts that resize frequently
-- Limit data points to 100-200 for smooth animations
-- Disable animations for large datasets
-
-**Accessibility:**
-
-- Always provide axis titles with `xAxisTitle` and `yAxisTitle`
-- Use `seriesLabel` to describe each data series
-- Ensure color contrasts meet WCAG standards
-
-**Visual Design:**
-
-- Keep charts simple - one message per chart
-- Use appropriate chart types for your data
-- Add grid lines (`showYGridlines="true"`) for precise reading
-- Limit colors to 5-7 for clarity
-
 ## ❓ Troubleshooting
 
 ### Charts Not Displaying
@@ -1067,7 +1010,6 @@ Based on Chart.js documentation, here are some tips:
 
 - ✅ Ensure BoxLang web support is enabled
 - ✅ Check that `htmlHead()` BIF is available
-- ✅ Verify Chart.js library loads (check browser console)
 - ✅ Make sure chart container has width/height
 
 ### Colors Not Working
@@ -1146,7 +1088,6 @@ We'd love to hear your ideas! Please:
 1. Open a [Feature Request](https://github.com/ortus-boxlang/bx-charts/issues/new)
 2. Describe the feature and its use case
 3. Explain how it would benefit users
-4. Consider if it aligns with Chart.js capabilities
 
 ### 🔧 Want to Contribute Code?
 
@@ -1176,23 +1117,11 @@ Excellent! Here's how to get started:
    # Install BoxLang dependencies
    box install
 
-   # Install Node.js dependencies (Chart.js)
+   # Install Node.js dependencies
    npm install
    ```
 
-   The `npm install` command will automatically:
-   - Download the latest Chart.js library
-   - Copy it to the `public/` folder
-
-4. **Update Chart.js (Optional):**
-
-   To manually update Chart.js to the latest version:
-
-   ```bash
-   npm run update-chartjs
-   ```
-
-5. **Test the Module Locally:**
+4. **Test the Module Locally:**
 
    Start a BoxLang server to test your changes:
 
@@ -1322,7 +1251,6 @@ See [LICENSE](LICENSE) file for full details.
 
 - **Module Docs**: You're reading them! 📚
 - **BoxLang Docs**: [https://boxlang.ortusbooks.com/](https://boxlang.ortusbooks.com/)
-- **Chart.js Docs**: [https://www.chartjs.org/docs/](https://www.chartjs.org/docs/)
 
 ### 🌐 Links
 

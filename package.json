@@ -1,7 +1,7 @@
 {
 	"name": "bx-charts",
 	"version": "1.0.0",
-	"description": "BoxLang Charts Module - Chart.js integration for BoxLang",
+	"description": "BoxLang Charts Module",
 	"private": true,
 	"scripts": {
 		"postinstall": "npm run copy-chartjs",

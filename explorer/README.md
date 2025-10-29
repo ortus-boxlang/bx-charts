@@ -205,11 +205,6 @@ docker run -d \
   boxlang-charts-explorer
 ```
 
-### Charts not displaying
-- Ensure the bx-charts module files were copied correctly
-- Check browser console for JavaScript errors
-- Verify Chart.js library is loading from `/bxmodules/bxcharts/public/chart.min.js`
-
 ## 📝 Development
 
 To update the explorer:
@@ -232,7 +227,6 @@ docker run -d --name charts-explorer -p 8080:8080 boxlang-charts-explorer
 - **BoxLang Documentation**: https://boxlang.io
 - **BoxLang Docker Images**: https://boxlang.ortusbooks.com/getting-started/running-boxlang/docker
 - **bx-charts GitHub**: https://github.com/ortus-boxlang/bx-charts
-- **Chart.js**: https://www.chartjs.org
 
 ## 📄 License
 

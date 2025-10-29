@@ -69,16 +69,16 @@
     xaxistitle="Products"
     yaxistitle="Revenue ($)"
     showygridlines="true"
-    backgroundcolor="####f8f9fa"&gt;
+    backgroundcolor="##f8f9fa"&gt;
     &lt;bx:chartseries
         type="bar"
-        data="####[
+        data="##[
             {item:'Product A', value:15000},
             {item:'Product B', value:23000},
             {item:'Product C', value:18000},
             {item:'Product D', value:12000},
             {item:'Product E', value:27000}
-        ]####"
+        ]##"
         colorlist="36A2EB"
         serieslabel="Sales Revenue"&gt;
     &lt;/bx:chartseries&gt;
@@ -139,13 +139,13 @@
     showxgridlines="true"&gt;
     &lt;bx:chartseries
         type="horizontalbar"
-        data="####[
+        data="##[
             ['Engineering', 850],
             ['Marketing', 620],
             ['Sales', 950],
             ['HR', 340],
             ['Operations', 720]
-        ]####"
+        ]##"
         colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
         serieslabel="Budget Allocation"&gt;
     &lt;/bx:chartseries&gt;
@@ -208,17 +208,17 @@
     yaxistitle="Revenue ($)"
     showygridlines="true"
     markersize="6"
-    bordercolor="####9966FF"&gt;
+    bordercolor="##9966FF"&gt;
     &lt;bx:chartseries
         type="line"
-        data="####[
+        data="##[
             {item:'January', value:120000},
             {item:'February', value:135000},
             {item:'March', value:148000},
             {item:'April', value:162000},
             {item:'May', value:178000},
             {item:'June', value:195000}
-        ]####"
+        ]##"
         colorlist="9966FF"
         serieslabel="Revenue"&gt;
     &lt;/bx:chartseries&gt;
@@ -276,13 +276,13 @@
     showlegend="true"&gt;
     &lt;bx:chartseries
         type="pie"
-        data="####[
+        data="##[
             ['North America', 450],
             ['Europe', 380],
             ['Asia Pacific', 520],
             ['Latin America', 210],
             ['Middle East', 180]
-        ]####"
+        ]##"
         colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
         serieslabel="Regional Sales"&gt;
     &lt;/bx:chartseries&gt;
@@ -338,15 +338,15 @@
     chartwidth="600"
     chartheight="600"
     showlegend="true"
-    backgroundcolor="####ffffff"&gt;
+    backgroundcolor="##ffffff"&gt;
     &lt;bx:chartseries
         type="doughnut"
-        data="####[
+        data="##[
             {item:'Page Views', value:15420},
             {item:'Unique Visitors', value:8750},
             {item:'New Users', value:3240},
             {item:'Returning Users', value:5510}
-        ]####"
+        ]##"
         colorlist="FF6384,36A2EB,FFCE56,4BC0C0"
         serieslabel="Metrics"&gt;
     &lt;/bx:chartseries&gt;
@@ -410,14 +410,14 @@
     showxgridlines="false"&gt;
     &lt;bx:chartseries
         type="area"
-        data="####[
+        data="##[
             ['January', 120000],
             ['February', 135000],
             ['March', 148000],
             ['April', 162000],
             ['May', 178000],
             ['June', 195000]
-        ]####"
+        ]##"
         colorlist="6f42c1"
         serieslabel="Revenue Growth"&gt;
     &lt;/bx:chartseries&gt;
@@ -479,13 +479,13 @@
     showygridlines="true"&gt;
     &lt;bx:chartseries
         type="bubble"
-        data="####[
+        data="##[
             {item:'Product A', x:20, y:30, r:15},
             {item:'Product B', x:40, y:10, r:10},
             {item:'Product C', x:30, y:20, r:25},
             {item:'Product D', x:15, y:35, r:8},
             {item:'Product E', x:50, y:45, r:20}
-        ]####"
+        ]##"
         colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
         serieslabel="Product Performance"&gt;
     &lt;/bx:chartseries&gt;
@@ -547,13 +547,13 @@
     showygridlines="true"&gt;
     &lt;bx:chartseries
         type="bubble"
-        data="####[
+        data="##[
             ['Stock A', 25, 12, 18],
             ['Stock B', 45, 8, 12],
             ['Bond C', 10, 6, 8],
             ['Stock D', 35, 15, 22],
             ['ETF E', 20, 10, 15]
-        ]####"
+        ]##"
         colorlist="FF6384,36A2EB,FFCE56,4BC0C0,9966FF"
         serieslabel="Investment Options"&gt;
     &lt;/bx:chartseries&gt;
@@ -618,14 +618,14 @@
     markersize="8"&gt;
     &lt;bx:chartseries
         type="scatter"
-        data="####[
+        data="##[
             {item:'Server 1', value:120},
             {item:'Server 2', value:85},
             {item:'Server 3', value:200},
             {item:'Server 4', value:150},
             {item:'Server 5', value:95},
             {item:'Server 6', value:175}
-        ]####"
+        ]##"
         colorlist="20c997"
         serieslabel="Server Performance"&gt;
     &lt;/bx:chartseries&gt;
@@ -684,14 +684,14 @@
     showlegend="true"&gt;
     &lt;bx:chartseries
         type="radar"
-        data="####[
+        data="##[
             ['JavaScript', 85],
             ['BoxLang', 95],
             ['Database', 75],
             ['DevOps', 70],
             ['Security', 80],
             ['Testing', 90]
-        ]####"
+        ]##"
         colorlist="6610f2"
         serieslabel="Current Skills"&gt;
     &lt;/bx:chartseries&gt;
@@ -725,37 +725,37 @@
                             <h6 class="mt-3">1. Array of Structs (Named Keys)</h6>
                             <p class="text-muted">Use this format when you want readable, self-documenting code:</p>
                             <pre class="code-example">&lt;bx:chartseries type="bar"
-    data="####[
+    data="##[
         {item:'Product A', value:100},
         {item:'Product B', value:200}
-    ]####"&gt;
+    ]##"&gt;
 &lt;/bx:chartseries&gt;</pre>
 
                             <h6 class="mt-3">2. Array of Arrays (Positional)</h6>
                             <p class="text-muted">Use this format for compact, efficient data representation:</p>
                             <pre class="code-example">&lt;bx:chartseries type="pie"
-    data="####[
+    data="##[
         ['Product A', 100],
         ['Product B', 200]
-    ]####"&gt;
+    ]##"&gt;
 &lt;/bx:chartseries&gt;</pre>
 
                             <h6 class="mt-3">3. Bubble Charts with Structs</h6>
                             <p class="text-muted">For bubble charts, use x, y, r instead of value:</p>
                             <pre class="code-example">&lt;bx:chartseries type="bubble"
-    data="####[
+    data="##[
         {item:'Point A', x:10, y:20, r:5},
         {item:'Point B', x:15, y:25, r:8}
-    ]####"&gt;
+    ]##"&gt;
 &lt;/bx:chartseries&gt;</pre>
 
                             <h6 class="mt-3">4. Bubble Charts with Arrays</h6>
                             <p class="text-muted">Positional format for bubble charts: [item, x, y, r]</p>
                             <pre class="code-example">&lt;bx:chartseries type="bubble"
-    data="####[
+    data="##[
         ['Point A', 10, 20, 5],
         ['Point B', 15, 25, 8]
-    ]####"&gt;
+    ]##"&gt;
 &lt;/bx:chartseries&gt;</pre>
                         </div>
                     </div>
@@ -817,7 +817,7 @@
 &lt;/bx:script&gt;
 
 &lt;bx:chart title="Dynamic Data"&gt;
-    &lt;bx:chartseries type="bar" data="####chartData####"&gt;
+    &lt;bx:chartseries type="bar" data="##chartData##"&gt;
     &lt;/bx:chartseries&gt;
 &lt;/bx:chart&gt;</pre>
                     </div>

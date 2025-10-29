@@ -1,7 +1,7 @@
 /**
- * BoxLang Chart Component - Renders charts using Chart.js
+ * BoxLang Chart Component - Renders charts
  * <p>
- * This component creates interactive charts using the Chart.js library.
+ * This component creates interactive charts
  * It processes chartSeries and chartData child components to build the chart configuration.
  * <p>
  * Basic Usage:
@@ -98,7 +98,7 @@ class{
 	static DEFAULT_COLOR_LIST = [ "##FF6384", "##36A2EB", "##FFCE56", "##4BC0C0", "##9966FF", "##FF9F40" ];
 
 	/**
-	 * Renders a chart using Chart.js
+	 * Renders chart based on provided attributes and body content.
 	 *
 	 * @param context The context of the execution (IBoxContext)
 	 * @param attributes The attributes of the component that were passed in
@@ -143,12 +143,11 @@ class{
 	 * @attribute.sortXAxis - boolean, optional -  Display column labels in alphabetic order along X-axis. Ignored if the xAxisType attribute is scale.
 	 * @attribute.url - string, optional -  URL to open if the user clicks item in a data series.
 	 *
-	 * Unimplemented attributes (not feasible with Chart.js or not essential)
 	 * @attribute.format - string, optional -  File format in which to save graph. Not implemented (web charts only support canvas/HTML)
 	 * @attribute.name - string, optional -  Page variable name. Not implemented (not applicable to web charts)
-	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not implemented (limited Chart.js support)
-	 * @attribute.xOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
-	 * @attribute.yOffset - number, optional -  Applies if show3D="yes". Not implemented (Chart.js doesn't support true 3D)
+	 * @attribute.pieSliceStyle - string, optional -  Applies to chartseries type attribute value pie. Not implemented
+	 * @attribute.xOffset - number, optional -  Applies if show3D="yes".
+	 * @attribute.yOffset - number, optional -  Applies if show3D="yes".
 	 * @attribute.base64 - boolean, optional -  Render chart inline using a base64 data url. Not implemented (complex feature, not essential)
 	 *
 	 * @return A BodyResult instance or null for a default result return.
@@ -163,13 +162,13 @@ class{
 		var chartHeight = attributes.chartheight ?: 300;
 		var title = attributes.title ?: "";
 		var backgroundColor = attributes.backgroundcolor ?: "##ffffff";
-		var showLegend = attributes.showlegend ?: true;
-		var show3d = attributes.show3d ?: false;
+		var showLegend = ( attributes.showlegend ?: true ) castAs Boolean;
+		var show3d = ( attributes.show3d ?: false ) castAs Boolean;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
 
 		// Responsive attributes
-		var responsive = attributes.responsive ?: true;
-		var maintainAspectRatio = attributes.maintainaspectratio ?: true;
+		var responsive = ( attributes.responsive ?: true ) castAs Boolean;
+		var maintainAspectRatio = ( attributes.maintainaspectratio ?: true ) castAs Boolean;
 		var aspectRatio = attributes.aspectratio ?: 2;
 		var resizeDelay = attributes.resizedelay ?: 0;
 
@@ -178,15 +177,15 @@ class{
 		var yAxisTitle = attributes.yaxistitle ?: "";
 
 		// Grid lines
-		var showXGridlines = attributes.showxgridlines ?: false;
-		var showYGridlines = attributes.showygridlines ?: true;
+		var showXGridlines = ( attributes.showxgridlines ?: false ) castAs Boolean;
+		var showYGridlines = ( attributes.showygridlines ?: true ) castAs Boolean;
 
 		// Series placement
 		var seriesPlacement = attributes.seriesplacement ?: "default";
 
 		// Font attributes - newly implemented
-		var fontBold = attributes.fontbold ?: false;
-		var fontItalic = attributes.fontitalic ?: false;
+		var fontBold = ( attributes.fontbold ?: false ) castAs Boolean;
+		var fontItalic = ( attributes.fontitalic ?: false ) castAs Boolean;
 		var fontSize = attributes.fontsize ?: 12;
 
 		// Color attributes - newly implemented
@@ -197,10 +196,10 @@ class{
 		var borderRadius = attributes.borderradius ?: 0;
 
 		// Display control attributes - newly implemented
-		var showBorder = attributes.showborder ?: false;
-		var showMarkers = attributes.showmarkers ?: true;
-		var showXLabel = attributes.showxlabel ?: true;
-		var showTooltip = attributes.showtooltip ?: true;
+		var showBorder = ( attributes.showborder ?: false ) castAs Boolean;
+		var showMarkers = ( attributes.showmarkers ?: true ) castAs Boolean;
+		var showXLabel = ( attributes.showxlabel ?: true ) castAs Boolean;
+		var showTooltip = ( attributes.showtooltip ?: true ) castAs Boolean;
 
 		// Axis formatting - newly implemented
 		var labelFormat = attributes.labelformat ?: "";
@@ -212,7 +211,7 @@ class{
 		var markerSize = attributes.markersize ?: 4;
 
 		// Data sorting - newly implemented
-		var sortXAxis = attributes.sortxaxis ?: false;
+		var sortXAxis = ( attributes.sortxaxis ?: false ) castAs Boolean;
 
 		// Click URL - newly implemented
 		var url = attributes.url ?: "";
@@ -226,8 +225,8 @@ class{
 			return bodyResult;
 		}
 
-		// Ensure Chart.js is loaded
-		ensureChartJSLoaded( context );
+		// Ensure ChartLib	is loaded
+		ensureLibIsLoaded( context );
 
 		// Build the chart configuration
 		var chartConfig = buildChartConfig(
@@ -267,18 +266,16 @@ class{
 		);
 
 		// Render the chart HTML and JavaScript
-		renderChart( context, chartId, chartWidth, chartHeight, chartConfig, responsive );
+		renderChart( context, chartId, chartWidth, chartHeight, chartConfig, responsive, backgroundColor );
 	}
 
 	/**
-	 * Ensures Chart.js library is loaded in the page head
+	 * Ensures chart library is loaded in the page head
 	 */
-	private function ensureChartJSLoaded( required context ) {
-		// Use the BoxLang web htmlHead() BIF to include Chart.js
+	private function ensureLibIsLoaded( required context ) {
 		if ( !context.hasAttachment( "chartJSLoaded" ) ) {
 			context.putAttachment( "chartJSLoaded", true );
 
-			// Include Chart.js from our public folder
 			var scriptTag = '<script src="/bxmodules/bxcharts/public/index.bxm?target=chart.min.js"></script>';
 
 			// Call the htmlHead BIF to add the script tag
@@ -287,7 +284,7 @@ class{
 	}
 
 	/**
-	 * Normalizes color values to proper hex format for Chart.js
+	 * Normalizes color values to proper hex format
 	 */
 	private function normalizeColor( required color ) {
 		if ( len( color ) == 0 ) {
@@ -312,7 +309,7 @@ class{
 	}
 
 	/**
-	 * Builds Chart.js configuration from collected series data
+	 * Builds configuration from collected series data
 	 */
 	private function buildChartConfig(
 		required array chartSeries,
@@ -355,16 +352,9 @@ class{
 		var normalizedBorderColor = normalizeColor( borderColor );
 
 		// Build font configuration
-		var fontStyle = "";
-		if ( fontBold && fontItalic ) {
-			fontStyle = "bold italic";
-		} else if ( fontBold ) {
-			fontStyle = "bold";
-		} else if ( fontItalic ) {
-			fontStyle = "italic";
-		} else {
-			fontStyle = "normal";
-		}
+		// Chart.js uses separate properties for weight (bold) and style (italic)
+		var fontWeight = fontBold ? "bold" : "normal";
+		var fontStyleValue = fontItalic ? "italic" : "normal";
 
 		var config = {
 			"type": "pie", // Default to pie, will be overridden by series
@@ -383,7 +373,8 @@ class{
 						"text": title,
 						"font": {
 							"size": fontSize,
-							"style": fontStyle
+							"weight": fontWeight,
+							"style": fontStyleValue
 						},
 						"color": normalizedForegroundColor
 					},
@@ -392,7 +383,8 @@ class{
 						"labels": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
@@ -409,7 +401,8 @@ class{
 							"text": xAxisTitle,
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						},
@@ -419,7 +412,8 @@ class{
 						"ticks": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
@@ -431,7 +425,8 @@ class{
 							"text": yAxisTitle,
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						},
@@ -441,7 +436,8 @@ class{
 						"ticks": {
 							"font": {
 								"size": fontSize,
-								"style": fontStyle
+								"weight": fontWeight,
+								"style": fontStyleValue
 							},
 							"color": normalizedForegroundColor
 						}
@@ -663,7 +659,6 @@ class{
 					config.options.scales.x.stacked = true;
 					config.options.scales.y.stacked = true;
 				}
-				// Note: "cluster" is the default behavior for Chart.js
 			}
 
 			arrayAppend( config.data.datasets, dataset );
@@ -679,10 +674,11 @@ class{
 	 * @chartId The unique ID for the chart canvas
 	 * @chartWidth The width of the chart in pixels
 	 * @chartHeight The height of the chart in pixels
-	 * @config The Chart.js configuration object
+	 * @config The chart configuration object
 	 * @responsive Whether the chart is responsive
+	 * @backgroundColor The background color for the chart container
 	 */
-	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive ) {
+	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive, backgroundColor ) {
 		// Handle special JavaScript functions that can't be JSON serialized
 		var clickUrl = "";
 		var labelFormat = "";
@@ -722,6 +718,12 @@ class{
 		} else {
 			// For non-responsive charts, use fixed dimensions
 			containerStyle = "width: #chartWidth#px; height: #chartHeight#px;";
+		}
+
+		// Normalize and apply background color if specified
+		var normalizedBgColor = normalizeColor( backgroundColor );
+		if ( len( normalizedBgColor ) > 0 ) {
+			containerStyle &= " background-color: #normalizedBgColor#; padding: 10px;";
 		}
 
 		var html = '<div style="#containerStyle#">

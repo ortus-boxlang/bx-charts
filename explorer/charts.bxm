@@ -576,10 +576,17 @@
                     <strong>Best for:</strong> Showing three dimensions of data (x, y, and size/radius)
                 </div>
                 <div class="chart-display">
-                    <bx:chart format="png" title="Product Performance Analysis"
-                              chartwidth="600" chartheight="350"
-                              xaxistitle="Market Share (%)" yaxistitle="Revenue (millions)"
-                              showxgridlines="true" showygridlines="true">
+                    <bx:chart
+						format="png"
+						title="Product Performance Analysis"
+                    	chartwidth="600"
+						chartheight="350"
+                        xaxistitle="Market Share (%)"
+						yaxistitle="Revenue (millions)"
+                        showxgridlines="true"
+						showygridlines="true"
+						showLegend="true"
+					>
                         <bx:chartseries type="bubble" colorlist="9966FF,36A2EB,FF6384,FFCE56"
                                         serieslabel="Products">
                             <bx:chartdata item="Product A" x="20" y="85" r="15" />
@@ -612,6 +619,7 @@
     xaxistitle="Market Share (%)"
     yaxistitle="Revenue (millions)"
     showxgridlines="true"
+	showLegend="false"
     showygridlines="true"&gt;
     &lt;bx:chartseries type="bubble" colorlist="9966FF,36A2EB,FF6384,FFCE56" serieslabel="Products"&gt;
         &lt;bx:chartdata item="Product A" x="20" y="85" r="15" /&gt;
