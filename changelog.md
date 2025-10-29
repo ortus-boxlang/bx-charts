@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Corrected all boolean attribute defaults in Chart.bx and ChartSeries.bx components
+  - Ensured boolean attributes default to `false` unless explicitly set to `true`
+  - Reviewed and updated documentation to reflect accurate default values
+
 ## [1.2.0] - 2025-10-16
 
 ### Added

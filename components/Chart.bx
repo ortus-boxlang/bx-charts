@@ -162,13 +162,13 @@ class{
 		var chartHeight = attributes.chartheight ?: 300;
 		var title = attributes.title ?: "";
 		var backgroundColor = attributes.backgroundcolor ?: "##ffffff";
-		var showLegend = attributes.showlegend ?: true;
-		var show3d = attributes.show3d ?: false;
+		var showLegend = ( attributes.showlegend ?: true ) castAs Boolean;
+		var show3d = ( attributes.show3d ?: false ) castAs Boolean;
 		var format = attributes.format ?: "canvas"; // We'll always render as canvas
 
 		// Responsive attributes
-		var responsive = attributes.responsive ?: true;
-		var maintainAspectRatio = attributes.maintainaspectratio ?: true;
+		var responsive = ( attributes.responsive ?: true ) castAs Boolean;
+		var maintainAspectRatio = ( attributes.maintainaspectratio ?: true ) castAs Boolean;
 		var aspectRatio = attributes.aspectratio ?: 2;
 		var resizeDelay = attributes.resizedelay ?: 0;
 
@@ -177,15 +177,15 @@ class{
 		var yAxisTitle = attributes.yaxistitle ?: "";
 
 		// Grid lines
-		var showXGridlines = attributes.showxgridlines ?: false;
-		var showYGridlines = attributes.showygridlines ?: true;
+		var showXGridlines = ( attributes.showxgridlines ?: false ) castAs Boolean;
+		var showYGridlines = ( attributes.showygridlines ?: true ) castAs Boolean;
 
 		// Series placement
 		var seriesPlacement = attributes.seriesplacement ?: "default";
 
 		// Font attributes - newly implemented
-		var fontBold = attributes.fontbold ?: false;
-		var fontItalic = attributes.fontitalic ?: false;
+		var fontBold = ( attributes.fontbold ?: false ) castAs Boolean;
+		var fontItalic = ( attributes.fontitalic ?: false ) castAs Boolean;
 		var fontSize = attributes.fontsize ?: 12;
 
 		// Color attributes - newly implemented
@@ -196,10 +196,10 @@ class{
 		var borderRadius = attributes.borderradius ?: 0;
 
 		// Display control attributes - newly implemented
-		var showBorder = attributes.showborder ?: false;
-		var showMarkers = attributes.showmarkers ?: true;
-		var showXLabel = attributes.showxlabel ?: true;
-		var showTooltip = attributes.showtooltip ?: true;
+		var showBorder = ( attributes.showborder ?: false ) castAs Boolean;
+		var showMarkers = ( attributes.showmarkers ?: true ) castAs Boolean;
+		var showXLabel = ( attributes.showxlabel ?: true ) castAs Boolean;
+		var showTooltip = ( attributes.showtooltip ?: true ) castAs Boolean;
 
 		// Axis formatting - newly implemented
 		var labelFormat = attributes.labelformat ?: "";
@@ -211,7 +211,7 @@ class{
 		var markerSize = attributes.markersize ?: 4;
 
 		// Data sorting - newly implemented
-		var sortXAxis = attributes.sortxaxis ?: false;
+		var sortXAxis = ( attributes.sortxaxis ?: false ) castAs Boolean;
 
 		// Click URL - newly implemented
 		var url = attributes.url ?: "";
