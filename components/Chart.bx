@@ -266,7 +266,7 @@ class{
 		);
 
 		// Render the chart HTML and JavaScript
-		renderChart( context, chartId, chartWidth, chartHeight, chartConfig, responsive );
+		renderChart( context, chartId, chartWidth, chartHeight, chartConfig, responsive, backgroundColor );
 	}
 
 	/**
@@ -676,8 +676,9 @@ class{
 	 * @chartHeight The height of the chart in pixels
 	 * @config The chart configuration object
 	 * @responsive Whether the chart is responsive
+	 * @backgroundColor The background color for the chart container
 	 */
-	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive ) {
+	private function renderChart( required context, required chartId, chartWidth, chartHeight, config, responsive, backgroundColor ) {
 		// Handle special JavaScript functions that can't be JSON serialized
 		var clickUrl = "";
 		var labelFormat = "";
@@ -717,6 +718,12 @@ class{
 		} else {
 			// For non-responsive charts, use fixed dimensions
 			containerStyle = "width: #chartWidth#px; height: #chartHeight#px;";
+		}
+
+		// Normalize and apply background color if specified
+		var normalizedBgColor = normalizeColor( backgroundColor );
+		if ( len( normalizedBgColor ) > 0 ) {
+			containerStyle &= " background-color: #normalizedBgColor#; padding: 10px;";
 		}
 
 		var html = '<div style="#containerStyle#">

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `backgroundColor` attribute in Chart component
+  - Now correctly applies background color to chart container div
+  - Supports hexadecimal values (e.g., `##FFFFFF`) and named colors (e.g., `white`)
+  - Added padding to prevent chart elements from touching container edges
 - Improved handling of font styles for bold and italic.
 - Corrected all boolean attribute defaults in Chart.bx and ChartSeries.bx components
   - Ensured boolean attributes default to `false` unless explicitly set to `true`
